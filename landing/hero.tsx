@@ -50,7 +50,7 @@ const RegisterModal = () => {
   const isLoading=false;
   const toast = useToast();
   const t = useTranslation();
-  
+
 
   
   const handleCreation = (e) => {
@@ -66,7 +66,7 @@ const RegisterModal = () => {
                 description: t("auth.login.signInError"),
                 status: "error",
               }),
-            ).then(() => {window.location.replace(`http://localhost:3000/${value}/admin`)});
+            ).then(() => {window.location.replace(`http://ferreteros.app/${value}/admin`)});
         }
       });
     }

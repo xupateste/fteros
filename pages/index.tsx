@@ -68,7 +68,7 @@ const RegisterModal = () => {
                 description: t("auth.login.signInError"),
                 status: "error",
               }),
-            ).then(() => {window.location.replace(`http://localhost:3000/${value}/admin`)});
+            ).then(() => {window.location.replace(`http://ferreteros.app/${value}/admin`)});
         }
       });
     }
