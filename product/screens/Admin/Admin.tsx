@@ -16,7 +16,7 @@ import {useTenant} from "~/tenant/hooks";
 import ProductsUpsertButton from "~/product/components/ProductsUpsertButton";
 
 const AdminScreen: React.FC = () => {
-  const [selected, setSelected] = React.useState<Partial<Product> | undefined>(undefined);
+  const [selected, setSelected] = React.useState< Partial<Product> | undefined >(undefined);
   const {flags, layout} = useTenant();
   const {products, filters} = useFilteredProductsWithCode();
   const {update, remove, create, upsert} = useProductActions();

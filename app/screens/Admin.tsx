@@ -15,6 +15,9 @@ import {
 
 import HomeAdminScreen from "./Home";
 
+//added
+import {useRouter} from "next/router";
+
 import ProductsAdminScreen from "~/product/screens/Admin/Admin";
 import OrdersAdminScreen from "~/product/screens/Orders/Orders";
 import TenantAdminScreen from "~/tenant/screens/Admin";
@@ -33,8 +36,13 @@ const AdminScreen: React.FC = () => {
   const {signOut} = useSession();
   const t = useTranslation();
 
+  //added
+  const router = useRouter();
+
+  console.log(router);
+
   return (
-    <Box as="main" backgroundColor="white" overflowY="auto">
+    <Box as="main" backgroundColor="white">
       <Flex alignItems="center" boxShadow="sm" height={16} paddingY={2} position="relative">
         <Content paddingX={4}>
           <Flex alignItems="center" justifyContent="space-between" width="100%">
@@ -44,7 +52,7 @@ const AdminScreen: React.FC = () => {
                 _hover={{
                   textDecoration: "none",
                 }}
-                href="/"
+                href={`/${router.query.slug}`}
                 rel="noopener noreferrer"
                 target="_blank"
               >

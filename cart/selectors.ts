@@ -89,7 +89,7 @@ export function getFormattedPrice(item: CartItem): string {
 
     // Ask price
     case "ask": {
-      return "A consultar";
+      return "Precio a consultar";
     }
 
     // Get price

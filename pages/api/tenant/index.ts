@@ -18,13 +18,15 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   if (req.method === "POST") {
     const {
       // We extract what we need from the body
-      body: {email, password, secret, slug},
+      //body: {email, password, secret, slug},
+      body: {email, password, slug},
     } = req as PostRequest;
 
     // If we don't have everything we need
-    if (!email || !password || !slug || !secret || secret !== process.env.SECRET) {
+    //if (!email || !password || !slug || !secret || secret !== process.env.SECRET) {
+    if (!email || !password || !slug) {
       // Return a 304
-      return res.status(304).end();
+      return res.status(304).end("if nor");
     }
 
     // Store a temp tenant
@@ -50,5 +52,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   }
 
   // If nothing matched return a 304
-  return res.status(304).end();
+  return res.status(304).end("nelnel");
 };

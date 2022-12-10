@@ -15,4 +15,8 @@ export default {
     name: "Español de España",
     translation: es_ES,
   },
+  "es-PE": {
+    name: "Español de Perú",
+    translation: es_ES,
+  },
 };

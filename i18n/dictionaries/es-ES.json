@@ -1,7 +1,7 @@
 {
   "common": {
     "error": "Error",
-    "email": "Email",
+    "email": "E-mail",
     "password": "Contraseña",
     "total": "Total",
     "featured": "Destacado",
@@ -25,42 +25,42 @@
     "features": {
       "streamlineBusinessManagment":{
         "title": "Agiliza la gestión de tu negocio",
-        "description": "Optimiza tus recursos simplificando la manera de recibir los pedidos."
+        "description": "Optimizamos tus recursos simplificando la forma de recibir los pedidos."
       },
       "endAbusiveCommissions":{
-        "title": "No más comisiones abusivas",
-        "description": "Olvídate de los intermediarios y las comisiones por venta. Ofrece un mejor precio con tu tienda independiente."
+        "title": "Pon fin a las comisiones abusivas",
+        "description": "Olvidate de los intermediarios y las comisiones por venta. Ofrece un mejor precio con tu tienda independiente."
       },
       "talkClientWithoutIntermediaries": {
-        "title": "Habla con tus clientes sin intermediarios",
+        "title": "Habla con tus clientes sin intermediarios.",
         "description": "Brinda un mejor servicio y atención gracias a la comunicación directa."
       },
       "avoidCrowdsPremises":{
-        "title": "Controla el aforo en tu tienda",
-        "description": "Reduce los tiempos de espera y líbrate de las filas innecesarias en tu tienda física tomando pedidos online."
+        "title": "Evita aglomeraciones en tu local",
+        "description": "Reduce los tiempos de espera y librate de las filas innecesarias vendiendo online."
       }
     },
     "footer": {
       "twitter": "Siguenos en Twitter",
       "facebook": "Siguenos en Facebook",
       "instagram": "Siguenos en Instagram",
-      "whatsapp": "Escribenos en Whatsapp",
+      "whatsapp": "Siguenos en Whatsapp",
       "termsConditions": "Términos y condiciones",
       "privacyPolicies": "Políticas de privacidad"
     },
     "header": {
-      "saveTimeMoney":"Tu tienda 100% gratis con Pency",
-      "publishCatalogOnline": "Publica tu catálogo online y recibe por Whatsapp los pedidos de tus clientes sin comisiones.",
+      "saveTimeMoney":"Ahorra tiempo y dinero con tu tienda Ferreteros.app",
+      "publishCatalogOnline": "Publica tu catálogo online y recibe por Whatsapp los pedidos de tus clientes ¡GRATIS!",
       "createStore": "Crear tienda",
-      "seeDemo": "Ver demo"
+      "seeDemo": "Ver tienda de prueba"
     },
     "navBar": {
       "supportByWhatsapp": "Soporte",
       "createStore": "Crear tienda"
     },
     "directory": {
-      "title": "¡Sumate a nuestras más de 1000 tiendas abiertas!",
-      "subtitle": "Conoce la comunidad de tiendas Pency",
+      "title": "¡Somos más de 1000 tiendas abiertas!",
+      "subtitle": "Conoce la comunidad de tiendas Ferreteros.app",
       "noResults": "No se encontraron resultados",
       "footer": {
         "withLocation": "Se muestran resultados dentro de los 5 KM de tu ubicación.",
@@ -71,8 +71,8 @@
     },
     "previews": {
       "versatileForAllBusinesses": {
-        "title": "Para todo tipo de negocios",
-        "description":"Independientemente del sector, tu tienda Pency se ajusta a ti y tus productos, además de ofrecer una experiencia de compra simple y agradable a tus clientes."
+        "title": "Versátil, para todo tipo de negocios",
+        "description":"Independientemente del rubro, tu tienda Ferreteros.app se ajusta a vos y tus productos, además de ofrecer una experiencia de compra simple y agradable a tus clientes."
       }
     },
     "shout": {
@@ -86,7 +86,7 @@
     },
     "testimonial": {
       "userName":"Francisco Bellocchio",
-      "message": "\"Pency apareció en el momento justo como una herramienta para ayudar a nuestra marca a potenciar la venta on line y llegar a nuestros clientes de manera simple y segura.\"",
+      "message": "\"Ferreteros.app apareció en el momento justo como una herramienta para ayudar a nuestra marca a potenciar la venta on line y llegar a nuestros clientes de manera simple y segura.\"",
       "ownerOf": "Dueño de Blondies"
     }
   },
@@ -97,16 +97,16 @@
       "placeholder": "Me gustaría que..."
     },
     "share": {
-      "prompt": {
+      "prompt":{
         "status": "success",
         "title": "Bien!",
         "description": "El enlace fue compartido correctamente"
       },
-      "clipboard": {
+      "clipboard":{
         "status": "success",
         "title": "Link copiado",
         "description": "El link se copió al portapapeles",
-        "error": {
+        "error":{
           "status": "warning",
           "title": "No se pudo copiar el link",
           "description": "No se tienen permisos para acceder al portapapeles en este navegador"
@@ -123,7 +123,7 @@
   },
   "admin": {
     "save" : "Guardar",
-    "orders": "Ordenes",
+    "orders": "Pedidos",
     "preview": "Ver tienda",
     "empty": "No se encontraron productos",
     "shop": {
@@ -190,7 +190,7 @@
         "addFieldToComplete" : "A completar",
         "addFieldNote" : "Nota",
         "addFieldNoteHelp" : "Máximo 70 caracteres",
-        "addFieldNotePlaceholder" : "Solo se entrega a zona sur" 
+        "addFieldNotePlaceholder" : "Solo se entrega a zona sur"
       },
       "advancedOptions" : {
         "title" : "Opciones avanzadas",
@@ -207,25 +207,25 @@
         "blurb": "Comenzar a utilizar una nueva herramienta nunca es fácil, por eso lo hicimos bien simple. Seguí estos pasos y en unos minutos tendrás tu tienda lista para compartir."
       },
       "contact": {
-        "title": "Si necesitas ayuda, escribinos:"
+        "title": "Si necesitas ayuda, escríbenos:"
       },
       "challenges": {
-        "title": "Comenzá con estos desafíos:",
+        "title": "Comienza con estos desafíos:",
         "first": {
-          "title": "Completá la info de tu negocio",
+          "title": "Completa la info de tu negocio",
           "description": "Nombre de tu negocio, rubro, una descripción y número de whatsapp."
         },
         "second": {
-          "title": "Personalizá tu tienda",
-          "description": "Subí tu logo, una imagen de cabecera y elegí el color de tu tienda."
+          "title": "Personaliza tu tienda",
+          "description": "Sube tu logo, una imagen de cabecera y elije el color de tu tienda."
         },
         "third": {
-          "title": "Cargá tus productos",
-          "description": "Cargá tus productos y empezá a vender ya!"
+          "title": "Carga tus productos",
+          "description": "Carga tus productos y empezá a vender ya!"
         }
       },
       "assets": {
-        "title": "Imprimí y comparti tu código QR",
+        "title": "Imprime y comparte tu código QR",
         "footer": "Escaneando este código tus clientes podrán acceder a tu tienda."
       },
       "tiers": {
@@ -281,14 +281,14 @@
     },
     "resetPasswordSuccess": {
       "title": "Listo! Te enviamos las instrucciones",
-      "description": "Recibiras un mail que tiene un link para restablecer tu contraseña. Si no aparece en algunos minutos, revisa la carpeta spam.",
+      "description": "Te llegará un mail que tiene un link para restablecer tu contraseña. Si no aparece en algunos minutos, revisa la carpeta spam.",
       "contactUsAt": "En caso que tengas algún problema en el proceso escribimos a",
-      "emailTitle": "Consulta por Pency"
+      "emailTitle": "Consulta por Ferreteros.app"
     },
     "login": {
       "signInError": "Hubo un error al iniciar sesión, verifica las credenciales",
       "recoverPassword": "Recuperar contraseña",
-      "signIn": "Acceder"
+      "signIn": "Ingresar"
     }
   },
   "catalogs": {

@@ -66,7 +66,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
           <Flex pt="44%" w="100%" borderColor="gray.400">
             <Flex h="100%" w="100%" position="absolute">
             </Flex>
-            <Text m="auto" fontSize="12px" fontWeight="bold" px={2} bg="black" color="white" position="relative">OUT OF STOCK</Text>
+            <Text m="auto" fontSize="12px" fontWeight="bold" px={2} bg="black" color="white" position="relative">Producto sin stock</Text>
           </Flex>)
         }
       </Box>
@@ -118,11 +118,11 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             {min === max ? p(min) : p(min)} ~ {p(max)}
           </Text>
         )*/}
-        {/*type === "ask" && (
-          <Text color="green.500" fontSize="sm" fontWeight={500} lineHeight={1}>
-            A consultar
+        {type === "ask" && (
+          <Text color="green.500" fontSize="md" fontWeight={600} lineHeight={1}>
+            Precio a consultar
           </Text>
-        )*/}
+        )}
       </Box>
     </Flex>
   );

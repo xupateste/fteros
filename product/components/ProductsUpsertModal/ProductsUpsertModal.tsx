@@ -31,7 +31,7 @@ const ProductsUpsertModal: React.FC<Props> = ({onClose, onChange}) => {
 
   function handleDownload() {
     // Download the base CSV file
-    download("pency.csv", CSV_TEMPLATE);
+    download("ferreteros.csv", CSV_TEMPLATE);
   }
 
   return (
@@ -60,7 +60,7 @@ const ProductsUpsertModal: React.FC<Props> = ({onClose, onChange}) => {
                   <UploadIcon color="gray.500" />
                   <Stack alignItems="center" spacing={0}>
                     <Text color="gray.500" fontSize="sm">
-                      Arrastrá tu archivo CSV o
+                      Arrastra tu archivo CSV o
                     </Text>
                     <Text color="primary.500" fontSize="sm">
                       Seleccionalo desde tu computadora
@@ -71,7 +71,7 @@ const ProductsUpsertModal: React.FC<Props> = ({onClose, onChange}) => {
             </Box>
             <Box color="gray.500" fontSize="sm">
               <Box as="span">
-                El archivo .CSV tiene que tener un formato particular. Si no sabés cual es
+                El archivo .CSV tiene que tener un formato particular. Si no sabes cual es
               </Box>
               <Stack
                 isInline
@@ -85,7 +85,7 @@ const ProductsUpsertModal: React.FC<Props> = ({onClose, onChange}) => {
                 onClick={handleDownload}
               >
                 <DownloadIcon marginBottom="auto" size={18} />
-                <Text>bajá este archivo</Text>
+                <Text>baja este archivo</Text>
               </Stack>
               <Box as="span">para usarlo como referencia.</Box>
             </Box>

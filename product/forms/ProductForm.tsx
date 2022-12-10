@@ -67,8 +67,8 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
             <FormControl
               isRequired
               error={errors.code && "Este campo es requerido"}
-              help="Ej: 12345"
-              label="Codigo"
+              help="Código interno de tu producto"
+              label="SKU"
               name="code"
             >
               <Input
@@ -118,14 +118,14 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 register={register({required: true})}
               />
             </FormControl>
-            {!["ask", "variant"].includes(values.type) && (
+            {!["variant"].includes(values.type) && (
               <Stack isInline spacing={2}>
                 <FormControl
                   isRequired
                   error={errors.price && "Este campo es requerido"}
                   flex={1}
-                  help="Precio Principal"
-                  label="Precio Final"
+                  help="Precio principal"
+                  label="Precio final"
                   name="price"
                 >
                   <Price
@@ -140,7 +140,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                     isRequired
                     error={errors.originalPrice && "Este valor es requerido"}
                     flex={1}
-                    help="Valor sin promocion"
+                    help="Valor sin promoción"
                     label="Precio original"
                     name="originalPrice"
                   >
@@ -158,7 +158,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
             <FormControl
               isRequired
               error={errors.category && "Este campo es requerido"}
-              help="Ayudá a tus clientes a encontrar más rápido tus productos."
+              help="Escribe ó selecciona una categoría"
               label="Categoría"
               name="category"
             >

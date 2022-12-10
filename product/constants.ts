@@ -20,6 +20,7 @@ export const DEFAULT_PRODUCT: Omit<Product, "id"> = {
   options: [],
   createdAt: 1594090800000,
   updatedAt: 1594090800000,
+  slug: "",
 };
 
 export const DEFAULT_PRODUCT_VARIANT: Omit<Variant, "id"> = {

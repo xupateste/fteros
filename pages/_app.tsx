@@ -14,7 +14,7 @@ process.on("uncaughtException", (error: Error) => {
   reporter.exception(error, {origin: "server | uncaughtException"});
 });
 
-export default class Pency extends App {
+export default class Ferreteros extends App {
   componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
     reporter.exception(error, {extras: errorInfo, origin: "client"});
 

@@ -44,6 +44,8 @@ const CartProvider = ({children}: Props) => {
           Object.keys(cartItemsData).forEach(function(key) {
             if(productsAll.find((_product) => _product.id === cartItemsData[key].product.id)) {
               cartItemsData[key].product.price = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).price
+              cartItemsData[key].product.title = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).title
+              cartItemsData[key].product.type = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).type
               add(cartItemsData[key].product, cartItemsData[key].variants, cartItemsData[key].count, cartItemsData[key].note)
             }            
           });

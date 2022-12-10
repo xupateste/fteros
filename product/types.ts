@@ -12,11 +12,12 @@ export interface Product {
   numPiezas?: number;
   priceOff?: number;
   lastStock?: number;
-  type: "available" | "unavailable" | "variant" | "hidden" | "promotional" | "ask";
+  type: "available" | "unavailable" | "hidden" | "promotional" | "ask";
   options?: Variant[];
   featured?: boolean;
   isnew?: boolean;
   isPreOrder?: boolean;
+  slug?: string;
 }
 
 export interface Variant {

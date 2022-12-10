@@ -1,9 +1,12 @@
 import React from "react";
-import {StackProps, Stack, Text} from "@chakra-ui/core";
+import {StackProps, Stack, Text, Box} from "@chakra-ui/core";
 import produce from "immer";
 import {Message} from "react-hook-form";
 
 import ProductVariantsInput from "../ProductVariantsInput";
+
+import ProductTypeInput from "../ProductTypeInput";
+
 
 import {Product, Variant} from "~/product/types";
 import Price from "~/ui/inputs/Price";
@@ -31,6 +34,26 @@ const ProductInput: React.FC<Props> = ({value: product, onChange, error, ...prop
     );
   }
 
+  function handlePricePromoChange(event: React.ChangeEvent<HTMLInputElement>) {
+    onChange(
+      // Produce a new product based on the change
+      produce(product, (product) => {
+        // Cast as unknown and then number so we can have an empty input, we then validate that with the schema
+        product.originalPrice = (event.target.value as unknown) as number;
+      }),
+    );
+  }
+
+  function handleTypeChange(event: React.ChangeEvent<HTMLInputElement>) {
+    onChange(
+      // Produce a new product based on the change
+      produce(product, (product) => {
+        // Cast as unknown and then number so we can have an empty input, we then validate that with the schema
+        product.type = (event.target.value as unknown) as string;
+      }),
+    );
+  }
+
   function handleImageChange(image: Product["image"]) {
     onChange(
       // Produce a new product based on the change
@@ -49,6 +72,7 @@ const ProductInput: React.FC<Props> = ({value: product, onChange, error, ...prop
       }),
     );
   }
+
 
   function handleToggle() {
     toggle(!isToggled);
@@ -73,27 +97,40 @@ const ProductInput: React.FC<Props> = ({value: product, onChange, error, ...prop
           <Text fontSize="sm" textAlign="left" width={240}>
             {product.category}
           </Text>
-          <Price
+          <Box>Tipo<ProductTypeInput
+            data-test-id="type-select"
+            name="type"
+            value={product.type}
+            onChange={handleTypeChange}
+          /></Box>
+          <Box>Precio final<Price
             inputProps={{isInvalid: false}}
             maxWidth={120}
             rounded="sm"
             value={product.price}
             onChange={handlePriceChange}
-          />
-          {isToggled ? (
+          /></Box>
+          <Box>Precio original<Price
+            inputProps={{isInvalid: false}}
+            maxWidth={120}
+            rounded="sm"
+            value={product.originalPrice}
+            onChange={handlePricePromoChange}
+          /></Box>
+          {/*isToggled ? (
             <ChevronUpIcon cursor="pointer" onClick={handleToggle} />
           ) : (
             <ChevronDownIcon cursor="pointer" onClick={handleToggle} />
-          )}
+          )*/}
         </Stack>
       </Stack>
-      {isToggled && (
+      {/*isToggled && (
         <ProductVariantsInput
           maxWidth={480}
           value={product.options}
           onChange={handleVariantsChange}
         />
-      )}
+      )*/}
       {error && (
         <Text backgroundColor="red.100" color="red.500" padding={2} rounded="md">
           {error}

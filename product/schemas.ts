@@ -64,6 +64,7 @@ export default {
       isnew: yup.boolean().default(DEFAULT_PRODUCT.isnew),
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
+      slug: yup.string().default(DEFAULT_PRODUCT.slug),
     }),
     update: yup.object<Partial<Product>>({
       id: yup.string().required(),
@@ -109,6 +110,7 @@ export default {
         )
         .nullable(),
       image: yup.string().nullable(),
+      slug: yup.string().nullable(),
     }),
   },
   client: {
@@ -176,6 +178,7 @@ export default {
       isnew: yup.boolean().default(DEFAULT_PRODUCT.isnew),
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
+      slug: yup.string().default(DEFAULT_PRODUCT.slug),
     }),
     update: yup.object<Product>({
       type: yup
@@ -221,6 +224,7 @@ export default {
       lastStock: yup.number().nullable(),
       numPiezas: yup.number().nullable(),
       title: yup.string().nullable(),
+      slug: yup.string().nullable(),
     }),
     create: yup.object<Product>({
       id: yup.string().strip(true),
@@ -283,6 +287,7 @@ export default {
       isnew: yup.boolean().default(DEFAULT_PRODUCT.isnew),
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
+      slug: yup.string().default(DEFAULT_PRODUCT.slug),
     }),
   },
 };

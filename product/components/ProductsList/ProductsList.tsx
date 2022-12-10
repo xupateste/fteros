@@ -32,7 +32,7 @@ const ProductsList: React.FC<Props> = ({
   ...props
 }) => {
   // If it doesn't have a title, show it
-  const [isToggled, toggle] = React.useState(!Boolean(title));
+  const [isToggled, toggle] = React.useState(Boolean(title));
 
   // Store preview mode
   const [previewMode, setPreviewMode] = React.useState("row");

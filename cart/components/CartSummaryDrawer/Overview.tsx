@@ -1,5 +1,5 @@
 import React from "react";
-import {Stack, Flex, Text, useDisclosure, Grid, Box, 
+import {Stack, Flex, Text, useDisclosure, Box, Link,
   AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
@@ -113,25 +113,23 @@ const Overview: React.FC<Props> = ({
           <Stack shouldWrapChildren spacing={6}>
             {items.map((item) => (
               <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
-                {(
-                  <Flex alignItems="center">
-                    <Image
-                      fadeIn
-                      height={{base: 24, sm: 24}}
-                      rounded="md"
-                      src={formattedImg(products.find((_product) => _product.id === item.product.id).image) || "/assets/fallback.jpg"}
-                      width={{base: 24, sm: 24}}
-                    />
-                  </Flex>
-                )}
+                <Flex alignItems="center">
+                  <Image
+                    fadeIn
+                    height={{base: 24, sm: 24}}
+                    rounded="md"
+                    src={formattedImg(products.find((_product) => _product.id === item.product.id).image) || "/assets/fallback.jpg"}
+                    width={{base: 24, sm: 24}}
+                  />
+                </Flex>
                 <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
-                  <Stack spacing={0}>
+                  <Stack spacing={0} flexDirection='column' display='flex'>
                     <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
                       {item.product.title}
                     </Text>
-                    {item.variants && (
+                    {/*item.variants && (
                       <Text color="gray.600">{getVariantsString(item.variants)}</Text>
-                    )}
+                    )*/}
                     {item.note && <Text color="gray.600">({item.note})</Text>}
                     <Stepper
                       marginTop={2}
@@ -139,6 +137,9 @@ const Overview: React.FC<Props> = ({
                       onDecrease={() => handleDecrease(item.id)}
                       onIncrease={() => handleIncrease(item.id)}
                     />
+                    <Link marginTop='auto'>
+                      Remover
+                    </Link>
                   </Stack>
                 </Flex>
                 <Flex alignItems="center">
@@ -146,20 +147,6 @@ const Overview: React.FC<Props> = ({
                 </Flex>
               </Flex>
             ))}
-          </Stack>
-          <Stack display="none" borderTopWidth={2} borderColor='gray.200'>
-            <Grid marginTop={10} marginBottom={4} templateColumns='3fr 2fr' borderWidth={1} borderColor='gray.300'>
-              <Box bg='gray.100' isTruncated padding={2} fontWeight='bold' borderBottomWidth={1} borderColor='gray.300'>Volumen de compra</Box>
-              <Box bg='gray.100' isTruncated padding={2} fontWeight='bold' borderBottomWidth={1} borderLeftWidth={1} borderColor='gray.300'>Ahorro</Box>
-              <Box bg='white' isTruncated padding={2} borderBottomWidth={1} borderColor='gray.300'>Invierte S/500 (o más)</Box>
-              <Box bg='white' isTruncated padding={2} borderBottomWidth={1} borderLeftWidth={1} borderColor='gray.300' color='#fd0000'>2% de descuento</Box>
-              <Box bg='white' isTruncated padding={2} borderBottomWidth={1} borderColor='gray.300'>Invierte S/1500 (o más)</Box>
-              <Box bg='white' isTruncated padding={2} borderBottomWidth={1} borderLeftWidth={1} borderColor='gray.300' color='#fd0000'>3% de descuento</Box>
-              <Box bg='white' isTruncated padding={2} borderBottomWidth={1} borderColor='gray.300'>Invierte S/3200 (o más)</Box>
-              <Box bg='white' isTruncated padding={2} borderBottomWidth={1} borderLeftWidth={1} borderColor='gray.300' color='#fd0000'>4% de descuento</Box>
-              <Box bg='white' isTruncated padding={2}>Invierte S/6000 (o más)</Box>
-              <Box bg='white' isTruncated padding={2} borderLeftWidth={1} borderColor='gray.300' color='#fd0000'>5% de descuento</Box>
-            </Grid>
           </Stack>
         </Stack>
       </DrawerBody>

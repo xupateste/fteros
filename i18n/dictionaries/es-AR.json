@@ -49,7 +49,7 @@
       "privacyPolicies": "Políticas de privacidad"
     },
     "header": {
-      "saveTimeMoney":"Ahorra tiempo y dinero con tu tienda Pency",
+      "saveTimeMoney":"Ahorra tiempo y dinero con tu tienda Ferreteros.app",
       "publishCatalogOnline": "Publica tu catálogo online y recibe por Whatsapp los pedidos de tus clientes ¡GRATIS!",
       "createStore": "Crear tienda",
       "seeDemo": "Ver tienda de prueba"
@@ -60,7 +60,7 @@
     },
     "directory": {
       "title": "¡Somos más de 1000 tiendas abiertas!",
-      "subtitle": "Conoce la comunidad de tiendas Pency",
+      "subtitle": "Conoce la comunidad de tiendas Ferreteros.app",
       "noResults": "No se encontraron resultados",
       "footer": {
         "withLocation": "Se muestran resultados dentro de los 5 KM de tu ubicación.",
@@ -72,7 +72,7 @@
     "previews": {
       "versatileForAllBusinesses": {
         "title": "Versátil, para todo tipo de negocios",
-        "description":"Independientemente del rubro, tu tienda Pency se ajusta a vos y tus productos, además de ofrecer una experiencia de compra simple y agradable a tus clientes."
+        "description":"Independientemente del rubro, tu tienda Ferreteros.app se ajusta a vos y tus productos, además de ofrecer una experiencia de compra simple y agradable a tus clientes."
       }
     },
     "shout": {
@@ -86,7 +86,7 @@
     },
     "testimonial": {
       "userName":"Francisco Bellocchio",
-      "message": "\"Pency apareció en el momento justo como una herramienta para ayudar a nuestra marca a potenciar la venta on line y llegar a nuestros clientes de manera simple y segura.\"",
+      "message": "\"Ferreteros.app apareció en el momento justo como una herramienta para ayudar a nuestra marca a potenciar la venta on line y llegar a nuestros clientes de manera simple y segura.\"",
       "ownerOf": "Dueño de Blondies"
     }
   },
@@ -123,7 +123,7 @@
   },
   "admin": {
     "save" : "Guardar",
-    "orders": "Ordenes",
+    "orders": "Pedidos",
     "preview": "Ver tienda",
     "empty": "No se encontraron productos",
     "shop": {
@@ -207,10 +207,10 @@
         "blurb": "Comenzar a utilizar una nueva herramienta nunca es fácil, por eso lo hicimos bien simple. Seguí estos pasos y en unos minutos tendrás tu tienda lista para compartir."
       },
       "contact": {
-        "title": "Si necesitas ayuda, escribinos:"
+        "title": "Si necesitas ayuda, escríbenos:"
       },
       "challenges": {
-        "title": "Comenzá con estos desafíos:",
+        "title": "Comienza con estos desafíos:",
         "first": {
           "title": "Completa la info de tu negocio",
           "description": "Nombre de tu negocio, rubro, una descripción y número de whatsapp."
@@ -225,7 +225,7 @@
         }
       },
       "assets": {
-        "title": "Imprime y comparti tu código QR",
+        "title": "Imprime y comparte tu código QR",
         "footer": "Escaneando este código tus clientes podrán acceder a tu tienda."
       },
       "tiers": {
@@ -274,8 +274,8 @@
   },
   "auth": {
     "resetPasswordForm": {
-      "resetError": "Hubo un error al reiniciar la contraseña, intentá de nuevo mas tarde",
-      "title": "Restablecé tu contraseña",
+      "resetError": "Hubo un error al reiniciar la contraseña, intenta de nuevo mas tarde",
+      "title": "Restablece tu contraseña",
       "description": "Ingresa tu mail y te enviaremos intrucciones sobre como restrablecerla.",
       "sendInstructions": "Enviar instrucciones"
     },
@@ -283,10 +283,10 @@
       "title": "Listo! Te enviamos las instrucciones",
       "description": "Te llegará un mail que tiene un link para restablecer tu contraseña. Si no aparece en algunos minutos, revisa la carpeta spam.",
       "contactUsAt": "En caso que tengas algún problema en el proceso escribimos a",
-      "emailTitle": "Consulta por Pency"
+      "emailTitle": "Consulta por Ferreteros.app"
     },
     "login": {
-      "signInError": "Hubo un error al iniciar sesión, verificá las credenciales",
+      "signInError": "Hubo un error al iniciar sesión, verifica las credenciales",
       "recoverPassword": "Recuperar contraseña",
       "signIn": "Ingresar"
     }

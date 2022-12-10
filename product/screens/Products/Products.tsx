@@ -1,5 +1,5 @@
 import React from "react";
-import {Stack, Box, PseudoBox, Flex, useDisclosure, Text } from "@chakra-ui/core";
+import {Stack, Box, PseudoBox, Flex, useDisclosure, Text, Image } from "@chakra-ui/core";
 import BTT from "~/ui/icons/BTT";
 import {useRouter} from "next/router";
 
@@ -38,7 +38,7 @@ const ProductsScreen: React.FC = () => {
   const {products, filters} = useFilteredProducts((product) => product.type !== "hidden");
   const productsAll = useProducts();
   const {highlight, fields, layout, ...tenant} = useTenant();
-  const selected = React.useMemo(() => products.find((_product) => _product.id === product), [
+  const selected = React.useMemo(() => products.find((_product) => _product.slug === product), [
     products,
     product,
   ]);
@@ -85,7 +85,7 @@ const ProductsScreen: React.FC = () => {
     add(product, options, count, note);
 
    //push(`/`);
-    push(`/`, `/`, {shallow: true});
+    push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
   }
 
   function handleOpenCart() {
@@ -94,21 +94,21 @@ const ProductsScreen: React.FC = () => {
 
   function handleCloseSelected() {
     //push(`/`);
-   push(`/`, `/`, {shallow: true});
+    push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
   }
 
   function handleSelect(product: Product) {
     push(
       {
-        pathname: `/`,
+        pathname: `/[slug]`,
         query: {
-          product: product.id,
+          product: product.slug,
         },
       },
       {
-        pathname: `/`,
+        pathname: `/${tenant.slug}`,
         query: {
-          product: product.id,
+          product: product.slug,
         },
       },
       {shallow: true},
@@ -231,14 +231,17 @@ const ProductsScreen: React.FC = () => {
       )}
       <Content>
         <Flex
-          alignItems={{base: "center", sm: "flex-end"}}
-          direction={{base: "column", sm: "row"}}
-          justifyContent="flex-end"
-          padding={4}
+          alignItems={{base: "center", sm: "center"}}
+          direction={{base: "column", sm: "column"}}
+          justifyContent="center"
+          pb={8}
         >  
-          <Stack w="100%" alignItems="center" spacing={1}>
-            <Text fontSize="sm">{'Made by'} <Link fontWeight="bolder" href="https://wa.me/51930240108/?text=Hi+Chris!" isExternal>Chris</Link></Text>
-          </Stack>
+          <Text fontSize="md" mt={2}>
+            Sitio creado con
+          </Text>
+          <Link href="https://ferreteros.app" isExternal>
+            <Image src={"/assets/ferreteros-app-black.png"} h={8}/>
+          </Link>
         </Flex>
       </Content>
       {isCartOpen && (

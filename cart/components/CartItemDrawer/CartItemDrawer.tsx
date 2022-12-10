@@ -213,7 +213,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                           fontSize="md"
                           whiteSpace="pre-line"
                         >
-                          {`Code: ${product.code}`}
+                          {`SKU: ${product.code}`}
                         </Text>
                       </Stack>
                     )}
@@ -226,7 +226,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                           whiteSpace="pre-line"
                           p={3}
                         >
-                          OUT OF STOCK
+                          Producto sin stock
                         </Text>
                       </Stack>
                     )}
@@ -264,7 +264,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                 </Stack>
               </DrawerBody>
               <DrawerFooter>
-                {["unavailable", "available", "promotional", "variant"].includes(product.type) && (
+                {["unavailable", "available", "promotional", "ask"].includes(product.type) && (
                   <SimpleGrid columns={1} w='100%' spacingY='20px'>
                     <Flex alignItems="center" justifyContent="space-between" >
                       <FormLabel padding={0}>{t("common.count")}</FormLabel>
@@ -284,7 +284,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     </SummaryButton>
                    </SimpleGrid>
                 )}
-                {product.type === "ask" && (
+                {/*product.type === "ask" && (
                   <Button
                     boxShadow="lg"
                     size="lg"
@@ -296,9 +296,9 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                       submit();
                     }}
                   >
-                    {t("common.add")}
+                    ➕ {t("common.add")}
                   </Button>
-                )}
+                )*/}
               </DrawerFooter>
             </>
           );

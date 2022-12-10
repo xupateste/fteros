@@ -26,14 +26,7 @@ const Info: React.FC = () => (
       <Text as="b" marginRight={1}>
         A consultar:
       </Text>
-      Muestra "A consultar" en el precio. Ideal para servicios.
-    </Text>
-    <Text>
-      <Text as="b" marginRight={1}>
-        Variante:
-      </Text>
-      Producto cuyo precio depende totalmente de las variantes. Es necesario crear como mínimo una
-      variante obligatoria para este tipo de productos.
+      Muestra "A consultar" en el precio. Ideal para proteger el precio.
     </Text>
     <Text>
       <Text as="b" marginRight={1}>

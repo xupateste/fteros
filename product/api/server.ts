@@ -6,6 +6,19 @@ import schemas from "../schemas";
 import {database, firestore} from "~/firebase/admin";
 import {ClientTenant} from "~/tenant/types";
 
+const slugify = (text) => {
+  return text
+    .toString()                   // Cast to string (optional)
+    .normalize('NFKD')            // The normalize() using NFKD method returns the Unicode Normalization Form of a given string.
+    .toLowerCase()                // Convert the string to lowercase letters
+    .trim()                       // Remove whitespace from both sides of a string (optional)
+    .replace(/\s+/g, '-')         // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')     // Remove all non-word chars
+    .replace(/\_/g,'-')           // Replace _ with -
+    .replace(/\-\-+/g, '-')       // Replace multiple - with single -
+    .replace(/\-$/g, '');         // Remove trailing -
+}
+
 export default {
   list: async (tenant: ClientTenant["id"]): Promise<Product[]> => {
     return database
@@ -26,15 +39,15 @@ export default {
       .then((orders) => orders.map((order) => order));
   },
   create: (tenant: ClientTenant["id"], product: Product) => {
+    const newProduct = database.collection("tenants").doc(tenant).collection("products").doc();
+    product["slug"] = slugify(product.title) + "-" + newProduct.id;
+    product["id"] = newProduct.id;
     const casted = schemas.server.create.cast(product);
 
-    return database
-      .collection("tenants")
-      .doc(tenant)
-      .collection("products")
-      .add(casted)
+    return newProduct
+      .set(casted)
       .then((snapshot) => {
-        const product: Product = {...casted, id: snapshot.id};
+        const product: Product = {...casted, id: snapshot['id']};
 
         return product;
       });
@@ -56,6 +69,8 @@ export default {
       .delete()
       .then(() => order),
   update: (tenant: ClientTenant["id"], {id, ...product}: Product) => {
+    product["slug"] = slugify(product.title) + "-" + id;
+
     const casted = schemas.server.update.cast(product);
 
     return database

@@ -37,8 +37,15 @@ export function useProductActions() {
 
 export function useProductCategories() {
   const products = useProducts();
-
-  return sort(extractUniqueBy(products, (product) => product.category));
+  let arrayCats = extractUniqueBy(products, (product) => product.category);
+  arrayCats.push('Accesorios Eléctricos');
+  arrayCats.push('Herramientas');
+  arrayCats.push('Gasfitería y Tubería');
+  arrayCats.push('Limpieza y Plagicídas');
+  arrayCats.push('Chapería');
+  arrayCats.push('Herrería y Pernería');
+  let uniqueCats = [...new Set(arrayCats)];
+  return uniqueCats;
 }
 
 export function useFilteredProducts(selector?: (product: Product) => boolean) {

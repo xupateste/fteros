@@ -67,7 +67,7 @@ const TenantHeader: React.FC<Props> = ({
           <Text color="gray.500" fontSize={{base: "sm", sm: "lg"}} lineHeight="normal">
             {description}
           </Text>
-          {location && (
+          {place && (
             <Stack isInline alignItems="center" color="primary.500" marginTop={1} spacing={1}>
               <MarkerIcon minWidth={4} size={4} />
               <Link

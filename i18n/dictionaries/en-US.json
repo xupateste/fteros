@@ -49,7 +49,7 @@
       "privacyPolicies": "Privacy policies"
     },
     "header": {
-      "saveTimeMoney":"Save time and mony with your Pency store",
+      "saveTimeMoney":"Save time and mony with your Ferreteros.app store",
       "publishCatalogOnline": "Publish your online store and receive orders on WhatsApp, FREE!",
       "createStore": "Create store",
       "seeDemo": "View demo"
@@ -72,7 +72,7 @@
     "previews": {
       "versatileForAllBusinesses": {
         "title": "Versátil, para todo tipo de negocios",
-        "description":"Independientemente del rubro, tu tienda Pency se ajusta a vos y tus productos, además de ofrecer una experiencia de compra simple y agradable a tus clientes."
+        "description":"Independientemente del rubro, tu tienda Ferreteros.app se ajusta a vos y tus productos, además de ofrecer una experiencia de compra simple y agradable a tus clientes."
       }
     },
     "shout": {
@@ -86,7 +86,7 @@
     },
     "testimonial": {
       "userName":"Francisco Bellocchio",
-      "message": "\"Pency apareció en el momento justo como una herramienta para ayudar a nuestra marca a potenciar la venta on line y llegar a nuestros clientes de manera simple y segura.\"",
+      "message": "\"Ferreteros.app apareció en el momento justo como una herramienta para ayudar a nuestra marca a potenciar la venta on line y llegar a nuestros clientes de manera simple y segura.\"",
       "ownerOf": "Dueño de Blondies"
     }
   },
@@ -283,7 +283,7 @@
       "title": "Ready! We just sent you the instructions",
       "description": "You will receive an email with a link to reset your password. If you can't find it in a couple of minutes, check your spam folder.",
       "contactUsAt": "If you have any question, contact us on",
-      "emailTitle": "Question about Pency"
+      "emailTitle": "Question about Ferreteros.app"
     },
     "login": {
       "signInError": "We couldn't sign in verify your credentials",
