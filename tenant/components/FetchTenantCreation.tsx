@@ -3,11 +3,11 @@ import React from 'react';
 class FetchTenantCreation extends React.Component {
     constructor(props) {
     super(props);
-    this.getTenant = this.getTenant.bind(this);
+    FetchTenantCreation.getTenant = FetchTenantCreation.getTenant.bind(FetchTenantCreation);
   }
 
 static async getTenant(slug, email, password) {
-    const tenantAPI = `http://localhost:3000/api/tenant`;
+    //const tenantAPI = `http://localhost:3000/api/tenant`;
     const response = await fetch('api/tenant', {
                            method: 'POST',
                            headers: {'Content-Type': 'application/x-www-form-urlencoded'},

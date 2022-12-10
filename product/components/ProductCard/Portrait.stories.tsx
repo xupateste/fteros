@@ -38,7 +38,7 @@ export const noStock = () => (
 export const variant = () => (
   <ProductCard
     layout="portrait"
-    product={{...productMock.withoutVariants, type: "variant"}}
+    product={{...productMock.withoutVariants, type: "ask"}}
     onClick={action("onClick")}
   />
 );

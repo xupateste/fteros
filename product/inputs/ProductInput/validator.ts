@@ -18,7 +18,7 @@ const schema = yup.object<Bulk>({
     .required("El precio original es requerido, indicá 0 en caso de no corresponder"),
   type: yup
     .string()
-    .oneOf(["available", "unavailable", "variant", "promotional", "ask", "hidden"])
+    .oneOf(["available", "unavailable", "promotional", "ask", "hidden"])
     .required("El tipo es requerida"),
   options: yup
     .array(

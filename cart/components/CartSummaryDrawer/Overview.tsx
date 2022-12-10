@@ -1,5 +1,5 @@
 import React from "react";
-import {Stack, Flex, Text, useDisclosure, Box, Link,
+import {Stack, Flex, Text, useDisclosure, Link,
   AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
@@ -19,7 +19,7 @@ import {getCount, getTotal, getFormattedPrice} from "~/cart/selectors";
 
 //import {formatPrice} from "~/i18n/selectors";
 import Stepper from "~/ui/inputs/Stepper";
-import {getVariantsString} from "~/product/selectors";
+//import {getVariantsString} from "~/product/selectors";
 import CrossIcon from "~/ui/icons/Cross";
 import TrashIcon from "~/ui/icons/Trash";
 

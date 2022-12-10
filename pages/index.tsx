@@ -17,7 +17,7 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
+  //InputRightAddon,
   FormControl,
   FormLabel,
   FormHelperText,
@@ -36,6 +36,8 @@ import LandingLayout from "~/app/layouts/LandingLayout"
 import FetchTenantCreation from '~/tenant/components/FetchTenantCreation'
 import api from "~/session/api/client"
 
+import {useToast} from "~/hooks/toast";
+import {useTranslation} from "~/i18n/hooks";
 
 const RegisterModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -50,7 +52,9 @@ const RegisterModal = () => {
   const [showPassword, setShowPassword] = React.useState(false)
 
   const isLoading=false;
-  
+  const toast = useToast();
+  const t = useTranslation();
+
   const handleCreation = (e) => {
     e.preventDefault();
     if(value && femail && fpassw) {

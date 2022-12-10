@@ -20,9 +20,9 @@ export function getUnitPrice(item: CartItem): number {
     }
 
     // Price depends only on the variants
-    case "variant": {
-      return getVariantsPrice(item.variants) * item.count;
-    }
+    // case "variant": {
+    //   return getVariantsPrice(item.variants) * item.count;
+    // }
 
     // Sum total and variants
     default: {
@@ -64,9 +64,9 @@ export function getPrice(item: CartItem): number {
     }
 
     // Price depends only on the variants
-    case "variant": {
-      return getVariantsPrice(item.variants) * item.count;
-    }
+    // case "variant": {
+    //   return getVariantsPrice(item.variants) * item.count;
+    // }
 
     // Sum total and variants
     default: {

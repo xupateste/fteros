@@ -7,7 +7,7 @@ import {Product} from "./types";
 import Input from "~/ui/inputs/Input";
 import Select from "~/ui/inputs/Select";
 import {extractUniqueBy, filterBy} from "~/selectors/filter";
-import {sort} from "~/selectors/sort";
+//import {sort} from "~/selectors/sort";
 import {groupBy} from "~/selectors/group";
 import {useTranslation} from "~/i18n/hooks";
 

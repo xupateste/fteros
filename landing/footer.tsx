@@ -20,11 +20,12 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
-  FormControl,
-  FormLabel,
-  FormHelperText,
+  //InputRightAddon,
+  //FormControl,
+  //FormLabel,
+  //FormHelperText,
  } from '@chakra-ui/core';
+
 
  const LoginModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();

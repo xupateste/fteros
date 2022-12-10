@@ -23,7 +23,7 @@ const TypeWriter: React.FC<ITypeWriter> = ({
   const [states, setStates] = React.useState<Array<IDelayText>>([]);
   const [stateIndex, setStateIndex] = React.useState(0);
   const [textContent, setTextContent] = React.useState("");
-  const [typing, setTyping] = React.useState(false);
+  const [, setTyping] = React.useState(false);
 
   // compose all text states and their delays and store them in an array
   // i.e. "" => "h" => "ha" => "har" => etc, etc

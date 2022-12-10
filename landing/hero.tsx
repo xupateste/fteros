@@ -1,3 +1,6 @@
+import React from "react";
+import {useState} from "react";
+
 import {
   Stack,
   Box,
@@ -16,7 +19,7 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
+  //InputRightAddon,
   FormControl,
   FormLabel,
   FormHelperText,
@@ -25,20 +28,30 @@ import {
   PseudoBox
 } from '@chakra-ui/core';
 import TypeWriter from './TypeWriter';
+import FetchTenantCreation from '~/tenant/components/FetchTenantCreation';
+import api from "~/session/api/client";
+import {useToast} from "~/hooks/toast";
+import {useTranslation} from "~/i18n/hooks";
+
+
 
 const RegisterModal = () => {
   const { isOpen, onOpen, onClose } = useDisclosure()
-  const [value, setValue] = React.useState('')
+  const [value, setValue] = useState('')
   const handleChange = (event) => setValue(event.target.value)
-  const [femail, setFemail] = React.useState('')
+  const [femail, setFemail] = useState('')
   const handleChangeEmail = (event) => setFemail(event.target.value)
-  const [fpassw, setFpassw] = React.useState('')
+  const [fpassw, setFpassw] = useState('')
   const handleChangePass = (event) => setFpassw(event.target.value)
-  const [wsp, setWsp] = React.useState('')
+  const [wsp, setWsp] = useState('')
   const handleChangeWsp = (event) => setWsp(event.target.value)
-  const [showPassword, setShowPassword] = React.useState(false)
+  const [showPassword, setShowPassword] = useState(false)
 
   const isLoading=false;
+  const toast = useToast();
+  const t = useTranslation();
+  
+
   
   const handleCreation = (e) => {
     e.preventDefault();

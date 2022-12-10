@@ -1,5 +1,5 @@
 import React from "react";
-import {NextApiResponse, NextApiRequest} from "next";
+//import {NextApiResponse, NextApiRequest} from "next";
 
 import {
   Box,
@@ -20,7 +20,7 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-  InputRightAddon,
+  //InputRightAddon,
   FormControl,
   FormLabel,
   FormHelperText,
@@ -29,9 +29,11 @@ import {
 
 import FetchTenantCreation from '~/tenant/components/FetchTenantCreation';
 
-import {GetServerSideProps} from "next";
+//import {GetServerSideProps} from "next";
 
 import api from "~/session/api/client";
+import {useToast} from "~/hooks/toast";
+import {useTranslation} from "~/i18n/hooks";
 
 
 const Hamburger = () => {
@@ -124,6 +126,8 @@ const RegisterModal = () => {
   const [showPassword, setShowPassword] = React.useState(false)
 
   const isLoading=false;
+  const toast = useToast();
+  const t = useTranslation();
   
   const handleCreation = (e) => {
     e.preventDefault();
@@ -243,6 +247,7 @@ const RegisterModal = () => {
 
 const LandingNavbar: React.FC = () => {
   const { isOpen, onToggle } = useDisclosure();
+  
 
   return (
     <Box>

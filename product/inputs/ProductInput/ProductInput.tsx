@@ -3,16 +3,16 @@ import {StackProps, Stack, Text, Box} from "@chakra-ui/core";
 import produce from "immer";
 import {Message} from "react-hook-form";
 
-import ProductVariantsInput from "../ProductVariantsInput";
+//import ProductVariantsInput from "../ProductVariantsInput";
 
 import ProductTypeInput from "../ProductTypeInput";
 
 
-import {Product, Variant} from "~/product/types";
+import {Product} from "~/product/types";
 import Price from "~/ui/inputs/Price";
 import ImageInput from "~/ui/inputs/Image";
-import ChevronDownIcon from "~/ui/icons/ChevronDown";
-import ChevronUpIcon from "~/ui/icons/ChevronUp";
+//import ChevronDownIcon from "~/ui/icons/ChevronDown";
+//import ChevronUpIcon from "~/ui/icons/ChevronUp";
 
 interface Props extends Omit<StackProps, "onChange"> {
   value?: Product;
@@ -22,7 +22,7 @@ interface Props extends Omit<StackProps, "onChange"> {
 
 const ProductInput: React.FC<Props> = ({value: product, onChange, error, ...props}) => {
   // Track toggle state
-  const [isToggled, toggle] = React.useState(false);
+  //const [isToggled, toggle] = React.useState(false);
 
   function handlePriceChange(event: React.ChangeEvent<HTMLInputElement>) {
     onChange(
@@ -49,7 +49,7 @@ const ProductInput: React.FC<Props> = ({value: product, onChange, error, ...prop
       // Produce a new product based on the change
       produce(product, (product) => {
         // Cast as unknown and then number so we can have an empty input, we then validate that with the schema
-        product.type = (event.target.value as unknown) as string;
+        product.type = (event.target.value as unknown) as "available" | "unavailable" | "hidden" | "promotional" | "ask";
       }),
     );
   }
@@ -64,19 +64,19 @@ const ProductInput: React.FC<Props> = ({value: product, onChange, error, ...prop
     );
   }
 
-  function handleVariantsChange(variants: Variant[]) {
-    onChange(
-      // Produce a new product based on the change
-      produce(product, (product) => {
-        product.options = variants;
-      }),
-    );
-  }
+  // function handleVariantsChange(variants: Variant[]) {
+  //   onChange(
+  //     // Produce a new product based on the change
+  //     produce(product, (product) => {
+  //       product.options = variants;
+  //     }),
+  //   );
+  // }
 
 
-  function handleToggle() {
-    toggle(!isToggled);
-  }
+  // function handleToggle() {
+  //   toggle(!isToggled);
+  // }
 
   return (
     <Stack shouldWrapChildren padding={3} spacing={3} {...props}>

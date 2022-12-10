@@ -4,7 +4,7 @@ import {Box, Text, Flex, Stack, FlexProps} from "@chakra-ui/core";
 import Image from "~/ui/feedback/Image";
 import {Product} from "~/product/types";
 import {usePrice} from "~/i18n/hooks";
-import {getVariantsPriceRange} from "~/product/selectors";
+//import {getVariantsPriceRange} from "~/product/selectors";
 
 
 interface Props extends Omit<FlexProps, "onClick"> {
@@ -16,7 +16,7 @@ interface Props extends Omit<FlexProps, "onClick"> {
 const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClick, ...props}) => {
   const p = usePrice();
   const {image, title, price, originalPrice, type} = product;
-  const [min, max] = getVariantsPriceRange(product.options);
+  //const [min, max] = getVariantsPriceRange(product.options);
 
   function formattedImg(image) {
     const position = image.indexOf('/upload/') + 8;
@@ -147,11 +147,11 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             Consultar Stock
           </Text>
         )*/}
-        {type === "variant" && (
+        {/*type === "variant" && (
           <Text color="green.500" fontSize="sm" fontWeight={500} lineHeight={1}>
             {min === max ? p(min) : p(min)} ~ {p(max)}
           </Text>
-        )}
+        )*/}
         {/*type === "ask" && (
           <Text color="green.500" fontSize="sm" fontWeight={500} lineHeight={1}>
             A consultar

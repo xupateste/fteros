@@ -31,7 +31,7 @@ export const unavailable = () => (
 
 export const variant = () => (
   <CartItemDrawer
-    product={{...productMock.full, type: "variant"}}
+    product={{...productMock.full, type: "unavailable"}}
     onClose={action("close")}
     onSubmit={action("submit")}
   />

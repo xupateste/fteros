@@ -8,7 +8,7 @@ import TrashIcon from "~/ui/icons/Trash";
 import DuplicateIcon from "~/ui/icons/Duplicate";
 import Image from "~/ui/feedback/Image";
 import {usePrice} from "~/i18n/hooks";
-import {getVariantsPriceRange} from "~/product/selectors";
+//import {getVariantsPriceRange} from "~/product/selectors";
 
 interface Props extends Product {
   onEdit: (product: Product) => void;
@@ -19,7 +19,7 @@ const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
   const [status, setStatus] = React.useState("init");
   const toast = useToast();
   const p = usePrice();
-  const [min, max] = getVariantsPriceRange(product.options);
+  //const [min, max] = getVariantsPriceRange(product.options);
 
   async function handleRemove(product: Product["id"]) {
     setStatus("pending");
@@ -65,7 +65,7 @@ const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
       <Box as="td" display={{base: "none", md: "table-cell"}} width="220px">
         <Text fontWeight="500" marginRight={{base: 4, md: 10}} textAlign="left">
           {product.type === "ask" && `A consultar (${p(product.price)})`}
-          {product.type === "variant" && (min === max ? p(min) : `${p(min)} ~ ${p(max)}`)}
+          {/*product.type === "variant" && (min === max ? p(min) : `${p(min)} ~ ${p(max)}`)*/}
           {product.type === "available" && p(product.price)}
           {product.type === "unavailable" && "Sin stock"}
           {product.type === "hidden" && "Oculto"}

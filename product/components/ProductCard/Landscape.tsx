@@ -5,7 +5,7 @@ import Image from "~/ui/feedback/Image";
 import {Product} from "~/product/types";
 import {usePrice} from "~/i18n/hooks";
 import TruncatedText from "~/ui/feedback/TruncatedText";
-import {getVariantsPriceRange} from "~/product/selectors";
+//import {getVariantsPriceRange} from "~/product/selectors";
 
 interface Props extends Omit<FlexProps, "onClick"> {
   product: Product;
@@ -16,7 +16,7 @@ interface Props extends Omit<FlexProps, "onClick"> {
 const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onClick, ...props}) => {
   const p = usePrice();
   const {image, title, price, originalPrice, description, type} = product;
-  const [min, max] = getVariantsPriceRange(product.options);
+  //const [min, max] = getVariantsPriceRange(product.options);
 
   function handleClick() {
     onClick && onClick(product);
@@ -92,11 +92,11 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
               Sin stock
             </Text>
           )}
-          {type === "variant" && (
+          {/*type === "variant" && (
             <Text color="green.500" fontSize="sm" fontWeight={500} lineHeight={1}>
               {min === max ? p(min) : p(min)} ~ {p(max)}
             </Text>
-          )}
+          )*/}
           {type === "ask" && (
             <Text color="green.500" fontSize="sm" fontWeight={500} lineHeight={1}>
               A consultar

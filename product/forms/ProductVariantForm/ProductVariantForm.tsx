@@ -24,7 +24,7 @@ interface Props {
 type FormData = Record<string, Variant>;
 
 const ProductVariantForm: React.FC<Props> = ({children, defaultValues, type, onSubmit}) => {
-  const {handleSubmit: submit, formState, control, errors, watch, setError, clearError} = useForm<
+  const {handleSubmit: submit, formState, control, errors, watch, clearError} = useForm<
     FormData
   >({
     defaultValues: defaultValues.reduce(
@@ -38,9 +38,11 @@ const ProductVariantForm: React.FC<Props> = ({children, defaultValues, type, onS
     const variants = (formData.options as unknown) as Variant[];
 
     // If its not valid, return
-    if (type === "variant" && !variants?.some((variant) => variant.value?.length)) {
-      return setError("type", "variant", "Al menos una opción debe ser seleccionada");
-    }
+    // if (type === "variant" && !variants?.some((variant) => variant.value?.length)) {
+    //   return setError("type", "variant", "Al menos una opción debe ser seleccionada");
+    // }
+
+    if (type) {}
 
     // Submit variants
     onSubmit(variants);

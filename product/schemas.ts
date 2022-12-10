@@ -12,7 +12,7 @@ export default {
       updatedAt: yup.number().default(DEFAULT_PRODUCT.updatedAt),
       type: yup
         .string()
-        .oneOf(["available", "unavailable", "ask", "promotional", "variant", "hidden"])
+        .oneOf(["available", "unavailable", "ask", "promotional", "hidden"])
         .default(DEFAULT_PRODUCT.type),
       title: yup.string().default(DEFAULT_PRODUCT.title),
       price: yup
@@ -81,7 +81,7 @@ export default {
       numPiezas: yup.number().nullable(),
       type: yup
         .string()
-        .oneOf(["available", "unavailable", "ask", "promotional", "variant", "hidden"])
+        .oneOf(["available", "unavailable", "ask", "promotional", "hidden"])
         .nullable(),
       featured: yup.boolean().nullable(),
       isnew: yup.boolean().nullable(),
@@ -121,7 +121,7 @@ export default {
       updatedAt: yup.number().default(DEFAULT_PRODUCT.updatedAt),
       type: yup
         .string()
-        .oneOf(["available", "unavailable", "ask", "promotional", "variant", "hidden"])
+        .oneOf(["available", "unavailable", "ask", "promotional", "hidden"])
         .default(DEFAULT_PRODUCT.type),
       title: yup.string().required().default(DEFAULT_PRODUCT.title),
       price: yup
@@ -183,7 +183,7 @@ export default {
     update: yup.object<Product>({
       type: yup
         .string()
-        .oneOf(["available", "unavailable", "ask", "promotional", "variant", "hidden"])
+        .oneOf(["available", "unavailable", "ask", "promotional", "hidden"])
         .nullable(),
       createdAt: yup.number().nullable().strip(true),
       updatedAt: yup.number().nullable().strip(true),
@@ -233,7 +233,7 @@ export default {
       updatedAt: yup.number().default(DEFAULT_PRODUCT.updatedAt),
       type: yup
         .string()
-        .oneOf(["available", "unavailable", "ask", "promotional", "variant", "hidden"])
+        .oneOf(["available", "unavailable", "ask", "promotional", "hidden"])
         .default(DEFAULT_PRODUCT.type),
       title: yup.string().default(DEFAULT_PRODUCT.title),
       price: yup

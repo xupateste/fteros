@@ -38,7 +38,7 @@ export const noStock = () => (
 export const custom = () => (
   <ProductCard
     layout="landscape"
-    product={{...productMock.withoutVariants, type: "variant"}}
+    product={{...productMock.withoutVariants, type: "unavailable"}}
     onClick={action("onClick")}
   />
 );
