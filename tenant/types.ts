@@ -11,6 +11,7 @@ export interface ServerTenant {
     "yellow" | "blue" | "cyan" | "gray" | "orange" | "purple" | "red" | "pink" | "teal" | "green"
   >;
   phone: string;
+  phonePersonal: string;
   logo?: string;
   title: string;
   instagram?: string;
@@ -30,7 +31,7 @@ export interface ServerTenant {
   pixel?: string;
   ga?: string;
   createdAt: number;
-  updatedAt: number;
+  updatedAt: number; 
   layout?: "landscape" | "portrait";
   mercadopago?: {
     token: string;

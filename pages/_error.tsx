@@ -2,7 +2,7 @@ import React from "react";
 import {Flex, Text, Heading, Stack} from "@chakra-ui/core";
 
 import ErrorLayout from "~/app/layouts/ErrorLayout";
-import CompassIcon from "~/ui/icons/Compass";
+import ShoppingIcon from "~/ui/icons/Shopping";
 
 interface Props {
   statusCode: number;
@@ -11,7 +11,7 @@ interface Props {
 export const ERRORS = {
   304: "Este link no parece valido",
   404: "Esta tienda no existe",
-  500: "Lo estamos solucionando, volvé mas tarde",
+  500: "Lo estamos solucionando, vuelve mas tarde",
 };
 
 const Error: React.FC<Props> = ({statusCode}) => {
@@ -19,7 +19,7 @@ const Error: React.FC<Props> = ({statusCode}) => {
     <ErrorLayout>
       <Flex
         alignItems="center"
-        backgroundColor="gray.100"
+        backgroundColor="cyan.100"
         color="white"
         height="100vh"
         justifyContent="center"
@@ -29,12 +29,12 @@ const Error: React.FC<Props> = ({statusCode}) => {
         width="100vw"
       >
         <Stack alignItems="center">
-          <CompassIcon color="teal.500" fontSize="xl" marginBottom={2} size={36} />
+          <ShoppingIcon color="cyan.900" fontSize="xl" marginBottom={2} size={36} />
           <Heading as="h4" color="black" fontWeight="bold" size="lg">
             Algo no salió bien
           </Heading>
           <Text color="gray.600" fontSize="lg">
-            {ERRORS[Number(statusCode)] || "Intentá de nuevo mas tarde"}
+            {ERRORS[Number(statusCode)] || "Intenta de nuevo mas tarde"}
           </Text>
         </Stack>
       </Flex>

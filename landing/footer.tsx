@@ -8,89 +8,14 @@ import {
   Text,
   Flex,
   Button,
-  Image,  
-  Modal,
-  ModalOverlay,
-  ModalContent,
-  ModalHeader,
-  ModalCloseButton,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-  Input,
-  InputGroup,
-  InputLeftAddon,
-  //InputRightAddon,
-  //FormControl,
-  //FormLabel,
-  //FormHelperText,
+  Image,
  } from '@chakra-ui/core';
 
-
- const LoginModal = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [value, setValue] = React.useState('')
-  const handleChange = (event) => setValue(event.target.value)
-  const handleLogin = () => {
-    if (value) {
-     window.location.href = 'https://ferreteros.app/'+value+'/admin';  
-    }
-  }
-
-  return (
-    <>
-      <Button
-        as={'a'}
-        fontSize={'lg'}
-        color='white'
-        variant={'link'}
-        onClick={onOpen}
-        pt={1}
-        _hover={{
-          textDecoration: 'none',
-          color: 'white'
-        }}>
-        Iniciar sesión
-      </Button>
-      <Modal blockScrollOnMount={true} closeOnOverlayClick={false}  isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay bg='cyan.500'/>
-        <ModalContent>
-          <ModalHeader>Ingresa a tu cuenta</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Stack spacing={4}>
-              <InputGroup size="lg">
-                <InputLeftAddon children='ferreteros.app/' />
-                <Input isInvalid={!value} value={value} placeholder='miNegocio' onChange={handleChange} />
-              </InputGroup>
-            </Stack>
-          </ModalBody>
-
-          <ModalFooter>
-            <Stack w="full">
-              <Button
-                w="full"
-                bg="cyan.500"
-                size="lg"
-                color="white"
-                mr={3}
-                onClick={handleLogin}
-                _hover={{
-                  bg: "cyan.600",
-                  color: 'white'
-                }}>
-                Iniciar sesión
-              </Button>
-              <Text textAlign="center" onClick={onClose}>¿No tienes cuenta? ¡Creala gratis!</Text>
-            </Stack>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  )
+interface Props {
+  handleLoginVisibility: () => void;
 }
 
-const Footer: React.FC = () => {
+const Footer: React.FC<Props> = (props) => {
   return (
     <Box
       bg='cyan.600'
@@ -107,7 +32,19 @@ const Footer: React.FC = () => {
             <Link href="#Preguntas">Preguntas frecuentes</Link>
           </Stack>
           <Stack textAlign='center'>
-            <LoginModal />
+            <Button
+              as={'a'}
+              fontSize={'lg'}
+              color='white'
+              variant={'link'}
+              onClick={props.handleLoginVisibility}
+              pt={1}
+              _hover={{
+                textDecoration: 'none',
+                color: 'white'
+              }}>
+              Iniciar sesión
+            </Button>
           </Stack>
         </SimpleGrid>
       </Flex>

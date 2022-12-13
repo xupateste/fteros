@@ -1,10 +1,12 @@
 import {ServerTenant, ClientTenant} from "../types";
 
-import {database, auth} from "~/firebase/admin";
+import {database, auth, firestore} from "~/firebase/admin";
 
 export default {
-  create: (email: string, password: string, tenant: Partial<ServerTenant>) =>
-    database
+  create: (email: string, password: string, tenant: Partial<ServerTenant>) => {
+    //const newProduct = database.collection("tenants").doc(tenant).collection("products").doc();
+    tenant['createdAt'] = firestore.Timestamp.now().toMillis();
+    return database
       .collection("tenants")
       .where("slug", "==", tenant.slug)
       .limit(1)
@@ -19,7 +21,8 @@ export default {
               .then((user) => database.collection("tenants").doc(user.uid).create(tenant))
               .catch(({errorInfo}) => Promise.reject({statusText: errorInfo.message, status: 400}))
           : Promise.reject({statusText: "Esa tienda ya existe", status: 409}),
-      ),
+      );
+  },
   fetch: async (slug: ServerTenant["slug"]): Promise<ServerTenant> => {
     return database
       .collection("tenants")

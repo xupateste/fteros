@@ -1,27 +1,26 @@
 import React from "react";
 
+import {useForm} from "react-hook-form";
+import FormControl from "~/ui/form/FormControl";
+
+
 import {
   Box,
+  Flex,
   Text,
   Heading,
   Button,
   Stack,
-  useDisclosure,
   Modal,
   ModalOverlay,
   ModalContent,
   ModalHeader,
   ModalCloseButton,
   ModalBody,
-  ModalFooter,
   Input,
   InputGroup,
   InputLeftAddon,
-  //InputRightAddon,
-  FormControl,
-  FormLabel,
-  FormHelperText,
-  InputRightElement,
+  Checkbox
 } from '@chakra-ui/core';
 
 import LandingNavBar from "~/landing/landingnavbar"
@@ -35,145 +34,95 @@ import Content from "~/ui/structure/Content"
 import LandingLayout from "~/app/layouts/LandingLayout"
 import FetchTenantCreation from '~/tenant/components/FetchTenantCreation'
 import api from "~/session/api/client"
-
 import {useToast} from "~/hooks/toast";
 import {useTranslation} from "~/i18n/hooks";
+import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
+import {COUNTRIES as countries4select} from "~/i18n/constants";
+import { COUNTRIES } from "~/landing/components/countries";
+import Select from "~/ui/inputs/Select";
 
-const RegisterModal = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const [value, setValue] = React.useState('')
-  const handleChange = (event) => setValue(event.target.value)
-  const [femail, setFemail] = React.useState('')
-  const handleChangeEmail = (event) => setFemail(event.target.value)
-  const [fpassw, setFpassw] = React.useState('')
-  const handleChangePass = (event) => setFpassw(event.target.value)
-  const [wsp, setWsp] = React.useState('')
-  const handleChangeWsp = (event) => setWsp(event.target.value)
-  const [showPassword, setShowPassword] = React.useState(false)
 
-  const isLoading=false;
+const Initio: React.FC = () => {
+  const { register, handleSubmit, errors } = useForm();
   const toast = useToast();
   const t = useTranslation();
 
-  const handleCreation = (e) => {
-    e.preventDefault();
-    if(value && femail && fpassw) {
-      FetchTenantCreation.getTenant(value, femail, fpassw).then(response => {
+  const onLoginSubmit = data => {
+    window.open(
+      window.location.origin+'/'+data.name+'/admin',
+      '_blank' // <- This is what makes it open in a new window.
+    );
+    //window.location.href = window.location.origin+'/'+data.name+'/admin'; 
+  };
+  const onRegisterSubmit = data => {
+    // console.log(data)
+    // console.log(storeCode + data.storePhone)
+    // console.log(personalCode + data.personalPhone)
+    // console.log(acceptCheck)
+    //window.location.href = window.location.origin+'/'+data.name+'/admin'; 
+    //e.preventDefault();
+    if(data.businessName &&
+        data.storeName &&
+        data.storePhone &&
+        data.personalPhone &&
+        data.country &&
+        data.email &&
+        data.password) {
+      FetchTenantCreation.getTenant(data.businessName,
+                                    data.storeName,
+                                    (storeCode+''+data.storePhone),
+                                    (personalCode+''+data.personalPhone),
+                                    data.country,
+                                    data.email,
+                                    data.password,
+                                    acceptCheck).then(response => {
         if(response.ok) {
           api
-            .signIn(femail, fpassw)
+            .signIn(data.email, data.password)
             .catch(() =>
               toast({
                 title: t("common.error"),
                 description: t("auth.login.signInError"),
                 status: "error",
               }),
-            ).then(() => {window.location.replace(`http://ferreteros.app/${value}/admin`)});
+            ).then(() => {window.location.replace(`${window.location.origin}/${data.storeName}/admin`)});
         }
       });
     }
+  };
+
+
+  const [modalRegisterVisible, setModalRegisterVisible] = React.useState(false);
+  const handleRegisterVisibility = () => {
+    setModalLoginVisible(false)
+    setModalRegisterVisible(!modalRegisterVisible)
   }
 
-  return (
-    <>
-      <Button
-        m="auto"
-        rounded={'full'}
-        size={'lg'}
-        onClick={onOpen}
-        mt={6}
-        fontWeight={'900'}
-        color={'white'}
-        bg={'cyan.500'}
-        _hover={{ bg: 'cyan.600' }}>
-        Crear cuenta
-      </Button>
-      <Modal blockScrollOnMount={true} closeOnOverlayClick={false} isOpen={isOpen} onClose={onClose}>
-        <ModalOverlay bg='cyan.500'/>
-        <ModalContent>
-          <ModalHeader>Crea tu cuenta gratis</ModalHeader>
-          <ModalCloseButton />
-          <ModalBody>
-            <Stack spacing={4}>
-              <FormControl id="nombre" isRequired>
-                <FormLabel>Nombre del negocio</FormLabel>
-                <Input type="text" placeholder='Nombre de mi negocio'/>
-              </FormControl>
-              <FormControl isRequired>
-                <FormLabel>Nombre de usuario</FormLabel>
-                <InputGroup size='lg'>
-                  <InputLeftAddon children='ferreteros.app/' />
-                  <Input isInvalid={!value} value={value} placeholder='miNegocio' onChange={handleChange} />
-                </InputGroup>
-                <FormHelperText>
-                  Solo puede contener letras minúsculas, números. No se aceptan tildes ni espacios.
-                </FormHelperText>
-              </FormControl>
-              <FormControl id="whatsapp" isRequired>
-                <FormLabel>Número de whatsapp</FormLabel>
-                <InputGroup size='lg'>
-                  <InputLeftAddon children='🇵🇪 +51' />
-                  <Input isInvalid={!wsp} value={wsp} type="numeric" placeholder='11144000' onChange={handleChangeWsp} />
-                </InputGroup>
-                <FormHelperText>
-                  WhatsApp donde recibirás los pedidos.
-                </FormHelperText>
-              </FormControl>
-              <FormControl id="email" isRequired>
-                <FormLabel>Correo electrónico</FormLabel>
-                <Input type="email" isInvalid={!femail} value={femail} onChange={handleChangeEmail}/>
-              </FormControl>
-              <FormControl id="password" isRequired>
-                <FormLabel>Contraseña</FormLabel>
-                <InputGroup>
-                  <Input type={showPassword ? 'text' : 'password'} isInvalid={!fpassw} value={fpassw} onChange={handleChangePass}/>
-                  <InputRightElement h={'full'}>
-                    <Button
-                      variant={'ghost'}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }>
-                      {showPassword ? "X" : "O"}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-            </Stack>
-          </ModalBody>
+  const [modalLoginVisible, setModalLoginVisible] = React.useState(false);
+  const handleLoginVisibility = () => {
+    setModalRegisterVisible(false)
+    setModalLoginVisible(!modalLoginVisible)
+  }
 
-          <ModalFooter>
-            <Stack w="full">
-              <Button
-                w="full"
-                bg="cyan.500"
-                size="lg"
-                color="white"
-                onClick={handleCreation}
-                isDisabled={isLoading}
-                mr={3}
-                _hover={{
-                  bg: "cyan.600",
-                  color: 'white'
-                }}>
-                {!isLoading ? 'Crear cuenta' : 'Creando...'}
-              </Button>
-              <Text textAlign="center" onClick={onClose}>¿Ya tienes cuenta? Inicia sesión</Text>
-            </Stack>
-          </ModalFooter>
-        </ModalContent>
-      </Modal>
-    </>
-  )
-}
+  const [acceptCheck, setAcceptCheck] = React.useState(true);
+  const handleCheckChange = () => {
+    setAcceptCheck(!acceptCheck)
+  }
+  
 
-const Initio: React.FC = () => {
+  const countryOptions = COUNTRIES.map(({ name, iso }) => ({
+    label: name,
+    value: iso
+  }));
+  const [storeCode, setstoreCode] = React.useState("51");
+  const [personalCode, setpersonalCode] = React.useState("51");
   
   return (
     <>
       <LandingLayout>
-        <LandingNavBar/>
+        <LandingNavBar handleLoginVisibility={handleLoginVisibility} handleRegisterVisibility={handleRegisterVisibility}/>
         <Content>
-          <Hero/>
+          <Hero handleRegisterVisibility={handleRegisterVisibility}/>
           <Features/>
           <Brands/>
           <Box textAlign="center" maxWidth="6xl" m="auto" mt={8} mb={8} py={16} px={6} bg={'cyan.100'} >
@@ -184,14 +133,230 @@ const Initio: React.FC = () => {
               ¡Es GRATIS! Y no requiere tarjetas de crédito.
             </Text>
             <Stack direction='row'>
-              <RegisterModal />
+              <Button
+                m="auto"
+                rounded={'full'}
+                size={'lg'}
+                mt={6}
+                fontWeight={'900'}
+                color={'white'}
+                onClick={handleRegisterVisibility}
+                bg={'cyan.500'}
+                _hover={{ bg: 'cyan.600' }}>
+                Crear cuenta
+              </Button>
             </Stack>
           </Box>
           <Pricing/>
           <Moreabout/>
         </Content>
-        <Footer/>
+        <Footer handleLoginVisibility={handleLoginVisibility}/>
       </LandingLayout>
+
+      <Modal id="REGISTER" blockScrollOnMount={true} closeOnOverlayClick={false} isOpen={modalRegisterVisible} onClose={handleRegisterVisibility}>
+        <ModalOverlay bg='cyan.500'/>
+        <ModalContent py={5}>
+          <ModalHeader fontSize={'2xl'}>Crea tu cuenta gratis</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <form onSubmit={handleSubmit(onRegisterSubmit)}>
+              <Stack spacing={4}>
+                <FormControl
+                  isRequired
+                  error={errors.businessName && "Este campo es requerido"}
+                  name="businessName"
+                  label="Nombre del negocio"
+                >
+                  <Input
+                    size="lg"
+                    autoFocus
+                    variant='filled'
+                    name='businessName'
+                    placeholder='Nombre de mi negocio'
+                    ref={register({required: true, minLength: 4, maxLength: 140})}
+                  />
+                </FormControl>
+                <FormControl
+                  isRequired
+                  error={errors.storeName && "El nombre de la cuenta debe tener al menos 4 caracteres"}
+                  name="storeName"
+                  label="Nombre de usuario"
+                >
+                  <InputGroup size="lg">
+                    <InputLeftAddon children='ferreteros.app/' pr={0} color='gray.500'/>
+                    <Input
+                      variant='filled'
+                      paddingLeft={0}
+                      name="storeName"
+                      placeholder='minegocio'
+                      ref={register({required: true, minLength: 4, maxLength: 70})}
+                    />
+                  </InputGroup>
+                </FormControl>
+                <FormControl
+                  isRequired
+                  error={errors.storePhone && "Este campo es requerido"}
+                  name="storePhone"
+                  label="WhatsApp donde recibirás los pedidos"
+                >
+                  <PhoneNumberInput
+                    ref={register({required: true, minLength: 4, maxLength: 140, pattern: /^[0-9]+$/})}
+                    country={'PER'}
+                    options={countryOptions}
+                    onChange={value => setstoreCode(value)}
+                    name="storePhone"
+                    placeholder="111344400"
+                  />
+                </FormControl>
+                <FormControl
+                  isRequired
+                  error={errors.personalPhone && "Este campo es requerido"}
+                  name="personalPhone"
+                  label="Telefono personal"
+                  help='Este telefono puede ser igual que el del negocio'
+                >
+                  <PhoneNumberInput
+                    ref={register({required: true, minLength: 4, maxLength: 140, pattern: /^[0-9]+$/})}
+                    country={'PER'}
+                    options={countryOptions}
+                    onChange={value => setpersonalCode(value)}
+                    name="personalPhone"
+                    placeholder="111344400"
+                  />
+                </FormControl>
+                <FormControl
+                  isRequired
+                  error={errors.country && "Este campo es requerido"}
+                  label="País"
+                  name="country"
+                >
+                  <Select
+                    ref={register({required: true})}
+                    size="lg"
+                    defaultValue="PE"
+                    name="country"
+                    placeholder="Selecciona un país"
+                  >
+                    {Object.entries(countries4select).map(([code, name]) => (
+                      <option key={code} value={code}>
+                        {name}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl
+                  isRequired
+                  error={errors.email && "Este campo es requerido"}
+                  label="E-mail"
+                  name="email"
+                >
+                  <Input
+                    variant='filled'
+                    size="lg"
+                    placeholder='tunegocio@gmail.com'
+                    name="email"
+                    ref={register({required: true, minLength: 4, maxLength: 70, pattern: /^\S+@\S+$/i})}
+                  />
+                </FormControl>
+                <FormControl
+                  isRequired
+                  error={errors.password && "Este campo es requerido"}
+                  label="Contraseña"
+                  name="password"
+                >
+                  <Input
+                    variant='filled'
+                    size="lg"
+                    placeholder='**********'
+                    name="password"
+                    type="password"
+                    ref={register({required: true, minLength: 4, maxLength: 70})}
+                  />
+                </FormControl>
+                <FormControl
+                  name="accept"
+                >
+                  <Checkbox
+                    isChecked={acceptCheck}
+                    size="md"
+                    name="accept"
+                    onChange={handleCheckChange}>
+                    Recibir novedades sobre ferreteros.app
+                  </Checkbox>
+                </FormControl>
+              </Stack>
+            </form>
+            <Stack pt={3}>
+              <Button
+                w="full"
+                bg="cyan.500"
+                size="md"
+                color="white"
+                mr={3}
+                onClick={handleSubmit(onRegisterSubmit)}
+                _hover={{
+                  bg: "cyan.600",
+                  color: 'white'
+                }}>
+                Crear tu cuenta
+              </Button>
+              <Flex justifyContent="center" w='100%'>
+                <Text>¿Ya tienes una cuenta?</Text>
+                <Text ml={2} fontWeight={500} textDecoration='underline' onClick={handleLoginVisibility}>¡Inicia sesión!</Text>
+              </Flex>
+            </Stack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
+
+      <Modal id="LOGIN" blockScrollOnMount={true} closeOnOverlayClick={false} isOpen={modalLoginVisible} onClose={handleLoginVisibility}>
+        <ModalOverlay bg='cyan.500'/>
+        <ModalContent py={5}>
+          <ModalHeader fontSize={'2xl'}>Ingresa a tu cuenta</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Stack >
+              <form onSubmit={handleSubmit(onLoginSubmit)}>
+                <FormControl
+                  isRequired
+                  error={errors.name && "El nombre de la cuenta debe tener al menos 4 caracteres"}
+                  name="name"
+                >
+                  <InputGroup size="lg">
+                    <InputLeftAddon children='ferreteros.app/' pr={0} color='gray.500'/>
+                    <Input
+                      variant='filled'
+                      paddingLeft={0}
+                      name="name"
+                      placeholder='minegocio'
+                      ref={register({required: true, minLength: 4, maxLength: 70})}
+                    />
+                  </InputGroup>
+                </FormControl>
+              </form>
+            </Stack>
+            <Stack pt={3}>
+              <Button
+                w="full"
+                bg="cyan.500"
+                size="lg"
+                color="white"
+                mr={3}
+                onClick={handleSubmit(onLoginSubmit)}
+                _hover={{
+                  bg: "cyan.600",
+                  color: 'white'
+                }}>
+                Iniciar sesión
+              </Button>
+              <Flex justifyContent="center" w='100%'>
+                <Text>¿No tienes cuenta?</Text>
+                <Text ml={2} fontWeight={500} textDecoration='underline' onClick={handleRegisterVisibility}>¡Creala gratis!</Text>
+              </Flex>
+            </Stack>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </>
   );
 };

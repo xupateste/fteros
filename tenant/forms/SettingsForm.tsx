@@ -6,7 +6,7 @@ import {ClientTenant} from "../types";
 import FieldsInput, {validator as FieldsInputValidator} from "../inputs/Fields";
 import LayoutInput from "../inputs/Layout";
 
-import {CATEGORIES} from "~/app/constants/catalogs";
+//import {CATEGORIES} from "~/app/constants/catalogs";
 import Select from "~/ui/inputs/Select";
 import Input from "~/ui/inputs/Input";
 import Textarea from "~/ui/inputs/Textarea";
@@ -105,7 +105,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
               error={errors.phone && (errors.phone.message || t("admin.shop.basicInformation.whatsappError"))}
               help={t("admin.shop.basicInformation.whatsappHelp")}
               isInvalid={Boolean(errors.phone)}
-              label="WhatsApp"
+              label="WhatsApp de pedidos"
               name="phone"
             >
               <Input
@@ -113,11 +113,28 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 defaultValue=""
                 min={0}
                 name="phone"
-                placeholder="5491144444444"
+                placeholder="51911114444"
                 type="number"
               />
             </FormControl>
             <FormControl
+              isRequired
+              error={errors.phonePersonal && (errors.phonePersonal.message || t("admin.shop.basicInformation.whatsappError"))}
+              help={t("admin.shop.basicInformation.whatsappHelp")}
+              isInvalid={Boolean(errors.phonePersonal)}
+              label="Telefono personal"
+              name="phonePersonal"
+            >
+              <Input
+                ref={register({required: true, pattern: /^[0-9]+$/})}
+                defaultValue=""
+                min={0}
+                name="phonePersonal"
+                placeholder="51911114444"
+                type="number"
+              />
+            </FormControl>
+            {/*<FormControl
               isRequired
               error={errors.category && t("admin.shop.basicInformation.categoryError")}
               help={t("admin.shop.basicInformation.categoryHelp")}
@@ -136,7 +153,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                   </option>
                 ))}
               </Select>
-            </FormControl>
+            </FormControl>*/}
             <FormControl help={t("admin.shop.basicInformation.keywordsHelp")} label={t("admin.shop.basicInformation.keywords")} name="keywords">
               <Input
                 ref={register}

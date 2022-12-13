@@ -39,7 +39,7 @@ const AdminScreen: React.FC = () => {
   //added
   const router = useRouter();
 
-  console.log(router);
+  //console.log(router);
 
   return (
     <Box as="main" backgroundColor="white">
