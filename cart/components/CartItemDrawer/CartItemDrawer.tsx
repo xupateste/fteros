@@ -155,7 +155,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     onClick={handleShare}
                   />
                 )}
-                {product.image && <ToggleableImage maxHeight="50vh" src={formattedImg(product.image)} />}
+                {product.image ? <ToggleableImage maxHeight="50vh" src={formattedImg(product.image)} /> : <ToggleableImage maxHeight="50vh" src="/assets/fallback.jpg" />}
                 <Stack
                   shouldWrapChildren
                   direction="column"
@@ -174,7 +174,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     >
                       {product.title}
                     </Text>
-                    {product.type != "unavailable" && (
+                    {["promotional", "available"].includes(product.type) && (
                       <Stack>
                         <Box
                           color="green.500"
@@ -182,31 +182,35 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                           fontSize="2xl"
                         >
                           {`${p(product.price)}`}
-                          {(product.numPiezas > 1 && 
-                              <Box display="inline-block" verticalAlign="sub" ml={2}>
-                                <Text display="block" color="gray.500" fontSize="xs" lineHeight={0} fontWeight={500}>{product.numPiezas > 1 ? "CADA PIEZA" : ""}</Text>
-                                <Text
-                                  display="block"
-                                  color="gray.500"
-                                  fontSize="lg"
-                                  fontWeight={500}
-                                  textDecoration="line-through"
-                                >
-                                  {`${p(product.originalPrice)}`}
-                                </Text>
-                              </Box>)
-                            ||
-                              <Text
-                                display="inline"
-                                color="gray.500"
-                                fontSize="xl"
-                                fontWeight={500}
-                                ml={2}
-                                textDecoration="line-through"
-                              >
-                                {`${p(product.originalPrice)}`}
-                              </Text>
-                          }
+                          {product.type === "promotional" && (<Text
+                              display="inline"
+                              color="gray.500"
+                              fontSize="xl"
+                              fontWeight={500}
+                              ml={2}
+                              textDecoration="line-through"
+                            >
+                              {product.originalPrice ? `${p(product.originalPrice)}` : ''}
+                            </Text>
+                          )}
+                        </Box>
+                        <Text
+                          color="gray.500"
+                          fontSize="md"
+                          whiteSpace="pre-line"
+                        >
+                          {`SKU: ${product.code}`}
+                        </Text>
+                      </Stack>
+                    )}
+                    {product.type === "ask" && (
+                      <Stack>
+                        <Box
+                          color="green.500"
+                          fontWeight={700}
+                          fontSize="xl"
+                        >
+                          {`*Precio a consultar*`}
                         </Box>
                         <Text
                           color="gray.500"

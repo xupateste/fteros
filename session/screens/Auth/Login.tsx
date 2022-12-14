@@ -70,7 +70,7 @@ const LoginScreen: React.FC<Props> = ({navigate, logo, title}) => {
               autoFocus
               fontSize="md"
               name="email"
-              placeholder="pency@gmail.com"
+              placeholder="tunegocio@gmail.com"
               size="lg"
               tabIndex={1}
             />

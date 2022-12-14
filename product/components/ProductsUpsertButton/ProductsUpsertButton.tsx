@@ -43,7 +43,7 @@ const ProductsUpsertButton: React.FC<Props> = ({products: base, onSubmit, ...pro
 
   async function handleSubmit(products: Product[]) {
     // Upsert products
-    await onSubmit(products);
+    products.length ? await onSubmit(products) : {};
 
     // Close drawer
     setProducts([]);

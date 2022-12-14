@@ -19,6 +19,7 @@ interface Props extends Omit<InputGroupProps, "children" | "onChange">{
   variant?: "outline" | "filled" | "flushed" | "unstyled";
   value?: string;
   country?: string;
+  isDisabled?: boolean;
   options?: any[];
   name?: string;
   onChange: (value: Props["value"]) => void;
@@ -28,7 +29,7 @@ interface Props extends Omit<InputGroupProps, "children" | "onChange">{
 
 
 const PhoneNumberInput: React.FC<Props> = React.forwardRef(
-  ({ size, variant, value, country, options, name, onChange, placeholder, inputProps = {}, ...rest}, ref) => {
+  ({ size, isDisabled, variant, value, country, options, name, onChange, placeholder, inputProps = {}, ...rest}, ref) => {
 
     //export default function PhoneNumberInput({
     let [number, setNumber] = useState(value || "");
@@ -68,12 +69,14 @@ const PhoneNumberInput: React.FC<Props> = React.forwardRef(
           left="0"
           zIndex={1}
           bottom={0}
+          size={size}
           opacity={0}
           height="100%"
           color='transparent'
           width={24}
           position="absolute"
           value={selectedCountry}
+          isDisabled={isDisabled}
           onChange={onCountryChange}
         >
           {options.map(option => (
@@ -92,6 +95,8 @@ const PhoneNumberInput: React.FC<Props> = React.forwardRef(
         ref={ref}
         variant={variant}
         type="tel"
+        size={size}
+        isDisabled={isDisabled}
         name={name}
         value={number}
         pattern="[0-9]"

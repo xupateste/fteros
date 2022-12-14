@@ -81,7 +81,7 @@ const chat = ({}) => {
           <Image
             height={150}
             width={150}
-            src={"https://res.cloudinary.com/pency-d7d98/image/upload/v1654905088/CLOUDINARY_PRESET_LOW/a1kmqmcf3fdbebh2qlqo.png"}
+            src={"https://res.cloudinary.com/ferreteros-app/image/upload/v1654905088/CLOUDINARY_PRESET_LOW/a1kmqmcf3fdbebh2qlqo.png"}
           />
         </Box>
         <Stack mt={-6} alignItems="center" textAlign="center">

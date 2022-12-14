@@ -44,7 +44,7 @@ describe("schemas", () => {
         expect(schemas.server.fetch.cast(actual)).toEqual(expected);
       });
 
-      it("PENCY-2Z - Cache case", () => {
+      it("FERRETEROS-2Z - Cache case", () => {
         const actual = {
           products: [],
           category: "jewelry-watches",
@@ -99,10 +99,10 @@ describe("schemas", () => {
           flags: DEFAULT_CLIENT_TENANT.flags,
           mercadopago: {token: "", expiration: null, refresh: ""},
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1593371612/pency/michelejoyas/cyath8rdaspggpi1qu8y.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1593371612/ferreteros/michelejoyas/cyath8rdaspggpi1qu8y.jpg",
           id: "QRWj1dEzx6g4BFwkupX79fhgYUH3",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1593371400/pency/michelejoyas/a2eoe44p8s3khkbjjb10.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1593371400/ferreteros/michelejoyas/a2eoe44p8s3khkbjjb10.jpg",
           instagram: "Michele_Joyas",
         };
         const expected = true;
@@ -110,7 +110,7 @@ describe("schemas", () => {
         expect(schemas.server.fetch.isValidSync(actual)).toEqual(expected);
       });
 
-      it("PENCY-30 - Cache case", () => {
+      it("FERRETEROS-30 - Cache case", () => {
         const actual = {
           products: [],
           category: "other",
@@ -130,14 +130,14 @@ describe("schemas", () => {
           location: DEFAULT_CLIENT_TENANT.location,
           fields: [],
           keywords:
-            "pency, tienda, online, whatsapp, delivery, pedidos,cera de soja, deco, hogar, quilmes, velas, aromas",
+            "ferreteros, tienda, online, whatsapp, delivery, pedidos,cera de soja, deco, hogar, quilmes, velas, aromas",
           flags: DEFAULT_CLIENT_TENANT.flags,
           mercadopago: {token: "", expiration: null, refresh: ""},
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1594421698/pency/unalome/nkmyuziflvl4g79tnoha.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1594421698/ferreteros/unalome/nkmyuziflvl4g79tnoha.jpg",
           id: "f0N6MLYGlXesZqZg8Bnigxty3Q22",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1594420621/pency/unalome/iuorwdw8u5mb17grnop0.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1594420621/ferreteros/unalome/iuorwdw8u5mb17grnop0.jpg",
           instagram: "unalome_velas",
         };
         const expected = true;
@@ -145,7 +145,7 @@ describe("schemas", () => {
         expect(schemas.server.fetch.isValidSync(actual)).toEqual(expected);
       });
 
-      it("PENCY-31 - Cache case", () => {
+      it("FERRETEROS-31 - Cache case", () => {
         const actual = {
           products: [],
           instagram: "sexshopsentidos",
@@ -154,9 +154,9 @@ describe("schemas", () => {
           hook: "",
           pixel: "",
           ga: "",
-          keywords: "pency, tienda, online, whatsapp, delivery, pedidos, sex shop",
+          keywords: "ferreteros, tienda, online, whatsapp, delivery, pedidos, sex shop",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1591988905/pency/sexshopsentidos/ide4humvpd3dpawxtdux.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1591988905/ferreteros/sexshopsentidos/ide4humvpd3dpawxtdux.jpg",
           mercadopago: {token: "", expiration: null, refresh: ""},
           id: "ege30MHDe7Xw5qH0Dbmbp5PKsb13",
           category: "toys",
@@ -168,7 +168,7 @@ describe("schemas", () => {
           facebook: "Sex Shop Sentidos",
           address: "",
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1591988962/pency/sexshopsentidos/elnptptcz39ygnh1oupo.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1591988962/ferreteros/sexshopsentidos/elnptptcz39ygnh1oupo.jpg",
           slug: "sexshopsentidos",
           country: DEFAULT_CLIENT_TENANT.country,
           flags: DEFAULT_CLIENT_TENANT.flags,
@@ -180,7 +180,7 @@ describe("schemas", () => {
         expect(schemas.server.fetch.isValidSync(actual)).toEqual(expected);
       });
 
-      it("PENCY-39 - Cache case", () => {
+      it("FERRETEROS-39 - Cache case", () => {
         const actual = {
           products: [],
           category: "clothes-accessories",
@@ -229,10 +229,10 @@ describe("schemas", () => {
           flags: DEFAULT_CLIENT_TENANT.flags,
           mercadopago: null,
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1593959210/pency/paroditas/phtzirdrfva8hsqgqkaj.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1593959210/ferreteros/paroditas/phtzirdrfva8hsqgqkaj.jpg",
           id: "3wo9AMAWUNPtGeFuppubZw7dEBr1",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1593959197/pency/paroditas/xww2ij6tw0fjal9trjgs.jpg",
+            "https://res.cloudinary.com/goncy/image/upload/v1593959197/ferreteros/paroditas/xww2ij6tw0fjal9trjgs.jpg",
           instagram: "Paroditas indumentaria ",
         };
         const expected = true;
@@ -240,7 +240,7 @@ describe("schemas", () => {
         expect(schemas.server.fetch.isValidSync(actual)).toEqual(expected);
       });
 
-      it("PENCY-40 - Cache case", () => {
+      it("FERRETEROS-40 - Cache case", () => {
         const actual = {
           products: [],
           description: DEFAULT_CLIENT_TENANT.description,
@@ -250,7 +250,7 @@ describe("schemas", () => {
           slug: "zerditos",
           phone: 5491144444444,
           facebook: null,
-          keywords: "pency, tienda, online, whatsapp, delivery, pedidos",
+          keywords: "ferreteros, tienda, online, whatsapp, delivery, pedidos",
           message: "Hola, quería pedir:\n\n{{productos}}\n\nTotal: {{total}}\n\nGracias.",
           id: "QoBu9gs6Z9ZixHmQvgMMLD6QdPm1",
           instagram: null,
@@ -260,12 +260,12 @@ describe("schemas", () => {
         expect(schemas.server.fetch.isValidSync(actual)).toEqual(expected);
       });
 
-      it("PENCY-5P - Cache case", () => {
+      it("FERRETEROS-5P - Cache case", () => {
         const actual = {
           products: [],
           color: "yellow",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1587397932/pency/ab40esgl6xvdbvfomggr.png",
+            "https://res.cloudinary.com/goncy/image/upload/v1587397932/ferreteros/ab40esgl6xvdbvfomggr.png",
           slug: "eguez",
           title: "eguez",
           id: "iZ6m50JdNtRdtc84OUGyTcq4qM22",

@@ -57,7 +57,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         // If everything went fine, return a 200
         .then(() => res.status(200).json({success: true}))
         // Otherwise return an error
-        .catch(() => res.status(400).end("Fallo la creación de la tienda"))
+        .catch(() => res.status(400).end("Fallo la creación"))
     );
   }
 

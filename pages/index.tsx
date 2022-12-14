@@ -46,21 +46,23 @@ const Initio: React.FC = () => {
   const { register, handleSubmit, errors } = useForm();
   const toast = useToast();
   const t = useTranslation();
+  const [isLoading, toggleLoading] = React.useState(false);
+
 
   const onLoginSubmit = data => {
-    window.open(
-      window.location.origin+'/'+data.name+'/admin',
-      '_blank' // <- This is what makes it open in a new window.
-    );
+    toggleLoading(true);
+    setTimeout(() => {
+      window.open(
+        window.location.origin+'/'+data.name+'/admin',
+        '_blank' // <- This is what makes it open in a new window.
+      );
+      toggleLoading(false);
+      handleLoginVisibility();
+    }, 1200);
     //window.location.href = window.location.origin+'/'+data.name+'/admin'; 
   };
   const onRegisterSubmit = data => {
-    // console.log(data)
-    // console.log(storeCode + data.storePhone)
-    // console.log(personalCode + data.personalPhone)
-    // console.log(acceptCheck)
-    //window.location.href = window.location.origin+'/'+data.name+'/admin'; 
-    //e.preventDefault();
+    toggleLoading(true);
     if(data.businessName &&
         data.storeName &&
         data.storePhone &&
@@ -75,19 +77,34 @@ const Initio: React.FC = () => {
                                     data.country,
                                     data.email,
                                     data.password,
-                                    acceptCheck).then(response => {
+                                    acceptCheck).then((response) => {
         if(response.ok) {
           api
             .signIn(data.email, data.password)
-            .catch(() =>
+            .catch(() => {
               toast({
                 title: t("common.error"),
-                description: t("auth.login.signInError"),
+                description: "Error iniciando sesión",
                 status: "error",
-              }),
-            ).then(() => {window.location.replace(`${window.location.origin}/${data.storeName}/admin`)});
+              });
+              toggleLoading(false)
+            }).then(() => {
+              window.open(
+                `${window.location.origin}/${data.storeName}/admin`,
+                '_blank' // <- This is what makes it open in a new window.
+              );
+              toggleLoading(false)
+              handleRegisterVisibility()
+            });
+        } else {
+          toast({
+            title: "Error al crear la cuenta",
+            description: "El nombre de usuario ya existe ó el Email ya está registrado",
+            status: "error",
+          });
+          toggleLoading(false)
         }
-      });
+      })
     }
   };
 
@@ -166,10 +183,11 @@ const Initio: React.FC = () => {
                   error={errors.businessName && "Este campo es requerido"}
                   name="businessName"
                   label="Nombre del negocio"
+                  w="full"
                 >
                   <Input
                     size="lg"
-                    autoFocus
+                    isDisabled={isLoading}
                     variant='filled'
                     name='businessName'
                     placeholder='Nombre de mi negocio'
@@ -186,6 +204,7 @@ const Initio: React.FC = () => {
                     <InputLeftAddon children='ferreteros.app/' pr={0} color='gray.500'/>
                     <Input
                       variant='filled'
+                      isDisabled={isLoading}
                       paddingLeft={0}
                       name="storeName"
                       placeholder='minegocio'
@@ -202,7 +221,10 @@ const Initio: React.FC = () => {
                   <PhoneNumberInput
                     ref={register({required: true, minLength: 4, maxLength: 140, pattern: /^[0-9]+$/})}
                     country={'PER'}
+                    isDisabled={isLoading}
                     options={countryOptions}
+                    variant='filled'
+                    size="lg"
                     onChange={value => setstoreCode(value)}
                     name="storePhone"
                     placeholder="111344400"
@@ -218,6 +240,9 @@ const Initio: React.FC = () => {
                   <PhoneNumberInput
                     ref={register({required: true, minLength: 4, maxLength: 140, pattern: /^[0-9]+$/})}
                     country={'PER'}
+                    isDisabled={isLoading}
+                    variant='filled'
+                    size="lg"
                     options={countryOptions}
                     onChange={value => setpersonalCode(value)}
                     name="personalPhone"
@@ -233,6 +258,7 @@ const Initio: React.FC = () => {
                   <Select
                     ref={register({required: true})}
                     size="lg"
+                    isDisabled={isLoading}
                     defaultValue="PE"
                     name="country"
                     placeholder="Selecciona un país"
@@ -252,6 +278,7 @@ const Initio: React.FC = () => {
                 >
                   <Input
                     variant='filled'
+                    isDisabled={isLoading}
                     size="lg"
                     placeholder='tunegocio@gmail.com'
                     name="email"
@@ -266,6 +293,7 @@ const Initio: React.FC = () => {
                 >
                   <Input
                     variant='filled'
+                    isDisabled={isLoading}
                     size="lg"
                     placeholder='**********'
                     name="password"
@@ -278,6 +306,7 @@ const Initio: React.FC = () => {
                 >
                   <Checkbox
                     isChecked={acceptCheck}
+                    isDisabled={isLoading}
                     size="md"
                     name="accept"
                     onChange={handleCheckChange}>
@@ -290,15 +319,16 @@ const Initio: React.FC = () => {
               <Button
                 w="full"
                 bg="cyan.500"
-                size="md"
+                size="lg"
                 color="white"
                 mr={3}
+                isLoading={isLoading}
                 onClick={handleSubmit(onRegisterSubmit)}
                 _hover={{
                   bg: "cyan.600",
                   color: 'white'
                 }}>
-                Crear tu cuenta
+                {isLoading ? "Creando cuenta..." : "Crear tu cuenta"}
               </Button>
               <Flex justifyContent="center" w='100%'>
                 <Text>¿Ya tienes una cuenta?</Text>
@@ -327,6 +357,7 @@ const Initio: React.FC = () => {
                     <Input
                       variant='filled'
                       paddingLeft={0}
+                      autoFocus
                       name="name"
                       placeholder='minegocio'
                       ref={register({required: true, minLength: 4, maxLength: 70})}
@@ -343,6 +374,7 @@ const Initio: React.FC = () => {
                 color="white"
                 mr={3}
                 onClick={handleSubmit(onLoginSubmit)}
+                isLoading={isLoading}
                 _hover={{
                   bg: "cyan.600",
                   color: 'white'

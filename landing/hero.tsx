@@ -45,8 +45,8 @@ const Hero: React.FC<Props> = (props) => {
                   textDecoration: "blink",
                 }}>
                 <TypeWriter
-                  typingDelay={100}
-                  erasingDelay={30}
+                  typingDelay={30}
+                  erasingDelay={140}
                   newTextDelay={1200}
                   textArray={["Ferretería", "Distribuidora", "Importadora"]}
                   loop={true}
@@ -83,6 +83,7 @@ const Hero: React.FC<Props> = (props) => {
               px={6}
               mt={2}
               borderWidth={1}
+              onClick={() => {window.open(`${window.location.origin}/demo`,'_blank')}}
               borderColor="cyan.600"
               color="cyan.600"
               bg={'white'}

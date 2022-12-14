@@ -65,7 +65,7 @@ const ResetPasswordForm: React.FC<Props> = ({onBack, onSuccess}) => {
             autoFocus
             fontSize="md"
             name="email"
-            placeholder="pency@gmail.com"
+            placeholder="tunegocio@gmail.com"
             size="lg"
           />
           <FormErrorMessage>

@@ -1,5 +1,5 @@
 import React from "react";
-import {Stack, Flex, Text, useDisclosure, Link,
+import {Stack, Flex, Text, useDisclosure,
   AlertDialog,
   AlertDialogBody,
   AlertDialogFooter,
@@ -113,13 +113,13 @@ const Overview: React.FC<Props> = ({
           <Stack shouldWrapChildren spacing={6}>
             {items.map((item) => (
               <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
-                <Flex alignItems="center">
+                <Flex alignItems="center" borderColor="gray.100" borderWidth={1} rounded={5}>
                   <Image
                     fadeIn
-                    height={{base: 24, sm: 24}}
+                    height={{base: 20, sm: 20}}
                     rounded="md"
-                    src={formattedImg(products.find((_product) => _product.id === item.product.id).image) || "/assets/fallback.jpg"}
-                    width={{base: 24, sm: 24}}
+                    src={item.product.image ? formattedImg(products.find((_product) => _product.id === item.product.id).image) : "/assets/fallback.jpg"}
+                    width={{base: 20, sm: 20}}
                   />
                 </Flex>
                 <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
@@ -137,9 +137,6 @@ const Overview: React.FC<Props> = ({
                       onDecrease={() => handleDecrease(item.id)}
                       onIncrease={() => handleIncrease(item.id)}
                     />
-                    <Link marginTop='auto'>
-                      Remover
-                    </Link>
                   </Stack>
                 </Flex>
                 <Flex alignItems="center">
@@ -169,7 +166,7 @@ const Overview: React.FC<Props> = ({
               cursor="pointer"
               marginRight={1}
             />
-            Clear "My order ({count})"
+            Limpiar "Mi pedido ({count})"
           </Button>
         </Stack>
       </DrawerFooter>
@@ -182,17 +179,17 @@ const Overview: React.FC<Props> = ({
         <AlertDialogOverlay zIndex={8000}/>
 
         <AlertDialogContent zIndex={8001}>
-          <AlertDialogHeader>Clear "My order ({count})"?</AlertDialogHeader>
+          <AlertDialogHeader>Limpiar "Mi pedido ({count})"?</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            {count} products will be removed
+            {count} productos serán removidos
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button onClick={onCloseReportModal}>
-              Cancel
+              Cancelar
             </Button>
             <Button background='#E53E3E' _hover={{ bg: '#E53E3E' }} color='white' onClick={handleOnRemoveAll} ml={3}>
-              Clear
+              Limpiar
             </Button>
           </AlertDialogFooter>
         </AlertDialogContent>

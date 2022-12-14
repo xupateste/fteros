@@ -119,7 +119,7 @@ const ProductsScreen: React.FC = () => {
       <Flex direction="column" height="100%">
         <Flex as="main" backgroundColor="white" direction="column" flex={1} height="100%">
           <Content height="100%" paddingX={{base: 0, sm: 4}}>
-            <TenantHeader data-test-id="header" marginBottom={0} tenant={tenant} />
+            <TenantHeader data-test-id="header" marginBottom={2} tenant={tenant} />
             <Box flex={1}>
               {highlight && (
                 <Box
@@ -239,7 +239,7 @@ const ProductsScreen: React.FC = () => {
           <Text fontSize="md" mt={2}>
             Sitio creado con
           </Text>
-          <Link href="https://ferreteros.app" isExternal>
+          <Link href="/" isExternal>
             <Image src={"/assets/ferreteros-app-black.png"} h={8}/>
           </Link>
         </Flex>

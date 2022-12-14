@@ -86,7 +86,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
               "brand",
             ]).then((csv) => {
               // Set header to download as file
-              res.setHeader("Content-Disposition", "attachment; filename=pency.csv");
+              res.setHeader("Content-Disposition", "attachment; filename=ferreterosapp.csv");
 
               // If everything is ok, return a 200
               return res.status(200).end(csv);

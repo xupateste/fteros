@@ -23,6 +23,7 @@ static async getTenant(businessName, storeName, storePhone, personalPhone, count
                            }),
                           })
     //let body = response.text();
+    // console.log(response)
     return response;
   }
 }
