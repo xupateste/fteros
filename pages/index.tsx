@@ -188,8 +188,7 @@ const Initio: React.FC = () => {
                   isRequired
                   error={errors.businessName && "Este campo es requerido"}
                   name="businessName"
-                  label="Nombre del negocio"
-                  w="full"
+                  label="Nombre de tu negocio"
                 >
                   <Input
                     size="lg"
@@ -207,11 +206,11 @@ const Initio: React.FC = () => {
                   label="Nombre de usuario"
                 >
                   <InputGroup size="lg">
-                    <InputLeftAddon children='ferreteros.app/' pr={0} color='gray.500'/>
+                    <InputLeftAddon children='ferreteros.app/' pr={1} color='gray.500' bg='gray.200' borderWidth={0}/>
                     <Input
                       variant='filled'
                       isDisabled={isLoading}
-                      paddingLeft={0}
+                      paddingLeft={1}
                       name="storeName"
                       placeholder='minegocio'
                       textTransform="lowercase"
@@ -360,10 +359,10 @@ const Initio: React.FC = () => {
                   name="name"
                 >
                   <InputGroup size="lg">
-                    <InputLeftAddon children='ferreteros.app/' pr={0} color='gray.500'/>
+                    <InputLeftAddon children='ferreteros.app/' pr={1} color='gray.500'/>
                     <Input
                       variant='filled'
-                      paddingLeft={0}
+                      paddingLeft={1}
                       autoFocus
                       name="name"
                       placeholder='minegocio'

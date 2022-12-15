@@ -6,6 +6,8 @@ import {
   FormControl,
   FormLabel,
   Box,
+  Link,
+  Image,
   Text,
   Flex,
 } from "@chakra-ui/core";
@@ -124,6 +126,15 @@ const LoginScreen: React.FC<Props> = ({navigate, logo, title}) => {
           </Button>
         </Stack>
       </Box>
+      <Flex
+        justifyContent="center"
+        alignItems="center"
+        pt={6}
+      >
+        <Link href="/" isExternal ml={2}>
+          <Image src={"/assets/ferreteros-app-black.png"} h="20px"/>
+        </Link>
+      </Flex>
     </Flex>
   );
 };

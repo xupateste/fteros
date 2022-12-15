@@ -25,8 +25,8 @@ const HomeScreen: React.FC = () => {
             <Challenges products={products} tenant={tenant} />
           </Stack>
           <Stack shouldWrapChildren spacing={{base: 4, sm: 8}}>
-            <Assets tenant={tenant} />
             <Contact />
+            <Assets tenant={tenant} />
           </Stack>
         </SimpleGrid>
       </Stack>

@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
 import {
   Box,
-  Flex,
   Input,
-  Text,
   Select,
   InputGroup,
   InputLeftElement,
@@ -83,11 +81,11 @@ const PhoneNumberInput: React.FC<Props> = React.forwardRef(
             <option key={option.value} value={option.value}>{option.label}</option>
           ))}
         </Select>
-        <Box pl={2} width="100%" alignItems="left">
-          <Flex mr="4px" width="50%" flex={1}>
+        <Box pl={2} width="100%" alignItems="center" display="flex">
+          <Box mr="4px" width="50%" minWidth={8}>
             <Flag height="1rem" code={selectedCountry || ""} />
-            <Text>{countryCode}</Text>
-          </Flex>
+          </Box>
+          {countryCode}
         </Box>
       </InputLeftElement>
       <Input
