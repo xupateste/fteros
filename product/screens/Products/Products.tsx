@@ -161,7 +161,7 @@ const ProductsScreen: React.FC = () => {
                               key={product.id}
                               isRaised
                               layout="portrait"
-                              minWidth={280}
+                              width={{base:210, sm: 280}}
                               product={product}
                               onClick={() => handleSelect(product)}
                             />
@@ -231,16 +231,15 @@ const ProductsScreen: React.FC = () => {
       )}
       <Content>
         <Flex
-          alignItems={{base: "center", sm: "center"}}
-          direction={{base: "column", sm: "column"}}
           justifyContent="center"
+          alignItems="center"
           pb={8}
         >  
           <Text fontSize="md" mt={2}>
             Sitio creado con
           </Text>
-          <Link href="/" isExternal>
-            <Image src={"/assets/ferreteros-app-black.png"} h={8}/>
+          <Link href="/" isExternal ml={2}>
+            <Image src={"/assets/ferreteros-app-black.png"} h="23px"/>
           </Link>
         </Flex>
       </Content>

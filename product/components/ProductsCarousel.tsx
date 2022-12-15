@@ -14,7 +14,8 @@ const ProductsCarousel: React.FC<Props> = ({children, title, ...props}) => (
     )}
     <Grid
       alignItems="flex-start"
-      gridAutoColumns="minmax(280px,320px)"
+      // gridAutoColumns="minmax(280px,280px)"
+      gridAutoColumns={{base:210, sm:280}}
       gridAutoFlow="column"
       gridGap={{base: 4, sm: 8}}
       overflowX="auto"

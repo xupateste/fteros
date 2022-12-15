@@ -18,6 +18,7 @@ import {
   ModalCloseButton,
   ModalBody,
   Input,
+  Link,
   InputGroup,
   InputLeftAddon,
   Checkbox
@@ -51,14 +52,14 @@ const Initio: React.FC = () => {
 
   const onLoginSubmit = data => {
     toggleLoading(true);
-    setTimeout(() => {
-      window.open(
-        window.location.origin+'/'+data.name+'/admin',
-        '_blank' // <- This is what makes it open in a new window.
-      );
-      toggleLoading(false);
-      handleLoginVisibility();
-    }, 1200);
+    //setTimeout(() => {
+    window.open(
+      window.location.origin+'/'+data.name+'/admin',
+      '_blank' // <- This is what makes it open in a new window.
+    );
+    toggleLoading(false);
+    handleLoginVisibility();
+    //}, 1200);
     //window.location.href = window.location.origin+'/'+data.name+'/admin'; 
   };
   const onRegisterSubmit = data => {
@@ -79,7 +80,8 @@ const Initio: React.FC = () => {
                                     data.password,
                                     acceptCheck).then((response) => {
         if(response.ok) {
-          api
+          api.signOut().then(() => {
+            api
             .signIn(data.email, data.password)
             .catch(() => {
               toast({
@@ -89,13 +91,17 @@ const Initio: React.FC = () => {
               });
               toggleLoading(false)
             }).then(() => {
-              window.open(
-                `${window.location.origin}/${data.storeName}/admin`,
-                '_blank' // <- This is what makes it open in a new window.
-              );
-              toggleLoading(false)
-              handleRegisterVisibility()
+              // window.open(
+              //   `${window.location.origin}/${data.storeName}/admin`,
+              //   '_blank' // <- This is what makes it open in a new window.
+              // );
+              window.location.href = window.location.origin+'/'+data.storeName+'/admin'; 
+              setTimeout(() => {
+                toggleLoading(false)
+                handleRegisterVisibility()
+              }, 3000) 
             });
+          })
         } else {
           toast({
             title: "Error al crear la cuenta",
@@ -196,7 +202,7 @@ const Initio: React.FC = () => {
                 </FormControl>
                 <FormControl
                   isRequired
-                  error={errors.storeName && "El nombre de la cuenta debe tener al menos 4 caracteres"}
+                  error={errors.storeName && "El nombre de la cuenta debe tener al menos 4 caracteres, sin espacios y sin simbolos"}
                   name="storeName"
                   label="Nombre de usuario"
                 >
@@ -208,7 +214,8 @@ const Initio: React.FC = () => {
                       paddingLeft={0}
                       name="storeName"
                       placeholder='minegocio'
-                      ref={register({required: true, minLength: 4, maxLength: 70})}
+                      textTransform="lowercase"
+                      ref={register({required: true, minLength: 4, maxLength: 70, pattern: /^[a-z0-9]*$/})}
                     />
                   </InputGroup>
                 </FormControl>
@@ -272,7 +279,7 @@ const Initio: React.FC = () => {
                 </FormControl>
                 <FormControl
                   isRequired
-                  error={errors.email && "Este campo es requerido"}
+                  error={errors.email && "Este campo es requerido, ingresa un email válido"}
                   label="E-mail"
                   name="email"
                 >
@@ -282,7 +289,7 @@ const Initio: React.FC = () => {
                     size="lg"
                     placeholder='tunegocio@gmail.com'
                     name="email"
-                    ref={register({required: true, minLength: 4, maxLength: 70, pattern: /^\S+@\S+$/i})}
+                    ref={register({required: true, minLength: 4, maxLength: 70, pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/})}
                   />
                 </FormControl>
                 <FormControl
@@ -330,9 +337,9 @@ const Initio: React.FC = () => {
                 }}>
                 {isLoading ? "Creando cuenta..." : "Crear tu cuenta"}
               </Button>
-              <Flex justifyContent="center" w='100%'>
+              <Flex justifyContent="center" w='100%' pt={4}>
                 <Text>¿Ya tienes una cuenta?</Text>
-                <Text ml={2} fontWeight={500} textDecoration='underline' onClick={handleLoginVisibility}>¡Inicia sesión!</Text>
+                <Link ml={2} isDisabled={isLoading} fontWeight={500} textDecoration='underline' onClick={handleLoginVisibility}>¡Inicia sesión!</Link>
               </Flex>
             </Stack>
           </ModalBody>
@@ -381,9 +388,9 @@ const Initio: React.FC = () => {
                 }}>
                 Iniciar sesión
               </Button>
-              <Flex justifyContent="center" w='100%'>
+              <Flex justifyContent="center" w='100%' pt={4}>
                 <Text>¿No tienes cuenta?</Text>
-                <Text ml={2} fontWeight={500} textDecoration='underline' onClick={handleRegisterVisibility}>¡Creala gratis!</Text>
+                <Link ml={2} isDisabled={isLoading} fontWeight={500} textDecoration='underline' onClick={handleRegisterVisibility}>¡Creala gratis!</Link>
               </Flex>
             </Stack>
           </ModalBody>

@@ -57,7 +57,7 @@ const TenantHeader: React.FC<Props> = ({
           gridArea="avatar"
           logo={logo}
           marginRight={{base: 0, sm: 4}}
-          marginTop={{base: -6, sm: -8}}
+          marginTop={{base: -10, sm: -10}}
           title={title}
         />
         <Stack gridArea="information" marginTop={{base: 1, sm: 4}} spacing={{base: 0, sm: 1}}>

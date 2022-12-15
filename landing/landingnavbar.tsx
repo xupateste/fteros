@@ -28,6 +28,16 @@ interface Props {
 const LandingNavbar: React.FC<Props> = (props) => {
   const { isOpen, onToggle } = useDisclosure();
   
+  const handleLoginClick = () => {
+    props.handleLoginVisibility();
+    onToggle();
+  }
+
+  const handleRegisterClick = () => {
+    props.handleRegisterVisibility();
+    onToggle();
+  }
+
 
   return (
     <Box>
@@ -177,7 +187,7 @@ const LandingNavbar: React.FC<Props> = (props) => {
             size="lg"
             color="white"
             mr={3}
-            onClick={props.handleLoginVisibility}
+            onClick={handleLoginClick}
             _hover={{
               bg: "cyan.600",
               color: 'white'
@@ -190,7 +200,7 @@ const LandingNavbar: React.FC<Props> = (props) => {
             fontWeight={600}
             color='white'
             variant={'link'}
-            onClick={props.handleRegisterVisibility}
+            onClick={handleRegisterClick}
             bg="cyan.700"
             mx={3}
             p={3}
