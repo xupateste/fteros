@@ -32,6 +32,16 @@ const LandingLayout: React.FC = ({children}) => (
       <meta content="summary_large_image" name="twitter:card" />
       <meta content={META.twitter} name="twitter:site" />
       <meta content={META.twitter} name="twitter:creator" />
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=G-6TBQVG5P7V`} />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-6TBQVG5P7V');`,
+                  }}
+      />
       <meta content={META.title} name="twitter:title" />
       <meta content={META.description} name="twitter:description" />
       <meta content={META.banner?.url} property="twitter:image" />

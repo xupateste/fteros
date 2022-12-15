@@ -5,7 +5,7 @@ export const META = {
   title: "Ferreteros.app - Crea hoy tu catálogo ferretero",
   description: "Crea tu catálogo ferretero para tu Ferretería, Distribuidora ó Importadora y recibe pedidos online",
   appleicon: "/logo192.jpg",
-  keywords: "tienda, negocio, online, facil, delivery, compras, ventas, ferreteria, distribuidora, ferreteros",
+  keywords: "tienda, negocio, online, facil, delivery, compras, ventas, ferreteria, distribuidora, importadora, ferreteros",
   author: "Ferreteros.app",
   twitter: "@",
   url: "https://ferreteros.app",
