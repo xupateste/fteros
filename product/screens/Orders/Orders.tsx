@@ -22,15 +22,22 @@ import {useOrders, useProductActions} from "~/product/hooks";
 
 import Content from "~/ui/structure/Content";
 import {useRouter} from "next/router";
+import {useTenant} from "~/tenant/hooks";
+// import productApi from "~/product/api/server";
+
 
 const OrdersScreen: React.FC = () => {
   const orders = useOrders();
+  
+
   const [, setStatus] = React.useState("init");
   const toast = useToast();
   const router = useRouter();
   //console.log(orders);
   const {remorder, updateorder} = useProductActions();
   const [orderkey, setOrderkey] = React.useState();
+  const tenant = useTenant();
+
 
   const { isOpen, onOpen, onClose } = useDisclosure()
   const alertDialog = useDisclosure()
@@ -47,7 +54,6 @@ const OrdersScreen: React.FC = () => {
     setStatus("pending");
     remorder(orderkey).catch(() => {
       setStatus("init");
-
       toast({status: "error", title: "Error", description: "No se pudo borrar la orden"});
     });
     alertDialog.onClose();
@@ -72,10 +78,12 @@ const OrdersScreen: React.FC = () => {
   }
 
   const [, setIsRefreshing] = React.useState(false);
+
   const refreshDatas = () => {
-    router.replace(router.asPath);
+    router.replace(`/[slug]/admin`, `/${tenant.slug}/admin`, {shallow: false});
     setIsRefreshing(true);
   };
+
   React.useEffect(() => {
     setIsRefreshing(false);
   }, [orders]);

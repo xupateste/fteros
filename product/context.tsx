@@ -65,7 +65,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
       .catch(() => {
         toast({
           title: "Error",
-          description: "Hubo un error creando el producto, refrescá la página e intentá nuevamente",
+          description: "Hubo un error creando el producto, refresca la página e intenta nuevamente",
           status: "error",
         });
       });
@@ -93,7 +93,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         toast({
           title: "Error",
           description:
-            "Hubo un error actualizando el producto, refrescá la página e intentá nuevamente",
+            "Hubo un error actualizando el producto, refresca la página e intenta nuevamente",
           status: "error",
         });
       });
@@ -127,7 +127,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         toast({
           title: "Error",
           description:
-            "Hubo un error actualizando los productos, refrescá la página e intentá nuevamente",
+            "Hubo un error actualizando los productos, refresca la página e intenta nuevamente",
           status: "error",
         });
       });
@@ -149,7 +149,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         toast({
           title: "Error",
           description:
-            "Hubo un error borrando el producto, refrescá la página e intentá nuevamente",
+            "Hubo un error borrando el producto, refresca la página e intenta nuevamente",
           status: "error",
         });
       });
@@ -171,7 +171,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         toast({
           title: "Error",
           description:
-            "Hubo un error borrando la orden, refrescá la página e intentá nuevamente",
+            "Hubo un error borrando la orden, refresca la página e intenta nuevamente",
           status: "error",
         });
       });
@@ -196,7 +196,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         toast({
           title: "Error",
           description:
-            "Hubo un error actualizando la orden, refrescá la página e intentá nuevamente",
+            "Hubo un error actualizando la orden, refresca la página e intenta nuevamente",
           status: "error",
         });
       });

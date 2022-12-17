@@ -76,9 +76,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       );
 
     // Get its orders //ADDED
-    const orders = await productApi
-      .orders(tenant.id)
-      .then((orders) => orders.map((order) => order));
+    const orders = [{}]
     //console.log(orders)
 
     // Return props
