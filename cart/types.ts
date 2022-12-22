@@ -21,7 +21,7 @@ export interface Actions {
   increase: (id: CartItem["id"]) => void;
   decrease: (id: CartItem["id"]) => void;
   remove: (id: CartItem["id"]) => void;
-  checkout: (fields?: Field[]) => Promise<void>;
+  checkout: (fields?: Field[]) => Promise<string>;
   removeAll: () => Promise<void>;
 }
 

@@ -139,7 +139,7 @@ const OrdersScreen: React.FC = () => {
                       #{order.orderId}
                     </Box>
                     <Box as="td">
-                      {order.fields ? order.fields[0].value : ''}
+                      {order.fields ? order.fields[0]?.value : ''}
                     </Box>
                     <Box as="td">
                       {dateOrder(order.createdAt)} {timeOrder(order.createdAt)}

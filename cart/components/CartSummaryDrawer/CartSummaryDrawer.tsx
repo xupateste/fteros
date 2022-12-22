@@ -1,5 +1,8 @@
 import React from "react";
-import {IDrawer} from "@chakra-ui/core";
+import {IDrawer, useDisclosure,
+        AlertDialog, AlertDialogOverlay, AlertDialogContent,
+        AlertDialogHeader, AlertDialogBody, AlertDialogFooter,
+        Button} from "@chakra-ui/core";
 
 import {CartItem} from "../../types";
 
@@ -18,7 +21,7 @@ interface Props extends Omit<IDrawer, "children"> {
   onClose: VoidFunction;
   items: CartItem[];
   fields?: ClientTenant["fields"];
-  onCheckout: (fields?: Field[]) => Promise<void>;
+  onCheckout: (fields?: Field[]) => Promise<string>;
   onDecrease: (id: CartItem["id"]) => void;
   onIncrease: (id: CartItem["id"]) => void;
   products: Product[]; //added
@@ -36,9 +39,14 @@ const CartSummaryDrawer: React.FC<Props> = ({
   onRemoveAll,
 }) => {
   const [step, setStep] = React.useState("overview");
+  const [waLink, setWalink] = React.useState<string>();
+  // let waLink = '';
+  const [argFields, setArgFields] = React.useState<Field[]>([])
   const count = getCount(items);
   const log = useAnalytics();
-  const hasNextStep = Boolean(fields?.length);
+  //const hasNextStep = Boolean(fields?.length);
+  const { isOpen, onOpen, onClose: onCloseDialog } = useDisclosure()
+  const cancelRef = React.useRef();
 
   const handleClose = React.useCallback(() => {
     onClose();
@@ -53,22 +61,30 @@ const CartSummaryDrawer: React.FC<Props> = ({
     setStep("overview");
   }
 
-  async function handleNext() {
+  async function handleCheckout() {
     log.viewFields(items);
-
+    onCloseDialog();
+    onCheckout(argFields).then((res) => {
+      setWalink(res)
+      // waLink = res
+    }).then(() => {
+      onRemoveAll()
+    })
     return setStep("fields");
   }
 
-  async function handleCheckoutWithoutFields() {
-    return onCheckout();
-  }
+  // async function handleCheckoutWithoutFields() {
+  //   return onCheckout();
+  // }
 
-  async function handleCheckoutWithFields(fields: Field[]) {
-    return onCheckout(fields);
+  async function handleOpenDialog(fields: Field[]) {
+    setArgFields(fields);
+    onOpen();
+    // return onCheckout(fields);
   }
 
   React.useEffect(() => {
-    if (!count) handleClose();
+    if (!count && step === 'overview') handleClose();
   }, [count, handleClose]);
 
   React.useEffect(() => {
@@ -78,35 +94,64 @@ const CartSummaryDrawer: React.FC<Props> = ({
   }, [log]);
 
   return (
-    <Drawer
-      id="cart"
-      placement="right"
-      size="md"
-      onAnimationEnd={handleReset}
-      onClose={handleClose}
-    >
-      {step === "overview" && (
-        <Overview
-          hasNextStep={hasNextStep}
-          items={items}
-          onClose={handleClose}
-          onDecrease={onDecrease}
-          onIncrease={onIncrease}
-          onSubmit={hasNextStep ? handleNext : handleCheckoutWithoutFields}
-          products={products}
-          onRemoveAll={onRemoveAll}
-        />
-      )}
-      {step === "fields" && (
-        <Fields
-          fields={fields}
-          onClose={handleClose}
-          onPrevious={handlePrevious}
-          onSubmit={handleCheckoutWithFields}
-        />
+    <>
+      <Drawer
+        id="cart"
+        placement="right"
+        size="md"
+        onAnimationEnd={handleReset}
+        onClose={handleClose}
+      >
+        {step === "overview" && (
+          <Overview
+            fields={fields}
+            //hasNextStep={hasNextStep}
+            items={items}
+            onClose={handleClose}
+            onDecrease={onDecrease}
+            onIncrease={onIncrease}
+            onSubmit={handleOpenDialog}
+            products={products}
+            //onRemoveAll={onRemoveAll}
+          />
+        )}
+        {step === "fields" && (
+          <Fields
+            fields={fields}
+            waLink={waLink}
+            onClose={handleClose}
+            onPrevious={handlePrevious}
+            onSubmit={handleOpenDialog}
+          />
 
-      )}
-    </Drawer>
+        )}
+      </Drawer>
+      <AlertDialog
+        isOpen={isOpen}
+        leastDestructiveRef={cancelRef}
+        isCentered={true}
+        onClose={onCloseDialog}
+      >
+        <AlertDialogOverlay zIndex={1401}>
+          <AlertDialogContent>
+            <AlertDialogHeader fontSize='lg' fontWeight='bold'>
+              Confirmar pedido
+            </AlertDialogHeader>
+            <AlertDialogBody>
+              Deseas confirmar y finalizar este pedido?.
+            </AlertDialogBody>
+            <AlertDialogFooter justifyContent="space-between">
+              <Button bg='gray' onClick={onCloseDialog}>
+                Regresar
+              </Button>
+              <Button variantColor="primary" onClick={handleCheckout} ml={3}>
+                Si, confirmar
+              </Button>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialogOverlay>
+      </AlertDialog>
+    </>
   );
 };
 

@@ -1,18 +1,11 @@
 import React from "react";
-import {Stack, Flex, Text, useDisclosure,
-  AlertDialog,
-  AlertDialogBody,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogContent,
-  AlertDialogCloseButton,
-  AlertDialogOverlay} from "@chakra-ui/core";
+import {Stack, Flex, Text, Box, Link} from "@chakra-ui/core";
 
 import {CartItem} from "../../types";
 
-import CheckoutButton from "./CheckoutButton";
+//import CheckoutButton from "./CheckoutButton";
 
-import {DrawerTitle, DrawerBody, DrawerFooter} from "~/ui/controls/Drawer";
+import {DrawerBody, DrawerFooter} from "~/ui/controls/Drawer";
 import Button from "~/ui/controls/Button";
 import {useTranslation, usePrice} from "~/i18n/hooks";
 import {getCount, getTotal, getFormattedPrice} from "~/cart/selectors";
@@ -21,41 +14,49 @@ import {getCount, getTotal, getFormattedPrice} from "~/cart/selectors";
 import Stepper from "~/ui/inputs/Stepper";
 //import {getVariantsString} from "~/product/selectors";
 import CrossIcon from "~/ui/icons/Cross";
-import TrashIcon from "~/ui/icons/Trash";
+//import TrashIcon from "~/ui/icons/Trash";
+import {Field} from "~/tenant/types";
 
 //added
 import {Product} from "~/product/types";
 import Image from "~/ui/feedback/Image";
+import WhatsAppIcon from "~/ui/icons/WhatsApp";
+import FieldsForm from "../../forms/FieldsForm";
+import {useTenant} from "~/tenant/hooks";
+
 
 interface Props {
+  fields?: Field[];
   products: Product[];  //added
   items: CartItem[];
   onDecrease: (id: CartItem["id"]) => void;
   onIncrease: (id: CartItem["id"]) => void;
-  onSubmit: () => Promise<void>;
+  onSubmit: (fields: Field[]) => void;
   onClose: VoidFunction;
-  hasNextStep: boolean;
-  onRemoveAll: () => Promise<void>;
+  //hasNextStep: boolean;
+  //onRemoveAll: () => Promise<void>;
 }
 
 const Overview: React.FC<Props> = ({
+  fields, //added
   items,
   onIncrease,
   onDecrease,
   onSubmit,
   onClose,
-  hasNextStep,
+  //hasNextStep,
   products, //added
-  onRemoveAll, //added
+  //onRemoveAll, //added
 }) => {
-  const [isLoading, toggleLoading] = React.useState(false);
   const t = useTranslation();
   const p = usePrice();
   const count = getCount(items);
   const total = getTotal(items);  
   //const {image, title, price, originalPrice, description, type} = product; //added
-  const { isOpen, onOpen, onClose: onCloseReportModal } = useDisclosure()
-  const cancelRef = React.useRef();
+
+  //const cancelRef = React.useRef();
+  const {phone} = useTenant();
+
 
   function formattedImg(image) {
     const position = image.indexOf('/upload/') + 8;
@@ -63,15 +64,15 @@ const Overview: React.FC<Props> = ({
     return [image.slice(0,position),format,image.slice(position)].join('');
   }
   
-  function handleSubmit() {
-    toggleLoading(true);
+  function handleSubmit(event: React.MouseEvent, submit: () => Promise<void>) {
+    event.stopPropagation();
 
-    onSubmit().finally(() => toggleLoading(false));
+    submit().finally();
   }
 
-  function handleNext() {
-    onSubmit();
-  }
+  // function handleNext() {
+  //   onSubmit();
+  // }
 
   function handleDecrease(id: CartItem["id"]) {
     onDecrease(id);
@@ -80,121 +81,204 @@ const Overview: React.FC<Props> = ({
   function handleIncrease(id: CartItem["id"]) {
     onIncrease(id);
   }
-  function handleOnOpenDialog() {
-    onOpen()
-  }
+  // const handleOnOpenDialog = () => {
+  //   onOpen()
+  // }
 
-  function handleOnRemoveAll() {
-    onRemoveAll();
-    onCloseReportModal();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
+  // function handleOnRemoveAll() {
+  //   onRemoveAll();
+  //   onCloseDialog();
+  //   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // }
+
+  // const handleNextDialog = () => {
+  //   handleNext()
+  // }
+
+  const RightIcon = () => {
+    return (
+      <svg  xmlns="http://www.w3.org/2000/svg" x="0px" stroke="white" fill="white" width={40} y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">
+      <g><path d="M983.3,484.4L760.6,261.7c-4.5-4.5-8.9-6.7-15.6-6.7c-13.4,0-22.3,8.9-22.3,22.3c0,6.7,2.2,11.1,6.7,15.6l184.9,184.9h-882c-13.4,0-22.3,8.9-22.3,22.3c0,13.4,8.9,22.3,22.3,22.3h882L729.4,707.1c-4.5,4.5-6.7,8.9-6.7,15.6c0,13.4,8.9,22.3,22.3,22.3c6.7,0,11.1-2.2,15.6-6.7l222.7-222.7c4.5-4.5,6.7-8.9,6.7-15.6S987.8,488.9,983.3,484.4z"/></g>
+      </svg>
+    );
+  };
+
+  const onChatLink = () => {
+    window.open(
+      `https://wa.me/${phone}?text=${encodeURIComponent('Hola - acabo de ver su catálogo y tengo una pregunta')}`,
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  };
 
   return (
-    <>
-      <DrawerBody>
-        <CrossIcon
-          background="white"
-          boxShadow="md"
-          cursor="pointer"
-          marginTop={6}
-          paddingX={4}
-          paddingY={3}
-          pos="fixed"
-          right={0}
-          roundedLeft="lg"
-          top={0}
-          onClick={onClose}
-        />
-        <Stack marginTop={10} spacing={6}>
-          <DrawerTitle>
-            {t("cart.yourOrder")} ({count})
-          </DrawerTitle>
-          <Stack shouldWrapChildren spacing={6}>
-            {items.map((item) => (
-              <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
-                <Flex alignItems="center" borderColor="gray.100" borderWidth={1} rounded={5}>
-                  <Image
-                    fadeIn
-                    height={{base: 20, sm: 20}}
-                    rounded="md"
-                    src={item.product.image ? formattedImg(products.find((_product) => _product.id === item.product.id).image) : "/assets/fallback.jpg"}
-                    width={{base: 20, sm: 20}}
-                  />
-                </Flex>
-                <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
-                  <Stack spacing={0} flexDirection='column' display='flex'>
-                    <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
-                      {item.product.title}
-                    </Text>
-                    {/*item.variants && (
-                      <Text color="gray.600">{getVariantsString(item.variants)}</Text>
-                    )*/}
-                    {item.note && <Text color="gray.600">({item.note})</Text>}
-                    <Stepper
-                      marginTop={2}
-                      value={item.count}
-                      onDecrease={() => handleDecrease(item.id)}
-                      onIncrease={() => handleIncrease(item.id)}
-                    />
-                  </Stack>
-                </Flex>
-                <Flex alignItems="center">
-                  <Text fontWeight={500}>{getFormattedPrice(item)}</Text>
-                </Flex>
-              </Flex>
-            ))}
-          </Stack>
-        </Stack>
-      </DrawerBody>
-      <DrawerFooter borderTopColor="gray.100" borderTopWidth={1} marginTop={2}>
-        <Stack spacing={4} width="100%">
-          <Flex alignItems="center" fontSize="lg" fontWeight={500} justifyContent="space-between" marginBottom="0">
-            <Text>{t("cart.estimatedTotal")}</Text>
-            <Text>{p(total)}</Text>
-          </Flex>
-          {hasNextStep ? (
-            <Button boxShadow="lg" size="lg" variantColor="primary" onClick={handleNext}>
-              ➡ {t("common.next")} ➡
-            </Button>
-          ) : (
-            <CheckoutButton isLoading={isLoading} onClick={handleSubmit} />
-          )}
-          <Button size='xs' marginTop={0} onClick={handleOnOpenDialog} fontSize="sm" color="gray.500" bg=''>
-            <TrashIcon
-              color="gray.500"
+    <FieldsForm defaultValues={fields} onSubmit={onSubmit}>
+      {({form, submit}) => (
+        <>
+          <DrawerBody>
+            <CrossIcon
+              background="white"
+              boxShadow="md"
               cursor="pointer"
-              marginRight={1}
+              paddingX={4}
+              paddingY={3}
+              pos="fixed"
+              right={0}
+              roundedLeft="lg"
+              top={0}
+              zIndex={1}
+              onClick={onClose}
             />
-            Limpiar "Mi pedido ({count})"
-          </Button>
-        </Stack>
-      </DrawerFooter>
-      <AlertDialog
-        leastDestructiveRef={cancelRef}
-        isOpen={isOpen}
-        isCentered
-        onClose={onCloseReportModal}
-      >
-        <AlertDialogOverlay zIndex={8000}/>
-
-        <AlertDialogContent zIndex={8001}>
-          <AlertDialogHeader>Limpiar "Mi pedido ({count})"?</AlertDialogHeader>
-          <AlertDialogCloseButton />
-          <AlertDialogBody>
-            {count} productos serán removidos
-          </AlertDialogBody>
-          <AlertDialogFooter>
-            <Button onClick={onCloseReportModal}>
-              Cancelar
-            </Button>
-            <Button background='#E53E3E' _hover={{ bg: '#E53E3E' }} color='white' onClick={handleOnRemoveAll} ml={3}>
-              Limpiar
-            </Button>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
-    </>
+            <Flex>
+              <Box
+                boxShadow="md"
+                flexDirection="column"
+                borderWidth="1px"
+                borderColor="gray.100"
+                d="flex"
+                px={4}
+                py={2}
+                mt={10}
+                rounded="md">
+                <Text as="b" fontSize="2xl">{p(total)}</Text>
+                <Text as="span" fontSize="xl">{count > 1 ? `${count} Items` : `${count} Item`}</Text>
+              </Box>
+            </Flex>
+            <Flex
+              boxShadow="md"
+              px={4}
+              py={2}
+              mt={5}
+              justifyContent="space-between"
+              borderWidth="1px"
+              borderColor="gray.100"
+              rounded="md">
+              <Box  
+                flexDirection="column"
+                d="flex">
+                <Text as="b" fontSize="lg">Tienes una pregunta?</Text>
+                <Text as="span" fontSize="md">Chatea con nosotros</Text>
+              </Box>
+              <Button onClick={onChatLink} alignSelf="center" bg="whatsapp.500" variantColor="green">
+                <WhatsAppIcon height={5} width={5} />
+                <Text ml={2} fontWeight={900} fontSize="lg">Chat</Text>
+              </Button>
+            </Flex>
+            <Stack
+              boxShadow="md"
+              px={4}
+              py={2}
+              pb={4}
+              mt={5}
+              flexDirection="column"
+              shouldWrapChildren
+              borderWidth="1px"
+              borderColor="gray.100"
+              justifyContent="space-between"
+              spacing={3}
+              rounded="md">          
+              <Text as="b" fontSize="lg">Mi pedido</Text>
+              {items.map((item) => (
+                  <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
+                    <Flex alignItems="center" borderColor="gray.100" borderWidth={1} rounded={5}>
+                      <Image
+                        fadeIn
+                        height={{base: 20, sm: 20}}
+                        rounded="md"
+                        src={item.product.image ? formattedImg(products.find((_product) => _product.id === item.product.id).image) : "/assets/fallback.jpg"}
+                        width={{base: 20, sm: 20}}
+                      />
+                    </Flex>
+                    <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
+                      <Stack spacing={0} flexDirection='column' display='flex'>
+                        <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
+                          {item.product.title}
+                        </Text>
+                        {/*item.variants && (
+                          <Text color="gray.600">{getVariantsString(item.variants)}</Text>
+                        )*/}
+                        {item.note && <Text color="gray.600">({item.note})</Text>}
+                        <Stepper
+                          marginTop={2}
+                          value={item.count}
+                          onDecrease={() => handleDecrease(item.id)}
+                          onIncrease={() => handleIncrease(item.id)}
+                        />
+                      </Stack>
+                    </Flex>
+                    <Flex alignItems="center">
+                      <Text fontWeight={500}>{getFormattedPrice(item)}</Text>
+                    </Flex>
+                  </Flex>
+                ))}
+            </Stack>
+            <Flex
+              boxShadow="md"
+              px={4}
+              py={2}
+              mt={5}
+              justifyContent="space-between"
+              borderWidth="1px"
+              borderColor="gray.100"
+              rounded="md">
+              <Box  
+                flexDirection="column"
+                alignSelf="center"
+                d="flex">
+                <Text as="b" fontSize="lg">{t("cart.estimatedTotal")}</Text>
+              </Box>
+              <Box  
+                flexDirection="column"
+                alignSelf="center" 
+                d="flex">
+                <Text as="b" fontSize="2xl">{p(total)}</Text>
+              </Box>
+            </Flex>
+            <Stack
+              boxShadow="md"
+              px={4}
+              py={2}
+              pb={4}
+              mt={5}
+              mb={5}
+              flexDirection="column"
+              borderWidth="1px"
+              borderColor="gray.100"
+              spacing={3}
+              rounded="md">          
+              <Text as="b" fontSize="lg">Información de contacto</Text>
+              <Flex fontWeight={500} fontSize="md" lineHeight={1}>Número de celular
+                <Text
+                  alignSelf="flex-start"
+                  backgroundColor="primary.50"
+                  color="primary.500"
+                  height={3}
+                  lineHeight="0.5rem"
+                  marginLeft={1}
+                  marginTop={0}
+                  padding={1}
+                  rounded="sm"
+                >
+                  *
+                </Text>
+              </Flex>
+              <Flex justifyContent="space-between" lineHeight={1} pb={3}>
+                <Text>+9192939219</Text>
+                <Link>Cambiar</Link>
+              </Flex>
+              {form}
+            </Stack>
+          </DrawerBody>
+          <DrawerFooter borderTopColor="gray.100" borderTopWidth={1} marginTop={2}>
+            <Stack spacing={4} width="100%">
+              <Button boxShadow="lg" size="lg" variantColor="primary" color="white" onClick={(event) => handleSubmit(event, submit)}>
+                <Text mx={5} fontWeight={500} fontSize="xl">Confirmar pedido</Text>
+                <RightIcon />
+              </Button>
+            </Stack>
+          </DrawerFooter>
+        </>
+      )}
+    </FieldsForm>
   );
 };
 

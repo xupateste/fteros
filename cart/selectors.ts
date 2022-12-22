@@ -3,6 +3,7 @@ import shortId from "shortid";
 import {CartItem} from "./types";
 
 import {Field} from "~/tenant/types";
+
 import {getVariantsPrice} from "~/product/selectors";
 import {formatPrice} from "~/i18n/selectors";
 
@@ -103,13 +104,22 @@ export function getCount(items: CartItem[]): number {
   return items.reduce((total, item) => total + item.count, 0);
 }
 
-/*function _getFields(fields: Field[]) {
-  if (!fields) return "";
+// function _getFields(fields: Field[]) {
+//   if (!fields) return "";
 
-  return fields
-    .filter(({value}) => value)
-    .map(({value}) => `${value.length > 4 ? value.toUpperCase().substring(0, 4).concat('…') : value.toUpperCase() }`);
-}*/
+//   return fields
+//     .filter(({value}) => value)
+//     .map(({value}) => `${value.length > 4 ? value.toUpperCase().substring(0, 4).concat('…') : value.toUpperCase() }`);
+// }
+
+// function _getFields(fields: Field[]) {
+//   if (!fields) return "";
+
+//   return fields
+//     .filter(({title, value}) => title && value)
+//     .map(({title, value}) => `${title}: *${value}*`)
+//     .join("\n");
+// }
 
 function _getFields(fields: Field[]) {
   if (!fields) return "";
@@ -120,7 +130,7 @@ function _getFields(fields: Field[]) {
     .join("\n");
 }
 
-/*function _getPreferenceFooter(preference?: string) {
+function _getPreferenceFooter(preference?: string) {
   if (!preference) return "";
 
   return `----------
@@ -128,7 +138,7 @@ function _getFields(fields: Field[]) {
 Este es tu link de pago. _Una vez realizado envianos el número de operación_.
 ${preference}`;
 }
-*/
+
 function _getItems(items: CartItem[]): string {
   return items
     .map(
@@ -157,6 +167,7 @@ export function getMessage(
     `Order# ${orderId}` +
     "\n" +
     (fields ? _getFields(fields) + "\n" : "") +
+    (preference ? `\n\n${_getPreferenceFooter(preference)}` : "") +
     "-----------------------------" +
     "\n" +
     _getItems(items) +

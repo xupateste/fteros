@@ -42,7 +42,7 @@ const FieldsForm: React.FC<Props> = ({defaultValues, children, onSubmit}) => {
     submit: submit(handleSubmit),
     form: (
       <form onSubmit={submit(handleSubmit)}>
-        <Stack spacing={8}>
+        <Stack spacing={5}>
           {defaultValues.map((field, index) => {
             const error = errors.fields?.[index]?.message;
 

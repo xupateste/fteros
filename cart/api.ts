@@ -7,8 +7,8 @@ import fetch from "~/utils/fetch";
 export default {
   checkout: ({phone, items, orderId, fields, preference = null}) =>
     `https://wa.me/${phone}?text=${encodeURIComponent(
-      getMessage(items, orderId, fields, preference),
-    )}`,
+      getMessage(items, orderId, fields, preference))}
+    `,
   hook: (url, {phone, items, orderId, fields, preference = null}) =>
     fetch(
       "POST",

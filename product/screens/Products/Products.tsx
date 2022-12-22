@@ -1,6 +1,6 @@
 import React from "react";
-import {Stack, Box, PseudoBox, Flex, useDisclosure, Text, Image } from "@chakra-ui/core";
-import BTT from "~/ui/icons/BTT";
+import {Stack, Box, PseudoBox, Flex, useDisclosure, Text, Image, Button} from "@chakra-ui/core";
+// import BTT from "~/ui/icons/BTT";
 import {useRouter} from "next/router";
 
 import ProductCard from "../../components/ProductCard";
@@ -25,11 +25,12 @@ import SummaryButton from "~/cart/components/SummaryButton";
 import CartItemDrawer from "~/cart/components/CartItemDrawer";
 import {Product, Variant} from "~/product/types";
 import Link from "~/ui/controls/Link";
+import WhatsAppIcon from "~/ui/icons/WhatsApp";
 
 
 const ProductsScreen: React.FC = () => {
   const {
-    query: {product, category},
+    query: {product},
     push,
   } = useRouter();
   const {add, increase, decrease, items, checkout, removeAll} = useCart();
@@ -46,39 +47,6 @@ const ProductsScreen: React.FC = () => {
   const featuredProducts = filterBy(products, {featured: true});
   const productsByCategory = groupBy(products, (product) => product.category);
 
-  // added
-  setTimeout(() => {
-    document.querySelector<HTMLElement>(`[id="btt"]`) ? document.querySelector<HTMLElement>(`[id="btt"]`).style.display='none' : ""
-  }, 0)
-  
-  let scrollPosition = 0
-  window.onscroll = () => {
-    scrollPosition = document.body.scrollTop || document.documentElement.scrollTop
-    if (scrollPosition > 500) {
-      document.querySelector<HTMLElement>(`[id="btt"]`).style.display='none' ? document.querySelector<HTMLElement>(`[id="btt"]`).style.display='block' : ''
-    } else {
-      document.querySelector<HTMLElement>(`[id="btt"]`).style.display='block' ? document.querySelector<HTMLElement>(`[id="btt"]`).style.display='none' : ''
-    }
-  };
-
-  function scrollToCategory() {
-    if(category) {
-      setTimeout(() => {
-        document
-          .querySelector(`[id="${category}"]`)
-          ?.scrollIntoView()
-        var scrolledY = window.scrollY;
-        if(scrolledY){
-          //window.scroll(0, scrolledY - 60);
-          window.scrollTo({ top: scrolledY - 60, behavior: 'smooth' });
-        }
-      }, 0)
-    } 
-  }
-
-  function scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }
   //end added
 
   function handleAdd(product: Product, options: Variant[], count: number, note: string) {
@@ -96,6 +64,13 @@ const ProductsScreen: React.FC = () => {
     //push(`/`);
     push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
   }
+
+  const onChatLink = () => {
+    window.open(
+      `https://wa.me/${tenant.phone}?text=${encodeURIComponent('Hola - acabo de ver su catálogo y tengo una pregunta')}`,
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  };
 
   function handleSelect(product: Product) {
     push(
@@ -193,16 +168,22 @@ const ProductsScreen: React.FC = () => {
             </Box>
           </Content>
         </Flex>
-        <Link id="btt" onClick={scrollToTop}>
-            <Box position='fixed'
-                bottom='70px'
-                color="primary"
-                right={['16px', '84px']}
-                zIndex={1}
-            >
-                <BTT w={10} h={10} />
-            </Box>
-        </Link>
+      </Flex>
+      <Flex
+          as="nav"
+          bottom={16}
+          justifyContent="flex-end"
+          margin={{base: 0, sm: "auto"}}
+          paddingX={{base: 4, sm: 24}}
+          pb={4}
+          position="sticky"
+          width="100%"
+          zIndex={4}
+        >
+          <Button onClick={onChatLink} alignSelf="center" bg="white" variantColor="gray" rounded={48} boxShadow='md' borderWidth={1} py='6'>
+            <WhatsAppIcon height={6} color="whatsapp.500" width={6} />
+            <Text ml={2} fontWeight={900} fontSize="xl" color="black">Chat</Text>
+          </Button>
       </Flex>
       {Boolean(items.length) && (
         <Flex
@@ -233,7 +214,8 @@ const ProductsScreen: React.FC = () => {
         <Flex
           justifyContent="center"
           alignItems="center"
-          pb={8}
+          mb={8}
+          mt={2}
         >  
           <Text fontSize="md" mt={2}>
             Sitio creado con
@@ -258,8 +240,6 @@ const ProductsScreen: React.FC = () => {
       {Boolean(selected) && (
         <CartItemDrawer product={selected} onClose={handleCloseSelected} onSubmit={handleAdd} />
       )}
-
-      {scrollToCategory()}
       <Onboarding />
     </>
   );

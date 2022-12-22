@@ -15,12 +15,13 @@ const TextFieldInput: React.FC<Props> = ({value, field, onChange}) => {
     <FormControl help={field.note} isRequired={field.required} label={field.title} width="100%">
       <Input
         maxLength={50}
-        paddingX={0}
-        size="lg" fontSize="2xl" 
+        paddingX={2}
+        size="md"
+        fontSize="md" 
         roundedRight={0}
         value={value || ""}
         placeholder='' 
-        variant="flushed"
+        variant="outline"
         onChange={(event) => onChange(event.target.value || "")}
       />
     </FormControl>

@@ -24,7 +24,6 @@ const RadioRow: React.FC<Props> = ({children, note = null, ...props}) => (
     paddingX={0}
     paddingY={2}
     rounded="md"
-    size="lg"
     width="100%"
     {...props}
   >
