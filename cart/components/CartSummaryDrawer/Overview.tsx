@@ -128,144 +128,149 @@ const Overview: React.FC<Props> = ({
               zIndex={1}
               onClick={onClose}
             />
-            <Flex>
-              <Box
-                boxShadow="md"
-                flexDirection="column"
-                borderWidth="1px"
-                borderColor="gray.100"
-                d="flex"
-                px={4}
-                py={2}
-                mt={10}
-                rounded="md">
-                <Text as="b" fontSize="2xl">{p(total)}</Text>
-                <Text as="span" fontSize="xl">{count > 1 ? `${count} Items` : `${count} Item`}</Text>
+            <Stack spacing={6}>
+              <Box alignItems="flex-start" justifyContent="space-between">
+                <Stack
+                  boxShadow="md"
+                  borderWidth="1px"
+                  borderColor="gray.100"
+                  px={4}
+                  py={2}
+                  mt={10}
+                  rounded="md">
+                  <Text as="b" fontSize="2xl">{p(total)}</Text>
+                  <Text as="span" fontSize="xl">{count > 1 ? `${count} Items` : `${count} Item`}</Text>
+                </Stack>
               </Box>
-            </Flex>
-            <Flex
-              boxShadow="md"
-              px={4}
-              py={2}
-              mt={5}
-              justifyContent="space-between"
-              borderWidth="1px"
-              borderColor="gray.100"
-              rounded="md">
-              <Box  
-                flexDirection="column"
-                d="flex">
-                <Text as="b" fontSize="lg">Tienes una pregunta?</Text>
-                <Text as="span" fontSize="md">Chatea con nosotros</Text>
+              <Box>
+                <Stack
+                  boxShadow="md" 
+                  px={4}
+                  py={2}
+                  flexDirection="row"
+                  borderWidth="1px"
+                  borderColor="gray.100"
+                  rounded="md"
+                  alignItems="flex-start"
+                  justifyContent="space-between">
+                  <Box  
+                    flexDirection="column"
+                    d="flex">
+                    <Text as="b" fontSize="lg">Tienes una pregunta?</Text>
+                    <Text as="span" fontSize="md">Chatea con nosotros</Text>
+                  </Box>
+                  <Button onClick={onChatLink} alignSelf="center" bg="whatsapp.500" variantColor="green">
+                    <WhatsAppIcon height={5} width={5} />
+                    <Text ml={2} fontWeight={900} fontSize="lg">Chat</Text>
+                  </Button>
+                </Stack>
               </Box>
-              <Button onClick={onChatLink} alignSelf="center" bg="whatsapp.500" variantColor="green">
-                <WhatsAppIcon height={5} width={5} />
-                <Text ml={2} fontWeight={900} fontSize="lg">Chat</Text>
-              </Button>
-            </Flex>
-            <Stack
-              boxShadow="md"
-              px={4}
-              py={2}
-              pb={4}
-              mt={5}
-              flexDirection="column"
-              shouldWrapChildren
-              borderWidth="1px"
-              borderColor="gray.100"
-              justifyContent="space-between"
-              spacing={3}
-              rounded="md">          
-              <Text as="b" fontSize="lg">Mi pedido</Text>
-              {items.map((item) => (
-                  <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
-                    <Flex alignItems="center" borderColor="gray.100" borderWidth={1} rounded={5}>
-                      <Image
-                        fadeIn
-                        height={{base: 20, sm: 20}}
-                        rounded="md"
-                        src={item.product.image ? formattedImg(products.find((_product) => _product.id === item.product.id).image) : "/assets/fallback.jpg"}
-                        width={{base: 20, sm: 20}}
-                      />
-                    </Flex>
-                    <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
-                      <Stack spacing={0} flexDirection='column' display='flex'>
-                        <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
-                          {item.product.title}
-                        </Text>
-                        {/*item.variants && (
-                          <Text color="gray.600">{getVariantsString(item.variants)}</Text>
-                        )*/}
-                        {item.note && <Text color="gray.600">({item.note})</Text>}
-                        <Stepper
-                          marginTop={2}
-                          value={item.count}
-                          onDecrease={() => handleDecrease(item.id)}
-                          onIncrease={() => handleIncrease(item.id)}
-                        />
-                      </Stack>
-                    </Flex>
-                    <Flex alignItems="center">
-                      <Text fontWeight={500}>{getFormattedPrice(item)}</Text>
-                    </Flex>
+              <Box>
+                <Stack
+                  boxShadow="md"
+                  px={4}
+                  py={2}
+                  pb={4}
+                  flexDirection="column"
+                  shouldWrapChildren
+                  borderWidth="1px"
+                  borderColor="gray.100"
+                  justifyContent="space-between"
+                  spacing={3}
+                  rounded="md">          
+                  <Text as="b" fontSize="lg">Mi pedido</Text>
+                  {items.map((item) => (
+                      <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
+                        <Flex alignItems="center" borderColor="gray.100" borderWidth={1} rounded={5}>
+                          <Image
+                            fadeIn
+                            height={{base: 20, sm: 20}}
+                            rounded="md"
+                            src={item.product.image ? formattedImg(products.find((_product) => _product.id === item.product.id).image) : "/assets/fallback.jpg"}
+                            width={{base: 20, sm: 20}}
+                          />
+                        </Flex>
+                        <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
+                          <Stack spacing={0} flexDirection='column' display='flex'>
+                            <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
+                              {item.product.title}
+                            </Text>
+                            {/*item.variants && (
+                              <Text color="gray.600">{getVariantsString(item.variants)}</Text>
+                            )*/}
+                            {item.note && <Text color="gray.600">({item.note})</Text>}
+                            <Stepper
+                              marginTop={2}
+                              value={item.count}
+                              onDecrease={() => handleDecrease(item.id)}
+                              onIncrease={() => handleIncrease(item.id)}
+                            />
+                          </Stack>
+                        </Flex>
+                        <Flex alignItems="center">
+                          <Text fontWeight={500}>{getFormattedPrice(item)}</Text>
+                        </Flex>
+                      </Flex>
+                    ))}
+                </Stack>
+              </Box>
+              <Box>
+                <Flex
+                  boxShadow="md"
+                  px={4}
+                  py={2}
+                  justifyContent="space-between"
+                  borderWidth="1px"
+                  borderColor="gray.100"
+                  rounded="md">
+                  <Box  
+                    flexDirection="column"
+                    alignSelf="center"
+                    d="flex">
+                    <Text as="b" fontSize="lg">{t("cart.estimatedTotal")}</Text>
+                  </Box>
+                  <Box  
+                    flexDirection="column"
+                    alignSelf="center" 
+                    d="flex">
+                    <Text as="b" fontSize="2xl">{p(total)}</Text>
+                  </Box>
+                </Flex>
+              </Box>
+              <Box>
+                <Stack
+                  boxShadow="md"
+                  px={4}
+                  py={2}
+                  mb={5}
+                  flexDirection="column"
+                  borderWidth="1px"
+                  borderColor="gray.100"
+                  spacing={3}
+                  rounded="md">          
+                  <Text as="b" fontSize="lg">Información de contacto</Text>
+                  <Flex fontWeight={500} fontSize="md" lineHeight={1}>Número de celular
+                    <Text
+                      alignSelf="flex-start"
+                      backgroundColor="primary.50"
+                      color="primary.500"
+                      height={3}
+                      lineHeight="0.5rem"
+                      marginLeft={1}
+                      marginTop={0}
+                      padding={1}
+                      rounded="sm"
+                    >
+                      *
+                    </Text>
                   </Flex>
-                ))}
-            </Stack>
-            <Flex
-              boxShadow="md"
-              px={4}
-              py={2}
-              mt={5}
-              justifyContent="space-between"
-              borderWidth="1px"
-              borderColor="gray.100"
-              rounded="md">
-              <Box  
-                flexDirection="column"
-                alignSelf="center"
-                d="flex">
-                <Text as="b" fontSize="lg">{t("cart.estimatedTotal")}</Text>
+                  <Flex justifyContent="space-between" lineHeight={1} pb={3}>
+                    <Text>+9192939219</Text>
+                    <Link>Cambiar</Link>
+                  </Flex>
+                  {form}
+                </Stack>
               </Box>
-              <Box  
-                flexDirection="column"
-                alignSelf="center" 
-                d="flex">
-                <Text as="b" fontSize="2xl">{p(total)}</Text>
-              </Box>
-            </Flex>
-            <Stack
-              boxShadow="md"
-              px={4}
-              py={2}
-              pb={4}
-              mt={5}
-              mb={5}
-              flexDirection="column"
-              borderWidth="1px"
-              borderColor="gray.100"
-              spacing={3}
-              rounded="md">          
-              <Text as="b" fontSize="lg">Información de contacto</Text>
-              <Flex fontWeight={500} fontSize="md" lineHeight={1}>Número de celular
-                <Text
-                  alignSelf="flex-start"
-                  backgroundColor="primary.50"
-                  color="primary.500"
-                  height={3}
-                  lineHeight="0.5rem"
-                  marginLeft={1}
-                  marginTop={0}
-                  padding={1}
-                  rounded="sm"
-                >
-                  *
-                </Text>
-              </Flex>
-              <Flex justifyContent="space-between" lineHeight={1} pb={3}>
-                <Text>+9192939219</Text>
-                <Link>Cambiar</Link>
-              </Flex>
-              {form}
             </Stack>
           </DrawerBody>
           <DrawerFooter borderTopColor="gray.100" borderTopWidth={1} marginTop={2}>
