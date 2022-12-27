@@ -140,6 +140,8 @@ const Overview: React.FC<Props> = ({
               boxShadow="md"
               cursor="pointer"
               paddingX={4}
+              marginTop={4}
+              borderWidth="1px"
               paddingY={3}
               pos="fixed"
               right={0}
@@ -288,7 +290,7 @@ const Overview: React.FC<Props> = ({
                   </Flex>
                   <Flex justifyContent="space-between" lineHeight={1} pb={3}>
                     <Text>{phoneclient}</Text>
-                    <Link onClick={handleOpenPhoneclientModal}>Cambiar</Link>
+                    <Link onClick={handleOpenPhoneclientModal} textDecoration="underline">Cambiar</Link>
                   </Flex>
                   {form}
                 </Stack>
@@ -307,6 +309,7 @@ const Overview: React.FC<Props> = ({
             isShown={isShown}
             onClose={handleClosePhoneclientModal}
             onSubmit={handleSubmitFromPhoneclientModal}
+            fromParent="overview"
           />
         </>
       )}

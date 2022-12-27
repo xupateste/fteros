@@ -200,32 +200,22 @@ const ProductsScreen: React.FC = () => {
       </Flex>
       <Flex
           as="nav"
-          bottom={16}
+          bottom={0}
           justifyContent="flex-end"
           margin={{base: 0, sm: "auto"}}
           paddingX={{base: 4, sm: 24}}
           pb={4}
+          direction="column"
           position="sticky"
+          display="flex"
           width="100%"
           zIndex={4}
         >
-          <Button onClick={onChatLink} alignSelf="center" bg="white" variantColor="gray" rounded={48} boxShadow='md' borderWidth={1} py='6'>
+          <Button onClick={onChatLink} alignSelf="end" bg="white" variantColor="gray" rounded={48} boxShadow='md' borderWidth={1}  mb={Boolean(items.length) ? 2: 5} py='6' d="flex">
             <WhatsAppIcon height={6} color="whatsapp.500" width={6} />
             <Text ml={2} fontWeight={900} fontSize="xl" color="black">Chat</Text>
           </Button>
-      </Flex>
       {Boolean(items.length) && (
-        <Flex
-          as="nav"
-          bottom={0}
-          justifyContent="center"
-          margin={{base: 0, sm: "auto"}}
-          paddingBottom={4}
-          paddingX={4}
-          position="sticky"
-          width="100%"
-          zIndex={4}
-        >
           <Box
             display="block"
             margin={{base: 0, sm: "auto"}}
@@ -237,8 +227,8 @@ const ProductsScreen: React.FC = () => {
               {t("products.review")}
             </SummaryButton>
           </Box>
-        </Flex>
       )}
+      </Flex>
       <Content>
         <Flex
           justifyContent="center"
@@ -273,6 +263,7 @@ const ProductsScreen: React.FC = () => {
         isShown={isShown}
         onClose={handleClosePhoneclientModal}
         onSubmit={handleSubmitFromPhoneclientModal}
+        fromParent="products"
       />
     </>
   );

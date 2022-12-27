@@ -18,25 +18,25 @@ interface Props {
   isShown: boolean;
   onClose: () => void;
   onSubmit: () => void;
+  fromParent: string;
 }
 
 
-const PhoneClientNumber:React.FC<Props> = ({isShown, onClose, onSubmit}) => {
+const PhoneClientNumber:React.FC<Props> = ({isShown, onClose, onSubmit, fromParent}) => {
   // const [isShown, setShown] = React.useState(
   //   process.browser ? (!Boolean(window.localStorage?.getItem("phoneclient:Products"))) : false,
   // );
 
-  function handleClose() {
-    // window.localStorage.setItem("phoneclient:Products", "completed");
+  function handleClose() {}
 
-    // setShown(false);
-  }
+  const [defaultPhone, setPhone] = React.useState(window.localStorage.getItem("phoneclientnocode:Products"))
 
   const onPhoneclientSubmit = data => {
     window.localStorage.setItem("phoneclient:Products", `+${storeCode}${data.phoneclient}`);
+    window.localStorage.setItem("phoneclientnocode:Products", `${data.phoneclient}`);
+    setPhone(data.phoneclient);
     onSubmit();
   }
-
 
   const countryOptions = COUNTRIES.map(({ name, iso }) => ({
     label: name,
@@ -77,22 +77,23 @@ const PhoneClientNumber:React.FC<Props> = ({isShown, onClose, onSubmit}) => {
           padding={4}
           rounded="lg"
         >
-          <Text mb={3}>Ingrese su numero telefónico para agregarlo a nuestra lista</Text>
+          {fromParent === 'products' && (<Text mb={3}>Ingrese su número telefónico para agregarlo a nuestra lista</Text>)}
           <form onSubmit={handleSubmit(onPhoneclientSubmit)}>
             <Stack spacing={4}>
               <FormControl
                 isRequired
-                error={errors.phoneclient && "Este campo es requerido"}
+                error={errors.phoneclient && "Ingrese un número válido"}
                 name="phoneclient"
               >
-                <Text textDecoration="underline" color="primary.700" fontSize={17}>Número de WhatsApp</Text>
+                <Text textDecoration="underline" color="primary.700" fontSize={17} mb={2}>Número de WhatsApp</Text>
                 <PhoneNumberInput
-                  ref={register({required: true, minLength: 9, maxLength: 9, pattern: /^[0-9]+$/})}
+                  ref={register({required: true, minLength: 9, maxLength: 12, pattern: /^[0-9]+$/})}
                   country={'PER'}
                   options={countryOptions}
                   size="lg"
                   onChange={value => setstoreCode(value)}
                   name="phoneclient"
+                  value={defaultPhone}
                   placeholder="111344400"
                 />
               </FormControl>
@@ -101,16 +102,16 @@ const PhoneClientNumber:React.FC<Props> = ({isShown, onClose, onSubmit}) => {
           <Stack pt={3}>
             <Button
               w="full"
-              bg="cyan.500"
+              bg="primary.500"
               size="lg"
               color="white"
               mr={3}
               onClick={handleSubmit(onPhoneclientSubmit)}
               _hover={{
-                bg: "cyan.600",
+                bg: "primary.600",
                 color: 'white'
               }}>
-              <Text mr={5}>Agregar al pedido</Text>
+              <Text mr={5}>{fromParent === 'overview' ? 'Cambiar teléfono' : 'Agregar al pedido'}</Text>
               <RightIcon />
             </Button>
           </Stack>
