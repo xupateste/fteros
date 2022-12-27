@@ -133,7 +133,7 @@ const CartSummaryDrawer: React.FC<Props> = ({
         onClose={onCloseDialog}
       >
         <AlertDialogOverlay zIndex={1401}>
-          <AlertDialogContent>
+          <AlertDialogContent m={4}>
             <AlertDialogHeader fontSize='lg' fontWeight='bold'>
               Confirmar pedido
             </AlertDialogHeader>
@@ -141,7 +141,7 @@ const CartSummaryDrawer: React.FC<Props> = ({
               Deseas confirmar y finalizar este pedido?.
             </AlertDialogBody>
             <AlertDialogFooter justifyContent="space-between">
-              <Button bg='gray' onClick={onCloseDialog}>
+              <Button bg='gray.200' onClick={onCloseDialog}>
                 Regresar
               </Button>
               <Button variantColor="primary" onClick={handleCheckout} ml={3}>

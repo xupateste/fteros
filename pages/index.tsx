@@ -62,6 +62,7 @@ const Initio: React.FC = () => {
     //}, 1200);
     //window.location.href = window.location.origin+'/'+data.name+'/admin'; 
   };
+  
   const onRegisterSubmit = data => {
     toggleLoading(true);
     if(data.businessName &&

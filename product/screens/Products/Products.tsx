@@ -8,7 +8,7 @@ import {useFilteredProducts, useProducts} from "../../hooks";
 import ProductsGrid from "../../components/ProductsGrid";
 import ProductsCarousel from "../../components/ProductsCarousel";
 
-import Onboarding from "./Onboarding";
+import PhoneClientNumber from "./PhoneClientNumber";
 
 //import Logo from "~/ui/static/Logo";
 //import Image from "~/ui/feedback/Image";
@@ -46,14 +46,42 @@ const ProductsScreen: React.FC = () => {
 
   const featuredProducts = filterBy(products, {featured: true});
   const productsByCategory = groupBy(products, (product) => product.category);
-
+  const [isShown, setShown] = React.useState(false);
+  
+  const [tmpProduct, setTmpProduct] = React.useState<Product>({} as Product)
+  const [tmpOptions, setTmpOptions] = React.useState<Variant[]>([])
+  const [tmpCount, setTmpCount] = React.useState(0)
+  const [tmpNote, setTmpNote] = React.useState('')
   //end added
 
   function handleAdd(product: Product, options: Variant[], count: number, note: string) {
-    add(product, options, count, note);
+    // add(product, options, count, note);
+
+    if(!Boolean(window.localStorage?.getItem("phoneclient:Products"))) {
+      setShown(true);
+      setTmpProduct(product);
+      setTmpOptions(options);
+      setTmpCount(count);
+      setTmpNote(note);
+      // window.localStorage.setItem("addedtocart:Cart", "completed");
+      // console.log('set to storage')
+    } else {
+      add(product, options, count, note);
+      push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+    }
 
    //push(`/`);
+    // push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+  }
+
+  const handleSubmitFromPhoneclientModal = () => {
+    add(tmpProduct, tmpOptions, tmpCount, tmpNote);
+    setShown(false)
     push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+  }
+
+  const handleClosePhoneclientModal = () => {
+    setShown(false)
   }
 
   function handleOpenCart() {
@@ -89,6 +117,7 @@ const ProductsScreen: React.FC = () => {
       {shallow: true},
     );
   }
+
   return (
     <>
       <Flex direction="column" height="100%">
@@ -240,7 +269,11 @@ const ProductsScreen: React.FC = () => {
       {Boolean(selected) && (
         <CartItemDrawer product={selected} onClose={handleCloseSelected} onSubmit={handleAdd} />
       )}
-      <Onboarding />
+      <PhoneClientNumber
+        isShown={isShown}
+        onClose={handleClosePhoneclientModal}
+        onSubmit={handleSubmitFromPhoneclientModal}
+      />
     </>
   );
 };

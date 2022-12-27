@@ -1,7 +1,6 @@
 import React from "react";
 import {
   Modal,
-  Link,
   ModalOverlay,
   ModalContent,
   ModalCloseButton,
@@ -25,7 +24,7 @@ const Onboarding = () => {
   if (!isShown) return null;
 
   return (
-    <Modal isCentered onClose={handleClose}>
+    <Modal isCentered isOpen onClose={handleClose}>
       <ModalOverlay backgroundColor="rgba(255,255,255,0.5)" zIndex={1400} />
       <ModalContent
         backgroundColor="transparent"
@@ -47,15 +46,12 @@ const Onboarding = () => {
         >
           <Stack>
             <Stack spacing={0}>
-              <Text fontSize="2xl" fontWeight="bold">
-                Bienvenidos a FERRISUR
+              <Text fontSize="xl" fontWeight="bold">
+                Hola!
               </Text>
-              <Text fontSize="sm" fontWeight="bold">
-                TENEMOS DE TODO PARA TU FERRETERIA
-              </Text>
-              <Text color="gray.600" marginTop={6}>Haz tu pedido fácil y rápido:</Text>
+              <Text color="gray.600">Armá tu pedido en simples pasos:</Text>
             </Stack>
-            <Stack marginTop={2} spacing={6}>
+            <Stack marginTop={4} spacing={6}>
               <Stack isInline alignItems="baseline" spacing={3}>
                 <Flex
                   alignItems="center"
@@ -71,7 +67,7 @@ const Onboarding = () => {
                 >
                   <Text>1</Text>
                 </Flex>
-                <Text>Elige los productos que quieras</Text>
+                <Text>Elegí los productos que quieras</Text>
               </Stack>
               <Stack isInline alignItems="baseline" spacing={3}>
                 <Flex
@@ -88,7 +84,7 @@ const Onboarding = () => {
                 >
                   <Text>2</Text>
                 </Flex>
-                <Text>Evalúa tu presupuesto y completa tu pedido</Text>
+                <Text>Revisá y completá tu pedido</Text>
               </Stack>
               <Stack isInline alignItems="baseline" spacing={3}>
                 <Flex
@@ -105,11 +101,8 @@ const Onboarding = () => {
                 >
                   <Text>3</Text>
                 </Flex>
-                <Text>¡Listo! Generamos tu pedido para que lo recibamos por WhatsApp</Text>
+                <Text>¡Listo! Generamos tu pedido para que la tienda lo reciba por WhatsApp</Text>
               </Stack>
-            </Stack>
-            <Stack spacing={0}>
-              <Text color="gray.600" marginTop={4}>Si tienes necesitas ayuda para completar tu Pedido <Link isExternal href={`https://wa.me/51930240108?text=Hola+Ferrisur!+Necesito+su+apoyo+para+completar+mi+Pedido+por+favor`}>escíbenos al WhatsApp</Link></Text>
             </Stack>
           </Stack>
         </ModalBody>

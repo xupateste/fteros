@@ -23,6 +23,7 @@ import Image from "~/ui/feedback/Image";
 import WhatsAppIcon from "~/ui/icons/WhatsApp";
 import FieldsForm from "../../forms/FieldsForm";
 import {useTenant} from "~/tenant/hooks";
+import PhoneClientNumber from "~/product/screens/Products/PhoneClientNumber";
 
 
 interface Props {
@@ -60,7 +61,7 @@ const Overview: React.FC<Props> = ({
 
   function formattedImg(image) {
     const position = image.indexOf('/upload/') + 8;
-    const format = "w_90,f_auto,q_auto/";
+    const format = "w_360,f_auto,q_auto/";
     return [image.slice(0,position),format,image.slice(position)].join('');
   }
   
@@ -95,6 +96,10 @@ const Overview: React.FC<Props> = ({
   //   handleNext()
   // }
 
+  const handleOpenPhoneclientModal = () => {
+    setShown(true);
+  }
+
   const RightIcon = () => {
     return (
       <svg  xmlns="http://www.w3.org/2000/svg" x="0px" stroke="white" fill="white" width={40} y="0px" viewBox="0 0 1000 1000" enableBackground="new 0 0 1000 1000">
@@ -109,6 +114,21 @@ const Overview: React.FC<Props> = ({
       '_blank' // <- This is what makes it open in a new window.
     );
   };
+
+  const [phoneclient, setPhoneclient] = React.useState(
+    process.browser ? window.localStorage?.getItem("phoneclient:Products") : '',
+  );
+
+  const [isShown, setShown] = React.useState(false);
+
+  const handleClosePhoneclientModal = () => {
+    setShown(false)
+  }
+
+  const handleSubmitFromPhoneclientModal = () => {
+    setPhoneclient(window.localStorage?.getItem("phoneclient:Products"))
+    setShown(false)
+  }
 
   return (
     <FieldsForm defaultValues={fields} onSubmit={onSubmit}>
@@ -129,9 +149,11 @@ const Overview: React.FC<Props> = ({
               onClick={onClose}
             />
             <Stack spacing={6}>
-              <Box alignItems="flex-start" justifyContent="space-between">
-                <Stack
+              <Stack alignItems="flex-start" justifyContent="space-between" d='inline-block'>
+                <Flex
                   boxShadow="md"
+                  d='inline-flex'
+                  flexDirection="column"
                   borderWidth="1px"
                   borderColor="gray.100"
                   px={4}
@@ -140,8 +162,8 @@ const Overview: React.FC<Props> = ({
                   rounded="md">
                   <Text as="b" fontSize="2xl">{p(total)}</Text>
                   <Text as="span" fontSize="xl">{count > 1 ? `${count} Items` : `${count} Item`}</Text>
-                </Stack>
-              </Box>
+                </Flex>
+              </Stack>
               <Box>
                 <Stack
                   boxShadow="md" 
@@ -265,8 +287,8 @@ const Overview: React.FC<Props> = ({
                     </Text>
                   </Flex>
                   <Flex justifyContent="space-between" lineHeight={1} pb={3}>
-                    <Text>+9192939219</Text>
-                    <Link>Cambiar</Link>
+                    <Text>{phoneclient}</Text>
+                    <Link onClick={handleOpenPhoneclientModal}>Cambiar</Link>
                   </Flex>
                   {form}
                 </Stack>
@@ -281,6 +303,11 @@ const Overview: React.FC<Props> = ({
               </Button>
             </Stack>
           </DrawerFooter>
+          <PhoneClientNumber
+            isShown={isShown}
+            onClose={handleClosePhoneclientModal}
+            onSubmit={handleSubmitFromPhoneclientModal}
+          />
         </>
       )}
     </FieldsForm>

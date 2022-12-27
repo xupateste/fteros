@@ -20,7 +20,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
 
   function formattedImg(image) {
     const position = image.indexOf('/upload/') + 8;
-    const format = "w_200,f_auto,q_auto/";
+    const format = "w_360,f_auto,q_auto/";
     return [image.slice(0,position),format,image.slice(position)].join('');
   }
   
