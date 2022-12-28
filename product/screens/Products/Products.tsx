@@ -199,22 +199,25 @@ const ProductsScreen: React.FC = () => {
         </Flex>
       </Flex>
       <Flex
-          as="nav"
+          // as="nav"
           bottom={0}
-          justifyContent="flex-end"
+          // justifyContent="flex-end"
           margin={{base: 0, sm: "auto"}}
           paddingX={{base: 4, sm: 24}}
           pb={4}
           direction="column"
           position="sticky"
-          display="flex"
+          // display="flex"
+          textAlign='right'
           width="100%"
           zIndex={4}
         >
-          <Button onClick={onChatLink} alignSelf="end" bg="white" variantColor="gray" rounded={48} boxShadow='md' borderWidth={1}  mb={Boolean(items.length) ? 2: 5} py='6' d="flex">
-            <WhatsAppIcon height={6} color="whatsapp.500" width={6} />
-            <Text ml={2} fontWeight={900} fontSize="xl" color="black">Chat</Text>
-          </Button>
+          <Box>
+            <Button onClick={onChatLink} alignItems="center" bg="white" variantColor="gray" rounded={48} boxShadow='md' borderWidth={1}  mb={Boolean(items.length) ? 2: 5} py='6'>
+              <WhatsAppIcon height={6} color="whatsapp.500" width={6} />
+              <Text ml={2} fontWeight={900} fontSize="xl" color="black">Chat</Text>
+            </Button>
+          </Box>
       {Boolean(items.length) && (
           <Box
             display="block"

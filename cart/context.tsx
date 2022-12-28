@@ -169,9 +169,11 @@ const CartProvider = ({children}: Props) => {
       // Do a post to it
       api.hook(hook, {phone, items, orderId, fields});
     }
+
+    let phoneclient = process.browser ? window.localStorage?.getItem('phoneclient:Products') : '';
     
     apiClient
-      .hookorder(tenant.id, {orderId: orderId, items: items, fields: fields, phone: phone, message: encodeURIComponent(getMessage(items, orderId, fields, ""))})
+      .hookorder(tenant.id, {orderId: orderId, items: items, fields: fields, phone: phoneclient, message: encodeURIComponent(getMessage(items, orderId, fields, ""))})
       .then()
       .catch(err => {console.log(err)})
     // added
