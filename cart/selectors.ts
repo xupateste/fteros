@@ -126,7 +126,7 @@ function _getFields(fields: Field[]) {
 
   return fields
     .filter(({title, value}) => title && value)
-    .map(({title, value}) => `${title}: *${value}*`)
+    .map(({title, value}) => `${title}: ${value}`.substring(0, 27).concat('…'))
     .join("\n");
 }
 
@@ -145,8 +145,9 @@ function _getItems(items: CartItem[]): string {
       (item) =>
         `·${[
           `[x${item.count}] ~Cod.${item.product.code}`,
-          ` ${(item.product.title).length > 27 ? (item.product.title).substring(0, 27).concat('…') : item.product.title}`,
-          ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
+          ` ${(item.product.title).length > 27 ? (item.product.title).toUpperCase().substring(0, 27).concat('…') : (item.product.title).toUpperCase()}`,
+          item.product.type === 'ask' ? ` S/ *Precio a consultar` : ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
+          // ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
         ]
           .filter(Boolean)
           .join("\n")}`,
@@ -161,30 +162,35 @@ export function getMessage(
   preference?: string,
 ): string {
  // console.log(fields);
-  console.log(preference);
+  // console.log(preference);
   return (
     "\`\`\`\n" +
-    `Order# ${orderId}` +
+    // `${title}\n`.substring(0, 27).concat('…') +
+    // `WhatsApp: ${phone}\n`+
+    `Pedido#: ${orderId}` +
     "\n" +
-    (fields ? _getFields(fields) + "\n" : "") +
-    (preference ? `\n\n${_getPreferenceFooter(preference)}` : "") +
+    ((_getFields(fields)).length > 0 ? _getFields(fields) + "\n" : "") +
+    (preference ? `b\n\n${_getPreferenceFooter(preference)}` : "") +
     "-----------------------------" +
     "\n" +
-    _getItems(items) +
-    "\n" +
+    ((_getItems(items)).length > 0 ? _getItems(items) + "\n" : "") +
     "-----------------------------" +
     "\n" +
     ` Subtotal` +
     "\n" +
-    ` ${getCount(items)} Item(s) -> ${formatPrice(getTotal(items))}`.substring(0, 28) +
+    ` ${getCount(items)} Item(s) a ${formatPrice(getTotal(items))}`.substring(0, 28) +
     "\n" +
     "-----------------------------" +
     "\`\`\`" +
     "\n\n" +
-    "*Total amount to pay*" + 
+    "*Monto Total a Pagar*" + 
     "\n" +
     "*= "+ formatPrice(getTotal(items)) + "*" +
-    "\n."
+    "\n" +
+    "\`\`\`\n" +
+    "* Los productos están sujetos\n" +
+    "  a disponibilidad de stock\n" +
+    "\`\`\`"
   );
 }
 

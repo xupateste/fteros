@@ -120,7 +120,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
         )*/}
         {type === "ask" && (
           <Text color="green.500" fontSize="md" fontWeight={600} lineHeight={1}>
-            Precio a consultar
+            *Precio a consultar
           </Text>
         )}
       </Box>

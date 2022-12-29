@@ -97,21 +97,23 @@ const OrdersScreen: React.FC = () => {
     <>
       <Flex direction="column" height="100%" marginTop={4}>
         <Box flex={1}>
-          <Button width="100%" background='#fff' _hover={{ bg: '#fff' }} color='gray' onClick={refreshDatas}>
-            Actualizar
-          </Button>
+          <Box textAlign="center">
+            <Button background='gray.100' _hover={{ bg: '#gray.200' }} color='gray' onClick={refreshDatas}>
+              Actualizar lista de pedidos
+            </Button>
+          </Box>
           <Content padding={4}>
-            <Box as="table" borderTopWidth={1} width="100%">
+            <Box as="table" width="100%">
               <Box as="tbody">
-                <Box as="tr" textAlign="left">
+                <Box as="tr" borderBottomWidth={1} textAlign="left">
                   <Box as="th" width={10}>
                     
                   </Box>
                   <Box as="th">
-                    ORDEN
+                    #PEDIDO
                   </Box>
                   <Box as="th">
-                    CLIENTE
+                    #CONTACTO
                   </Box>
                   <Box as="th">
                     FECHA
@@ -139,7 +141,7 @@ const OrdersScreen: React.FC = () => {
                       #{order.orderId}
                     </Box>
                     <Box as="td">
-                      {order.fields ? order.fields[0]?.value : ''}
+                      {order.phone}
                     </Box>
                     <Box as="td">
                       {dateOrder(order.createdAt)} {timeOrder(order.createdAt)}
@@ -176,7 +178,7 @@ const OrdersScreen: React.FC = () => {
           <AlertDialogHeader>Eliminar Orden</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
-            Deseas eliminar la orden?<br/>
+            Deseas eliminar este pedido?<br/>
           </AlertDialogBody>
           <AlertDialogFooter>
             <Button onClick={alertDialog.onClose}>

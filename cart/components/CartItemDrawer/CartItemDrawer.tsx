@@ -212,7 +212,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                           fontWeight={700}
                           fontSize="xl"
                         >
-                          {`*Precio a consultar*`}
+                          {`*Precio a consultar`}
                         </Box>
                         <Text
                           color="gray.500"
