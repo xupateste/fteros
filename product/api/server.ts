@@ -104,15 +104,22 @@ export default {
 
         return {id, ...formatted};
       } else {
-        const formatted = schemas.server.create.cast(product);
+        // added
         const docId = shortid.generate();
+        product["slug"] = slugify(product.title) + "-" + docId;
+        product["id"] = docId;
+        // end-added
+
+        // const formatted = schemas.server.create.cast(product);
+        // const docId = shortid.generate();
+        const formatted = schemas.server.create.cast(product);
 
         batch.create(
           database.collection("tenants").doc(tenant).collection("products").doc(docId),
           formatted,
         );
 
-        return {id: docId, ...formatted};
+        return {...formatted, id: docId} as Product;
       }
     });
 

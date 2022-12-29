@@ -118,7 +118,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 register={register({required: true})}
               />
             </FormControl>
-            {!["variant"].includes(values.type) && (
+            {!["ask","variant"].includes(values.type) && (
               <Stack isInline spacing={2}>
                 <FormControl
                   isRequired
