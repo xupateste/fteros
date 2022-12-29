@@ -100,6 +100,7 @@ const CartSummaryDrawer: React.FC<Props> = ({
         placement="right"
         size="md"
         onAnimationEnd={handleReset}
+        closeOnOverlayClick={!Boolean(step === "fields")}
         onClose={handleClose}
       >
         {step === "overview" && (

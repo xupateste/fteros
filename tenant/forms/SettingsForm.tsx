@@ -21,10 +21,10 @@ import PixelInput, {
   info as PixelInputInfo,
   validator as PixelInputValidator,
 } from "~/ui/inputs/Pixel";
-import GoogleAnalyticsInput, {
-  info as GoogleAnalyticsInputInfo,
-  validator as GoogleAnalyticsInputValidator,
-} from "~/ui/inputs/GoogleAnalytics";
+// import GoogleAnalyticsInput, {
+//   info as GoogleAnalyticsInputInfo,
+//   validator as GoogleAnalyticsInputValidator,
+// } from "~/ui/inputs/GoogleAnalytics";
 
 interface Props {
   defaultValues: Partial<ClientTenant>;
@@ -386,7 +386,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 register={register({validate: PixelInputValidator})}
               />
             </FormControl>
-            <FormControl
+            {/*<FormControl
               error={errors.ga?.message}
               help={t("admin.shop.advancedOptions.gaHelp")}
               info={<GoogleAnalyticsInputInfo />}
@@ -399,7 +399,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 placeholder="UA-XXXXXXXXX-X"
                 register={register({validate: GoogleAnalyticsInputValidator})}
               />
-            </FormControl>
+            </FormControl>*/}
             {defaultValues.flags?.includes("advanced") && (
               <FormControl
                 help="Vamos a hacer un POST a esta url cada vez que un usuario complete un pedido"

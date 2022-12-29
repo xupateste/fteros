@@ -51,7 +51,7 @@ const StoreLayout: React.FC<Props> = ({tenant, product, category, children}) => 
       <meta content="summary_large_image" name="twitter:card" />
       <meta content={tenant.twitter ? `@${tenant.twitter}` : META.twitter} name="twitter:creator" />
       <meta content={META.twitter} name="twitter:site" />
-      {tenant.ga && (
+      {/*{tenant.ga && (
         <>
           <script async src={`https://www.googletagmanager.com/gtag/js?id=${tenant.ga}`} />
           <script
@@ -65,6 +65,17 @@ const StoreLayout: React.FC<Props> = ({tenant, product, category, children}) => 
           />
         </>
       )}
+      */}
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=G-6TBQVG5P7V`} />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-6TBQVG5P7V');`,
+                  }}
+      />
       {tenant.pixel && (
         <>
           <script

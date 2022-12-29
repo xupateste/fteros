@@ -14,7 +14,7 @@ const ProductTypeInput: React.FC<Props> = ({register, ...props}) => (
     <option value="available">Disponible</option>
     <option value="unavailable">Sin stock</option>
     <option value="promotional">Promocional</option>
-    <option value="ask">A consultar</option>
+    <option value="ask">Precio a consultar</option>
     <option value="hidden">Oculto</option>
   </Select>
 );
