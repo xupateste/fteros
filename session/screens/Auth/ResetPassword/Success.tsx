@@ -1,5 +1,5 @@
 import React from "react";
-import {Stack, Link, Text} from "@chakra-ui/core";
+import {Stack, Text} from "@chakra-ui/core";
 
 import {useTranslation} from "~/i18n/hooks";
 
@@ -14,14 +14,12 @@ const ResetPasswordSuccess: React.FC = () => {
       <Text color="gray.500">{t("auth.resetPasswordSuccess.description")}</Text>
       <Text color="gray.500">
         <span>{t("auth.resetPasswordSuccess.contactUsAt")} </span>
-        <Link
-          color="primary.500"
-          href={`mailto:${process.env.MANTAINER_EMAIL}?subject=${t(
-            "auth.resetPasswordSuccess.emailTitle",
-          )}`}
-        >
-          {process.env.MANTAINER_EMAIL}
-        </Link>
+        <Text color="primary.500">
+          Email: {process.env.MANTAINER_EMAIL}
+        </Text>
+        <Text color="primary.500">
+          WhatsApp: {process.env.MANTAINER_PHONE}
+        </Text>
         .
       </Text>
     </Stack>

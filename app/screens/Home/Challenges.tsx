@@ -15,7 +15,7 @@ interface Props {
 const Challenges: React.FC<Props> = ({tenant, products}) => {
   const t = useTranslation();
 
-  const hasBasicComplete = tenant.title && tenant.category && tenant.description && tenant.phone;
+  const hasBasicComplete = tenant.title && tenant.description && tenant.phone && tenant.place;
   const hasCustomizationComplete = tenant.logo && tenant.banner && tenant.color;
   const hasProducts = Boolean(products.length);
 

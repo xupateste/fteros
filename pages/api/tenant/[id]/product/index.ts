@@ -74,7 +74,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           .then(() => res.status(200).json(casted))
           .catch(() => res.status(400).end("Hubo un error creando el producto"));
       })
-      .catch(() => res.status(401).end("La sesión expiró, volvé a iniciar sesión para continuar"));
+      .catch(() => res.status(401).end("La sesión expiró, vuelve a iniciar sesión para continuar"));
   }
 
   if (req.method === "PATCH") {
@@ -103,7 +103,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
             }),
           );
       })
-      .catch(() => res.status(401).end("La sesión expiró, volvé a iniciar sesión para continuar"));
+      .catch(() => res.status(401).end("La sesión expiró, vuelve a iniciar sesión para continuar"));
   }
 
   if (req.method === "PUT") {
@@ -150,7 +150,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         // If the session is not valid, return a 401
         .catch((error) =>
           res.status(401).json({
-            message: "La sesión expiró, volvé a iniciar sesión para continuar",
+            message: "La sesión expiró, vuelve a iniciar sesión para continuar",
             details: error,
           }),
         )
@@ -175,7 +175,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           .then(() => res.status(200).json({success: true}))
           .catch(() => res.status(400).end("Hubo un error borrando el producto"));
       })
-      .catch(() => res.status(401).end("La sesión expiró, volvé a iniciar sesión para continuar"));
+      .catch(() => res.status(401).end("La sesión expiró, vuelve a iniciar sesión para continuar"));
   }
 
   return res.status(304).end();

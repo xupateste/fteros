@@ -61,7 +61,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           );
         })
         // If thats not the user, return a 401
-        .catch(() => res.status(401).end("La sesión expiró, volvé a iniciar sesión para continuar"))
+        .catch(() => res.status(401).end("La sesión expiró, vuelve a iniciar sesión para continuar"))
     );
   }
 
@@ -104,7 +104,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           );
         })
         // If thats not the user, return a 401
-        .catch(() => res.status(401).end("La sesión expiró, volvé a iniciar sesión para continuar"))
+        .catch(() => res.status(401).end("La sesión expiró, vuelve a iniciar sesión para continuar"))
     );
   }
 

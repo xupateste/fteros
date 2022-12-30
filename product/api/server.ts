@@ -132,6 +132,7 @@ export default {
     // let dateMinusHours = firestore.Timestamp.fromMillis(now.toMillis() - (3600000*5));
     order['createdAt'] = firestore.Timestamp.now().seconds;
     order['checked'] = false;
+    order['deleted'] = false;
 
     return database
       .collection("tenants")

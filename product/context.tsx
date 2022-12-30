@@ -162,8 +162,8 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         setOrders((initialOrders) => initialOrders.filter((order) => order.id !== id));
 
         toast({
-          title: "Orden eliminada",
-          description: "La Orden fue eliminada correctamente",
+          title: "Pedido eliminado",
+          description: "El pedido fue eliminado correctamente",
           status: "success",
         });
       })
@@ -171,7 +171,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         toast({
           title: "Error",
           description:
-            "Hubo un error borrando la orden, refresca la página e intenta nuevamente",
+            "Hubo un error borrando el pedido, refresca la página e intenta nuevamente",
           status: "error",
         });
       });
@@ -187,8 +187,8 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
           ),
         );
         toast({
-          title: "Orden actualizada",
-          description: "La Orden fue actualizada correctamente",
+          title: "Lista de pedidos actualizada",
+          description: "El pedido fue actualizado correctamente",
           status: "success",
         });
       })
@@ -196,7 +196,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         toast({
           title: "Error",
           description:
-            "Hubo un error actualizando la orden, refresca la página e intenta nuevamente",
+            "Hubo un error actualizando, refresca la página e intenta nuevamente",
           status: "error",
         });
       });

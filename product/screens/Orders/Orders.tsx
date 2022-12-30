@@ -16,7 +16,7 @@ import {Box, Flex, Modal, Button, PseudoBox,
 import CheckIcon from "~/ui/icons/Check";
 import CircleIcon from "~/ui/icons/Circle";
 import TrashIcon from "~/ui/icons/Trash";
-import {useToast} from "~/hooks/toast";
+// import {useToast} from "~/hooks/toast";
 
 import {useOrders, useProductActions} from "~/product/hooks";
 
@@ -30,12 +30,12 @@ const OrdersScreen: React.FC = () => {
   const orders = useOrders();
   
 
-  const [, setStatus] = React.useState("init");
-  const toast = useToast();
+  // const [, setStatus] = React.useState("init");
+  // const toast = useToast();
   const router = useRouter();
   //console.log(orders);
-  const {remorder, updateorder} = useProductActions();
-  const [orderkey, setOrderkey] = React.useState();
+  const {updateorder} = useProductActions();
+  const [orderkey, setOrderkey] = React.useState({});
   const tenant = useTenant();
 
 
@@ -51,13 +51,15 @@ const OrdersScreen: React.FC = () => {
   }
 
   function handleRemoveOrder() {
-    setStatus("pending");
-    remorder(orderkey).catch(() => {
-      setStatus("init");
-      toast({status: "error", title: "Error", description: "No se pudo borrar la orden"});
-    });
+    // setStatus("pending");
+    // remorder(orderkey).catch(() => {
+    //   setStatus("init");
+    //   toast({status: "error", title: "Error", description: "No se pudo borrar la orden"});
+    // });
+    orderkey ?? (orderkey['deleted'] = true);
+    updateorder(orderkey);
     alertDialog.onClose();
-    setOrderkey(null);
+    // setOrderkey(null);
   }
 
   function dateOrder(secs) {
@@ -122,7 +124,7 @@ const OrdersScreen: React.FC = () => {
                     
                   </Box>
                 </Box>
-                {orders.map((order) => (
+                {orders.map((order) => !order.deleted && (
                   <PseudoBox as="tr" key={order.id} marginBottom="10px" lineHeight={2} position="relative" color={order.checked ? "#b7b7b7" : ""}
                   _after={order.checked ? {
                           content: `""`,
@@ -146,7 +148,7 @@ const OrdersScreen: React.FC = () => {
                     <Box as="td">
                       {dateOrder(order.createdAt)} {timeOrder(order.createdAt)}
                     </Box>
-                    <Box as="td" width={5} onClick={() => order.checked ? null : handleOnOpenAlert(order.id)}>
+                    <Box as="td" width={5} onClick={() => order.checked ? null : handleOnOpenAlert(order)}>
                       <TrashIcon />
                     </Box>
                   </PseudoBox>
@@ -175,7 +177,7 @@ const OrdersScreen: React.FC = () => {
       >
         <AlertDialogOverlay zIndex={8000}/>
         <AlertDialogContent zIndex={8001}>
-          <AlertDialogHeader>Eliminar Orden</AlertDialogHeader>
+          <AlertDialogHeader>Eliminar Pedido</AlertDialogHeader>
           <AlertDialogCloseButton />
           <AlertDialogBody>
             Deseas eliminar este pedido?<br/>

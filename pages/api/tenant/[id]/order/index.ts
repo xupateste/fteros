@@ -60,7 +60,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     return api
       .hookorder(id, order)
       .then(() => res.status(200).json(order))
-      .catch(() => res.status(400).end("Hubo un error creando la orden"));
+      .catch(() => res.status(400).end("Hubo un error creando el pedido"));
   }
 
   if (req.method === "PATCH") {
@@ -82,7 +82,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
           .then(() => res.status(200).json(order))
           .catch((error) =>
             res.status(400).json({
-              message: "Hubo un error actualizando la orden",
+              message: "Hubo un error actualizando el pedido",
               details: error,
             }),
           );
@@ -106,9 +106,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         return api
           .remorder(id, order)
           .then(() => res.status(200).json({success: true}))
-          .catch(() => res.status(400).end("Hubo un error borrando la orden"));
+          .catch(() => res.status(400).end("Hubo un error borrando el pedido"));
       })
-      .catch(() => res.status(401).end("La sesión expiró, volvé a iniciar sesión para continuar"));
+      .catch(() => res.status(401).end("La sesión expiró, vuelve a iniciar sesión para continuar"));
   }
 
   return res.status(304).end('return end');

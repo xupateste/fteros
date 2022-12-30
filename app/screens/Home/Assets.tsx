@@ -24,7 +24,7 @@ const Assets: React.FC<Props> = ({tenant}) => {
         <QrCode
           borderColor="gray.300"
           borderWidth={1}
-          text={`${process.env.APP_URL}/${tenant.slug}`}
+          text={`${window.location.origin}/${tenant.slug}`}
         />
       </Stack>
     </Box>

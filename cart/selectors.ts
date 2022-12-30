@@ -135,7 +135,7 @@ function _getPreferenceFooter(preference?: string) {
 
   return `----------
 
-Este es tu link de pago. _Una vez realizado envianos el número de operación_.
+Este es tu link de pago. _Una vez realizado envianos el número de operación_.
 ${preference}`;
 }
 
@@ -160,13 +160,17 @@ export function getMessage(
   orderId: string,
   fields?: Field[],
   preference?: string,
+  tenantSlug?: string,
+  tenantPhone?: string,
 ): string {
  // console.log(fields);
   // console.log(preference);
   return (
     "\`\`\`\n" +
-    // `${title}\n`.substring(0, 27).concat('…') +
-    // `WhatsApp: ${phone}\n`+
+    `${tenantSlug.toUpperCase()}`.substring(0, 27) +
+    "\n" +
+    `WhatsApp +${tenantPhone}`+
+    "\n\n" +
     `Pedido#: ${orderId}` +
     "\n" +
     ((_getFields(fields)).length > 0 ? _getFields(fields) + "\n" : "") +

@@ -2,12 +2,12 @@ import {getMessage} from "./selectors";
 
 import fetch from "~/utils/fetch";
 
-//import {database} from "~/firebase/admin";
+
 
 export default {
-  checkout: ({phone, items, orderId, fields, preference = null}) =>
+  checkout: ({tenantSlug, phone, items, orderId, fields, preference = null}) =>
     `https://wa.me/${phone}?text=${encodeURIComponent(
-      getMessage(items, orderId, fields, preference))}
+      getMessage(items, orderId, fields, preference, tenantSlug, phone))}
     `,
   hook: (url, {phone, items, orderId, fields, preference = null}) =>
     fetch(
@@ -19,7 +19,7 @@ export default {
         orderId,
         fields,
         preference,
-        message: getMessage(items, orderId, fields, preference),
+        message: getMessage(items, orderId, fields, preference, '', ''),
       },
       {},
       "no-cors",
