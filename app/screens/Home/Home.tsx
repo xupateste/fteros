@@ -2,9 +2,10 @@ import React from "react";
 import {SimpleGrid, Stack} from "@chakra-ui/core";
 
 import Introduction from "./Introduction";
-import Contact from "./Contact";
+// import Contact from "./Contact";
 import Challenges from "./Challenges";
 import Assets from "./Assets";
+import TypeTenant from "./TypeTenant";
 
 import Content from "~/ui/structure/Content";
 import {useTenant} from "~/tenant/hooks";
@@ -21,11 +22,13 @@ const HomeScreen: React.FC = () => {
       <Stack shouldWrapChildren spacing={{base: 4, sm: 8}}>
         <SimpleGrid columns={{base: 1, sm: 2}} spacing={{base: 4, sm: 8}}>
           <Stack shouldWrapChildren spacing={{base: 4, sm: 8}}>
-            <Introduction title={tenant.title} />
+            <TypeTenant />
             <Challenges products={products} tenant={tenant} />
+            {/*<Contact />*/}
           </Stack>
           <Stack shouldWrapChildren spacing={{base: 4, sm: 8}}>
-            <Contact />
+            {/*<TypeTenant tenant={tenant} />*/}
+            <Introduction title={tenant.title} />
             <Assets tenant={tenant} />
           </Stack>
         </SimpleGrid>

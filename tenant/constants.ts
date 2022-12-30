@@ -11,6 +11,7 @@ export const DEFAULT_CLIENT_TENANT: Partial<ClientTenant> = {
   createdAt: 1670897400000,
   updatedAt: 1670897400000,
   layout: "portrait",
+  typeTenant: "test",
   flags: [],
   fields: [],
   mercadopago: false,

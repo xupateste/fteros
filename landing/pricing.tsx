@@ -163,7 +163,7 @@ const Pricing: React.FC = () => {
               borderColor={'cyan.400'}>
               <List spacing={3} textAlign="start" px={12}>
                 <ListItem fontWeight={700}>
-                  PLAN PREMIUM
+                  PLAN COMERCIAL (incluido)
                 </ListItem>
                 <ListItem>
                   Productos ilimitados

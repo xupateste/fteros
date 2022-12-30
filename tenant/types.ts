@@ -33,6 +33,7 @@ export interface ServerTenant {
   createdAt: number;
   updatedAt: number; 
   layout?: "landscape" | "portrait";
+  typeTenant?: "free" | "test" | "p050" | "p250" | "p450" | "p650" | "p850" | "p1k0" | "p1k2" | "p1k4" | "p1k6" | "p2k8" | "p3k0" | "p3k2" | "p3k4" | "p3k6" | "p3k8" | "p4k0" | "p4k2" | "p4k4" | "p4k6" | "p4k8" | "p5k0" | "pall";
   mercadopago?: {
     token: string;
     refresh: string;

@@ -88,6 +88,7 @@ const color = yup
 const flags = yup.array(yup.string());
 const fields = yup.array<Field>(field.lazy);
 const layout = yup.string().oneOf(["portrait", "landscape"]);
+const typeTenant = yup.string().oneOf(["free", "test", "p050", "p250", "p450", "p650", "p850", "p1k0", "p1k2", "p1k4", "p1k6", "p2k8", "p3k0", "p3k2", "p3k4", "p3k6", "p3k8", "p4k0", "p4k2", "p4k4", "p4k6", "p4k8", "p5k0", "pall"]);
 const products = {
   schema: yup.array().of(productSchemas.client.fetch),
   lazy: yup.lazy((value: Product[]) =>
@@ -127,6 +128,7 @@ export default {
       fields: fields.nullable(),
       flags: flags.nullable(),
       layout: layout.nullable(),
+      typeTenant: typeTenant.nullable(),
       hook: yup.string().nullable(),
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
@@ -157,6 +159,7 @@ export default {
       fields: fields.nullable(),
       flags: flags.nullable(),
       layout: layout.nullable(),
+      typeTenant: typeTenant.nullable(),
       hook: yup.string().nullable(),
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
@@ -186,6 +189,7 @@ export default {
       highlight: yup.string(),
       fields,
       layout: layout.default(DEFAULT_CLIENT_TENANT.layout),
+      typeTenant: typeTenant.default(DEFAULT_CLIENT_TENANT.typeTenant),
       flags: flags.default(DEFAULT_CLIENT_TENANT.flags),
       hook: yup.string(),
       pixel: yup.string(),
@@ -220,6 +224,7 @@ export default {
       placeUrl: yup.string().default("").nullable(),
       highlight: yup.string().default("").nullable(),
       layout: layout.default(DEFAULT_CLIENT_TENANT.layout).nullable(),
+      typeTenant: typeTenant.default(DEFAULT_CLIENT_TENANT.typeTenant).nullable(),
       fields: fields.default(DEFAULT_CLIENT_TENANT.fields).nullable(),
       flags: flags.default(DEFAULT_CLIENT_TENANT.flags).nullable(),
       hook: yup.string().default("").nullable(),
@@ -255,6 +260,7 @@ export default {
       fields: fields.nullable(),
       flags: flags.nullable(),
       layout: layout.nullable(),
+      typeTenant: typeTenant.nullable(),
       hook: yup.string().nullable(),
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
@@ -284,6 +290,7 @@ export default {
       highlight: yup.string(),
       fields,
       layout: layout.default(DEFAULT_CLIENT_TENANT.layout),
+      typeTenant: typeTenant.default(DEFAULT_CLIENT_TENANT.typeTenant),
       flags: flags.default(DEFAULT_CLIENT_TENANT.flags),
       hook: yup.string(),
       pixel: yup.string(),

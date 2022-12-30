@@ -62,7 +62,7 @@ const Hero: React.FC<Props> = (props) => {
             Potencie la eficiencia de su equipo de ventas y proteja sus diseños y precios de ser copiados por la competencia.
           </Text>
           <Stack
-            spacing={{ base: 4, sm: 6 }}
+            spacing={{ base: 2, sm: 4 }}
             direction='row'>
             <Button
               rounded={'full'}
@@ -80,7 +80,7 @@ const Hero: React.FC<Props> = (props) => {
               rounded={'full'}
               size={'lg'}
               fontWeight={'bold'}
-              px={6}
+              px={4}
               mt={2}
               borderWidth={1}
               onClick={() => {window.open(`${window.location.origin}/demo`,'_blank')}}
