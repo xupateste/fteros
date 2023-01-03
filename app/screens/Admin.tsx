@@ -17,7 +17,7 @@ import HomeAdminScreen from "./Home";
 
 //added
 import {useRouter} from "next/router";
-// import {useTenant} from "~/tenant/hooks";
+import {useTenant} from "~/tenant/hooks";
 import CrossIcon from "~/ui/icons/Cross"
 
 import ProductsAdminScreen from "~/product/screens/Admin/Admin";
@@ -33,20 +33,28 @@ import {useSession} from "~/session/hooks";
 import Content from "~/ui/structure/Content";
 import {useTranslation} from "~/i18n/hooks";
 import HomeIcon from "~/ui/icons/Home";
-import {getTypeTenant} from "./Home/SelectorsTypeTenant"
+import BannerTenant from "./Home/BannerTenant";
 
 const AdminScreen: React.FC = () => {
   const {signOut} = useSession();
   const t = useTranslation();
-  // const {typeTenant} = useTenant();
-  const [isVisible, setVisible] = React.useState(true)
+  const {createdAt, slug, typeTenant} = useTenant();
+  const [isVisible, setVisible] = React.useState<boolean>(true)
   // setVisible(true)
   //added
   const router = useRouter();
 
+  const[itExceeds, setItExceeds]= React.useState<boolean>(false);
+
   const handleVisibility = () => {
     setVisible(!isVisible)
   }
+
+  React.useEffect(() => {
+    itExceeds ? setVisible(itExceeds) : setVisible(true)
+    // setVisible(itExceeds)
+  }, [itExceeds])
+
 
   //console.log(router);
 
@@ -141,14 +149,11 @@ const AdminScreen: React.FC = () => {
           </Content>
         </Stack>
         {isVisible && (
-          <Stack w="full" bg='red.400' justifyContent='center' color='white' py={4}>
+          <Stack w="full" bg='red.400' justifyContent='center' color='white' py={3}>
             <Content paddingX={4}>
               <Flex justifyContent="space-between" alignItems="center">
-                <Flex alignItems="center" direction={{base:'column', sm:'row' }} textAlign="center">
-                  <Box>
-                    My frind2 aisdasndasjdas dnasd sajdsaj d sad {getTypeTenant('hola')}
-                  </Box>
-                  <Button bg="white" color="red.400" ml={{base:0, sm:3 }}>Mejorar Plan</Button>
+                <Flex alignItems="center" direction={{base:'column', sm:'row' }} textAlign="center" px={4}>
+                  <BannerTenant typeTenant={typeTenant} createdAt={createdAt} slug={slug} itExceeds={itExceeds} />
                 </Flex>
                 <Link onClick={handleVisibility}><CrossIcon></CrossIcon></Link>
               </Flex>
@@ -161,7 +166,7 @@ const AdminScreen: React.FC = () => {
               <HomeAdminScreen />
             </TabPanel>
             <TabPanel>
-              <ProductsAdminScreen />
+              <ProductsAdminScreen setItExceeds={setItExceeds} />
             </TabPanel>
             <TabPanel>
               <TenantAdminScreen />

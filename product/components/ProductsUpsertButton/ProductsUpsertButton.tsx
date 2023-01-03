@@ -12,9 +12,10 @@ import {Product} from "~/product/types";
 interface Props extends Omit<StackProps, "onSubmit"> {
   products: Product[];
   onSubmit: (products: Product[]) => Promise<void>;
+  isDisabled: boolean;
 }
 
-const ProductsUpsertButton: React.FC<Props> = ({products: base, onSubmit, ...props}) => {
+const ProductsUpsertButton: React.FC<Props> = ({products: base, onSubmit, isDisabled, ...props}) => {
   // Store products to edit
   const [products, setProducts] = React.useState<Product[]>([]);
 
@@ -63,6 +64,7 @@ const ProductsUpsertButton: React.FC<Props> = ({products: base, onSubmit, ...pro
           leftIcon={UploadIcon}
           size="md"
           onClick={handleImportOpen}
+          isDisabled={isDisabled}
         >
           Importar
         </IconButton>

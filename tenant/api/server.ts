@@ -6,6 +6,8 @@ export default {
   create: (email: string, password: string, tenant: Partial<ServerTenant>) => {
     //const newProduct = database.collection("tenants").doc(tenant).collection("products").doc();
     tenant['createdAt'] = firestore.Timestamp.now().toMillis();
+    // tenant['createdAt'] = firestore.Timestamp.now().seconds;
+
     return database
       .collection("tenants")
       .where("slug", "==", tenant.slug)

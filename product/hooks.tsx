@@ -10,6 +10,8 @@ import {extractUniqueBy, filterBy} from "~/selectors/filter";
 //import {sort} from "~/selectors/sort";
 import {groupBy} from "~/selectors/group";
 import {useTranslation} from "~/i18n/hooks";
+import {getQtyProdsTypeOf} from "~/app/screens/Home/SelectorsTypeTenant"
+import {useTenant} from "~/tenant/hooks";
 
 export function useProducts() {
   const {
@@ -62,6 +64,9 @@ export function useFilteredProducts(selector?: (product: Product) => boolean) {
     number,
   ] => [category, products.length]);
 
+  //added
+  const {typeTenant} = useTenant();
+
   function handleCategoryChange(category: Product["category"]) {
     setQuery("");
 
@@ -78,7 +83,7 @@ export function useFilteredProducts(selector?: (product: Product) => boolean) {
   }
 
   return {
-    products: productsBySearch,
+    products: productsBySearch.slice(0,getQtyProdsTypeOf(typeTenant)),
     filters: (
       <>
         <Flex alignItems="center">

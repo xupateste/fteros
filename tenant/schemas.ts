@@ -88,7 +88,7 @@ const color = yup
 const flags = yup.array(yup.string());
 const fields = yup.array<Field>(field.lazy);
 const layout = yup.string().oneOf(["portrait", "landscape"]);
-const typeTenant = yup.string().oneOf(["free", "test", "p050", "p250", "p450", "p650", "p850", "p1k0", "p1k2", "p1k4", "p1k6", "p2k8", "p3k0", "p3k2", "p3k4", "p3k6", "p3k8", "p4k0", "p4k2", "p4k4", "p4k6", "p4k8", "p5k0", "pall"]);
+const typeTenant = yup.string().oneOf(["free", "test", "p050", "p250", "p450", "p650", "p850", "p1k0", "p1k2", "p1k4", "p1k6", "p1k8", "p2k0", "p2k2", "p2k4", "p2k6", "p2k8", "p3k0", "p3k2", "p3k4", "p3k6", "p3k8", "p4k0", "call", "pall"]);
 const products = {
   schema: yup.array().of(productSchemas.client.fetch),
   lazy: yup.lazy((value: Product[]) =>

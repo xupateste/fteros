@@ -14,10 +14,15 @@ import NoResults from "~/ui/feedback/NoResults";
 import {useTranslation} from "~/i18n/hooks";
 import {useTenant} from "~/tenant/hooks";
 import ProductsUpsertButton from "~/product/components/ProductsUpsertButton";
+import {getIsItExceeds} from "~/app/screens/Home/SelectorsTypeTenant"
 
-const AdminScreen: React.FC = () => {
+interface Props {
+  setItExceeds: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
   const [selected, setSelected] = React.useState< Partial<Product> | undefined >(undefined);
-  const {flags, layout} = useTenant();
+  const {flags, layout, typeTenant} = useTenant();
   const {products, filters} = useFilteredProductsWithCode();
   const {update, remove, create, upsert} = useProductActions();
   const categories = useProductCategories();
@@ -50,6 +55,10 @@ const AdminScreen: React.FC = () => {
     setSelected(undefined);
   }
 
+  React.useEffect(() => {
+    setItExceeds(getIsItExceeds(typeTenant, products.length))
+  }, [getIsItExceeds(typeTenant, products.length)])
+
   return (
     <>
       <Flex direction="column" height="100%" marginTop={4}>
@@ -59,14 +68,14 @@ const AdminScreen: React.FC = () => {
               <Flex alignItems="center" justifyContent="space-between" paddingX={4} width="100%">
                 {filters}
                 <Stack isInline shouldWrapChildren marginLeft={4} spacing={2}>
-                  {(
-                    <ProductsUpsertButton
-                      display={{base: "none", sm: "flex"}}
-                      products={products}
-                      onSubmit={upsert}
-                    />
-                  )}
+                  <ProductsUpsertButton
+                    display={{base: "none", sm: "flex"}}
+                    products={products}
+                    onSubmit={upsert}
+                    isDisabled={getIsItExceeds(typeTenant, products.length)}
+                  />
                   <IconButton
+                    isDisabled={getIsItExceeds(typeTenant, products.length)}
                     isCollapsable
                     data-test-id="add-product"
                     leftIcon={PlusIcon}
