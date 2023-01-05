@@ -23,6 +23,7 @@ export interface Context {
     updateorder: (order) => Promise<void>;
   };
 }
+
 interface Props {
   initialValues: Product[];
   initialOrders: any[];
@@ -159,7 +160,7 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
     return api
       .remorder(tenant.id, id)
       .then(() => {
-        setOrders((initialOrders) => initialOrders.filter((order) => order.id !== id));
+        setOrders((orders) => orders.filter((order) => order.id !== id));
 
         toast({
           title: "Pedido eliminado",

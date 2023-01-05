@@ -85,7 +85,8 @@ const BannerTenant: React.FC<Props> = ({typeTenant, createdAt, slug, itExceeds})
       }
       return (
         <Box mb={{base:2, sm:0}}>
-          <Text d="inline-box">Tienes activado el Plan de Prueba por 40 días. <b>¡Puedes subir hasta 200 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>
+          {/*<Text d="inline-box">Tienes activado el Plan de Prueba por 40 días. <b>¡Puedes subir hasta 200 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>*/}
+          <Text d="inline-box"><b>¡Enhorabuena!</b> Te activamos el Plan de Prueba por 40 días. <b>¡Sube hasta 200 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>
           <Button onClick={() => {onUpgradePlan('getBetterPlan')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Mejorar Plan</Button>
         </Box>
       );

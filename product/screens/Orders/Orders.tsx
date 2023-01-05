@@ -56,7 +56,7 @@ const OrdersScreen: React.FC = () => {
     //   setStatus("init");
     //   toast({status: "error", title: "Error", description: "No se pudo borrar la orden"});
     // });
-    orderkey ?? (orderkey['deleted'] = true);
+    orderkey['deleted'] = true;
     updateorder(orderkey);
     alertDialog.onClose();
     // setOrderkey(null);

@@ -22,6 +22,7 @@ import CrossIcon from "~/ui/icons/Cross"
 
 import ProductsAdminScreen from "~/product/screens/Admin/Admin";
 import OrdersAdminScreen from "~/product/screens/Orders/Orders";
+import ContactAdminScreen from "~/contact/screens/Admin/Admin";
 import TenantAdminScreen from "~/tenant/screens/Admin";
 import BoxIcon from "~/ui/icons/Box";
 import SlidersIcon from "~/ui/icons/Sliders";
@@ -33,6 +34,7 @@ import {useSession} from "~/session/hooks";
 import Content from "~/ui/structure/Content";
 import {useTranslation} from "~/i18n/hooks";
 import HomeIcon from "~/ui/icons/Home";
+import Users from "~/ui/icons/Users";
 import BannerTenant from "./Home/BannerTenant";
 
 const AdminScreen: React.FC = () => {
@@ -144,6 +146,10 @@ const AdminScreen: React.FC = () => {
                   <CheckIcon marginRight={2} />
                   <Text fontWeight={600}>{t("admin.orders")}</Text>
                 </Tab>
+                <Tab fontSize="md">
+                  <Users marginRight={2} />
+                  <Text fontWeight={600}>{'Mi Lista'}</Text>
+                </Tab>
               </TabList>
             </Box>
           </Content>
@@ -173,6 +179,9 @@ const AdminScreen: React.FC = () => {
             </TabPanel>
             <TabPanel>
               <OrdersAdminScreen />
+            </TabPanel>
+            <TabPanel>
+              <ContactAdminScreen />
             </TabPanel>
           </TabPanels>
         </Box>
