@@ -108,11 +108,11 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             </Text>
           </Stack>
         )}
-        {/*type === "unavailable" && (
+        {type === "unavailable" && (
           <Text color="yellow.500" fontSize="md" fontWeight={900} lineHeight={1}>
-            Consultar Stock
+            *Agotado
           </Text>
-        )*/}
+        )}
         {/*type === "variant" && (
           <Text color="green.500" fontSize="sm" fontWeight={500} lineHeight={1}>
             {min === max ? p(min) : p(min)} ~ {p(max)}

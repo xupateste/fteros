@@ -45,8 +45,12 @@ const CartProvider = ({children}: Props) => {
             if(productsAll.find((_product) => _product.id === cartItemsData[key].product.id)) {
               cartItemsData[key].product.price = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).price
               cartItemsData[key].product.title = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).title
-              cartItemsData[key].product.type = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).type
-              add(cartItemsData[key].product, cartItemsData[key].variants, cartItemsData[key].count, cartItemsData[key].note)
+              let prodType = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).type
+              // if (prodType === "unavailable") {break};
+              cartItemsData[key].product.type = prodType;
+              if(prodType !== 'unavailable') {
+                add(cartItemsData[key].product, cartItemsData[key].variants, cartItemsData[key].count, cartItemsData[key].note)
+              }
             }            
           });
         }),

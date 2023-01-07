@@ -17,7 +17,7 @@ const ContactDrawer: React.FC<Props> = ({defaultValues, onClose, onSubmit}) => {
   return (
     <Drawer closeOnOverlayClick={false} id="contact" onClose={onClose}>
       <DrawerHeader onClose={onClose} />
-      <ContactForm defaultValues={defaultValues} onSubmit={onSubmit}>
+      <ContactForm defaultValues={defaultValues} onSubmit={onSubmit} isNew={isNew}>
         {({form, submit, isLoading}) => (
           <DrawerBody marginBottom={4}>
             <Stack shouldWrapChildren spacing={4}>

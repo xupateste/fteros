@@ -1,4 +1,6 @@
 import React from "react";
+import {useForm} from "react-hook-form";
+import FormControl from "~/ui/form/FormControl";
 import {
   Modal,
   ModalOverlay,
@@ -9,32 +11,48 @@ import {
   Button,
   Stack,
 } from "@chakra-ui/core";
-import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
-import {useForm} from "react-hook-form";
-import FormControl from "~/ui/form/FormControl";
 import { COUNTRIES } from "~/landing/components/countries";
+import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
+import {Contact} from "~/contact/types";
+// import apiContact from "~/contact/api/client"; //added
 
 interface Props {
   isShown: boolean;
   onClose: () => void;
   onSubmit: () => void;
   fromParent: string;
+  onHookcontact: (contact: Contact) => void;
+
 }
 
-
-const PhoneClientNumber:React.FC<Props> = ({isShown, onClose, onSubmit, fromParent}) => {
+const PhoneClientNumber: React.FC<Props> = ({
+  isShown, onHookcontact, onClose, onSubmit, fromParent
+}) => {
   // const [isShown, setShown] = React.useState(
   //   process.browser ? (!Boolean(window.localStorage?.getItem("phoneclient:Products"))) : false,
   // );
+  // let newContact = ({}) as Partial<Contact>;
+  // const [newContact,] = React.useState<Contact | undefined >(undefined)
+  // const {hookcontact} = useContactActions();
 
   function handleClose() {}
 
   const [defaultPhone, setPhone] = React.useState(window.localStorage.getItem("phoneclientnocode:Products"))
 
+  // async function handleOnHookContact(){
+  //   onHookcontact(newContact).then()
+  // }
+
   const onPhoneclientSubmit = data => {
     window.localStorage.setItem("phoneclient:Products", `+${storeCode}${data.phoneclient}`);
     window.localStorage.setItem("phoneclientnocode:Products", `${data.phoneclient}`);
     setPhone(data.phoneclient);
+    //set phoneclient to firebase
+    let newContact = {} as Contact;
+    newContact['phone'] = `+${storeCode}${data.phoneclient}`;
+    // setNewContact({phone: `+${storeCode}${data.phoneclient}`});
+    onHookcontact(newContact);
+    // handleOnHookContact();
     onSubmit();
   }
 

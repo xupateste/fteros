@@ -37,6 +37,17 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
     };
     return t.toLocaleDateString('es-PE', options);
   }
+
+  function isNewContact(secs) {
+    var t = new Date(null); // Epoch
+    t.setSeconds(secs);
+    var Now = new Date(Date.now());
+    if (t < Now){
+      return dateContact(secs);
+    } else {
+      return '-';
+    }
+  }
   
   return (
   	<Box
@@ -46,11 +57,11 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
       cursor="pointer"
       onClick={() => onEdit(contact)}
     >
-      <Box as="td" maxWidth="300px">
+      <Box as="td" maxWidth={{base: '150px', md: '300px'}}>
 	    	<Flex alignItems="center" marginRight={{base: 4, md: 12}} paddingY={2}>
 	        <Box flex={1} isTruncated>
-	          <Text fontWeight="500" marginLeft={2}>{contact.phone ? contact.phone : ""}</Text>
-	          <Text fontWeight="500" marginLeft={2}>{contact.name ? contact.name : "noName"}</Text>
+	          <Text fontWeight="900" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} isTruncated>{contact.phone ? contact.phone : ""}</Text>
+	          <Text fontWeight="500" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} isTruncated>{contact.name ? contact.name : "[Sin Nombre]"}</Text>
 	        </Box>
 	      </Flex>
       </Box>
@@ -61,12 +72,12 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
       </Box>
       <Box as="td" display="table-cell" width="200px">
         <Text marginRight={{base: 4, md: 12}} textAlign="left">
-          {dateContact(contact.createdAt)}
+          {isNewContact(contact.updatedAt)}
         </Text>
       </Box>
       <Box as="td" display="table-cell" width="200px">
         <Text marginRight={{base: 4, md: 12}} textAlign="left">
-          {'3 visitas'}
+          {contact.visits} visitas
         </Text>
       </Box>
       <Box as="td">

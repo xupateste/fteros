@@ -18,10 +18,10 @@ export function useContacts() {
 
 export function useContactActions() {
   const {
-    actions: {create, update, remove},
+    actions: {create, update, remove, hookcontact},
   } = React.useContext(ContactContext);
 
-  return {create, update, remove};
+  return {create, update, remove, hookcontact};
 }
 
 export function useFilteredContacts(selector?: (contact: Contact) => boolean) {

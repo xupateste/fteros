@@ -5,12 +5,14 @@ import {useRouter} from "next/router";
 import ProductsScreen from "~/product/screens/Products";
 import {ClientTenant} from "~/tenant/types";
 import {Product} from "~/product/types";
+import {Contact} from "~/contact/types";
 import StoreLayout from "~/app/layouts/StoreLayout";
 import {Provider as I18nProvider} from "~/i18n/context";
 import {Provider as CartProvider} from "~/cart/context";
 import {Provider as AnalyticsProvider} from "~/analytics/context";
 import {Provider as ProductProvider} from "~/product/context";
 import {Provider as TenantProvider} from "~/tenant/context";
+import {Provider as ContactProvider} from "~/contact/context";
 import tenantApi from "~/tenant/api/server";
 import productApi from "~/product/api/server";
 import tenantSchemas from "~/tenant/schemas";
@@ -21,9 +23,10 @@ interface Props {
   products: Product[];
   orders: any[];
   category: string | string[];
+  contacts: Contact[];
 }
 
-const SlugRoute: React.FC<Props> = ({tenant, products, orders}) => {
+const SlugRoute: React.FC<Props> = ({tenant, products, orders, contacts}) => {
   // Get router instance
   const router = useRouter();
 
@@ -46,11 +49,13 @@ const SlugRoute: React.FC<Props> = ({tenant, products, orders}) => {
         <ProductProvider initialValues={products} initialOrders={orders}>
           <AnalyticsProvider>
             <CartProvider>
-              <StoreLayout product={product} category={category} tenant={tenant}>
-                <I18nProvider country={tenant.country}>
-                  <ProductsScreen />
-                </I18nProvider>
-              </StoreLayout>
+              <ContactProvider initialContacts={contacts}>
+                <StoreLayout product={product} category={category} tenant={tenant}>
+                  <I18nProvider country={tenant.country}>
+                    <ProductsScreen />
+                  </I18nProvider>
+                </StoreLayout>
+              </ContactProvider>
             </CartProvider>
           </AnalyticsProvider>
         </ProductProvider>
@@ -78,10 +83,14 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     // Get its orders //ADDED
     const orders = [{}]
     //console.log(orders)
+    // Get its contacts //ADDED
+    
+    const contacts = [{}]
+    //console.log(contacts)
 
     // Return props
     return {
-      props: {tenant, products, orders},
+      props: {tenant, products, orders, contacts},
     };
   } catch (err) {
     return {

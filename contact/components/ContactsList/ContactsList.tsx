@@ -30,12 +30,12 @@ const ContactsList: React.FC<Props> = ({
               </Box>
               <Box as="th" display={{base: "none", md: "table-cell"}} width="200px">
                 <Text marginRight={{base: 4, md: 12}} textAlign="left">
-                  {'Primera vez visto'}
+                  {'Primera visita'}
                 </Text>
               </Box>
               <Box as="th" display="table-cell" width="200px">
                 <Text marginRight={{base: 4, md: 12}} textAlign="left">
-                  {'Última vez visto'}
+                  {'Última visita'}
                 </Text>
               </Box>
               <Box as="th" display="table-cell" width="200px">

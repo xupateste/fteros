@@ -47,4 +47,57 @@ export default {
       .doc(contact)
       .delete()
       .then(() => contact),
+
+  hookcontact: (tenant: ClientTenant["id"], contact: Contact) => {
+    //const casted = schemas.server.create.cast(product);
+    
+    // SIN AWAIT
+    const firestoreRef = database.collection('tenants').doc(tenant).collection("contacts");
+    const queryRef = firestoreRef.where('phone', '==', contact['phone']);
+    return queryRef.get().then((querySnapshot) => {
+      const matchedDocs = querySnapshot.size
+      if (matchedDocs) {
+        querySnapshot.docs.forEach(doc => {
+          contact['name'] = doc.data().name;
+          contact['description'] = doc.data().description;
+          contact['location'] = doc.data().location;
+          contact['createdAt'] = doc.data().createdAt;
+          contact['updatedAt'] = firestore.Timestamp.now().seconds;
+          contact['visits'] = doc.data().visits + 1;
+          return database
+            .collection("tenants")
+            .doc(tenant)
+            .collection("contacts")
+            .doc(doc.id)
+            .update(contact)
+            .then();
+        })
+      } else {
+        contact['createdAt'] = firestore.Timestamp.now().seconds;
+        contact['updatedAt'] = firestore.Timestamp.now().seconds;
+        contact['visits'] = 1;
+        return database
+          .collection("tenants")
+          .doc(tenant)
+          .collection("contacts")
+          .add(contact)
+          .then();
+      }
+    })
+    // return 'hookcontact success'
+
+
+
+
+    // DEFAULT
+    // contact['createdAt'] = firestore.Timestamp.now().seconds;
+    // contact['updatedAt'] = firestore.Timestamp.now().seconds;
+    
+    // return database
+    //   .collection("tenants")
+    //   .doc(tenant)
+    //   .collection("contacts")
+    //   .add(contact)
+    //   .then();
+  },
 }

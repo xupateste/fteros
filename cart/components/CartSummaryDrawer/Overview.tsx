@@ -2,6 +2,7 @@ import React from "react";
 import {Stack, Flex, Text, Box, Link} from "@chakra-ui/core";
 
 import {CartItem} from "../../types";
+import PhoneClientNumber from "~/product/screens/Products/PhoneClientNumber";
 
 //import CheckoutButton from "./CheckoutButton";
 
@@ -23,7 +24,7 @@ import Image from "~/ui/feedback/Image";
 import WhatsAppIcon from "~/ui/icons/WhatsApp";
 import FieldsForm from "../../forms/FieldsForm";
 import {useTenant} from "~/tenant/hooks";
-import PhoneClientNumber from "~/product/screens/Products/PhoneClientNumber";
+import {useContactActions} from "~/contact/hooks";
 
 
 interface Props {
@@ -53,6 +54,7 @@ const Overview: React.FC<Props> = ({
   const p = usePrice();
   const count = getCount(items);
   const total = getTotal(items);  
+  const {hookcontact} = useContactActions();
   //const {image, title, price, originalPrice, description, type} = product; //added
 
   //const cancelRef = React.useRef();
@@ -307,6 +309,7 @@ const Overview: React.FC<Props> = ({
           </DrawerFooter>
           <PhoneClientNumber
             isShown={isShown}
+            onHookcontact={hookcontact}
             onClose={handleClosePhoneclientModal}
             onSubmit={handleSubmitFromPhoneclientModal}
             fromParent="overview"

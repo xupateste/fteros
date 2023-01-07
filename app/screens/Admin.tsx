@@ -148,7 +148,7 @@ const AdminScreen: React.FC = () => {
                 </Tab>
                 <Tab fontSize="md">
                   <Users marginRight={2} />
-                  <Text fontWeight={600}>{'Mi Lista'}</Text>
+                  <Text fontWeight={600} whiteSpace="nowrap">{'Mi Lista'}</Text>
                 </Tab>
               </TabList>
             </Box>

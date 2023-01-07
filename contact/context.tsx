@@ -6,8 +6,9 @@ import schemas from "./schemas";
 
 import {useToast} from "~/hooks/toast";
 import {useTenant} from "~/tenant/hooks";
-import {sortBy} from "~/selectors/sort";
+import {sortBy, sortByDesc} from "~/selectors/sort";
 
+import apiContact from "~/contact/api/client"; //added
 
 export interface Context {
   state: {
@@ -17,6 +18,7 @@ export interface Context {
     create: (contact: Contact) => Promise<void>;
     update: (contact: Contact) => Promise<void>;
     remove: (id: Contact["id"]) => Promise<void>;
+    hookcontact: (contact: Contact) => void;
   };
 }
 
@@ -34,8 +36,22 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
     sortBy(initialContacts, (item) => item?.name),
   );
 
+  React.useEffect(() => {
+    setContacts(sortByDesc(initialContacts, (item) => item?.updatedAt +''));
+  }, [initialContacts]);
+
+
   async function create(contact: Contact) {
     const casted = schemas.client.create.cast(contact);
+
+    // before create find if it exists
+    if (contacts.findIndex(c => c.phone === casted['phone']) > -1) {
+      return toast({
+          title: "Contacto ya existe",
+          description: "Tu contacto ya existe en tu lista",
+          status: "warning",
+        });
+    }
 
     return api
       .create(tenant.id, casted)
@@ -55,7 +71,7 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
           status: "error",
         });
       });
-  }
+  };
 
   function update(contact: Contact) {
     const casted = schemas.client.update.cast(contact);
@@ -83,7 +99,7 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
           status: "error",
         });
       });
-  }
+  };
 
   function remove(id: Contact["id"]) {
     return api
@@ -107,11 +123,39 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
       });
   };
 
+  async function hookcontact(contact: Contact) {
+    const casted = schemas.client.create.cast(contact);
+
+    apiContact
+      .hookcontact(tenant.id, casted)
+      .then()
+      .catch(err => {console.log(err)})
+      // .then((contact) => {
+      //   setContacts(contacts.concat(contact));
+
+      //   toast({
+      //     title: "Contacto creado",
+      //     description: "Tu contacto fue creado correctamente",
+      //     status: "success",
+      //   });
+      // })
+      // .catch(() => {
+      //   toast({
+      //     title: "Error",
+      //     description: "Hubo un error creando el contacto, refresca la página e intenta nuevamente",
+      //     status: "error",
+      //   });
+      // });
+
+    return 'success'
+  };
+
   const state: Context["state"] = {contacts};
   const actions: Context["actions"] = {
     create,
     update,
     remove,
+    hookcontact,
   };
 
   return <ContactContext.Provider value={{state, actions}}>{children}</ContactContext.Provider>;

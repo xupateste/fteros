@@ -15,10 +15,11 @@ interface Props {
     isLoading: boolean;
     submit: (e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
   }) => JSX.Element;
+  isNew: boolean;
 }
 
 
-const ContactForm: React.FC<Props> = ({defaultValues, children, onSubmit}) => {
+const ContactForm: React.FC<Props> = ({defaultValues, children, onSubmit, isNew}) => {
   const form = useForm<Partial<Contact>>({defaultValues});
   const {handleSubmit: submit, errors, register, formState} = form;
   // const values = watch();
@@ -37,13 +38,17 @@ const ContactForm: React.FC<Props> = ({defaultValues, children, onSubmit}) => {
         <form onSubmit={submit(handleSubmit)}>
           <Stack spacing={4}>
           	<FormControl
-              // isDisabled
+              isRequired
+              error={errors.phone && "Ingrese un número de Whatsapp válido. Ej: +51999111111"}
               label="WhatsApp"
               name="phone"
+              help="Simbolo(+) + Código de país + teléfono. Ej: +51999111111"
             >
               <Input
-                ref={register({required: true})}
+                ref={register({required: true, minLength: 10, maxLength: 15,  pattern: /^[+][0-9]+$/})}
+                isDisabled={isNew ? false : true}
                 name="phone"
+                placeholder="Ej. +51999111111"
               />
             </FormControl>
             <FormControl
@@ -57,7 +62,7 @@ const ContactForm: React.FC<Props> = ({defaultValues, children, onSubmit}) => {
                 ref={register({maxLength: 70})}
                 autoFocus
                 name="name"
-                placeholder="..."
+                placeholder="Nombre del cliente"
               />
             </FormControl>
             <FormControl
@@ -70,20 +75,20 @@ const ContactForm: React.FC<Props> = ({defaultValues, children, onSubmit}) => {
                 ref={register({maxLength: 1400})}
                 maxLength={1400}
                 name="location"
-                placeholder="Av. San Luis 7330 - Ate, Lima"
+                placeholder="Ej. El Porvenir - Trujillo"
               />
             </FormControl>
             <FormControl
               error={errors.description && "La descripción no puede ser mayor a 1400 caracteres"}
               help="Máximo 1400 caracteres"
-              label="Descripción"
+              label="Observaciones"
               name="description"
             >
               <Textarea
                 ref={register({maxLength: 1400})}
                 maxLength={1400}
                 name="description"
-                placeholder="64GB mem. Silver."
+                placeholder="Ej. Cliente paga contraentrega"
               />
             </FormControl>
           </Stack>

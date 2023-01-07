@@ -26,6 +26,8 @@ import CartItemDrawer from "~/cart/components/CartItemDrawer";
 import {Product, Variant} from "~/product/types";
 import Link from "~/ui/controls/Link";
 import WhatsAppIcon from "~/ui/icons/WhatsApp";
+import {useContactActions} from "~/contact/hooks";
+import {Contact} from "~/contact/types";
 
 
 const ProductsScreen: React.FC = () => {
@@ -34,6 +36,7 @@ const ProductsScreen: React.FC = () => {
     push,
   } = useRouter();
   const {add, increase, decrease, items, checkout, removeAll} = useCart();
+  const {hookcontact} = useContactActions();
   const t = useTranslation();
   const {isOpen: isCartOpen, onOpen: openCart, onClose: closeCart} = useDisclosure();
   const {products, filters} = useFilteredProducts((product) => product.type !== "hidden");
@@ -43,6 +46,16 @@ const ProductsScreen: React.FC = () => {
     products,
     product,
   ]);
+  React.useEffect(()=>{
+    let defaultPhone = window.localStorage?.getItem("phoneclient:Products")
+    if(defaultPhone) {
+      // const [isContact, setIsNewContact] = React.useState<Contact>(undefined)
+      let isContact = {} as Contact;
+      isContact['phone'] = defaultPhone;
+      hookcontact(isContact)
+    }
+  }, []) // <-- empty dependency array
+
 
   const featuredProducts = filterBy(products, {featured: true});
   const productsByCategory = groupBy(products, (product) => product.category);
@@ -75,7 +88,7 @@ const ProductsScreen: React.FC = () => {
   }
 
   const handleSubmitFromPhoneclientModal = () => {
-    add(tmpProduct, tmpOptions, tmpCount, tmpNote);
+    add(tmpProduct, tmpOptions, tmpCount, tmpNote); // add product to cart from phone modal
     setShown(false)
     push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
   }
@@ -264,6 +277,7 @@ const ProductsScreen: React.FC = () => {
       )}
       <PhoneClientNumber
         isShown={isShown}
+        onHookcontact={hookcontact}
         onClose={handleClosePhoneclientModal}
         onSubmit={handleSubmitFromPhoneclientModal}
         fromParent="products"

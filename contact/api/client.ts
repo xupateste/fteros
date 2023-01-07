@@ -25,6 +25,15 @@ export default {
   remove: (tenant: ClientTenant["slug"], contact: Contact["id"]) =>
     fetch("DELETE", `/api/tenant/${tenant}/contact?contact=${contact}`, null, {
       Authorization: window.localStorage.getItem("token"),
-    }),
+    }),   
+  hookcontact: (tenant: ClientTenant["slug"], contact: Contact) =>
+    fetch(
+      "POST",
+      `/api/tenant/${tenant}/contactweb`,
+      {contact},
+      {
+        Authorization: window.localStorage.getItem("token"),
+      },
+    ),
 
 }
