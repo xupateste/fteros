@@ -57,8 +57,8 @@ const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
             width={12}
           />
           <Box flex={1} isTruncated>
-            <Text fontWeight="500" marginLeft={2}>{product.code? product.code : ""}</Text>
-            <Text fontWeight="500" marginLeft={2}>{product.title}</Text>
+            <Text fontWeight="500" marginLeft={2} color={product.code ? "black" : "gray.300"}>{product.code ? product.code : "[Sin SKU]"}</Text>
+            <Text fontWeight="900" marginLeft={2}>{product.title}</Text>
           </Box>
         </Flex>
       </Box>

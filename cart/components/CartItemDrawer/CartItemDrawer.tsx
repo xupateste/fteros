@@ -203,13 +203,15 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                             </Box>
                           </Flex>
                         )}
-                        <Text
-                          color="gray.500"
-                          fontSize="md"
-                          whiteSpace="pre-line"
-                        >
-                          {`SKU: ${product.code}`}
-                        </Text>
+                        {product.code && (
+                          <Text
+                            color="gray.500"
+                            fontSize="md"
+                            whiteSpace="pre-line"
+                          >
+                            {`SKU: ${product.code}`}
+                          </Text>
+                        )}
                       </Stack>
                     )}
                     {product.type === "ask" && (

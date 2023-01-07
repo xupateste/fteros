@@ -73,14 +73,14 @@ const Initio: React.FC = () => {
         data.email &&
         data.password) {
       FetchTenantCreation.getTenant(data.businessName,
-                                    data.storeName,
+                                    (data.storeName).toLowerCase(),
                                     (storeCode+''+data.storePhone),
                                     (personalCode+''+data.personalPhone),
                                     data.country,
                                     data.email,
                                     data.password,
                                     acceptCheck).then((response) => {
-        if(response.ok) {
+        if(response?.ok) {
           api.signOut().then(() => {
             api
             .signIn(data.email, data.password)
@@ -140,13 +140,13 @@ const Initio: React.FC = () => {
   }));
   const [storeCode, setstoreCode] = React.useState("51");
   const [personalCode, setpersonalCode] = React.useState("51");
-  
+
   return (
     <>
       <LandingLayout>
         <LandingNavBar handleLoginVisibility={handleLoginVisibility} handleRegisterVisibility={handleRegisterVisibility}/>
         <Content>
-          <Hero handleRegisterVisibility={handleRegisterVisibility}/>
+          {(!modalRegisterVisible) ? <Hero handleRegisterVisibility={handleRegisterVisibility}/> : null}
           <Features/>
           <Brands/>
           <Box textAlign="center" maxWidth="6xl" m="auto" mt={8} mb={8} py={16} px={6} bg={'cyan.100'} >
@@ -215,7 +215,10 @@ const Initio: React.FC = () => {
                       name="storeName"
                       placeholder='minegocio'
                       textTransform="lowercase"
-                      ref={register({required: true, minLength: 4, maxLength: 70, pattern: /^[a-z0-9]*$/})}
+                      onChange={(e) => {e.target.value = e.target.value.replace(/[^a-z0-9]/gi, '')}}
+                      // onChange={handleStoreSlugChange}
+                      // value={storeSlug}
+                      ref={register({required: true, minLength: 4, maxLength: 70, pattern: /^[A-Za-z0-9]*$/})}
                     />
                   </InputGroup>
                 </FormControl>

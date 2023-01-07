@@ -65,14 +65,13 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
               />
             </FormControl>
             <FormControl
-              isRequired
-              error={errors.code && "Este campo es requerido"}
+              error={errors.code && "Este campo es requerido. Máximo 20 caracteres"}
               help="Código interno de tu producto"
               label="SKU"
               name="code"
             >
               <Input
-                ref={register({required: true})}
+                ref={register({maxLength: 20})}
                 autoFocus
                 name="code"
                 placeholder="90001"

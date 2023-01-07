@@ -61,7 +61,7 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
 	    	<Flex alignItems="center" marginRight={{base: 4, md: 12}} paddingY={2}>
 	        <Box flex={1} isTruncated>
 	          <Text fontWeight="900" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} isTruncated>{contact.phone ? contact.phone : ""}</Text>
-	          <Text fontWeight="500" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} isTruncated>{contact.name ? contact.name : "[Sin Nombre]"}</Text>
+	          <Text fontWeight="500" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} color={contact.name ? "black" : "gray.300"} isTruncated>{contact.name ? contact.name : "[Sin Nombre]"}</Text>
 	        </Box>
 	      </Flex>
       </Box>
