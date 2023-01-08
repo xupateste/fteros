@@ -140,7 +140,7 @@
         "highlightHelp" : "Shown below the description",
         "highlightPlaceholder" : "Only orders made from Monday to Friday between 9 a.m. and 6 p.m. will be dispatched",
         "whatsappError" : "This field is invalid",
-        "whatsappHelp" : "Country code + area code + telephone. Ex: 5491173694572",
+        "whatsappHelp" : "Country code + area code + telephone. Ex: 51999111111",
         "category" : "Category to which you belong",
         "categoryError" : "This field is required",
         "categoryHelp" : "Help your customers find your products faster",

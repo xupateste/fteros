@@ -1,12 +1,12 @@
 import {ClientTenant} from "./types";
 
 export const DEFAULT_CLIENT_TENANT: Partial<ClientTenant> = {
-  description: "Arma tu catálogo y recibe los pedidos via WhatsApp",
-  keywords: "ferreteros.app, catálogo, online, whatsapp, delivery, pedidos, shop",
+  description: "Arma tu catálogo ferretero y recibe pedidos via WhatsApp",
+  keywords: "ferreteros, app, catalogo, online, whatsapp, delivery, pedidos, shop, tienda",
   country: "PE",
-  title: "Tu catálogo online fácil",
-  phone: "51929571659",
-  phonePersonal: "51929571659",
+  title: "Tu catálogo ferretero fácil",
+  phone: "",
+  phonePersonal: "",
   color: "teal",
   createdAt: 1670897400000,
   updatedAt: 1670897400000,
@@ -16,6 +16,6 @@ export const DEFAULT_CLIENT_TENANT: Partial<ClientTenant> = {
   fields: [],
   mercadopago: false,
   location: null,
-  place: "place",
-  placeUrl: "placeUrl",
+  place: "",
+  placeUrl: "",
 };

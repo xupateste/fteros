@@ -140,7 +140,7 @@
         "highlightHelp" : "Se muestra debajo de la descripción.",
         "highlightPlaceholder" : "Solo pedidos realizados de lunes a viernes entre las 9 y las 18 horas serán enviados",
         "whatsappError" : "Este campo es inválido",
-        "whatsappHelp" : "Código de país + código de área + teléfono. Ej: 5491173694572",
+        "whatsappHelp" : "Código de país + código de área + teléfono. Ej: 51999111111",
         "category" : "Categoría a la que pertenece",
         "categoryError" : "Este campo es requerido",
         "categoryHelp" : "Ayude a sus clientes a encontrar sus productos más rápido",
