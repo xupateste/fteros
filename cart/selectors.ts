@@ -167,11 +167,13 @@ export function getMessage(
   // console.log(preference);
   return (
     "\`\`\`\n" +
-    `${tenantSlug.toUpperCase()}`.substring(0, 27) +
+    `${tenantSlug.toUpperCase()}`.substring(0, 27).concat('…') +
     "\n" +
-    `WhatsApp +${tenantPhone}`+
+    `Tienda#: +${tenantPhone}`+
     "\n\n" +
     `Pedido#: ${orderId}` +
+    "\n" +
+    `Cliente#: ${process.browser ? window.localStorage?.getItem("phoneclient:Products") : ''}` +
     "\n" +
     ((_getFields(fields)).length > 0 ? _getFields(fields) + "\n" : "") +
     (preference ? `b\n\n${_getPreferenceFooter(preference)}` : "") +
