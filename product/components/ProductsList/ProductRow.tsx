@@ -64,7 +64,7 @@ const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
       </Box>
       <Box as="td" display={{base: "none", md: "table-cell"}} width="220px">
         <Text fontWeight="500" marginRight={{base: 4, md: 10}} textAlign="left">
-          {product.type === "ask" && `A consultar (${p(product.price)})`}
+          {product.type === "ask" && `Precio a consultar`}
           {/*product.type === "variant" && (min === max ? p(min) : `${p(min)} ~ ${p(max)}`)*/}
           {product.type === "available" && p(product.price)}
           {product.type === "unavailable" && "Sin stock"}
