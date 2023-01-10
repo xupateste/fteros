@@ -126,7 +126,7 @@ function _getFields(fields: Field[]) {
 
   return fields
     .filter(({title, value}) => title && value)
-    .map(({title, value}) => `${title}: ${value}`.substring(0, 27).concat('…'))
+    .map(({title, value}) => `${title}: ${value}`.substring(0, 25).concat('…'))
     .join("\n");
 }
 
@@ -145,8 +145,8 @@ function _getItems(items: CartItem[]): string {
       (item) =>
         `·${[
           `[x${item.count}] ~Cod.${item.product.code}`,
-          ` ${(item.product.title).length > 27 ? (item.product.title).toUpperCase().substring(0, 27).concat('…') : (item.product.title).toUpperCase()}`,
-          item.product.type === 'ask' ? ` S/ *Precio a consultar` : ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
+          ` ${(item.product.title).length > 25 ? (item.product.title).toUpperCase().substring(0, 23).concat('…') : (item.product.title).toUpperCase()}`,
+          item.product.type === 'ask' ? ` S/ *Precio a consultar` : ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 26).concat('…'),
           // ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
         ]
           .filter(Boolean)
@@ -167,26 +167,26 @@ export function getMessage(
   // console.log(preference);
   return (
     "\`\`\`\n" +
-    `${tenantSlug.toUpperCase()}`.substring(0, 27).concat('…') +
+    `${tenantSlug.toUpperCase()}`.substring(0, 25).concat('…') +
     "\n" +
-    `Tienda#: +${tenantPhone}`+
+    `Tienda#: +${tenantPhone}`.substring(0, 25).concat('…')+
     "\n\n" +
     `Pedido#: ${orderId}` +
     "\n" +
     `Cliente#: ${process.browser ? window.localStorage?.getItem("phoneclient:Products") : ''}` +
     "\n" +
-    ((_getFields(fields)).length > 0 ? _getFields(fields) + "\n" : "") +
+    ((_getFields(fields)).length > 0 ? _getFields(fields).substring(0, 25).concat('…') + "\n" : "") +
     (preference ? `b\n\n${_getPreferenceFooter(preference)}` : "") +
-    "-----------------------------" +
+    "---------------------------" +
     "\n" +
     ((_getItems(items)).length > 0 ? _getItems(items) + "\n" : "") +
-    "-----------------------------" +
+    "---------------------------" +
     "\n" +
     ` Subtotal` +
     "\n" +
-    ` ${getCount(items)} Item(s) a ${formatPrice(getTotal(items))}`.substring(0, 28) +
+    ` ${getCount(items)} Item(s) a ${formatPrice(getTotal(items))}`.substring(0, 25).concat('…') +
     "\n" +
-    "-----------------------------" +
+    "---------------------------" +
     "\`\`\`" +
     "\n\n" +
     "*Monto Total a Pagar*" + 
@@ -194,8 +194,8 @@ export function getMessage(
     "*= "+ formatPrice(getTotal(items)) + "*" +
     "\n" +
     "\`\`\`\n" +
-    "* Los productos están sujetos\n" +
-    "  a disponibilidad de stock\n" +
+    "* Productos están sujetos a\n" +
+    "  disponibilidad de stock\n" +
     "\`\`\`"
   );
 }
