@@ -44,23 +44,24 @@ export function getIsItExceeds(typeTenant, numProds): boolean {
 export function getQtyProdsTypeOf(typeTenant): number {
   switch (typeTenant) {
     // todo: for COMERCIAL/PREMIUM/EMPRENDEDOR
-    case "test": {return 200;}
-    case "p050": {return 50;}
-    case "p250": {return 250;}
-    case "p450": {return 450;}
-    case "p650": {return 650;}
-    case "p850": {return 850;}
-    case "p1k0": {return 1050;}
-    case "p1k2": {return 1250;}
-    case "p1k4": {return 1450;}
-    case "p1k6": {return 1650;}
-    case "p1k8": {return 1850;}
-    case "p2k0": {return 2050;}
-    case "p2k2": {return 2250;}
-    case "p2k4": {return 2450;}
-    case "p2k6": {return 2650;}
-    case "p2k8": {return 2850;}
-    case "p3k0": {return 3050;}
+    case "test": {return 100;} // free x 40 días
+    case "p050": {return 50;} // S/ 3.00 x mes
+    case "p100": {return 100;} // S/ 5.00 x mes
+    case "p250": {return 250;} // S/ 10.00 x mes
+    case "p450": {return 450;} // S/ 15.00 x mes // desde aqui +S/5.00 x 200p
+    case "p650": {return 650;} // S/ 20.00 x mes
+    case "p850": {return 850;} // S/ 25.00 x mes
+    case "p1k0": {return 1050;} // S/ 30.00 x mes
+    case "p1k2": {return 1250;} // S/ 35.00 x mes
+    case "p1k4": {return 1450;} // S/ 40.00 x mes
+    case "p1k6": {return 1650;} // S/ 45.00 x mes
+    case "p1k8": {return 1850;} // S/ 50.00 x mes
+    case "p2k0": {return 2050;} // S/ 55.00 x mes
+    case "p2k2": {return 2250;} // S/ 60.00 x mes
+    case "p2k4": {return 2450;} // S/ 65.00 x mes
+    case "p2k6": {return 2650;} // S/ 70.00 x mes
+    case "p2k8": {return 2850;} // S/ 75.00 x mes
+    case "p3k0": {return 3050;} // S/ 80.00 x mes
     default: {
       return 10;
     }

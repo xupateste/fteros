@@ -33,7 +33,7 @@ export interface ServerTenant {
   createdAt: number;
   updatedAt: number; 
   layout?: "landscape" | "portrait";
-  typeTenant?: "free" | "test" | "p050" | "p250" | "p450" | "p650" | "p850" | "p1k0" | "p1k2" | "p1k4" | "p1k6" | "p1k8" | "p2k0" | "p2k2" | "p2k4" | "p2k6" | "p2k8" | "p3k0" | "p3k2" | "p3k4" | "p3k6" | "p3k8" | "p4k0" | "call" | "pall";
+  typeTenant?: "free" | "test" | "p050" | "p100" | "p250" | "p450" | "p650" | "p850" | "p1k0" | "p1k2" | "p1k4" | "p1k6" | "p1k8" | "p2k0" | "p2k2" | "p2k4" | "p2k6" | "p2k8" | "p3k0" | "p3k2" | "p3k4" | "p3k6" | "p3k8" | "p4k0" | "call" | "pall";
   mercadopago?: {
     token: string;
     refresh: string;
