@@ -72,6 +72,9 @@ const Pricing: React.FC = () => {
                   Visitas y pedidos ilimitados
                 </ListItem>
                 <ListItem>
+                  Identificación de Visitas
+                </ListItem>
+                <ListItem>
                   Soporte whatsapp
                 </ListItem>
                 <ListItem color="green.500">
@@ -132,6 +135,9 @@ const Pricing: React.FC = () => {
                   </ListItem>
                   <ListItem>
                     Etiquetas en productos
+                  </ListItem>
+                  <ListItem>
+                    Verificación OTP WhatsApp
                   </ListItem>
                   <ListItem>
                     Soporte preferencial  
