@@ -126,7 +126,7 @@ function _getFields(fields: Field[]) {
 
   return fields
     .filter(({title, value}) => title && value)
-    .map(({title, value}) => `${title}: ${value}`.substring(0, 25).concat('…'))
+    .map(({title, value}) => (`${title}: ${value}`).length > 25 ? `${title}: ${value}`.substring(0, 25).concat('…') : `${title}: ${value}`)
     .join("\n");
 }
 
@@ -146,7 +146,7 @@ function _getItems(items: CartItem[]): string {
         `·${[
           `[x${item.count}] ~Cod.${item.product.code}`,
           ` ${(item.product.title).length > 25 ? (item.product.title).toUpperCase().substring(0, 23).concat('…') : (item.product.title).toUpperCase()}`,
-          item.product.type === 'ask' ? ` S/ *Precio a consultar` : ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 26).concat('…'),
+          item.product.type === 'ask' ? ` S/ *Precio a consultar` : ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 25),
           // ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
         ]
           .filter(Boolean)
@@ -167,15 +167,15 @@ export function getMessage(
   // console.log(preference);
   return (
     "\`\`\`\n" +
-    `${tenantSlug.toUpperCase()}`.substring(0, 25).concat('…') +
+    `${(tenantSlug).length > 25 ? tenantSlug.toUpperCase().substring(0, 25).concat('…') : tenantSlug.toUpperCase()}` +
     "\n" +
-    `Tienda#: +${tenantPhone}`.substring(0, 25).concat('…')+
+    `Tienda#: +${tenantPhone}`+
     "\n\n" +
     `Pedido#: ${orderId}` +
     "\n" +
     `Cliente#: ${process.browser ? window.localStorage?.getItem("phoneclient:Products") : ''}` +
     "\n" +
-    ((_getFields(fields)).length > 0 ? _getFields(fields).substring(0, 25).concat('…') + "\n" : "") +
+    ((_getFields(fields)).length > 0 ? _getFields(fields) + "\n" : "") +
     (preference ? `b\n\n${_getPreferenceFooter(preference)}` : "") +
     "---------------------------" +
     "\n" +
