@@ -15,13 +15,28 @@ interface Props extends Omit<ButtonProps, "onChange" | "leftIcon" | "rightIcon" 
   isCollapsable?: boolean;
 }
 
-// CSV Schema
+// CSV Schema DEFAULT
 const schema = yup.object<Partial<Product>>({
   category: yup.string().trim().required("La categoría es requerida"),
   description: yup.string().default("").nullable(),
   price: yup.number().typeError("El precio debe ser un número").required("El precio es requerido"),
   title: yup.string().required("El título es requerido"),
 });
+
+// // CSV Schema TO-FULL-IMPORT
+// const schema = yup.object<Partial<Product>>({
+//   image: yup.string().default("").nullable(),
+//   featured: yup.boolean().default(false),
+//   description: yup.string().default("").nullable(),
+//   category: yup.string().trim().required("La categoría es requerida"),
+//   originalPrice: yup.number().typeError("El precio debe ser un número").required("El precio es requerido"),
+//   price: yup.number().typeError("El precio debe ser un número").required("El precio es requerido"),
+//   title: yup.string().required("El título es requerido"),
+//   type: yup.string().required("El título es requerido"),
+//   updatedAt: yup.number().default(1594090800000),
+//   createdAt: yup.number().default(1594090800000),
+//   code: yup.string().required("El título es requerido"),
+// });
 
 const ProductsCSVInput: React.FC<Props> = ({onChange, children}) => {
   // Track loading state
@@ -66,6 +81,7 @@ const ProductsCSVInput: React.FC<Props> = ({onChange, children}) => {
     } catch (error) {
       // Reset loading
       setLoading(false);
+      console.log(error)
 
       // Show toast to user
       toast({

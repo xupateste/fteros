@@ -233,14 +233,14 @@
           "name": "Entrepreneur",
           "features": {
             "update": "At 00:00 (UTC) every day.",
-            "products": "100."
+            "products": "200."
           }
         },
         "preferential": {
           "name": "Preferential",
           "features": {
             "update": "Every hour.",
-            "products": "100."
+            "products": "200."
           }
         },
         "commercial": {
