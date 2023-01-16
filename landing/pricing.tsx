@@ -39,14 +39,14 @@ const Pricing: React.FC = () => {
 	    </Box>
 
       <Box pt={2} px={4}>
-        <SimpleGrid columns={{ base: 1, md: 1, lg: 3 }}
+        <SimpleGrid columns={{ base: 1, md: 2, lg: 4 }}
           textAlign="center"
           spacing={{ base: 4, lg: 4 }}
           py={4}>
           <PriceWrapper>
             <Box py={4} px={12}>
               <Text fontWeight="700" fontSize="2xl">
-                PLAN GRATUITO
+                GRATUITO
               </Text>
               <Stack justifyContent="center">
                 <Box fontSize="md" fontWeight="600">
@@ -61,7 +61,7 @@ const Pricing: React.FC = () => {
               bg='cyan.100'
               py={4}
               borderColor={'cyan.400'}>
-              <List spacing={3} textAlign="start" px={12}>
+              <List spacing={3} textAlign="start" px={6}>
                 <ListItem>
                   Catálogo con su Marca
                 </ListItem>
@@ -89,6 +89,69 @@ const Pricing: React.FC = () => {
               <Box
                 position="absolute"
                 top="-16px"
+                left="40%"
+                style={{ transform: 'translate(-30%)' }}>
+                <Text
+                  textTransform="uppercase"
+                  bg='yellow.200'
+                  px={3}
+                  py={1}
+                  color='blue.900'
+                  fontSize="sm"
+                  fontWeight="600"
+                  rounded="xl">
+                  NUEVOS PLANES
+                </Text>
+              </Box>
+              <Box py={4} px={8}>
+                <Text fontWeight="700" fontSize="2xl">
+                  EMPRENDEDORES
+                </Text>
+                <Stack justifyContent="center">
+                  <Box fontSize="md" fontWeight="600">
+                    DESDE
+                  </Box>
+                  <Text fontSize="5xl" mt={0} fontWeight="900">
+                    S/ 3*
+                  </Text>
+                </Stack>
+              </Box>
+              <Stack
+                bg='cyan.100'
+                py={4}
+                borderColor={'cyan.400'}>
+                <List spacing={3} textAlign="start" px={6}>
+                  <ListItem>
+                    Catálogo con su Marca
+                  </ListItem>
+                  <ListItem>
+                    Desde 50+ productos 
+                  </ListItem>
+                  <ListItem>
+                    S/ 5 x 200 productos adicionales
+                  </ListItem>
+                  <ListItem>
+                    Visitas y pedidos ilimitados
+                  </ListItem>
+                  <ListItem>
+                    Identificación de visitas
+                  </ListItem>
+                  <ListItem>
+                    Soporte WhatsApp  
+                  </ListItem>
+                  <ListItem color="green.500">
+                    *Precio promocional por mes realizando un pago anual. Tarifa mensual sin descuento S/ 4.
+                  </ListItem>
+                </List>
+              </Stack>
+            </Box>
+          </PriceWrapper>
+          
+          <PriceWrapper>
+            <Box position="relative">
+              <Box
+                position="absolute"
+                top="-16px"
                 left="50%"
                 style={{ transform: 'translate(-50%)' }}>
                 <Text
@@ -105,7 +168,7 @@ const Pricing: React.FC = () => {
               </Box>
               <Box py={4} px={12}>
                 <Text fontWeight="700" fontSize="2xl">
-                  PLAN COMERCIAL
+                  COMERCIAL
                 </Text>
                 <Stack justifyContent="center">
                   <Box fontSize="md" fontWeight="600">
@@ -120,7 +183,7 @@ const Pricing: React.FC = () => {
                 bg='cyan.100'
                 py={4}
                 borderColor={'cyan.400'}>
-                <List spacing={3} textAlign="start" px={12}>
+                <List spacing={3} textAlign="start" px={6}>
                   <ListItem>
                     Catálogo con su Marca
                   </ListItem>
@@ -131,13 +194,13 @@ const Pricing: React.FC = () => {
                     Visitas y pedidos ilimitados
                   </ListItem>
                   <ListItem>
-                    Catálogo descargable en PDF
+                    Descargable en PDF
                   </ListItem>
                   <ListItem>
                     Etiquetas en productos
                   </ListItem>
                   <ListItem>
-                    Verificación OTP WhatsApp
+                    Verificación OTP
                   </ListItem>
                   <ListItem>
                     Soporte preferencial  
@@ -149,10 +212,11 @@ const Pricing: React.FC = () => {
               </Stack>
             </Box>
           </PriceWrapper>
+
           <PriceWrapper>
             <Box py={4} px={12}>
               <Text fontWeight="700" fontSize="2xl">
-                PLAN PREMIUM
+                PREMIUM
               </Text>
               <Stack justifyContent="left">
                 <Box fontSize="md" fontWeight="600">
@@ -167,7 +231,7 @@ const Pricing: React.FC = () => {
               bg='cyan.100'
               py={4}
               borderColor={'cyan.400'}>
-              <List spacing={3} textAlign="start" px={12}>
+              <List spacing={3} textAlign="start" px={6}>
                 <ListItem fontWeight={700}>
                   PLAN COMERCIAL (incluido)
                 </ListItem>
