@@ -65,9 +65,9 @@ const Pricing: React.FC = () => {
                 <ListItem>
                   Catálogo con su Marca
                 </ListItem>
-                <ListItem>
+                {/*<ListItem>
                   Hasta 20 productos
-                </ListItem>
+                </ListItem>*/}
                 <ListItem>
                   Visitas y pedidos ilimitados
                 </ListItem>
@@ -124,12 +124,12 @@ const Pricing: React.FC = () => {
                   <ListItem>
                     Catálogo con su Marca
                   </ListItem>
-                  <ListItem>
+                  {/*<ListItem>
                     Hasta 50 productos 
                   </ListItem>
                   <ListItem>
                     S/ 5 x 200 productos adicionales
-                  </ListItem>
+                  </ListItem>*/}
                   <ListItem>
                     Visitas y pedidos ilimitados
                   </ListItem>
@@ -187,9 +187,9 @@ const Pricing: React.FC = () => {
                   <ListItem>
                     Catálogo con su Marca
                   </ListItem>
-                  <ListItem>
+                  {/*<ListItem>
                     Hasta 400 productos
-                  </ListItem>
+                  </ListItem>*/}
                   <ListItem>
                     Visitas y pedidos ilimitados
                   </ListItem>
