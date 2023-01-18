@@ -63,7 +63,7 @@ export function getQtyProdsTypeOf(typeTenant): number {
     case "p2k8": {return 2850;} // S/ 75.00 x mes
     case "p3k0": {return 3050;} // S/ 80.00 x mes
     default: {
-      return 10;
+      return 20;
     }
   }
 }

@@ -181,7 +181,7 @@ const Initio: React.FC = () => {
         <ModalOverlay bg='cyan.500'/>
         <ModalContent py={5}>
           <ModalHeader fontSize={'2xl'}>Crea tu cuenta gratis</ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton is={isLoading}/>
           <ModalBody>
             <form onSubmit={handleSubmit(onRegisterSubmit)}>
               <Stack spacing={4}>

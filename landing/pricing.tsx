@@ -66,7 +66,7 @@ const Pricing: React.FC = () => {
                   Catálogo con su Marca
                 </ListItem>
                 <ListItem>
-                  Hasta 10 productos
+                  Hasta 20 productos
                 </ListItem>
                 <ListItem>
                   Visitas y pedidos ilimitados
@@ -78,7 +78,7 @@ const Pricing: React.FC = () => {
                   Soporte whatsapp
                 </ListItem>
                 <ListItem color="green.500">
-                  *Gratis para siempre.
+                  *Gratis para siempre ;).
                 </ListItem>
               </List>
             </Stack>
@@ -125,7 +125,7 @@ const Pricing: React.FC = () => {
                     Catálogo con su Marca
                   </ListItem>
                   <ListItem>
-                    Desde 50+ productos 
+                    Hasta 50 productos 
                   </ListItem>
                   <ListItem>
                     S/ 5 x 200 productos adicionales
@@ -137,7 +137,7 @@ const Pricing: React.FC = () => {
                     Identificación de visitas
                   </ListItem>
                   <ListItem>
-                    Soporte WhatsApp  
+                    Soporte preferencial  
                   </ListItem>
                   <ListItem color="green.500">
                     *Precio promocional por mes realizando un pago anual. Tarifa mensual sin descuento S/ 4.
