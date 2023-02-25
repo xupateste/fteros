@@ -105,6 +105,19 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
               />
             </FormControl>
             <FormControl
+              error={errors.keywords && "Las keywords no pueden ser mayor a 1400 caracteres"}
+              help="Palabras adicionales que ayuden a la busqueda del producto"
+              label="Keywords"
+              name="keywords"
+            >
+              <Input
+                ref={register({maxLength: 1400})}
+                maxLength={1400}
+                name="keywords"
+                placeholder="Palabras separadas por espacios"
+              />
+            </FormControl>
+            <FormControl
               isRequired
               error={errors.type?.message}
               info={<ProductTypeInputInfo />}

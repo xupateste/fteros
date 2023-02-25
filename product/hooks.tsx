@@ -40,12 +40,12 @@ export function useProductActions() {
 export function useProductCategories() {
   const products = useProducts();
   let arrayCats = extractUniqueBy(products, (product) => product.category);
-  arrayCats.push('Accesorios Eléctricos');
-  arrayCats.push('Herramientas');
-  arrayCats.push('Gasfitería y Tubería');
-  arrayCats.push('Limpieza y Plagicídas');
-  arrayCats.push('Chapería');
-  arrayCats.push('Herrería y Pernería');
+  // arrayCats.push('Accesorios Eléctricos');
+  // arrayCats.push('Herramientas');
+  // arrayCats.push('Gasfitería y Tubería');
+  // arrayCats.push('Limpieza y Plagicídas');
+  // arrayCats.push('Chapería');
+  // arrayCats.push('Herrería y Pernería');
   let uniqueCats = [...new Set(arrayCats)];
   return uniqueCats;
 }
@@ -55,7 +55,7 @@ export function useFilteredProducts(selector?: (product: Product) => boolean) {
   const t = useTranslation();
   const [query, setQuery] = React.useState("");
   const filtered = selector ? products.filter(selector) : products;
-  const productsBySearch = React.useMemo(() => filterBy(filtered, {title:query, description:query}), [
+  const productsBySearch = React.useMemo(() => filterBy(filtered, {code:query, title:query, keywords:query}), [
     query,
     filtered,
   ]);
@@ -126,7 +126,7 @@ export function useFilteredProducts(selector?: (product: Product) => boolean) {
           </InputGroup>
         </Flex>
         {query && (
-            <Text fontWeight="900" fontStyle="italic" textAlign="center">Search results for: "{query}"</Text>
+            <Text fontWeight="900" fontStyle="italic" textAlign="center">Resultados para: "{query}"</Text>
           )
         }
       </>
