@@ -99,14 +99,21 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
           </Stack>
         )}
         {type === "promotional" && (
-          <Stack isInline alignItems="center">
-            <Text color="green.500" fontSize="md" fontWeight={600} lineHeight={1}>
-              {p(price)}
-            </Text>
-            <Text color="gray.500" fontSize="sm" lineHeight={1} textDecoration="line-through">
-              {p(originalPrice)}
-            </Text>
-          </Stack>
+          <>
+            <Stack isInline alignItems="center">
+              <Text color="green.500" fontSize="md" fontWeight={600} lineHeight={1}>
+                {p(price)}
+              </Text>
+              <Text color="gray.500" fontSize="sm" lineHeight={1} textDecoration="line-through">
+                {p(originalPrice)}
+              </Text>
+            </Stack>
+            <Flex>
+              <Box borderWidth={2} borderRadius='sm' borderColor='black' mt={1} px={2} py={0} fontWeight={600} fontSize="xs">
+                {`USTED GANA... ${p(originalPrice - price)}`}
+              </Box>
+            </Flex>
+          </>
         )}
         {type === "unavailable" && (
           <Text color="yellow.500" fontSize="md" fontWeight={900} lineHeight={1}>
