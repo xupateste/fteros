@@ -15,7 +15,7 @@ interface Props extends Omit<FlexProps, "onClick"> {
 
 const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClick, ...props}) => {
   const p = usePrice();
-  const {image, title, price, originalPrice, type} = product;
+  const {image, title, price, originalPrice, type, badgeText, badgeColor} = product;
   //const [min, max] = getVariantsPriceRange(product.options);
 
   function formattedImg(image) {
@@ -67,6 +67,12 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             <Flex h="100%" w="100%" position="absolute">
             </Flex>
             <Text m="auto" fontSize="12px" fontWeight="bold" px={2} bg="black" color="white" position="relative">Producto sin stock</Text>
+          </Flex>)
+        || badgeText && (
+          <Flex paddingBottom="100%" height="0" w="100%">
+            <Box fontWeight="bold" fontSize="12px" backgroundColor={`${badgeColor}.500`} position="absolute" top={0} right={0} display="inline-flex" justifyContent="center">
+              <Text fontStyle="italic" px={2} color="white">{badgeText}</Text>
+            </Box>
           </Flex>)
         }
       </Box>

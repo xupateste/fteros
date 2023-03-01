@@ -6,6 +6,8 @@ export interface Product {
   title: string;
   description?: string;
   keywords?: string;
+  badgeText?: string;
+  badgeColor?: string;
   category?: string;
   image?: string | undefined;
   price: number;

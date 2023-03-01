@@ -10,6 +10,15 @@ export const COLORS = [
   "teal",
   "green",
 ];
+export const BADGECOLORS = [
+  "white",
+  "yellow",
+  "red",
+  "cyan",
+  "purple",
+  "teal",
+  "gray",
+];
 
 export const CATEGORIES = [
   "vehicle-accessories",

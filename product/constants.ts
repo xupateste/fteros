@@ -7,6 +7,8 @@ export const DEFAULT_PRODUCT: Omit<Product, "id"> = {
   code: "",
   description: "",
   keywords: "",
+  badgeText: "",
+  badgeColor: "",
   category: null,
   image: "",
   originalPrice: 0,

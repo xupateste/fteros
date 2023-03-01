@@ -16,6 +16,8 @@ import ImageInput from "~/ui/inputs/Image";
 import SwitchInput from "~/ui/inputs/Switch";
 import Price from "~/ui/inputs/Price";
 import FormControl from "~/ui/form/FormControl";
+import BadgeColorRadio from "~/ui/inputs/BadgeColorRadio";
+
 
 interface Props {
   defaultValues?: Partial<Product>;
@@ -166,6 +168,36 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 )}
               </Stack>
             )}
+            <Divider />
+            <Stack>
+              <FormControl
+                error={errors.badgeText && "Este valor es requerido"}
+                flex={1}
+                label="Etiqueta de Producto"
+                name="badgeText"
+              >
+                <Input
+                  ref={register({maxLength: 100})}
+                  name="badgeText"
+                  placeholder=""
+                  rounded="md"
+                />
+              </FormControl>
+              <FormControl
+                error={errors.badgeColor && "Este valor es requerido"}
+                flex={1}
+                help="Texto y color de fondo para etiqueta"
+                name="badgeColor"
+              >
+                <Controller
+                  as={BadgeColorRadio}
+                  control={control}
+                  defaultValue="white"
+                  name="badgeColor"
+                  rules={{required: true}}
+                />
+              </FormControl>
+            </Stack>
             <Divider />
             <FormControl
               isRequired
