@@ -194,7 +194,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                   control={control}
                   defaultValue="white"
                   name="badgeColor"
-                  rules={{required: true}}
+                  // rules={{required: true}}
                 />
               </FormControl>
             </Stack>
