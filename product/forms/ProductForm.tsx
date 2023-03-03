@@ -74,7 +74,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
             >
               <Input
                 ref={register({maxLength: 20})}
-                autoFocus
+                // autoFocus
                 name="code"
                 placeholder="90001"
               />
@@ -88,9 +88,9 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
             >
               <Input
                 ref={register({required: true})}
-                autoFocus
+                // autoFocus
                 name="title"
-                placeholder="iPhone XS Max"
+                placeholder="Alicate comercial"
               />
             </FormControl>
             <FormControl
@@ -103,7 +103,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 ref={register({maxLength: 1400})}
                 maxLength={1400}
                 name="description"
-                placeholder="64GB mem. Silver."
+                placeholder="Uso rudo pesado."
               />
             </FormControl>
             <FormControl

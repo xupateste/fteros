@@ -69,7 +69,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             <Text m="auto" fontSize="12px" fontWeight="bold" px={2} bg="black" color="white" position="relative">Producto sin stock</Text>
           </Flex>)
         || badgeText && (
-          <Flex paddingBottom="100%" height="0" w="100%">
+          <Flex>
             <Box fontWeight="bold" fontSize="12px" backgroundColor={`${badgeColor}.500`} position="absolute" top={0} right={0} display="inline-flex" justifyContent="center">
               <Text fontStyle="italic" px={2} color="white">{badgeText}</Text>
             </Box>

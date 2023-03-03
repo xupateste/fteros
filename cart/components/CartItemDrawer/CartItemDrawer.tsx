@@ -176,6 +176,13 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     >
                       {product.title}
                     </Text>
+                    {product.badgeText && (
+                      <Flex w="100%">
+                        <Box fontWeight="bold" fontSize="md" backgroundColor={`${product.badgeColor}.500`} display="inline-flex" justifyContent="center">
+                          <Text fontStyle="italic" px={3} color="white">{product.badgeText}</Text>
+                        </Box>
+                      </Flex>
+                    )}
                     {["promotional", "available"].includes(product.type) && (
                       <Stack>
                         <Box

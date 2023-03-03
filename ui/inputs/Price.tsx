@@ -24,7 +24,7 @@ const Price: React.FC<Props> = React.forwardRef(
       />
       <Input
         ref={ref}
-        inputMode="numeric"
+        inputMode="decimal"
         name={name}
         placeholder={placeholder}
         rounded={rounded}
