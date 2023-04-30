@@ -144,9 +144,9 @@ function _getItems(items: CartItem[]): string {
     .map(
       (item) =>
         `·${[
-          `[x${item.count}] ~Cod.${item.product.code}`,
+          `[x${item.count}] ~Cod-${item.product.code}`,
           ` ${(item.product.title).length > 25 ? (item.product.title).toUpperCase().substring(0, 23).concat('…') : (item.product.title).toUpperCase()}`,
-          item.product.type === 'ask' ? ` S/ *Precio a consultar` : ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 25),
+          item.product.type === 'ask' ? ` S/ *Precio a consultar` : ` ${getFormattedPrice(item)} (PU ${getFormattedUnitPrice(item)})`.substring(0, 25),
           // ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
         ]
           .filter(Boolean)

@@ -140,6 +140,7 @@ const Initio: React.FC = () => {
   }));
   const [storeCode, setstoreCode] = React.useState("51");
   const [personalCode, setpersonalCode] = React.useState("51");
+  const [countryNew, setCountryNew] = React.useState("PER");
 
   return (
     <>
@@ -195,6 +196,7 @@ const Initio: React.FC = () => {
                     size="lg"
                     isDisabled={isLoading}
                     variant='filled'
+                    autoComplete="off"
                     name='businessName'
                     placeholder='Nombre de mi negocio'
                     ref={register({required: true, minLength: 4, maxLength: 140})}
@@ -213,6 +215,7 @@ const Initio: React.FC = () => {
                       isDisabled={isLoading}
                       paddingLeft={1}
                       name="storeName"
+                      autoComplete="off"
                       placeholder='minegocio'
                       textTransform="lowercase"
                       onChange={(e) => {e.target.value = e.target.value.replace(/[^a-z0-9]/gi, '')}}
@@ -224,13 +227,35 @@ const Initio: React.FC = () => {
                 </FormControl>
                 <FormControl
                   isRequired
+                  error={errors.country && "Este campo es requerido"}
+                  label="País"
+                  name="country"
+                >
+                  <Select
+                    ref={register({required: true})}
+                    size="lg"
+                    isDisabled={isLoading}
+                    defaultValue="PER"
+                    name="country"
+                    placeholder="Selecciona un país"
+                    onChange={e => setCountryNew(e.target.value)}
+                  >
+                    {Object.entries(countries4select).map(([code, name]) => (
+                      <option key={code} value={code}>
+                        {name}
+                      </option>
+                    ))}
+                  </Select>
+                </FormControl>
+                <FormControl
+                  isRequired
                   error={errors.storePhone && "Este campo es requerido"}
                   name="storePhone"
                   label="WhatsApp donde recibirás los pedidos"
                 >
                   <PhoneNumberInput
-                    ref={register({required: true, minLength: 4, maxLength: 140, pattern: /^[0-9]+$/})}
-                    country={'PER'}
+                    ref={register({required: true, minLength: 4, maxLength: 12, pattern: /^[0-9]+$/})}
+                    country={countryNew}
                     isDisabled={isLoading}
                     options={countryOptions}
                     variant='filled'
@@ -248,8 +273,8 @@ const Initio: React.FC = () => {
                   help='Este telefono puede ser igual que el del negocio'
                 >
                   <PhoneNumberInput
-                    ref={register({required: true, minLength: 4, maxLength: 140, pattern: /^[0-9]+$/})}
-                    country={'PER'}
+                    ref={register({required: true, minLength: 4, maxLength: 12, pattern: /^[0-9]+$/})}
+                    country={countryNew}
                     isDisabled={isLoading}
                     variant='filled'
                     size="lg"
@@ -258,27 +283,6 @@ const Initio: React.FC = () => {
                     name="personalPhone"
                     placeholder="111344400"
                   />
-                </FormControl>
-                <FormControl
-                  isRequired
-                  error={errors.country && "Este campo es requerido"}
-                  label="País"
-                  name="country"
-                >
-                  <Select
-                    ref={register({required: true})}
-                    size="lg"
-                    isDisabled={isLoading}
-                    defaultValue="PE"
-                    name="country"
-                    placeholder="Selecciona un país"
-                  >
-                    {Object.entries(countries4select).map(([code, name]) => (
-                      <option key={code} value={code}>
-                        {name}
-                      </option>
-                    ))}
-                  </Select>
                 </FormControl>
                 <FormControl
                   isRequired

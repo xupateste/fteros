@@ -14,6 +14,8 @@ import {
 import { COUNTRIES } from "~/landing/components/countries";
 import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
 import {Contact} from "~/contact/types";
+import {useTenant} from "~/tenant/hooks";
+
 // import apiContact from "~/contact/api/client"; //added
 
 interface Props {
@@ -28,6 +30,8 @@ interface Props {
 const PhoneClientNumber: React.FC<Props> = ({
   isShown, onHookcontact, onClose, onSubmit, fromParent
 }) => {
+  const {country} = useTenant();
+
   // const [isShown, setShown] = React.useState(
   //   process.browser ? (!Boolean(window.localStorage?.getItem("phoneclient:Products"))) : false,
   // );
@@ -106,7 +110,7 @@ const PhoneClientNumber: React.FC<Props> = ({
                 <Text textDecoration="underline" color="primary.700" fontSize={17} mb={2}>Número de WhatsApp</Text>
                 <PhoneNumberInput
                   ref={register({required: true, minLength: 9, maxLength: 12, pattern: /^[0-9]+$/})}
-                  country={'PER'}
+                  country={country}
                   options={countryOptions}
                   size="lg"
                   onChange={value => setstoreCode(value)}

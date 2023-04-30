@@ -54,14 +54,14 @@ export function getQtyProdsTypeOf(typeTenant): number {
     case "p1k0": {return 1050;} // S/ 28.00 x mes
     case "p1k2": {return 1250;} // S/ 33.00 x mes
     case "p1k4": {return 1450;} // S/ 38.00 x mes
-    case "p1k6": {return 1650;} // S/ 45.00 x mes
-    case "p1k8": {return 1850;} // S/ 50.00 x mes
-    case "p2k0": {return 2050;} // S/ 55.00 x mes
-    case "p2k2": {return 2250;} // S/ 60.00 x mes
-    case "p2k4": {return 2450;} // S/ 65.00 x mes
-    case "p2k6": {return 2650;} // S/ 70.00 x mes
-    case "p2k8": {return 2850;} // S/ 75.00 x mes
-    case "p3k0": {return 3050;} // S/ 80.00 x mes
+    case "p1k6": {return 1650;} // S/ 43.00 x mes
+    case "p1k8": {return 1850;} // S/ 48.00 x mes
+    case "p2k0": {return 2050;} // S/ 53.00 x mes
+    case "p2k2": {return 2250;} // S/ 58.00 x mes
+    case "p2k4": {return 2450;} // S/ 63.00 x mes
+    case "p2k6": {return 2650;} // S/ 68.00 x mes
+    case "p2k8": {return 2850;} // S/ 73.00 x mes
+    case "p3k0": {return 3050;} // S/ 78.00 x mes
     default: {
       return 20;
     }
