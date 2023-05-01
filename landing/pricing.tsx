@@ -112,7 +112,7 @@ const Pricing: React.FC = () => {
                     DESDE
                   </Box>
                   <Text fontSize="5xl" mt={0} fontWeight="900">
-                    S/ 3*
+                    S/ 5*
                   </Text>
                 </Stack>
               </Box>
@@ -140,7 +140,7 @@ const Pricing: React.FC = () => {
                     Soporte preferencial  
                   </ListItem>
                   <ListItem color="green.500">
-                    *Precio promocional por mes realizando un pago anual. Tarifa mensual sin descuento S/ 4.
+                    *Precio promocional por mes realizando un pago anual. Tarifa mensual sin descuento S/ 7.
                   </ListItem>
                 </List>
               </Stack>

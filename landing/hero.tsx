@@ -30,7 +30,7 @@ const Hero: React.FC<Props> = (props) => {
             mt={10}
             fontSize={{ base: '3xl', sm: '4xl', lg: '5xl' }}>
             <Text as={'span'} position={'relative'} fontSize={{base: 'md', sm: 'md', lg: 'lg'}} color={'cyan.500'}>
-              CREA UNA TIENDA ONLINE
+              CREA UNA TIENDA
             </Text>
             <Text as={'span'} position={'relative'} fontSize={{base: 'lg', sm: 'lg', lg: '2xl'}} textTransform="lowercase" letterSpacing={'1px'} px={1} ml={2} color={'white'} bg="cyan.500">
               gratis

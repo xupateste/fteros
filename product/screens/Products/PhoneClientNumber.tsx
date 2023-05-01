@@ -15,6 +15,7 @@ import { COUNTRIES } from "~/landing/components/countries";
 import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
 import {Contact} from "~/contact/types";
 import {useTenant} from "~/tenant/hooks";
+import { getCountryTelCode } from "~/landing/components/countries";
 
 // import apiContact from "~/contact/api/client"; //added
 
@@ -66,7 +67,7 @@ const PhoneClientNumber: React.FC<Props> = ({
   }));
 
   const { register, handleSubmit, errors } = useForm();
-  const [storeCode, setstoreCode] = React.useState("51");
+  const [storeCode, setstoreCode] = React.useState((getCountryTelCode(country)).replaceAll("+", "").replaceAll(" ", ""));
 
   const RightIcon = () => {
     return (

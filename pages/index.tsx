@@ -41,6 +41,7 @@ import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
 import {COUNTRIES as countries4select} from "~/i18n/constants";
 import { COUNTRIES } from "~/landing/components/countries";
 import Select from "~/ui/inputs/Select";
+import { getCountryTelCode } from "~/landing/components/countries";
 
 
 const Initio: React.FC = () => {
@@ -138,9 +139,15 @@ const Initio: React.FC = () => {
     label: name,
     value: iso
   }));
+  const [countryNew, setCountryNew] = React.useState("PER");
+  // const [storeCode, setstoreCode] = React.useState("51");
   const [storeCode, setstoreCode] = React.useState("51");
   const [personalCode, setpersonalCode] = React.useState("51");
-  const [countryNew, setCountryNew] = React.useState("PER");
+
+  React.useEffect(() => {
+      setstoreCode((getCountryTelCode(countryNew)).replaceAll("+", "").replaceAll(" ", ""));
+      setpersonalCode((getCountryTelCode(countryNew)).replaceAll("+", "").replaceAll(" ", ""));
+    }, [countryNew]);
 
   return (
     <>
@@ -235,7 +242,7 @@ const Initio: React.FC = () => {
                     ref={register({required: true})}
                     size="lg"
                     isDisabled={isLoading}
-                    defaultValue="PER"
+                    defaultValue={countryNew}
                     name="country"
                     placeholder="Selecciona un país"
                     onChange={e => setCountryNew(e.target.value)}
