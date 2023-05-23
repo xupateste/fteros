@@ -4,7 +4,8 @@ import {Stack, Box, PseudoBox, Flex, useDisclosure, Text, Image, Button} from "@
 import {useRouter} from "next/router";
 
 import ProductCard from "../../components/ProductCard";
-import {useFilteredProducts, useProducts} from "../../hooks";
+// import {useFilteredProducts, useProducts} from "../../hooks";
+import {useFilteredProductsScroll, useProducts} from "../../hooks";
 import ProductsGrid from "../../components/ProductsGrid";
 import ProductsCarousel from "../../components/ProductsCarousel";
 
@@ -39,7 +40,8 @@ const ProductsScreen: React.FC = () => {
   const {hookcontact} = useContactActions();
   const t = useTranslation();
   const {isOpen: isCartOpen, onOpen: openCart, onClose: closeCart} = useDisclosure();
-  const {products, filters} = useFilteredProducts((product) => product.type !== "hidden");
+  // const {products, filters} = useFilteredProducts((product) => product.type !== "hidden");
+  const {products, filters} = useFilteredProductsScroll((product) => product.type !== "hidden");
   const productsAll = useProducts();
   const {highlight, fields, layout, ...tenant} = useTenant();
   const selected = React.useMemo(() => products.find((_product) => _product.slug === product), [
@@ -138,7 +140,7 @@ const ProductsScreen: React.FC = () => {
           <Content height="100%" paddingX={{base: 0, sm: 4}}>
             <TenantHeader data-test-id="header" marginBottom={2} tenant={tenant} />
             <Box flex={1}>
-              {highlight && (
+              {/*highlight && (
                 <Box
                   backgroundColor="primary.50"
                   color="primary.500"
@@ -152,7 +154,7 @@ const ProductsScreen: React.FC = () => {
                 >
                   {highlight}
                 </Box>
-              )}
+              )*/}
               <Box
                 backgroundColor="gray.50"
                 data-test-id="filters"

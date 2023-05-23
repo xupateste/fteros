@@ -4,7 +4,7 @@
     "email": "E-mail",
     "password": "Contraseña",
     "total": "Total",
-    "featured": "Destacado",
+    "featured": "DESTACADOS",
     "categories": "Categorías",
     "noImage": "Sin foto",
     "add": "Agregar",
@@ -119,7 +119,7 @@
     "invalidEmail": "No es un email válido"
   },
   "filters": {
-    "search": "Buscar..."
+    "search": "El que busca encuentra..."
   },
   "admin": {
     "save" : "Guardar",

@@ -41,6 +41,7 @@ const StoreLayout: React.FC<Props> = ({tenant, product, category, children}) => 
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap"
         rel="stylesheet"
       />
+
       <title>{product ? product.title + ' - ' + tenant.title : tenant.title + ' - ' + tenant.description || META.title}</title>
       <meta content={tenant.color || META.theme} name="theme-color" />
       <meta content={tenant.description || META.description} name="description" />

@@ -6,6 +6,8 @@ import ErrorScreen from "./_error";
 
 import reporter from "~/reporting";
 
+import 'react-horizontal-scrolling-menu/dist/styles.css';
+
 process.on("unhandledRejection", (error: Error) => {
   reporter.exception(error, {origin: "server | unhandledRejection"});
 });
