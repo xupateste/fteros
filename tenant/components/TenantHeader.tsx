@@ -25,6 +25,16 @@ interface Props extends BoxProps {
   >;
 }
 
+const isValidUrl = urlString=> {
+      var urlPattern = new RegExp('^(https?:\\/\\/)?'+ // validate protocol
+      '((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|'+ // validate domain name
+      '((\\d{1,3}\\.){3}\\d{1,3}))'+ // validate OR ip (v4) address
+      '(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*'+ // validate port and path
+      '(\\?[;&a-z\\d%_.~+=-]*)?'+ // validate query string
+      '(\\#[-a-z\\d_]*)?$','i'); // validate fragment locator
+    return !!urlPattern.test(urlString);
+  };
+
 const TenantHeader: React.FC<Props> = ({
   tenant: {banner, facebook, instagram, twitter, logo, title, description, phone, place, placeUrl},
   ...props
@@ -70,14 +80,20 @@ const TenantHeader: React.FC<Props> = ({
           {place && (
             <Stack isInline alignItems="center" color="primary.500" marginTop={1} spacing={1}>
               <MarkerIcon minWidth={4} size={4} />
-              <Link
-                isExternal
-                href={placeUrl}
-              >
-                <Text fontSize={{base: "sm", sm: "md"}} lineHeight="tall">
-                  {place}
-                </Text>
-              </Link>
+              {isValidUrl(placeUrl) ? (
+                <Link
+                  isExternal
+                  href={placeUrl}
+                >
+                  <Text fontSize={{base: "sm", sm: "md"}} lineHeight="tall">
+                    {place}
+                  </Text>
+                </Link>
+              ) : (
+                  <Text fontSize={{base: "sm", sm: "md"}} lineHeight="tall">
+                    {place}
+                  </Text>
+              )}
             </Stack>
           )}
         </Stack>
