@@ -219,7 +219,7 @@ const Overview: React.FC<Props> = ({
                         <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
                           <Stack spacing={0} flexDirection='column' display='flex'>
                             <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
-                              {item.product.title}
+                              {(item.product.title).toUpperCase()}
                             </Text>
                             {/*item.variants && (
                               <Text color="gray.600">{getVariantsString(item.variants)}</Text>

@@ -223,12 +223,13 @@ const ProductsScreen: React.FC = () => {
           direction="column"
           position="sticky"
           // display="flex"
+          pointerEvents="none"
           textAlign='right'
           width="100%"
           zIndex={4}
         >
-          <Box>
-            <Button onClick={onChatLink} alignItems="center" bg="white" variantColor="gray" rounded={48} boxShadow='md' borderWidth={1}  mb={Boolean(items.length) ? 2: 5} py='6'>
+          <Box pointerEvents="none">
+            <Button pointerEvents="auto" onClick={onChatLink} alignItems="center" bg="white" variantColor="gray" rounded={48} boxShadow='md' borderWidth={1}  mb={Boolean(items.length) ? 2: 5} py='6'>
               <WhatsAppIcon height={6} color="whatsapp.500" width={6} />
               <Text ml={2} fontWeight={900} fontSize="xl" color="black">Chat</Text>
             </Button>
@@ -241,7 +242,7 @@ const ProductsScreen: React.FC = () => {
             rounded={4}
             width={{base: "100%", sm: "auto"}}
           >
-            <SummaryButton items={items} onClick={handleOpenCart}>
+            <SummaryButton pointerEvents="auto" items={items} onClick={handleOpenCart}>
               {t("products.review")}
             </SummaryButton>
           </Box>

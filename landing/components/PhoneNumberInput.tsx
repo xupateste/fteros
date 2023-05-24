@@ -51,13 +51,13 @@ const PhoneNumberInput: React.FC<Props> = React.forwardRef(
       onChange(code.replaceAll("+", "").replaceAll(" ", ""));
     };
 
-    const onPhoneNumberChange = e => {
-      let value = e.target.value;
-      //let parsedNumber = new AsYouType().input(`${countryCode}${value}`);
+    // const onPhoneNumberChange = e => {
+    //   let value = e.target.value;
+    //   //let parsedNumber = new AsYouType().input(`${countryCode}${value}`);
 
-      setNumber(value);
-      //onChange(parsedNumber.replaceAll("+", "").replaceAll(" ", ""));
-    };
+    //   setNumber(value);
+    //   //onChange(parsedNumber.replaceAll("+", "").replaceAll(" ", ""));
+    // };
 
     return (
     <InputGroup size={size} {...rest}>
@@ -99,7 +99,8 @@ const PhoneNumberInput: React.FC<Props> = React.forwardRef(
         value={number}
         pattern="[0-9]"
         placeholder={placeholder}
-        onChange={onPhoneNumberChange}
+        // onChange={onPhoneNumberChange}
+        onChange={(e) => setNumber(e.target.value) }
         {...inputProps}
       />
     </InputGroup>

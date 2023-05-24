@@ -110,7 +110,7 @@ const PhoneClientNumber: React.FC<Props> = ({
               >
                 <Text textDecoration="underline" color="primary.700" fontSize={17} mb={2}>Número de WhatsApp</Text>
                 <PhoneNumberInput
-                  ref={register({required: true, minLength: 9, maxLength: 12, pattern: /^[0-9]+$/})}
+                  ref={register({required: true, maxLength: 12, pattern: /^[0-9]+$/})}
                   country={country}
                   options={countryOptions}
                   size="lg"

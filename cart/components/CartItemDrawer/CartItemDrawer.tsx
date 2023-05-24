@@ -106,7 +106,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
   if (product.type === "hidden") return null;
 
   return (
-    <Drawer id="cart-item" placement="right" size="md" onClose={onClose} {...props}>
+    <Drawer id="cart-item" blockScrollOnMount={true} placement="right" size="md" onClose={onClose} {...props}>
       <ProductVariantForm
         defaultValues={product.options}
         type={product.type}
@@ -157,7 +157,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     onClick={handleShare}
                   />
                 )}
-                {product.image ? <ToggleableImage maxHeight="50vh" src={formattedImg(product.image)} /> : <ToggleableImage maxHeight="50vh" src="/assets/fallback.jpg" />}
+                {product.image ? <ToggleableImage maxHeight="40vh" src={formattedImg(product.image)} /> : <ToggleableImage maxHeight="50vh" src="/assets/fallback.jpg" />}
                 <Stack
                   shouldWrapChildren
                   direction="column"
@@ -174,7 +174,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                       lineHeight="normal"
                       overflowWrap="break-word"
                     >
-                      {product.title}
+                      {(product.title).toUpperCase()}
                     </Text>
                     {product.badgeText && (
                       <Flex w="100%">
