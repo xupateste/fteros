@@ -86,7 +86,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 placeholder={t("admin.shop.basicInformation.descriptionPlaceholder")}
               />
             </FormControl>
-            <FormControl
+            {/*<FormControl
               error={errors.highlight && t("admin.shop.basicInformation.highlightError")}
               help={t("admin.shop.basicInformation.highlightHelp")}
               label={t("admin.shop.basicInformation.highlight")}
@@ -99,7 +99,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 name="highlight"
                 placeholder={t("admin.shop.basicInformation.highlightPlaceholder")}
               />
-            </FormControl>
+            </FormControl>*/}
             <FormControl
               isRequired
               error={errors.phone && (errors.phone.message || t("admin.shop.basicInformation.whatsappError"))}

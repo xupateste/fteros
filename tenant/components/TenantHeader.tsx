@@ -40,6 +40,17 @@ const TenantHeader: React.FC<Props> = ({
   ...props
 }) => (
   <Box {...props}>
+    {/*<Box
+      width="100%"
+      backgroundColor="primary.500"
+      color="white"
+      textAlign="center"
+      fontSize={{base:"sm", sm:"sm"}}
+      paddingY={0}
+      fontWeight="900"
+    >
+      {highlight}
+    </Box>*/}
     <Box
       backgroundColor="primary.500"
       backgroundImage={`url(${banner})`}

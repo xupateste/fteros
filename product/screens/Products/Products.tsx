@@ -43,7 +43,7 @@ const ProductsScreen: React.FC = () => {
   // const {products, filters} = useFilteredProducts((product) => product.type !== "hidden");
   const {products, filters} = useFilteredProductsScroll((product) => product.type !== "hidden");
   const productsAll = useProducts();
-  const {highlight, fields, layout, ...tenant} = useTenant();
+  const {fields, layout, ...tenant} = useTenant();
   const selected = React.useMemo(() => products.find((_product) => _product.slug === product), [
     products,
     product,
@@ -163,7 +163,7 @@ const ProductsScreen: React.FC = () => {
                 paddingY={1}
                 position="sticky"
                 roundedBottom="lg"
-                roundedTop={highlight ? "none" : "lg"}
+                roundedTop="none"
                 top={0}
                 zIndex={3}
               >
