@@ -9,12 +9,14 @@ export interface Product {
   badgeText?: string;
   badgeColor?: string;
   category?: string;
+  brand?: string;
   image?: string | undefined;
   price: number;
   originalPrice?: number;
   numPiezas?: number;
   priceOff?: number;
   lastStock?: number;
+  mqo?: number;
   type: "available" | "unavailable" | "hidden" | "promotional" | "ask";
   options?: Variant[];
   featured?: boolean;

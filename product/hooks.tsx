@@ -59,6 +59,21 @@ export function useProductCategories() {
   return uniqueCats;
 }
 
+export function useProductBrands() {
+  const products = useProducts();
+  let arrayBrands = extractUniqueBy(products, (product) => product.brand);
+  arrayBrands = arrayBrands.filter(function(e){return e});
+  // console.log(arrayBrands);
+  // arrayCats.push('Accesorios Eléctricos');
+  // arrayCats.push('Herramientas');
+  // arrayCats.push('Gasfitería y Tubería');
+  // arrayCats.push('Limpieza y Plagicídas');
+  // arrayCats.push('Chapería');
+  // arrayCats.push('Herrería y Pernería');
+  let uniqueBrand = [...new Set(arrayBrands)];
+  return uniqueBrand;
+}
+
 export function useFilteredProducts(selector?: (product: Product) => boolean) {
   const products = useProducts();
   const t = useTranslation();
@@ -149,7 +164,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
   const [query, setQuery] = React.useState("");
   const [catquery, setCatquery] = React.useState("");
   const filtered = selector ? products.filter(selector) : products;
-  const productsBySearch = React.useMemo(() => filterBy(filtered, {code:query, title:query, keywords:query, badgeText:query}), [
+  const productsBySearch = React.useMemo(() => filterBy(filtered, {code:query, title:query, keywords:query, badgeText:query, brand:query}), [
     query,
     filtered,
   ]);

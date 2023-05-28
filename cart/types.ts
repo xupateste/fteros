@@ -7,6 +7,7 @@ export interface CartItem {
   variants: Variant[];
   note: string;
   count: number;
+  mqo: number;
 }
 
 export type Cart = Record<string, CartItem>;

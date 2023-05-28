@@ -31,6 +31,10 @@ export default {
         .number()
         .transform((value) => (isNaN(value) ? undefined : value))
         .default(DEFAULT_PRODUCT.lastStock),
+      mqo: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.mqo),
       numPiezas: yup
         .number()
         .transform((value) => (isNaN(value) ? undefined : value))
@@ -59,6 +63,7 @@ export default {
         )
         .default([]),
       category: yup.string().default(DEFAULT_PRODUCT.category).trim(),
+      brand: yup.string().default(DEFAULT_PRODUCT.brand).trim(),
       description: yup.string().default(DEFAULT_PRODUCT.description),
       keywords: yup.string().default(DEFAULT_PRODUCT.keywords),
       badgeText: yup.string().default(DEFAULT_PRODUCT.badgeText),
@@ -74,6 +79,7 @@ export default {
       code: yup.string().nullable(),
       title: yup.string().nullable(),
       category: yup.string().trim().nullable(),
+      brand: yup.string().trim().nullable(),
       description: yup.string().nullable(),
       keywords: yup.string().nullable(),
       badgeText: yup.string().nullable(),
@@ -84,6 +90,7 @@ export default {
       originalPrice: yup.number().nullable(),
       priceOff: yup.number().nullable(),
       lastStock: yup.number().nullable(),
+      mqo: yup.number().nullable(),
       numPiezas: yup.number().nullable(),
       type: yup
         .string()
@@ -150,6 +157,11 @@ export default {
         .transform((value) => (isNaN(value) ? undefined : value))
         .required()
         .default(DEFAULT_PRODUCT.lastStock),
+      mqo: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .required()
+        .default(DEFAULT_PRODUCT.mqo),
       numPiezas: yup
         .number()
         .transform((value) => (isNaN(value) ? undefined : value))
@@ -179,6 +191,7 @@ export default {
         )
         .default([]),
       category: yup.string().default(DEFAULT_PRODUCT.category).trim(),
+      brand: yup.string().default(DEFAULT_PRODUCT.brand).trim(),
       description: yup.string().default(DEFAULT_PRODUCT.description),
       keywords: yup.string().default(DEFAULT_PRODUCT.keywords),
       badgeText: yup.string().default(DEFAULT_PRODUCT.badgeText),
@@ -197,6 +210,7 @@ export default {
       createdAt: yup.number().nullable().strip(true),
       updatedAt: yup.number().nullable().strip(true),
       category: yup.string().trim().nullable(),
+      brand: yup.string().trim().nullable(),
       description: yup.string().nullable(),
       keywords: yup.string().nullable(),
       badgeText: yup.string().nullable(),
@@ -234,6 +248,7 @@ export default {
       originalPrice: yup.number().nullable(),
       priceOff: yup.number().nullable(),
       lastStock: yup.number().nullable(),
+      mqo: yup.number().nullable(),
       numPiezas: yup.number().nullable(),
       title: yup.string().nullable(),
       slug: yup.string().nullable(),
@@ -264,6 +279,10 @@ export default {
         .number()
         .transform((value) => (isNaN(value) ? undefined : value))
         .default(DEFAULT_PRODUCT.lastStock),
+      mqo: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.mqo),
       numPiezas: yup
         .number()
         .transform((value) => (isNaN(value) ? undefined : value))
@@ -294,6 +313,7 @@ export default {
         )
         .default([]),
       category: yup.string().default(DEFAULT_PRODUCT.category).trim(),
+      brand: yup.string().default(DEFAULT_PRODUCT.brand).trim(),
       description: yup.string().default(DEFAULT_PRODUCT.description),
       keywords: yup.string().default(DEFAULT_PRODUCT.keywords),
       badgeText: yup.string().default(DEFAULT_PRODUCT.badgeText),

@@ -45,11 +45,12 @@ const CartProvider = ({children}: Props) => {
             if(productsAll.find((_product) => _product.id === cartItemsData[key].product.id)) {
               cartItemsData[key].product.price = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).price
               cartItemsData[key].product.title = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).title
+              cartItemsData[key].product.mqo = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).mqo
               let prodType = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).type
               // if (prodType === "unavailable") {break};
               cartItemsData[key].product.type = prodType;
               if(prodType !== 'unavailable') {
-                add(cartItemsData[key].product, cartItemsData[key].variants, cartItemsData[key].count, cartItemsData[key].note)
+                add(cartItemsData[key].product, cartItemsData[key].variants, cartItemsData[key].count, cartItemsData[key].note, cartItemsData[key].mqo)
               }
             }            
           });
@@ -62,7 +63,7 @@ const CartProvider = ({children}: Props) => {
     localStorage.setItem('cartItems', JSON.stringify(cart)) 
   }, [cart])
   
-  function add(product: Product, variants: Variant[], count: number = 1, note: string = "") {
+  function add(product: Product, variants: Variant[], count: number = 1, note: string = "", mqo: number = 1) {
     log.addToCart(product, variants, count);
     
     
@@ -84,6 +85,7 @@ const CartProvider = ({children}: Props) => {
             count,
             product,
             note,
+            mqo,
           };
         }
       }),
@@ -114,24 +116,26 @@ const CartProvider = ({children}: Props) => {
 
   function increase(id: CartItem["id"]) {
     if (!cart[id]) return;
-
+    // var mqo = cart[id].mqo ? cart[id].mqo : 1;
     return setCart(
       produce((cart) => {
-        cart[id].count++;
+        cart[id].count ++;
       }),
     );
   }
 
   function decrease(id: CartItem["id"]) {
     if (!cart[id]) return;
+    var mqo = cart[id].product.mqo ? cart[id].product.mqo : 1;
 
-    if (cart[id].count === 1) {
+    if (cart[id].count === mqo) {
       return remove(id);
     }
 
+
     return setCart(
       produce((cart) => {
-        cart[id].count--;
+        cart[id].count --;
       }),
     );
   }

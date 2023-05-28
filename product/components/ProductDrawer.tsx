@@ -9,17 +9,18 @@ import Drawer, {DrawerHeader, DrawerBody, DrawerTitle} from "~/ui/controls/Drawe
 interface Props extends Omit<IDrawer, "children"> {
   onClose: () => void;
   categories: Product["category"][];
+  brands: Product["brand"][];
   onSubmit: (values: Omit<Product, "id">) => void;
   defaultValues?: Partial<Product>;
 }
 
-const ProductDrawer: React.FC<Props> = ({categories, defaultValues, onClose, onSubmit}) => {
+const ProductDrawer: React.FC<Props> = ({categories, brands, defaultValues, onClose, onSubmit}) => {
   const isNew = Boolean(!defaultValues?.id);
 
   return (
     <Drawer closeOnOverlayClick={false} id="product" onClose={onClose}>
       <DrawerHeader onClose={onClose} />
-      <ProductForm categories={categories} defaultValues={defaultValues} onSubmit={onSubmit}>
+      <ProductForm categories={categories} brands={brands} defaultValues={defaultValues} onSubmit={onSubmit}>
         {({form, submit, isLoading}) => (
           <DrawerBody marginBottom={4}>
             <Stack shouldWrapChildren spacing={4}>

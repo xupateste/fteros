@@ -7,7 +7,7 @@ import Drawer, {DrawerBody, DrawerFooter} from "~/ui/controls/Drawer";
 import {Product, Variant} from "~/product/types";
 import ProductVariantForm from "~/product/forms/ProductVariantForm";
 import ArrowLeftIcon from "~/ui/icons/ArrowLeft";
-import Stepper from "~/ui/inputs/Stepper";
+import StepperPacked from "~/ui/inputs/StepperPacked";
 import FormLabel from "~/ui/form/FormLabel";
 import TruncatedText from "~/ui/feedback/ToggleableText";
 import ToggleableImage from "~/ui/feedback/ToggleableImage";
@@ -28,8 +28,9 @@ interface Props extends Omit<IDrawer, "children"> {
 }
 
 const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props}) => {
-  const [count, setCount] = React.useState(1);
+  const [count, setCount] = React.useState(product.mqo ? product.mqo : 1);
   const [note, setNote] = React.useState("");
+  let mqo = (product.mqo ? product.mqo : 1)
   const p = usePrice();
   const t = useTranslation();
   const log = useAnalytics();
@@ -121,6 +122,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
               product,
               variants,
               count,
+              mqo,
             },
           ];
 
@@ -290,7 +292,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                   <SimpleGrid columns={1} w='100%' spacingY='20px'>
                     <Flex alignItems="center" justifyContent="space-between" >
                       <FormLabel padding={0}>{t("common.count")}</FormLabel>
-                      <Stepper min={1} value={count} onChange={setCount} />
+                      <StepperPacked min={product.mqo} packed={product.mqo} value={count} onChange={setCount} />
                     </Flex>
                     <SummaryButton
                       isDisabled={product.type === "unavailable"}

@@ -40,7 +40,7 @@ const SlugRoute: React.FC<Props> = ({tenant, products, orders, contacts}) => {
   // end added
 
   // added get tenant
-    //console.log(router.query.slug);
+    // console.log(router.query.slug);
   // end added
 
   return (
@@ -93,6 +93,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       props: {tenant, products, orders, contacts},
     };
   } catch (err) {
+    console.log(err)
     return {
       // If something failed return a status code that will be intercepted by _app
       props: {

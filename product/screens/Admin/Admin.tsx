@@ -2,7 +2,7 @@ import React from "react";
 import {Stack, Box, Flex} from "@chakra-ui/core";
 
 import ProductDrawer from "../../components/ProductDrawer";
-import {useFilteredProductsWithCode, useProductActions, useProductCategories} from "../../hooks";
+import {useFilteredProductsWithCode, useProductActions, useProductCategories, useProductBrands} from "../../hooks";
 import {Product} from "../../types";
 import ProductsList from "../../components/ProductsList";
 
@@ -26,6 +26,7 @@ const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
   const {products, filters} = useFilteredProductsWithCode();
   const {update, remove, create, upsert} = useProductActions();
   const categories = useProductCategories();
+  const brands = useProductBrands();
   const productsByCategory = groupBy(products, (product) => product.category);
   const t = useTranslation();
 
@@ -117,6 +118,7 @@ const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
       {Boolean(selected) && (
         <ProductDrawer
           categories={categories}
+          brands={brands}
           defaultValues={selected}
           onClose={closeProductDrawer}
           onSubmit={handleSubmit}

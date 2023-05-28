@@ -6,9 +6,10 @@ import productMock from "../mock";
 import ProductForm from "./ProductForm";
 
 const CATEGORIES = ["some", "categories"];
+const BRANDS = ["some", "brands"];
 
 export const create = () => (
-  <ProductForm categories={CATEGORIES} defaultValues={{}} onSubmit={action("submit")}>
+  <ProductForm categories={CATEGORIES} brands={BRANDS} defaultValues={{}} onSubmit={action("submit")}>
     {({form}) => form}
   </ProductForm>
 );
@@ -16,6 +17,7 @@ export const create = () => (
 export const edit = () => (
   <ProductForm
     categories={CATEGORIES}
+    brands={BRANDS}
     defaultValues={productMock.withoutVariants}
     onSubmit={action("submit")}
   >
@@ -26,6 +28,17 @@ export const edit = () => (
 export const noCategories = () => (
   <ProductForm
     categories={[]}
+    brands={[]}
+    defaultValues={productMock.withoutVariants}
+    onSubmit={action("submit")}
+  >
+    {({form}) => form}
+  </ProductForm>
+);
+export const noBrands = () => (
+  <ProductForm
+    categories={[]}
+    brands={[]}
     defaultValues={productMock.withoutVariants}
     onSubmit={action("submit")}
   >

@@ -22,6 +22,7 @@ import BadgeColorRadio from "~/ui/inputs/BadgeColorRadio";
 interface Props {
   defaultValues?: Partial<Product>;
   categories: Product["category"][];
+  brands: Product["brand"][];
   onSubmit: (values: Partial<Product>) => void;
   children: (options: {
     form: JSX.Element;
@@ -30,7 +31,7 @@ interface Props {
   }) => JSX.Element;
 }
 
-const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, categories}) => {
+const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, categories, brands}) => {
   const form = useForm<Partial<Product>>({defaultValues});
   const {handleSubmit: submit, watch, errors, register, formState, setValue, control} = form;
   const values = watch();
@@ -43,6 +44,11 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
 
   function setCategory(event: React.ChangeEvent<HTMLSelectElement>) {
     setValue("category", event.target.value);
+    event.target.value = "";
+  }
+
+  function setBrand(event: React.ChangeEvent<HTMLSelectElement>) {
+    setValue("brand", event.target.value);
     event.target.value = "";
   }
 
@@ -92,6 +98,27 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 name="title"
                 placeholder="Alicate comercial"
               />
+            </FormControl>
+            <FormControl
+              isRequired
+              error={errors.brand && "Este campo es requerido"}
+              help="Escribe ó selecciona una marca"
+              label="Marca"
+              name="brand"
+            >
+              <Stack isInline spacing={2}>
+                <Input ref={register({required: true})} name="brand" placeholder="Marca" />
+                {Boolean(brands.length) && (
+                  <Select data-test-id="brand-select" onChange={setBrand}>
+                    <option value="">Cargar</option>
+                    {brands.map((brand) => (
+                      <option key={brand} value={brand}>
+                        {brand}
+                      </option>
+                    ))}
+                  </Select>
+                )}
+              </Stack>
             </FormControl>
             <FormControl
               error={errors.description && "La descripción no puede ser mayor a 1400 caracteres"}
@@ -168,6 +195,24 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 )}
               </Stack>
             )}
+            <Divider />
+              <FormControl
+                isRequired
+                error={errors.mqo && "Este valor es requerido"}
+                flex={1}
+                help="Número mínimo de unidades a vender por pedido"
+                label="Cantidad mínima de pedido (MQO)"
+                name="mqo"
+              >
+                <Input
+                  ref={register({required: true})}
+                  inputMode="numeric"
+                  type="number"
+                  name="mqo"
+                  placeholder="1"
+                  defaultValue={1}
+                />
+              </FormControl>
             <Divider />
             <Stack>
               <FormControl

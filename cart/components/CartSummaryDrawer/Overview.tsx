@@ -12,7 +12,7 @@ import {useTranslation, usePrice} from "~/i18n/hooks";
 import {getCount, getTotal, getFormattedPrice} from "~/cart/selectors";
 
 //import {formatPrice} from "~/i18n/selectors";
-import Stepper from "~/ui/inputs/Stepper";
+import StepperPacked from "~/ui/inputs/StepperPacked";
 //import {getVariantsString} from "~/product/selectors";
 import CrossIcon from "~/ui/icons/Cross";
 //import TrashIcon from "~/ui/icons/Trash";
@@ -225,9 +225,11 @@ const Overview: React.FC<Props> = ({
                               <Text color="gray.600">{getVariantsString(item.variants)}</Text>
                             )*/}
                             {item.note && <Text color="gray.600">({item.note})</Text>}
-                            <Stepper
+                            <StepperPacked
                               marginTop={2}
+                              isMqo={((item.count > 1) && (item.count === item.product.mqo))}
                               value={item.count}
+                              packed={item.product.mqo ? item.product.mqo : 1}
                               onDecrease={() => handleDecrease(item.id)}
                               onIncrease={() => handleIncrease(item.id)}
                             />
