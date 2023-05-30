@@ -12,8 +12,8 @@ import FormLabel from "~/ui/form/FormLabel";
 import TruncatedText from "~/ui/feedback/ToggleableText";
 import ToggleableImage from "~/ui/feedback/ToggleableImage";
 import {useTranslation} from "~/i18n/hooks";
-import {useToast} from "~/hooks/toast";
-import ShareIcon from "~/ui/icons/Share";
+// import {useToast} from "~/hooks/toast";
+// import ShareIcon from "~/ui/icons/Share";
 import {useAnalytics} from "~/analytics/hooks";
 import Textarea from "~/ui/inputs/Textarea";
 import FormControl from "~/ui/form/FormControl";
@@ -34,12 +34,12 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
   const p = usePrice();
   const t = useTranslation();
   const log = useAnalytics();
-  const toast = useToast();
+  // const toast = useToast();
   const {flags} = useTenant();
-  const canShare = {
-    prompt: Boolean(navigator?.share),
-    clipboard: Boolean(navigator?.clipboard),
-  };
+  // const canShare = {
+  //   prompt: Boolean(navigator?.share),
+  //   clipboard: Boolean(navigator?.clipboard),
+  // };
   
   function formattedImg(image) {
     const position = image.indexOf('/upload/') + 8;
@@ -51,47 +51,47 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
     onSubmit(product, options, count, note);
   }
 
-  function handleShare() {
-    if (canShare.prompt) {
-      navigator
-        .share({
-          title: product.title,
-          text: "",//product.description,
-          url: window.location.href,
-        })
-        .then(() => {
-          toast({
-            status: t("cartItemDrawer.share.prompt.status"),
-            title: t("cartItemDrawer.share.prompt.title"),
-            description: t("cartItemDrawer.share.prompt.description"),
-          });
+  // function handleShare() {
+  //   if (canShare.prompt) {
+  //     navigator
+  //       .share({
+  //         title: product.title,
+  //         text: "",//product.description,
+  //         url: window.location.href,
+  //       })
+  //       .then(() => {
+  //         toast({
+  //           status: t("cartItemDrawer.share.prompt.status"),
+  //           title: t("cartItemDrawer.share.prompt.title"),
+  //           description: t("cartItemDrawer.share.prompt.description"),
+  //         });
 
-          log.share(product, "mobile");
-        })
-        .catch(() => {
-          console.info("El dialogo de share fue cerrado");
-        });
-    } else if (canShare.clipboard) {
-      navigator.clipboard
-        .writeText(window.location.href)
-        .then(() => {
-          toast({
-            status: t("cartItemDrawer.share.clipboard.status"),
-            title: t("cartItemDrawer.share.clipboard.title"),
-            description: t("cartItemDrawer.share.clipboard.description"),
-          });
+  //         log.share(product, "mobile");
+  //       })
+  //       .catch(() => {
+  //         console.info("El dialogo de share fue cerrado");
+  //       });
+  //   } else if (canShare.clipboard) {
+  //     navigator.clipboard
+  //       .writeText(window.location.href)
+  //       .then(() => {
+  //         toast({
+  //           status: t("cartItemDrawer.share.clipboard.status"),
+  //           title: t("cartItemDrawer.share.clipboard.title"),
+  //           description: t("cartItemDrawer.share.clipboard.description"),
+  //         });
 
-          log.share(product, "desktop");
-        })
-        .catch(() => {
-          toast({
-            status: t("cartItemDrawer.share.clipboard.error.status"),
-            title: t("cartItemDrawer.share.clipboard.error.title"),
-            description: t("cartItemDrawer.share.clipboard.error.description"),
-          });
-        });
-    }
-  }
+  //         log.share(product, "desktop");
+  //       })
+  //       .catch(() => {
+  //         toast({
+  //           status: t("cartItemDrawer.share.clipboard.error.status"),
+  //           title: t("cartItemDrawer.share.clipboard.error.title"),
+  //           description: t("cartItemDrawer.share.clipboard.error.description"),
+  //         });
+  //       });
+  //   }
+  // }
 
   function handleNoteChange(event: React.ChangeEvent<HTMLInputElement>) {
     setNote(event.target.value);
@@ -143,7 +143,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                   top={0}
                   onClick={onClose}
                 />
-                {(canShare.clipboard || canShare.prompt) && (
+                {/*(canShare.clipboard || canShare.prompt) && (
                   <ShareIcon
                     background="white"
                     boxShadow="md"
@@ -158,7 +158,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     top={0}
                     onClick={handleShare}
                   />
-                )}
+                )*/}
                 {product.image ? <ToggleableImage maxHeight="40vh" src={formattedImg(product.image)} /> : <ToggleableImage maxHeight="50vh" src="/assets/fallback.jpg" />}
                 <Stack
                   shouldWrapChildren

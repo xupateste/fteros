@@ -9,6 +9,7 @@ import {
   ModalBody,
   Text,
   Button,
+  // Link,
   Stack,
 } from "@chakra-ui/core";
 import { COUNTRIES } from "~/landing/components/countries";
@@ -137,6 +138,7 @@ const PhoneClientNumber: React.FC<Props> = ({
               <Text mr={5}>{fromParent === 'overview' ? 'Cambiar teléfono' : 'Agregar al pedido'}</Text>
               <RightIcon />
             </Button>
+            {/*<Link textAlign="center" color="primary.500">Lo ingresaré más tarde</Link>*/}
           </Stack>
         </ModalBody>
       </ModalContent>
