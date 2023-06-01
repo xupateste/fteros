@@ -62,7 +62,7 @@ const Hero: React.FC<Props> = (props) => {
             </Text>
           </Heading>
           <Text color={'gray.500'} fontSize={{base:'md', sm:'md', lg:'xl'}}>
-            Potencie la eficiencia de su equipo de ventas y proteja sus diseños y precios de ser copiados por la competencia.
+            Potencia tu negocio a nivel nacional y simplifica todas tus ventas.
           </Text>
           <Stack
             spacing={{ base: 2, sm: 4 }}
