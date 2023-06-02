@@ -16,11 +16,22 @@ interface Props extends Omit<ButtonProps, "onChange" | "leftIcon" | "rightIcon" 
 }
 
 // CSV Schema DEFAULT
+// const schema = yup.object<Partial<Product>>({
+//   category: yup.string().trim().required("La categoría es requerida"),
+//   description: yup.string().default("").nullable(),
+//   price: yup.number().typeError("El precio debe ser un número").required("El precio es requerido"),
+//   title: yup.string().required("El título es requerido"),
+// });
+
 const schema = yup.object<Partial<Product>>({
-  category: yup.string().trim().required("La categoría es requerida"),
-  description: yup.string().default("").nullable(),
-  price: yup.number().typeError("El precio debe ser un número").required("El precio es requerido"),
+  code: yup.string().required("El sku es requerido"),
   title: yup.string().required("El título es requerido"),
+  description: yup.string().default("").nullable(),
+  brand: yup.string().required("La marca es requerido"),
+  category: yup.string().trim().required("La categoría es requerida"),
+  originalPrice: yup.number().typeError("El precio debe ser un número").required("El precio es requerido"),
+  price: yup.number().typeError("El precio debe ser un número").required("El precio es requerido"),
+  keywords: yup.string().default("").nullable(),
 });
 
 // // CSV Schema TO-FULL-IMPORT

@@ -25,9 +25,8 @@ const Hero: React.FC<Props> = (props) => {
         py={{ base: 0, md: 35 }}>
         <Stack flex={1} spacing={{ base: 5, md: 3 }}>
           <Heading
-            lineHeight={1.1}
+            lineHeight={1.2}
             fontWeight={600}
-            mt={10}
             fontSize={{ base: '3xl', sm: '4xl', lg: '5xl' }}>
             <Text as={'span'} position={'relative'} fontSize={{base: 'md', sm: 'md', lg: 'lg'}} color={'cyan.500'}>
               CREA UNA TIENDA
@@ -38,6 +37,7 @@ const Hero: React.FC<Props> = (props) => {
             <br />
             <Text
               as={'span'}
+              pt={10}
               position={'relative'} fontWeight={800}>
               Para tu 
               <PseudoBox
@@ -49,7 +49,7 @@ const Hero: React.FC<Props> = (props) => {
                 }}>
                 <TypeWriter
                   typingDelay={30}
-                  erasingDelay={140}
+                  erasingDelay={90}
                   newTextDelay={1200}
                   textArray={["Ferretería", "Distribuidora", "Importadora"]}
                   loop={true}
