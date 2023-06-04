@@ -48,8 +48,8 @@ const Hero: React.FC<Props> = (props) => {
                   textDecoration: "blink",
                 }}>
                 <TypeWriter
-                  typingDelay={30}
-                  erasingDelay={90}
+                  typingDelay={20}
+                  erasingDelay={60}
                   newTextDelay={1200}
                   textArray={["Ferretería", "Distribuidora", "Importadora"]}
                   loop={true}

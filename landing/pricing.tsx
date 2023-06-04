@@ -73,19 +73,28 @@ const Pricing: React.FC = () => {
               py={4}
               borderColor={'cyan.400'}>
               <List spacing={3} textAlign="start" px={6}>
-                <ListItem>
+                <ListItem color="gray.600">
                   Catálogo con su Marca
                 </ListItem>
-                <ListItem>
+                <ListItem color="gray.600">
                   Hasta 100 productos
                 </ListItem>
-                <ListItem>
+                <ListItem color="gray.600">
                   Visitas y pedidos ilimitados
                 </ListItem>
-                <ListItem>
+                <ListItem color="gray.600">
+                  Etiquetas en productos
+                </ListItem>
+                <ListItem color="gray.600">
+                  Panel de pedidos
+                </ListItem>
+                <ListItem color="gray.600">
+                  Acceso vía link y código QR
+                </ListItem>
+                <ListItem color="gray.600">
                   Identificación de Visitas
                 </ListItem>
-                <ListItem>
+                <ListItem color="gray.600">
                   Soporte whatsapp
                 </ListItem>
                 <ListItem color="green.500">
@@ -142,25 +151,37 @@ const Pricing: React.FC = () => {
                 py={4}
                 borderColor={'cyan.400'}>
                 <List spacing={3} textAlign="start" px={6}>
-                  <ListItem>
+                  <ListItem color="gray.600">
                     Catálogo con su Marca
                   </ListItem>
-                  <ListItem>
+                  <ListItem fontWeight={700}>
                     Hasta 2000 productos
                   </ListItem>
-                  <ListItem>
+                  <ListItem color="gray.600">
                     Visitas y pedidos ilimitados
                   </ListItem>
-                  <ListItem>
-                    Descargable en PDF
-                  </ListItem>
-                  <ListItem>
+                  <ListItem color="gray.600">
                     Etiquetas en productos
                   </ListItem>
-                  <ListItem>
+                  <ListItem color="gray.600">
+                    Panel de pedidos
+                  </ListItem>
+                  <ListItem color="gray.600">
+                    Acceso vía link y código QR
+                  </ListItem>
+                  <ListItem color="gray.600">
+                    Identificación de Visitas
+                  </ListItem>
+                  <ListItem fontWeight={700}>
+                    Base de datos de Clientes
+                  </ListItem>
+                  <ListItem fontWeight={700}>
+                    Historial de pedidos por Cliente
+                  </ListItem>
+                  <ListItem fontWeight={700}>
                     Verificación OTP
                   </ListItem>
-                  <ListItem>
+                  <ListItem fontWeight={700}>
                     Soporte preferencial  
                   </ListItem>
                   <ListItem color="green.500">
@@ -203,19 +224,25 @@ const Pricing: React.FC = () => {
                 <ListItem fontWeight={700}>
                   PLAN COMERCIAL (incluido)
                 </ListItem>
-                <ListItem>
+                <ListItem fontWeight={700}>
                   Productos ilimitados
                 </ListItem>
-                <ListItem>
-                  Control de stock
+                <ListItem fontWeight={700}>
+                  Gestión de stock
                 </ListItem>
-                <ListItem>
+                <ListItem fontWeight={700}>
                   Gestión de pedidos
                 </ListItem>
-                <ListItem>
-                  Listas de precios
+                <ListItem fontWeight={700}>
+                  Base de datos de Clientes
                 </ListItem>
-                <ListItem>
+                <ListItem fontWeight={700}>
+                  Descargable en PDF
+                </ListItem>
+                <ListItem fontWeight={700}>
+                  Hasta 3 listas de precios
+                </ListItem>
+                <ListItem fontWeight={700}>
                   Soporte prioritario
                 </ListItem>
                 <ListItem color="green.500">
