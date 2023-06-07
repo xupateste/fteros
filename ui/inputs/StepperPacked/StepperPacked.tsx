@@ -72,7 +72,7 @@ const StepperPacked: React.FC<Props> = ({
         />
       )}
       {value && (
-        <Text fontWeight={500} textAlign="center" width={6}>
+        <Text fontWeight={500} textAlign="center" width={10}>
           {value}
         </Text>
       )}
