@@ -292,7 +292,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                   <SimpleGrid columns={1} w='100%' spacingY='20px'>
                     <Flex alignItems="center" justifyContent="space-between" >
                       <FormLabel padding={0}>{t("common.count")}</FormLabel>
-                      <StepperPacked min={product.mqo} packed={product.mqo} value={count} onChange={setCount} />
+                      <StepperPacked min={product.mqo} packed={product.numPiezas} value={count} onChange={setCount} />
                     </Flex>
                     <SummaryButton
                       isDisabled={product.type === "unavailable"}

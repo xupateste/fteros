@@ -46,6 +46,7 @@ const CartProvider = ({children}: Props) => {
               cartItemsData[key].product.price = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).price
               cartItemsData[key].product.title = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).title
               cartItemsData[key].product.mqo = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).mqo
+              cartItemsData[key].product.numPiezas = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).numPiezas
               let prodType = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).type
               // if (prodType === "unavailable") {break};
               cartItemsData[key].product.type = prodType;
@@ -63,7 +64,7 @@ const CartProvider = ({children}: Props) => {
     localStorage.setItem('cartItems', JSON.stringify(cart)) 
   }, [cart])
   
-  function add(product: Product, variants: Variant[], count: number = 1, note: string = "", mqo: number = 1) {
+  function add(product: Product, variants: Variant[], count: number = 1, note: string = "", mqo: number = 1, numPiezas: number = 1) {
     log.addToCart(product, variants, count);
     
     
@@ -86,6 +87,7 @@ const CartProvider = ({children}: Props) => {
             product,
             note,
             mqo,
+            numPiezas,
           };
         }
       }),
@@ -116,26 +118,27 @@ const CartProvider = ({children}: Props) => {
 
   function increase(id: CartItem["id"]) {
     if (!cart[id]) return;
-    // var mqo = cart[id].mqo ? cart[id].mqo : 1;
+    var packed = cart[id].product.numPiezas ? cart[id].product.numPiezas : 1;
     return setCart(
       produce((cart) => {
-        cart[id].count ++;
+        cart[id].count += packed;
       }),
     );
   }
 
   function decrease(id: CartItem["id"]) {
     if (!cart[id]) return;
+    var packed = cart[id].product.numPiezas ? cart[id].product.numPiezas : 1;
     var mqo = cart[id].product.mqo ? cart[id].product.mqo : 1;
 
-    if (cart[id].count === mqo) {
+    if (cart[id].count <= mqo) {
       return remove(id);
     }
 
 
     return setCart(
       produce((cart) => {
-        cart[id].count --;
+        cart[id].count -= packed;
       }),
     );
   }

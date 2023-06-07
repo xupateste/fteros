@@ -14,6 +14,7 @@ interface Props extends Omit<StackProps, "value" | "onChange"> {
   max?: number;
   min?: number;
   packed?: number;
+  mqo?: number;
   isMqo?: boolean;
   onChange?: (value: number) => void;
   onIncrease?: (value: number) => void;
@@ -27,6 +28,7 @@ const StepperPacked: React.FC<Props> = ({
   onChange,
   min,
   max,
+  mqo,
   packed,
   isMqo,
   ...props
@@ -37,20 +39,20 @@ const StepperPacked: React.FC<Props> = ({
   function handleDecrease(event: React.MouseEvent) {
     event.stopPropagation();
 
-    onDecrease && onDecrease(value - 1);
-    onChange && onChange(value - 1);
+    onDecrease && onDecrease(value - (1*packed));
+    onChange && onChange(value - (1*packed));
   }
 
   function handleIncrease(event: React.MouseEvent) {
     event.stopPropagation();
 
-    onIncrease && onIncrease(value + 1);
-    onChange && onChange(value + 1);
+    onIncrease && onIncrease(value + (1*packed));
+    onChange && onChange(value + (1*packed));
   }
 
   return (
     <Stack isInline alignItems="center" rounded="lg" spacing={0} width="auto" {...props}>
-      {isMqo && (<Text color="primary.500" fontSize={{base:10, sm:12}} fontWeight={900} lineHeight={1} pr={1}>Pedido mínimo<br/>{packed} unidades</Text>)}
+      {isMqo && (<Text color="primary.500" fontSize={{base:10, sm:12}} fontWeight={900} lineHeight={1} pr={1}>Pedido mínimo<br/>unidades</Text>)}
       {value && (
         <RoundButton
           isRound

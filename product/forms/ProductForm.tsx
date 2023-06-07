@@ -196,6 +196,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
               </Stack>
             )}
             <Divider />
+            <Stack isInline spacing={2}>
               <FormControl
                 isRequired
                 error={errors.mqo && "Este valor es requerido"}
@@ -213,6 +214,24 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                   defaultValue={1}
                 />
               </FormControl>
+              <FormControl
+                isRequired
+                error={errors.numPiezas && "Este valor es requerido"}
+                flex={1}
+                help="Por ejemplo en 12 unidades (caja por docena)"
+                label="Se vende en cantidades de:"
+                name="numPiezas"
+              >
+                <Input
+                  ref={register({required: true})}
+                  inputMode="numeric"
+                  type="number"
+                  name="numPiezas"
+                  placeholder="1"
+                  defaultValue={1}
+                />
+              </FormControl>
+            </Stack>
             <Divider />
             <Stack>
               <FormControl
@@ -224,7 +243,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 <Input
                   ref={register({maxLength: 100})}
                   name="badgeText"
-                  placeholder=""
+                  placeholder="Por ejemplo: ¡Nuevo! ó ¡Ultimo Stock!"
                   rounded="md"
                 />
               </FormControl>

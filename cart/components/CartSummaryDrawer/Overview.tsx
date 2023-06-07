@@ -229,7 +229,8 @@ const Overview: React.FC<Props> = ({
                               marginTop={2}
                               isMqo={((item.count > 1) && (item.count === item.product.mqo))}
                               value={item.count}
-                              packed={item.product.mqo ? item.product.mqo : 1}
+                              mqo={item.product.mqo ? item.product.mqo : 1}
+                              packed={item.product.numPiezas ? item.product.numPiezas : 1}
                               onDecrease={() => handleDecrease(item.id)}
                               onIncrease={() => handleIncrease(item.id)}
                             />
