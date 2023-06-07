@@ -91,7 +91,7 @@ const AdminScreen: React.FC = () => {
             </Stack>
             <Stack isInline spacing={{base: 0, sm: 8}}>
               <Link
-                href={`mailto:${process.env.MANTAINER_EMAIL}?subject=Consulta por la tienda`}
+                href={`https://wa.me/${process.env.MANTAINER_PHONE}`}
                 lineHeight="normal"
               >
                 <IconButton
