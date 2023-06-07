@@ -221,9 +221,6 @@ const Overview: React.FC<Props> = ({
                             <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
                               {(item.product.title).toUpperCase()}
                             </Text>
-                            {/*item.variants && (
-                              <Text color="gray.600">{getVariantsString(item.variants)}</Text>
-                            )*/}
                             {item.note && <Text color="gray.600">({item.note})</Text>}
                             <StepperPacked
                               marginTop={2}
