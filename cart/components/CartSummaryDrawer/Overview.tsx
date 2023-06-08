@@ -70,7 +70,14 @@ const Overview: React.FC<Props> = ({
   function handleSubmit(event: React.MouseEvent, submit: () => Promise<void>) {
     event.stopPropagation();
 
+    if(!Boolean(window.localStorage?.getItem("phoneclient:Products"))) {
+      setShown(true);
+      // window.localStorage.setItem("addedtocart:Cart", "completed");
+      // console.log('set to storage')
+    } else {
     submit().finally();
+
+    }
   }
 
   // function handleNext() {
@@ -291,8 +298,8 @@ const Overview: React.FC<Props> = ({
                     </Text>
                   </Flex>
                   <Flex justifyContent="space-between" lineHeight={1} pb={3}>
-                    <Text>{phoneclient}</Text>
-                    <Link onClick={handleOpenPhoneclientModal} textDecoration="underline">Cambiar</Link>
+                    <Text color={phoneclient ? "black" : "gray.300"}>{phoneclient ? phoneclient : "[Número de contacto]"}</Text>
+                    <Link onClick={handleOpenPhoneclientModal} textDecoration="underline">{phoneclient ? "Cambiar" : "Ingresar número"}</Link>
                   </Flex>
                   {form}
                 </Stack>

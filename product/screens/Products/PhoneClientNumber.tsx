@@ -9,7 +9,7 @@ import {
   ModalBody,
   Text,
   Button,
-  // Link,
+  Link,
   Stack,
 } from "@chakra-ui/core";
 import { COUNTRIES } from "~/landing/components/countries";
@@ -102,6 +102,7 @@ const PhoneClientNumber: React.FC<Props> = ({
           rounded="lg"
         >
           {fromParent === 'products' && (<Text mb={3}>Ingrese su número telefónico para agregarlo a nuestra lista</Text>)}
+          {fromParent === 'overview' && (<Text mb={3} mr={4}>Ingrese un número de contacto para poder coordinar su pedido</Text>)}
           <form onSubmit={handleSubmit(onPhoneclientSubmit)}>
             <Stack spacing={4}>
               <FormControl
@@ -135,10 +136,10 @@ const PhoneClientNumber: React.FC<Props> = ({
                 bg: "primary.600",
                 color: 'white'
               }}>
-              <Text mr={5}>{fromParent === 'overview' ? 'Cambiar teléfono' : 'Agregar al pedido'}</Text>
+              <Text mr={5}>{fromParent === 'overview' ? (Boolean(window.localStorage?.getItem("phoneclient:Products")) ? 'Cambiar teléfono' : 'Ingresar teléfono') : 'Agregar al pedido'}</Text>
               <RightIcon />
             </Button>
-            {/*<Link textAlign="center" color="primary.500">Lo ingresaré más tarde</Link>*/}
+            {fromParent === 'products' && (<Link onClick={onClose} textAlign="center" color="primary.500">Ingresaré mi número más tarde</Link>)}
           </Stack>
         </ModalBody>
       </ModalContent>

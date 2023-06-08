@@ -56,7 +56,7 @@ const ProductsScreen: React.FC = () => {
       isContact['phone'] = defaultPhone;
       hookcontact(isContact)
     }
-  }, []) // <-- empty dependency array
+  }, []) // <-- empty dependency array - run only once
 
 
   const featuredProducts = filterBy(products, {featured: true});
@@ -73,11 +73,16 @@ const ProductsScreen: React.FC = () => {
     // add(product, options, count, note);
 
     if(!Boolean(window.localStorage?.getItem("phoneclient:Products"))) {
-      setShown(true);
-      setTmpProduct(product);
-      setTmpOptions(options);
-      setTmpCount(count);
-      setTmpNote(note);
+      if(!Boolean(window.localStorage?.getItem("phoneclient:After"))) {
+        setShown(true);
+        setTmpProduct(product);
+        setTmpOptions(options);
+        setTmpCount(count);
+        setTmpNote(note);
+      } else {
+        add(product, options, count, note);
+        push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+      }
       // window.localStorage.setItem("addedtocart:Cart", "completed");
       // console.log('set to storage')
     } else {
@@ -96,7 +101,10 @@ const ProductsScreen: React.FC = () => {
   }
 
   const handleClosePhoneclientModal = () => {
+    window.localStorage.setItem("phoneclient:After", "after")
+    add(tmpProduct, tmpOptions, tmpCount, tmpNote); // add for testing bypassing
     setShown(false)
+    push(`/[slug]`, `/${tenant.slug}`, {shallow: true}); // add for testing bypassing
   }
 
   function handleOpenCart() {
