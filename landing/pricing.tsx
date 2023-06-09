@@ -77,7 +77,7 @@ const Pricing: React.FC = () => {
                   Catálogo con su Marca
                 </ListItem>
                 <ListItem color="gray.600">
-                  Hasta 100 productos
+                  Catálogo de productos
                 </ListItem>
                 <ListItem color="gray.600">
                   Visitas y pedidos ilimitados
@@ -155,7 +155,7 @@ const Pricing: React.FC = () => {
                     Catálogo con su Marca
                   </ListItem>
                   <ListItem fontWeight={700}>
-                    Hasta 2000 productos
+                    Catálogo Premium
                   </ListItem>
                   <ListItem color="gray.600">
                     Visitas y pedidos ilimitados
@@ -225,7 +225,7 @@ const Pricing: React.FC = () => {
                   PLAN COMERCIAL (incluido)
                 </ListItem>
                 <ListItem fontWeight={700}>
-                  Productos ilimitados
+                  Catálogo Premium
                 </ListItem>
                 <ListItem fontWeight={700}>
                   Gestión de stock
