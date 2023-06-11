@@ -29,7 +29,7 @@ const BannerTenant: React.FC<Props> = ({typeTenant, createdAt, slug, itExceeds})
     }
     if (value === 'newPlan') {
       window.open(
-        `https://wa.me/${process.env.MANTAINER_PHONE}?text=${encodeURIComponent('Hola quisiera saber más acerca del Nuevo Plan. Mi cuenta: '+slug.toUpperCase())}`,
+        `https://wa.me/${process.env.MANTAINER_PHONE}?text=${encodeURIComponent('Hola quisiera elegir un mejor Plan. Mi cuenta: '+slug.toUpperCase())}`,
         '_blank' // <- This is what makes it open in a new window.
       );
     }
@@ -86,7 +86,7 @@ const BannerTenant: React.FC<Props> = ({typeTenant, createdAt, slug, itExceeds})
       return (
         <Box mb={{base:2, sm:0}}>
           {/*<Text d="inline-box">Tienes activado el Plan de Prueba por 40 días. <b>¡Puedes subir hasta 200 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>*/}
-          <Text d="inline-box"><b>¡Enhorabuena!</b> Te activamos el Plan de Prueba por 40 días. <b>¡Sube hasta 100 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>
+          <Text d="inline-box"><b>¡Enhorabuena!</b> Te activamos el Plan de Prueba por 40 días. <b>¡Sube hasta 500 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>
           <Button onClick={() => {onUpgradePlan('getBetterPlan')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Mejorar Plan</Button>
         </Box>
       );
@@ -95,8 +95,8 @@ const BannerTenant: React.FC<Props> = ({typeTenant, createdAt, slug, itExceeds})
     case 'free' : {
       return (
         <Box mb={{base:2, sm:0}}>
-          <Text d="inline-box"><b>Tienes activado el Plan Gratuito.</b> Se limitó la cantidad de productos a 10. <b>¡Ya está disponible un Nuevo Plan!</b></Text>
-          <Button onClick={() => {onUpgradePlan('newPlan')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Nuevo Plan</Button>
+          <Text d="inline-box"><b>Tienes activado el Plan Gratuito.</b> Se limitó la cantidad de productos a 100. <b>¡Puedes elegir un mejor Plan!</b></Text>
+          <Button onClick={() => {onUpgradePlan('newPlan')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Elegir Plan</Button>
         </Box>
       );
     }

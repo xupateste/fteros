@@ -20,7 +20,7 @@ export function getNameTypeOf(typeTenant): string {
       return 'GRATUITO';
     }
     case "test": {
-      return 'PRUEBA';
+      return 'INICIO';
     }
     case "pall": {
       return 'PREMIUM';
@@ -44,7 +44,7 @@ export function getIsItExceeds(typeTenant, numProds): boolean {
 export function getQtyProdsTypeOf(typeTenant): number {
   switch (typeTenant) {
     // todo: for COMERCIAL/PREMIUM/EMPRENDEDOR
-    case "test": {return 100;} // free x 40 días
+    case "test": {return 500;} // free x 40 días
     case "p050": {return 50;} // S/ 3.00 x mes
     case "p100": {return 100;} // S/ 5.00 x mes
     case "p250": {return 250;} // S/ 8.00 x mes // desde aqui +S/5.00 x 200p
@@ -63,7 +63,7 @@ export function getQtyProdsTypeOf(typeTenant): number {
     case "p2k8": {return 2850;} // S/ 73.00 x mes
     case "p3k0": {return 3050;} // S/ 78.00 x mes
     default: {
-      return 20;
+      return 100;
     }
   }
 }
@@ -83,10 +83,10 @@ const days = (date_1, date_2) => {
 };
 
 export const getTenantBannerMessage = (typeTenant, createdAt) => {
-  let message1 = `Tienes activado el Plan de Prueba por 40 días. ¡Puedes subir hasta 200 productos! Te quedan ${getTestDaysLeft(createdAt)} días.`;
-  let message2 = "escenario fin de prueba";
-  let message3 = "escenario limit 10 & nuevos planes económicos";
-  let message4 = "escenario mas opciones";
+  let message1 = `Tienes activado el Plan de Prueba por 40 días. ¡Puedes subir hasta 500 productos! Te quedan ${getTestDaysLeft(createdAt)} días.`;
+  let message2 = "Fin del periodo de prueba ;)";
+  let message3 = "Se activo el plan gratuito, puedes publicar hasta 100 productos";
+  let message4 = "Excelente!";
 
   switch (typeTenant) {
   // if test -> 1:escenario mas opciones?   2:escenario fin prueba?
