@@ -39,6 +39,12 @@ const BannerTenant: React.FC<Props> = ({typeTenant, createdAt, slug, itExceeds})
         '_blank' // <- This is what makes it open in a new window.
       );
     }
+    if (value === 'yanapay') {
+      window.open(
+        `https://wa.me/${process.env.MANTAINER_PHONE}?text=${encodeURIComponent('Hola quisiera apoyo con respecto a mi tienda. Mi cuenta: '+slug.toUpperCase())}`,
+        '_blank' // <- This is what makes it open in a new window.
+      );
+    }
   }
 
   // return (
@@ -85,9 +91,10 @@ const BannerTenant: React.FC<Props> = ({typeTenant, createdAt, slug, itExceeds})
       }
       return (
         <Box mb={{base:2, sm:0}}>
-          {/*<Text d="inline-box">Tienes activado el Plan de Prueba por 40 días. <b>¡Puedes subir hasta 200 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>*/}
-          <Text d="inline-box"><b>¡Enhorabuena!</b> Te activamos el Plan de Prueba por 40 días. <b>¡Sube hasta 500 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>
-          <Button onClick={() => {onUpgradePlan('getBetterPlan')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Mejorar Plan</Button>
+          {/*<Text d="inline-box"><b>¡Enhorabuena!</b> Te activamos el Plan de Prueba por 40 días. <b>¡Sube hasta 500 productos!</b> Te quedan {getTestDaysLeft(createdAt)} días.</Text>*/}
+          {/*<Button onClick={() => {onUpgradePlan('getBetterPlan')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Mejorar Plan</Button>*/}
+          <Text d="inline-box"><b>¡Enhorabuena!</b> Tu tiempo es oro, si necesitas ayuda con respecto a tu tienda, no dudes en escribirnos.</Text>
+          <Button onClick={() => {onUpgradePlan('yanapay')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Ayuda ✋</Button>
         </Box>
       );
     }

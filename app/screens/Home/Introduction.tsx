@@ -14,7 +14,7 @@ const Introduction: React.FC<Props> = ({title}) => {
   return (
     <Stack spacing={1}>
       <Text fontSize="xl" fontWeight="bold">
-        {t("admin.home.introduction.title")} {title}
+        {t("admin.home.introduction.title")} {(title).toUpperCase()}
       </Text>
       <Text color="gray.500">{t("admin.home.introduction.blurb")}</Text>
     </Stack>
