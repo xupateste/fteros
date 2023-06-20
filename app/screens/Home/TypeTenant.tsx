@@ -55,7 +55,7 @@ const TypeTenant = () => {
           toast({
             status: 'success',
             title: '¡Copiado!',
-            description: 'Link Administración',
+            description: 'Panel de Administración',
           });
         })
         .catch(() => {});
@@ -68,13 +68,13 @@ const TypeTenant = () => {
       <Stack>
         <Flex fontSize="lg">
           Tu Plan:
-          <Flex bg="green.100" px={2} py={0} ml={3} fontSize={16} alignItems="center" rounded="sm">
+          <Flex bg="primary.50" px={2} py={0} ml={3} fontSize={16} alignItems="center" rounded="sm">
             {getNameTypeOf(typeTenant)}
           </Flex>
         </Flex>
         {/*<Text color="gray.600">Cantidad máxima de productos: {getQtyProdsTypeOf(typeTenant)}</Text>*/}
-        <Text color="gray.600">📌 Catálogo de Productos</Text>
-        <Text color="gray.400">🚫 Acceso a Base de Datos de Clientes</Text>
+        <Text color="gray.600" lineHeight={1}>✅ Catálogo de Productos</Text>
+        <Text color="gray.400" lineHeight={1}>🚫 Acceso a Base de Datos de Clientes</Text>
       </Stack>
       <Button onClick={onUpgradePlan} variantColor="primary" color="white">Mejorar</Button>
     </Flex>
@@ -86,7 +86,7 @@ const TypeTenant = () => {
             <Text fontSize="lg">
               Link de Tienda:
             </Text>
-            <Flex bg="green.100" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
+            <Flex bg="primary.50" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
               {'https://ferreteros.app/'+slug}
             </Flex>
           </Grid>
@@ -100,9 +100,9 @@ const TypeTenant = () => {
         <Box overflowX="auto" overflowY="hidden">
           <Grid>
             <Text fontSize="lg">
-              Link de Administración:
+              Panel de Administración:
             </Text>
-            <Flex bg="green.100" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
+            <Flex bg="primary.50" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
               {'https://ferreteros.app/'+slug+'/admin'}
             </Flex>
           </Grid>
