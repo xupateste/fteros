@@ -135,12 +135,12 @@ const AdminScreen: React.FC = () => {
                   <Text fontWeight={600}>{t("common.home")}</Text>
                 </Tab>
                 <Tab fontSize="md">
-                  <BoxIcon marginRight={2} />
-                  <Text fontWeight={600}>{t("common.products")}</Text>
-                </Tab>
-                <Tab fontSize="md">
                   <SlidersIcon marginRight={2} />
                   <Text fontWeight={600}>{t("common.shop")}</Text>
+                </Tab>
+                <Tab fontSize="md">
+                  <BoxIcon marginRight={2} />
+                  <Text fontWeight={600}>{t("common.products")}</Text>
                 </Tab>
                 <Tab fontSize="md">
                   <CheckIcon marginRight={2} />
@@ -172,10 +172,10 @@ const AdminScreen: React.FC = () => {
               <HomeAdminScreen />
             </TabPanel>
             <TabPanel>
-              <ProductsAdminScreen setItExceeds={setItExceeds} />
+              <TenantAdminScreen />
             </TabPanel>
             <TabPanel>
-              <TenantAdminScreen />
+              <ProductsAdminScreen setItExceeds={setItExceeds} />
             </TabPanel>
             <TabPanel>
               <OrdersAdminScreen />

@@ -88,7 +88,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
             <FormControl
               isRequired
               error={errors.title && "Este campo es requerido"}
-              help="Ej: Campera de cuero con apliques de piedras"
+              help="Ej: Botas de Seguridad Punta de Acero"
               label="Nombre"
               name="title"
             >
@@ -201,8 +201,8 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 isRequired
                 error={errors.mqo && "Este valor es requerido"}
                 flex={1}
-                help="Número mínimo de unidades a vender por pedido"
-                label="Cantidad mínima de pedido (MQO)"
+                help="MQO: Número mínimo de unidades a vender"
+                label="Pedido mínimo"
                 name="mqo"
               >
                 <Input
@@ -218,8 +218,8 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 isRequired
                 error={errors.numPiezas && "Este valor es requerido"}
                 flex={1}
-                help="Por ejemplo en 12 unidades (caja por docena)"
-                label="Se vende en cantidades de:"
+                help="Ej: 100 si desea sumar al carrito por cientos"
+                label="Multiplo al agregar"
                 name="numPiezas"
               >
                 <Input
@@ -237,7 +237,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
               <FormControl
                 error={errors.badgeText && "Este valor es requerido"}
                 flex={1}
-                label="Etiqueta de Producto"
+                label="Etiqueta en Producto"
                 name="badgeText"
               >
                 <Input
