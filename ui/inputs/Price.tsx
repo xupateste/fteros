@@ -2,6 +2,7 @@ import React from "react";
 import {InputGroup, InputLeftElement, InputGroupProps, InputProps} from "@chakra-ui/core";
 
 import Input from "./Input";
+import {formatSymbol} from "~/i18n/selectors";
 
 interface Props extends Omit<InputGroupProps, "children" | "onChange"> {
   name?: InputProps["name"];
@@ -16,7 +17,7 @@ const Price: React.FC<Props> = React.forwardRef(
   ({name, value, placeholder, onChange, rounded, inputProps = {}, ...props}, ref) => (
     <InputGroup {...props}>
       <InputLeftElement
-        children="$"
+        children={formatSymbol()}
         backgroundColor="transparent"
         paddingX={0}
         pointerEvents="none"
@@ -28,7 +29,7 @@ const Price: React.FC<Props> = React.forwardRef(
         name={name}
         placeholder={placeholder}
         rounded={rounded}
-        style={{paddingLeft: "2rem"}}
+        style={{paddingLeft: "2.5rem"}}
         type="number"
         value={value}
         variant="filled"
