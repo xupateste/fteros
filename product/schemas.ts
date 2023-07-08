@@ -1,7 +1,7 @@
 import * as yup from "yup";
 
-import {Product, Variant, Option} from "./types";
-import {DEFAULT_PRODUCT, DEFAULT_PRODUCT_OPTION, DEFAULT_PRODUCT_VARIANT} from "./constants";
+import {Product, Variant, Option, xOption} from "./types";
+import {DEFAULT_PRODUCT, DEFAULT_PRODUCT_OPTION, DEFAULT_PRODUCT_XOPTION, DEFAULT_PRODUCT_VARIANT} from "./constants";
 
 export default {
   server: {
@@ -62,6 +62,21 @@ export default {
           }),
         )
         .default([]),
+      xoptions: yup
+              .array(
+                yup.object<xOption>({
+                  price: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.price),
+                  id: yup.string().required(),
+                  quantity: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.quantity),
+                }),
+              )
+              .default([]),
       category: yup.string().default(DEFAULT_PRODUCT.category).trim(),
       brand: yup.string().default(DEFAULT_PRODUCT.brand).trim(),
       description: yup.string().default(DEFAULT_PRODUCT.description),
@@ -69,6 +84,7 @@ export default {
       badgeText: yup.string().default(DEFAULT_PRODUCT.badgeText),
       badgeColor: yup.string().default(DEFAULT_PRODUCT.badgeColor),
       featured: yup.boolean().default(DEFAULT_PRODUCT.featured),
+      wholesale: yup.boolean().default(DEFAULT_PRODUCT.wholesale),
       isnew: yup.boolean().default(DEFAULT_PRODUCT.isnew),
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
@@ -97,6 +113,7 @@ export default {
         .oneOf(["available", "unavailable", "ask", "promotional", "hidden"])
         .nullable(),
       featured: yup.boolean().nullable(),
+      wholesale: yup.boolean().nullable(),
       isnew: yup.boolean().nullable(),
       isPreOrder: yup.boolean().nullable(),
       options: yup
@@ -122,6 +139,22 @@ export default {
           }),
         )
         .nullable(),
+      xoptions: yup
+              .array(
+                yup.object<xOption>({
+                  price: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.price),
+                  id: yup.string().required(),
+                  quantity: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.quantity),
+                }),
+              )
+              .default([])
+              .nullable(), //.nullable() ?
       image: yup.string().nullable(),
       slug: yup.string().nullable(),
     }),
@@ -190,6 +223,21 @@ export default {
           }),
         )
         .default([]),
+      xoptions: yup
+              .array(
+                yup.object<xOption>({
+                  price: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.price),
+                  id: yup.string().required(),
+                  quantity: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.quantity),
+                }),
+              )
+              .default([]),
       category: yup.string().default(DEFAULT_PRODUCT.category).trim(),
       brand: yup.string().default(DEFAULT_PRODUCT.brand).trim(),
       description: yup.string().default(DEFAULT_PRODUCT.description),
@@ -197,6 +245,7 @@ export default {
       badgeText: yup.string().default(DEFAULT_PRODUCT.badgeText),
       badgeColor: yup.string().default(DEFAULT_PRODUCT.badgeColor),
       featured: yup.boolean().default(DEFAULT_PRODUCT.featured),
+      wholesale: yup.boolean().default(DEFAULT_PRODUCT.wholesale),
       isnew: yup.boolean().default(DEFAULT_PRODUCT.isnew),
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
@@ -216,6 +265,7 @@ export default {
       badgeText: yup.string().nullable(),
       badgeColor: yup.string().nullable(),
       featured: yup.boolean().nullable(),
+      wholesale: yup.boolean().nullable(),
       isnew: yup.boolean().nullable(),
       isPreOrder: yup.boolean().nullable(),
       id: yup.string().required(),
@@ -244,6 +294,22 @@ export default {
           }),
         )
         .nullable(),
+      xoptions: yup
+              .array(
+                yup.object<xOption>({
+                  price: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.price),
+                  id: yup.string().required(),
+                  quantity: yup
+                    .number()
+                    .transform((value) => (isNaN(value) ? undefined : value))
+                    .default(DEFAULT_PRODUCT_XOPTION.quantity),
+                }),
+              )
+              .default([])
+              .nullable(),
       price: yup.number().nullable(),
       originalPrice: yup.number().nullable(),
       priceOff: yup.number().nullable(),
@@ -312,6 +378,22 @@ export default {
             .nullable(),
         )
         .default([]),
+      xoptions: yup
+                .array(
+                  yup.object<xOption>({
+                    price: yup
+                      .number()
+                      .transform((value) => (isNaN(value) ? undefined : value))
+                      .default(DEFAULT_PRODUCT_XOPTION.price),
+                    id: yup.string().required(),
+                    quantity: yup
+                      .number()
+                      .transform((value) => (isNaN(value) ? undefined : value))
+                      .default(DEFAULT_PRODUCT_XOPTION.quantity),
+                  }),
+                )
+                .default([])
+                .nullable(),
       category: yup.string().default(DEFAULT_PRODUCT.category).trim(),
       brand: yup.string().default(DEFAULT_PRODUCT.brand).trim(),
       description: yup.string().default(DEFAULT_PRODUCT.description),
@@ -319,6 +401,7 @@ export default {
       badgeText: yup.string().default(DEFAULT_PRODUCT.badgeText),
       badgeColor: yup.string().default(DEFAULT_PRODUCT.badgeColor),
       featured: yup.boolean().default(DEFAULT_PRODUCT.featured),
+      wholesale: yup.boolean().default(DEFAULT_PRODUCT.wholesale),
       isnew: yup.boolean().default(DEFAULT_PRODUCT.isnew),
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),

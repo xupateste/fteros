@@ -86,7 +86,7 @@ const TypeTenant = () => {
             <Text fontSize="lg">
               Link de Tienda:
             </Text>
-            <Flex bg="primary.50" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
+            <Flex color="gray.600" bg="primary.50" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
               {'https://ferreteros.app/'+slug}
             </Flex>
           </Grid>
@@ -102,7 +102,7 @@ const TypeTenant = () => {
             <Text fontSize="lg">
               Panel de Administración:
             </Text>
-            <Flex bg="primary.50" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
+            <Flex color="gray.600" bg="primary.50" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
               {'https://ferreteros.app/'+slug+'/admin'}
             </Flex>
           </Grid>

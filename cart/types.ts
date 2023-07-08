@@ -5,6 +5,7 @@ export interface CartItem {
   id: string | Product["id"];
   product: Product;
   variants: Variant[];
+  // xoptions: xOption[];
   note: string;
   count: number;
   mqo: number;

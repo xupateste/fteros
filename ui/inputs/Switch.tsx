@@ -35,7 +35,7 @@ const SwitchInput: React.FC<Props> = ({checked = false, onChange, label, name, .
       {label && (
         <FormLabel
           cursor="pointer"
-          fontSize={{base: "sm", sm: "md"}}
+          fontSize={{base: "md", sm: "md"}}
           fontWeight={500}
           name={current}
           style={{padding: 0}}

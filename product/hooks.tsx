@@ -179,7 +179,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
 
   const map = groupBy(filtered, (product) => product.category).map(([category]) => ["id", category]);
 
-  map.unshift(["id","TODOS LOS PRODUCTOS"])
+  map.unshift(["id","TODOS"])
   const categoryList = Array.from(map, ([key, value]) => {
     return {[key]: value};
   });
@@ -219,7 +219,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
 
   function handleCategoryChange(category: Product["category"]) {
     setQuery("");
-    if (category === "TODOS LOS PRODUCTOS") {
+    if (category === "TODOS") {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else if (category) {
       document
@@ -240,7 +240,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
   }
 
   return {
-    products: (query || catquery==="TODOS LOS PRODUCTOS") ? productsBySearch.slice(0,getQtyProdsTypeOf(typeTenant)) : productsByCategory.slice(0,getQtyProdsTypeOf(typeTenant)),
+    products: (query || catquery==="TODOS") ? productsBySearch.slice(0,getQtyProdsTypeOf(typeTenant)) : productsByCategory.slice(0,getQtyProdsTypeOf(typeTenant)),
     filters: (
       <>
         <Flex alignItems="center">

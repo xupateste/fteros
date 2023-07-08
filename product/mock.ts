@@ -23,8 +23,10 @@ export default {
       mqo: faker.random.number(9),
       featured: true,
       isnew: true,
+      wholesale: false,
       isPreOrder: true,
       options: [],
+      xoptions: [],
     };
   },
   get withoutImage(): Product {

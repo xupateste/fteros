@@ -2,13 +2,64 @@ import shortId from "shortid";
 
 import {CartItem} from "./types";
 
+import {xOption} from "~/product/types";
+
+
 import {Field} from "~/tenant/types";
 
-import {getVariantsPrice} from "~/product/selectors";
+// import {getVariantsPrice} from "~/product/selectors";
 import {formatPrice} from "~/i18n/selectors";
 
 export function getTotal(items: CartItem[]): number {
   return items.reduce((total, item) => total + getPrice(item), 0);
+}
+
+export function getTotalSaving(items: CartItem[]): number {
+ return items.reduce((total, item) => total + getSaving(item.product.wholesale, item.product.xoptions, item.product.price, item.count), 0);
+}
+
+export function getSaving(wholesale:boolean, xoptions: xOption[], price:number, count:number): number {
+  let saving = 0;
+  if (xoptions && wholesale) {
+    let last = xoptions.length;
+    for (var i = 0; i < xoptions.length; i++) {
+      if(count<xoptions[i].quantity) {
+        saving = 0
+        break;
+      }
+      if(xoptions[i].quantity <= count && count < xoptions[i+1]?.quantity) {
+        saving = Number(price) - Number(xoptions[i].price);
+        break;
+      } else if(count >= xoptions[last-1].quantity) {
+        saving = Number(price) - Number(xoptions[last-1].price);
+        break;
+      }
+    }
+  }
+
+  return Number(saving)*Number(count);
+}
+
+export function getProductSaving(wholesale:boolean, xoptions: xOption[], price:number, count:number): string {
+  let saving = 0;
+  let last = xoptions.length;
+  if(wholesale) {
+    for (var i = 0; i < xoptions.length; i++) {
+      if(count<xoptions[i].quantity) {
+        saving = 0
+        break;
+      }
+      if(xoptions[i].quantity <= count && count < xoptions[i+1]?.quantity) {
+        saving = Number(price) - Number(xoptions[i].price);
+        break;
+      } else if(count >= xoptions[last-1].quantity) {
+        saving = Number(price) - Number(xoptions[last-1].price);
+        break;
+      }
+    }
+  }
+
+  return saving ? `¡Ahorras ${formatPrice(Number(count)*Number(saving))}!` : ''
 }
 
 export function getUnitPrice(item: CartItem): number {
@@ -27,7 +78,25 @@ export function getUnitPrice(item: CartItem): number {
 
     // Sum total and variants
     default: {
-      return (item.product.price + getVariantsPrice(item.variants));
+      // return (item.product.price + getVariantsPrice(item.variants));
+      let unitPrice = item.product.price
+      let last = (item.product.xoptions).length;
+      if(item.product.wholesale) {
+        for (var i = 0; i < (item.product.xoptions).length; i++) {
+          if(item.count<item.product.xoptions[i].quantity) {
+            // unitPrice = item.product.xoptions[i].price
+            break;
+          }
+          if(item.product.xoptions[i].quantity <= item.count && item.count < item.product.xoptions[i+1]?.quantity) {
+            unitPrice = item.product.xoptions[i].price
+            break;
+          } else if(item.count >= item.product.xoptions[last-1].quantity) {
+            unitPrice = item.product.xoptions[last-1].price
+            break;
+          }
+        }
+      }
+      return unitPrice
     }
   }
 }
@@ -71,9 +140,34 @@ export function getPrice(item: CartItem): number {
 
     // Sum total and variants
     default: {
-      return (item.product.price + getVariantsPrice(item.variants)) * item.count;
+      // return (item.product.price + getVariantsPrice(item.variants)) * item.count; //cmntd because xoptions
+      return getRealPrice(item.product.wholesale, item.product.price, item.product.xoptions, item.count) * item.count;
     }
   }
+}
+
+export function getRealPrice(isWholesale:boolean, price:number, xoptions: xOption[], count: number): number {
+  let realPrice = 0;
+  let last = xoptions.length;
+  if(!isWholesale) {
+    realPrice = price //+ getVariantsPrice(item.variants)
+  } else {
+    for (var i = 0; i < xoptions.length; i++) {
+      if(count<xoptions[i].quantity) {
+        realPrice = Number(price);
+        break;
+      }
+      if(xoptions[i].quantity <= count && count < xoptions[i+1]?.quantity) {
+        realPrice = Number(xoptions[i].price);
+        break;
+      } else if(count >= xoptions[last-1].quantity) {
+        realPrice = Number(xoptions[last-1].price);
+        break;
+      }
+    }
+  }
+  // console.log(realPrice)
+  return realPrice
 }
 
 export function getFormattedPrice(item: CartItem): string {
@@ -146,7 +240,7 @@ function _getItems(items: CartItem[]): string {
         `·${[
           `[x${item.count}] ~Cod-${item.product.code}`,
           ` ${(item.product.title).length > 25 ? (item.product.title).toUpperCase().substring(0, 23).concat('…') : (item.product.title).toUpperCase()}`,
-          item.product.type === 'ask' ? ` *Precio a consultar` : ` ${getFormattedPrice(item)} (PU ${getFormattedUnitPrice(item)})`.substring(0, 25),
+          item.product.type === 'ask' ? ` *Precio a consultar` : ` ${getFormattedPrice(item)} (PU ${getFormattedUnitPrice(item)})`.substring(0, 26),
           // ` ${getFormattedPrice(item)} (P.U. ${getFormattedUnitPrice(item)})`.substring(0, 28),
         ]
           .filter(Boolean)

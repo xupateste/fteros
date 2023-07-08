@@ -36,23 +36,30 @@ const StepperPacked: React.FC<Props> = ({
   const isMinDisabled = min === undefined ? false : value <= min;
   const isMaxDisabled = max === undefined ? false : value >= max;
 
+  const getMultiplyInf = (val) => {
+    return packed*Math.floor(val/packed)
+  } 
+
   function handleDecrease(event: React.MouseEvent) {
     event.stopPropagation();
 
-    onDecrease && onDecrease(value - (1*packed));
-    onChange && onChange(value - (1*packed));
+    // onDecrease && onDecrease(value - (value === 1*packed ? (0) : (1*packed)));
+    // onDecrease && onDecrease((value === 1*packed) ? (mqo) : (value - 1*packed));
+    onDecrease && onDecrease(((value - 1*packed) < mqo) ? (mqo) : (value - 1*packed));
+    onChange && onChange(((value - 1*packed) < mqo) ? (mqo) : (value - 1*packed));
   }
 
   function handleIncrease(event: React.MouseEvent) {
     event.stopPropagation();
 
-    onIncrease && onIncrease(value + (1*packed));
-    onChange && onChange(value + (1*packed));
+    onIncrease && onIncrease(value < mqo ? (mqo) : getMultiplyInf(value) + (1*packed));
+    // onChange && onChange(value + (1*packed));
+    onChange && onChange(value < mqo ? (mqo) : getMultiplyInf(value) + (1*packed));
   }
 
   return (
     <Stack isInline alignItems="center" rounded="lg" spacing={0} width="auto" {...props}>
-      {isMqo && (<Text color="primary.500" fontSize={{base:10, sm:12}} fontWeight={900} lineHeight={1} pr={1}>Pedido mínimo<br/>unidades</Text>)}
+      {isMqo && (<Text color="primary.500" fontSize={{base:10, sm:12}} fontWeight={900} lineHeight={1} pr={1}>Pedido<br/>mínimo</Text>)}
       {value && (
         <RoundButton
           isRound

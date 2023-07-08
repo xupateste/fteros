@@ -25,6 +25,9 @@ import WhatsAppIcon from "~/ui/icons/WhatsApp";
 import FieldsForm from "../../forms/FieldsForm";
 import {useTenant} from "~/tenant/hooks";
 import {useContactActions} from "~/contact/hooks";
+import {getProductSaving, getTotalSaving} from "../../selectors"
+
+import Content from "~/ui/structure/Content";
 
 
 interface Props {
@@ -53,7 +56,8 @@ const Overview: React.FC<Props> = ({
   const t = useTranslation();
   const p = usePrice();
   const count = getCount(items);
-  const total = getTotal(items);  
+  const total = getTotal(items);
+  const totalSaving = getTotalSaving(items);
   const {hookcontact} = useContactActions();
   //const {image, title, price, originalPrice, description, type} = product; //added
 
@@ -203,74 +207,91 @@ const Overview: React.FC<Props> = ({
                   boxShadow="md"
                   px={4}
                   py={2}
-                  pb={4}
+                  // pb={2}
                   flexDirection="column"
                   shouldWrapChildren
                   borderWidth="1px"
                   borderColor="gray.100"
                   justifyContent="space-between"
                   spacing={3}
+                  pb={4}
                   rounded="md">          
                   <Text as="b" fontSize="lg">Mi pedido</Text>
-                  {items.map((item) => (
-                      <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
-                        <Flex alignItems="center" borderColor="gray.100" borderWidth={1} rounded={5}>
-                          <Image
-                            fadeIn
-                            height={{base: 20, sm: 20}}
-                            rounded="md"
-                            src={item.product.image ? formattedImg(products.find((_product) => _product.id === item.product.id).image) : "/assets/fallback.jpg"}
-                            width={{base: 20, sm: 20}}
-                          />
-                        </Flex>
-                        <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
-                          <Stack spacing={0} flexDirection='column' display='flex'>
-                            <Text fontWeight={500} overflowWrap="break-word" fontSize="sm">
-                              {(item.product.title).toUpperCase()}
-                            </Text>
-                            {item.note && <Text color="gray.600">({item.note})</Text>}
-                            <StepperPacked
-                              marginTop={2}
-                              isMqo={((item.count > 1) && (item.count === item.product.mqo))}
-                              value={item.count}
-                              mqo={item.product.mqo ? item.product.mqo : 1}
-                              packed={item.product.numPiezas ? item.product.numPiezas : 1}
-                              onDecrease={() => handleDecrease(item.id)}
-                              onIncrease={() => handleIncrease(item.id)}
+                  {items.map((item) => {
+                    const productSaving = getProductSaving(item.product.wholesale, item.product.xoptions, item.product.price, item.count)
+                    return (
+                        <Flex key={item.id} alignItems="flex-start" justifyContent="space-between">
+                          <Flex alignItems="center" borderColor="gray.100" borderWidth={1} rounded={5}>
+                            <Image
+                              fadeIn
+                              height={{base: 20, sm: 20}}
+                              rounded="md"
+                              src={item.product.image ? formattedImg(products.find((_product) => _product.id === item.product.id).image) : "/assets/fallback.jpg"}
+                              width={{base: 20, sm: 20}}
                             />
-                          </Stack>
+                          </Flex>
+                          <Flex alignItems="center" mr={2} ml={2}  width={"100%"}>
+                            <Stack spacing={0} flexDirection='column' display='flex'>
+                              <Text fontWeight={500} fontSize="sm" isTruncated maxWidth={{base: 140, sm:200}}>
+                                {(item.product.title).toUpperCase()}
+                              </Text>
+                              {item.note && <Text color="gray.600">({item.note})</Text>}
+                              <StepperPacked
+                                marginTop={2}
+                                isMqo={((item.count > 1) && (item.count === item.product.mqo))}
+                                value={item.count}
+                                mqo={item.product.mqo ? item.product.mqo : 1}
+                                packed={item.product.numPiezas ? item.product.numPiezas : 1}
+                                onDecrease={() => handleDecrease(item.id)}
+                                onIncrease={() => handleIncrease(item.id)}
+                              />
+                              {productSaving && item.product.wholesale && (<Text color="primary.600" fontSize="xs" mt={1} textAlign="left">{productSaving}</Text>)}
+                            </Stack>
+                          </Flex>
+                          <Flex alignItems="end" flexDirection="column">
+                            <Text fontWeight={500}>{getFormattedPrice(item)}</Text>
+                            {productSaving && item.product.wholesale && (<Text fontWeight={500} color="gray.500" textDecoration="line-through" fontSize="sm">{p(Number(item.product.price)*Number(item.count))}</Text>)}
+                          </Flex>
                         </Flex>
-                        <Flex alignItems="center">
-                          <Text fontWeight={500}>{getFormattedPrice(item)}</Text>
-                        </Flex>
-                      </Flex>
-                    ))}
+                    )})}
                 </Stack>
               </Box>
-              <Box>
-                <Flex
-                  boxShadow="md"
-                  px={4}
-                  py={2}
-                  justifyContent="space-between"
-                  borderWidth="1px"
-                  borderColor="gray.100"
-                  rounded="md">
-                  <Box  
-                    flexDirection="column"
-                    alignSelf="center"
-                    d="flex">
-                    <Text as="b" fontSize="lg">{t("cart.estimatedTotal")}</Text>
-                  </Box>
-                  <Box  
-                    flexDirection="column"
-                    alignSelf="center" 
-                    d="flex">
-                    <Text as="b" fontSize="2xl">{p(total)}</Text>
-                  </Box>
-                </Flex>
-              </Box>
-              <Box>
+              <Flex
+                // as="nav"
+                bottom={0}
+                // justifyContent="flex-end"
+                // pb={4}
+                direction="column"
+                position="sticky"
+                // display="flex"
+                pointerEvents="none"
+                textAlign='right'
+                width="100%"
+                zIndex={4}
+              >
+                  <Stack
+                    boxShadow="md"
+                    backgroundColor="white"
+                    px={4}
+                    py={2}
+                    borderWidth="1px"
+                    borderColor="gray.100"
+                    rounded="md">
+                    <Flex justifyContent="space-between" color="gray.700">
+                      <Text fontSize="md" alignSelf="center">Subtotal</Text>
+                      <Text fontSize="lg" alignSelf="center">{p(Number(total)+Number(totalSaving))}</Text>
+                    </Flex>
+                    <Flex justifyContent="space-between" color="gray.700">
+                      <Text fontSize="md" alignSelf="center">Descuentos</Text>
+                      <Text fontSize="lg" alignSelf="center">{totalSaving ? "-"+p(totalSaving) : '—'}</Text>
+                    </Flex>
+                    <Flex justifyContent="space-between">
+                      <Text as="b" fontSize="lg" alignSelf="center">{t("cart.estimatedTotal")}</Text>
+                      <Text as="b" fontSize="xl" alignSelf="center">{p(total)}</Text>
+                    </Flex>
+                  </Stack>
+              </Flex>
+              <Content>
                 <Stack
                   boxShadow="md"
                   px={4}
@@ -303,7 +324,7 @@ const Overview: React.FC<Props> = ({
                   </Flex>
                   {form}
                 </Stack>
-              </Box>
+              </Content>
             </Stack>
           </DrawerBody>
           <DrawerFooter borderTopColor="gray.100" borderTopWidth={1} marginTop={2}>

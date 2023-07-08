@@ -20,7 +20,7 @@ const MoneyShieldIcon: React.FC<Props> = ({size, ...props}) => {
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="2.5"
+          strokeWidth="4"
         />
         <path
           clipRule="evenodd"
@@ -29,7 +29,7 @@ const MoneyShieldIcon: React.FC<Props> = ({size, ...props}) => {
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
-          strokeWidth="2.5"
+          strokeWidth="4"
         />
       </svg>
     </Box>

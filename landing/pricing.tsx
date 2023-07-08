@@ -137,10 +137,13 @@ const Pricing: React.FC = () => {
                         $
                       </Text>
                       <Text fontSize={{ base: "5xl", md: "6xl"}} mt={0} fontWeight="900">
-                        9*
+                        9
+                      </Text>
+                      <Text fontSize={{ base: "lg", md: "xl"}} my="auto" fontWeight="900">
+                        /mes*
                       </Text>
                     </Flex>
-                    <Text fontSize={{ base: "2xl", md: "xl"}} mt={0} fontWeight="900" lineHeight={1}>
+                    <Text fontSize={{ base: "2xl", md: "xl"}} m={0} fontWeight="900" lineHeight={1}>
                       ó S/29*
                     </Text>
                   </Box>
@@ -207,7 +210,10 @@ const Pricing: React.FC = () => {
                         $
                       </Text>
                       <Text fontSize={{ base: "4xl", md: "5xl"}} mt={0} fontWeight="900">
-                        29*
+                        29
+                      </Text>
+                      <Text fontSize={{ base: "lg", md: "xl"}} my="auto" fontWeight="900">
+                        /mes*
                       </Text>
                     </Flex>
                     <Text fontSize={{ base: "xl", md: "lg"}} mt={0} fontWeight="900" lineHeight={1}>

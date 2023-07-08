@@ -59,12 +59,12 @@ const MenuScroll: React.FC<Props> = ({items, catChange, setDefault}) => {
         scrollContainer.current.scrollLeft += posDiff;
       }
     });
-    const [selected, setSelected] = React.useState<string>("TODOS LOS PRODUCTOS");
+    const [selected, setSelected] = React.useState<string>("TODOS");
 
 
     React.useEffect(() => {
       if (setDefault) {
-        setSelected("TODOS LOS PRODUCTOS")
+        setSelected("TODOS")
       }
       // Run! Like go get some data from an API.
     }, [setDefault]);

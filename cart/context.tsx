@@ -47,13 +47,14 @@ const CartProvider = ({children}: Props) => {
               cartItemsData[key].product.title = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).title
               cartItemsData[key].product.mqo = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).mqo
               cartItemsData[key].product.numPiezas = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).numPiezas
+              cartItemsData[key].product.xoptions = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).xoptions
               let prodType = productsAll.find((_product) => _product.id === cartItemsData[key].product.id).type
               // if (prodType === "unavailable") {break};
               cartItemsData[key].product.type = prodType;
               if(prodType !== 'unavailable') {
                 add(cartItemsData[key].product, cartItemsData[key].variants, cartItemsData[key].count, cartItemsData[key].note, cartItemsData[key].mqo)
               }
-            }            
+            }
           });
         }),
       );
@@ -119,9 +120,12 @@ const CartProvider = ({children}: Props) => {
   function increase(id: CartItem["id"]) {
     if (!cart[id]) return;
     var packed = cart[id].product.numPiezas ? cart[id].product.numPiezas : 1;
+    const getMultiplyInf = (val) => {
+      return packed*Math.floor(val/packed)
+    } 
     return setCart(
       produce((cart) => {
-        cart[id].count += packed;
+        cart[id].count = getMultiplyInf(cart[id].count) + packed;
       }),
     );
   }
@@ -135,10 +139,9 @@ const CartProvider = ({children}: Props) => {
       return remove(id);
     }
 
-
     return setCart(
       produce((cart) => {
-        cart[id].count -= packed;
+        cart[id].count = ((cart[id].count-packed) < mqo ? mqo : (cart[id].count - packed));
       }),
     );
   }

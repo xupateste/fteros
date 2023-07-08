@@ -27,6 +27,7 @@ const Hero: React.FC<Props> = (props) => {
           <Heading
             lineHeight={1.2}
             fontWeight={600}
+            pt={8}
             fontSize={{ base: '3xl', sm: '4xl', lg: '5xl' }}>
             <Text as={'span'} position={'relative'} fontSize={{base: 'md', sm: 'md', lg: 'lg'}} color={'cyan.500'}>
               CREA UNA TIENDA

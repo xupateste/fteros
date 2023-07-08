@@ -19,7 +19,9 @@ export interface Product {
   mqo?: number;
   type: "available" | "unavailable" | "hidden" | "promotional" | "ask";
   options?: Variant[];
+  xoptions?: xOption[];
   featured?: boolean;
+  wholesale?: boolean;
   isnew?: boolean;
   isPreOrder?: boolean;
   slug?: string;
@@ -37,5 +39,11 @@ export interface Variant {
 export interface Option {
   id: string;
   title: string;
+  price: number;
+}
+
+export interface xOption {
+  id: string;
+  quantity: number;
   price: number;
 }

@@ -1,12 +1,18 @@
 import React from "react";
-import {useForm, Controller, FormContext} from "react-hook-form";
+import {useForm, Controller, FormContext, FieldError} from "react-hook-form";
 import {Stack, Divider} from "@chakra-ui/core";
 
 import {Product} from "../types";
-/*import ProductVariantsInput, {
-  validator as ProductVariantsInputValidator,
-  info as ProductVariantsInputInfo,
-} from "../inputs/ProductVariantsInput";*/
+//commented variants start
+// import ProductVariantsInput, {
+//   validator as ProductVariantsInputValidator,
+//   info as ProductVariantsInputInfo,
+// } from "../inputs/ProductVariantsInput";
+
+import ProductxOptionsInput from "../inputs/ProductVariantsInput/ProductxOptionsInput";
+import {xvalidator as ProductxOptionsInputValidator} from "../inputs/ProductVariantsInput"
+
+//commented variants end
 import ProductTypeInput, {info as ProductTypeInputInfo} from "../inputs/ProductTypeInput";
 
 import Input from "~/ui/inputs/Input";
@@ -18,13 +24,16 @@ import Price from "~/ui/inputs/Price";
 import FormControl from "~/ui/form/FormControl";
 import BadgeColorRadio from "~/ui/inputs/BadgeColorRadio";
 
+// import WholesalesInput from "../inputs/Wholesales";
+
+
 
 interface Props {
   defaultValues?: Partial<Product>;
   categories: Product["category"][];
   brands: Product["brand"][];
   onSubmit: (values: Partial<Product>) => void;
-  children: (options: {
+  children: (xoptions: {
     form: JSX.Element;
     isLoading: boolean;
     submit: (e?: React.BaseSyntheticEvent<object, any, any> | undefined) => Promise<void>;
@@ -100,6 +109,19 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
               />
             </FormControl>
             <FormControl
+              error={errors.description && "La descripción no puede ser mayor a 1400 caracteres"}
+              help="Máximo 1400 caracteres"
+              label="Descripción"
+              name="description"
+            >
+              <Textarea
+                ref={register({maxLength: 1400})}
+                maxLength={1400}
+                name="description"
+                placeholder="Uso rudo pesado."
+              />
+            </FormControl>
+            <FormControl
               isRequired
               error={errors.brand && "Este campo es requerido"}
               help="Escribe ó selecciona una marca"
@@ -121,30 +143,25 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
               </Stack>
             </FormControl>
             <FormControl
-              error={errors.description && "La descripción no puede ser mayor a 1400 caracteres"}
-              help="Máximo 1400 caracteres"
-              label="Descripción"
-              name="description"
+              isRequired
+              error={errors.category && "Este campo es requerido"}
+              help="Escribe ó selecciona una categoría"
+              label="Categoría de producto"
+              name="category"
             >
-              <Textarea
-                ref={register({maxLength: 1400})}
-                maxLength={1400}
-                name="description"
-                placeholder="Uso rudo pesado."
-              />
-            </FormControl>
-            <FormControl
-              error={errors.keywords && "Las keywords no pueden ser mayor a 1400 caracteres"}
-              help="Palabras adicionales que ayuden a la busqueda del producto"
-              label="Keywords"
-              name="keywords"
-            >
-              <Input
-                ref={register({maxLength: 1400})}
-                maxLength={1400}
-                name="keywords"
-                placeholder="Palabras separadas por espacios"
-              />
+              <Stack isInline spacing={2}>
+                <Input ref={register({required: true})} name="category" placeholder="Categoría" />
+                {Boolean(categories.length) && (
+                  <Select data-test-id="category-select" onChange={setCategory}>
+                    <option value="">Cargar</option>
+                    {categories.map((category) => (
+                      <option key={category} value={category}>
+                        {category}
+                      </option>
+                    ))}
+                  </Select>
+                )}
+              </Stack>
             </FormControl>
             <FormControl
               isRequired
@@ -160,40 +177,75 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
               />
             </FormControl>
             {!["ask","variant"].includes(values.type) && (
-              <Stack isInline spacing={2}>
-                <FormControl
-                  isRequired
-                  error={errors.price && "Este campo es requerido"}
-                  flex={1}
-                  help="Precio principal"
-                  label="Precio final"
-                  name="price"
-                >
-                  <Price
-                    ref={register({required: true})}
-                    name="price"
-                    placeholder="200"
-                    rounded="md"
-                  />
-                </FormControl>
-                {values.type === "promotional" && (
+              <>
+                <Stack isInline spacing={2}>
                   <FormControl
                     isRequired
-                    error={errors.originalPrice && "Este valor es requerido"}
+                    error={errors.price && "Este campo es requerido"}
                     flex={1}
-                    help="Valor sin promoción"
-                    label="Precio original"
-                    name="originalPrice"
+                    help="Precio principal"
+                    label="Precio final"
+                    name="price"
                   >
                     <Price
                       ref={register({required: true})}
-                      name="originalPrice"
-                      placeholder="150"
+                      name="price"
+                      placeholder="200"
                       rounded="md"
                     />
                   </FormControl>
+                  {values.type === "promotional" && (
+                    <FormControl
+                      isRequired
+                      error={errors.originalPrice && "Este valor es requerido"}
+                      flex={1}
+                      help="Valor sin promoción"
+                      label="Precio original"
+                      name="originalPrice"
+                    >
+                      <Price
+                        ref={register({required: true})}
+                        name="originalPrice"
+                        placeholder="150"
+                        rounded="md"
+                      />
+                    </FormControl>
+                  )}
+                </Stack>              
+                <FormControl 
+                  error={errors.featured?.message}
+                  name="wholesale"
+                  help="Al activar esta opcion puedes colocar precios de acuerdo a la cantidad de pedido"
+                  mt={4}
+                  mb={2}
+                >
+                  <Controller
+                    as={SwitchInput}
+                    color="primary"
+                    control={control}
+                    defaultValue={false}
+                    display="block"
+                    name="wholesale"
+                    label="Tengo precios al por mayor"
+                  />
+                </FormControl>
+                {values.wholesale && (
+                  <Stack>
+                    <FormControl name="xoptions">
+                      <Controller
+                        as={ProductxOptionsInput}
+                        control={control}
+                        defaultValue={[]}
+                        error={(errors.xoptions as unknown) as FieldError}
+                        name="xoptions"
+                        rules={{
+                          validate: ProductxOptionsInputValidator,
+                        }}
+                      />
+                    </FormControl>
+                  </Stack>
                 )}
-              </Stack>
+              </>
             )}
             <Divider />
             <Stack isInline spacing={2}>
@@ -218,7 +270,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 isRequired
                 error={errors.numPiezas && "Este valor es requerido"}
                 flex={1}
-                help="Ej: 100 si desea sumar al carrito por cientos"
+                help="Ej: 12 y se sumarán por docenas al carrito"
                 label="Multiplo al agregar"
                 name="numPiezas"
               >
@@ -264,25 +316,17 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
             </Stack>
             <Divider />
             <FormControl
-              isRequired
-              error={errors.category && "Este campo es requerido"}
-              help="Escribe ó selecciona una categoría"
-              label="Categoría"
-              name="category"
+              error={errors.keywords && "Las keywords no pueden ser mayor a 1400 caracteres"}
+              help="Palabras adicionales que ayuden a la busqueda del producto"
+              label="Keywords"
+              name="keywords"
             >
-              <Stack isInline spacing={2}>
-                <Input ref={register({required: true})} name="category" placeholder="Categoría" />
-                {Boolean(categories.length) && (
-                  <Select data-test-id="category-select" onChange={setCategory}>
-                    <option value="">Cargar</option>
-                    {categories.map((category) => (
-                      <option key={category} value={category}>
-                        {category}
-                      </option>
-                    ))}
-                  </Select>
-                )}
-              </Stack>
+              <Input
+                ref={register({maxLength: 1400})}
+                maxLength={1400}
+                name="keywords"
+                placeholder="Palabras separadas por espacios"
+              />
             </FormControl>
             <FormControl error={errors.featured?.message} name="featured">
               <Controller
@@ -295,8 +339,8 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 name="featured"
               />
             </FormControl>
-            {/*<Divider />
-            <FormControl info={<ProductVariantsInputInfo />} label="Variantes" name="options">
+            <Divider />
+            {/*<FormControl info={<ProductVariantsInputInfo />} label="Variantes" name="options">
               <Controller
                 as={ProductVariantsInput}
                 control={control}
