@@ -23,6 +23,7 @@ import {useTenant} from "~/tenant/hooks";
 import {usePrice} from "~/i18n/hooks";
 import {getProductSaving} from "../../selectors"
 
+import {getxOptionsPriceRange} from "~/product/selectors";
 
 interface Props extends Omit<IDrawer, "children"> {
   onSubmit: (product: Product, options: Variant[], count: number, note: string) => void;
@@ -39,6 +40,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
   // const toast = useToast();
   const {flags} = useTenant();
   // {{ base: product.xoptions.length+1 === 1 ? 1 : product.xoptions.length+1 === 2 ? 2 : product.xoptions.length+1 === 3 ? 3 : 2}}
+  const [min, ] = getxOptionsPriceRange(product.price, product.xoptions, product.mqo);
   const numPriceColums = () => {
     // let columns = 0
     if (product.mqo !== product.xoptions[0].quantity) {
@@ -281,6 +283,31 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                         <Text fontSize="sm" textAlign="center">
                           Pedido mín.: {product.mqo} {product.mqo > 1 ? 'Unidades' : 'Unidad'}
                         </Text>
+                        {product.type === "promotional" && (
+                          <Box textAlign="center" mb={2}>
+                            <Text
+                              display="inline-flex"
+                              color="gray.500"
+                              fontSize="sm"
+                              fontWeight={800}
+                            >
+                              PRECIO REGULAR:
+                            </Text>
+                            <Text
+                              display="inline-flex"
+                              color="gray.500"
+                              fontSize="md"
+                              fontWeight={800}
+                              ml={1}
+                              textDecoration="line-through"
+                            >
+                              {product.originalPrice ? `${p(product.originalPrice)}` : ''}
+                            </Text>
+                            <Box m="auto" d="inline-flex" borderWidth={2} borderRadius='lg' borderColor='black' px={2} py={0} fontWeight={600}>
+                              {`USTED GANA HASTA.. ${p(product.originalPrice - min)}`}
+                            </Box>
+                          </Box>
+                        )}
                       </>
                     )}
 

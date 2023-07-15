@@ -197,14 +197,17 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                   {values.type === "promotional" && (
                     <FormControl
                       isRequired
-                      error={errors.originalPrice && "Este valor es requerido"}
+                      error={errors.originalPrice && "Debe ser mayor a Precio final"}
                       flex={1}
-                      help="Valor sin promoción"
-                      label="Precio original"
+                      help="Precio sin promoción"
+                      label="Precio regular"
                       name="originalPrice"
                     >
                       <Price
-                        ref={register({required: true})}
+                        ref={register({
+                          required: true,
+                          validate: (value) => value > values.price,
+                        })}
                         name="originalPrice"
                         placeholder="150"
                         rounded="md"
