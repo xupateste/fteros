@@ -288,7 +288,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                             <Text
                               display="inline-flex"
                               color="gray.500"
-                              fontSize="sm"
+                              fontSize="xs"
                               fontWeight={800}
                             >
                               PRECIO REGULAR:
@@ -296,15 +296,15 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                             <Text
                               display="inline-flex"
                               color="gray.500"
-                              fontSize="md"
+                              fontSize="sm"
                               fontWeight={800}
                               ml={1}
                               textDecoration="line-through"
                             >
                               {product.originalPrice ? `${p(product.originalPrice)}` : ''}
                             </Text>
-                            <Box m="auto" d="inline-flex" borderWidth={2} borderRadius='lg' borderColor='black' px={2} py={0} fontWeight={600}>
-                              {`USTED GANA HASTA.. ${p(product.originalPrice - min)}`}
+                            <Box d="inline-flex" ml={2} fontSize="xs" borderWidth={2} borderRadius='lg' borderColor='black' px={1} py={0} fontWeight={600}>
+                              {`USTED GANA.. ${p(product.originalPrice - min)}`}
                             </Box>
                           </Box>
                         )}
