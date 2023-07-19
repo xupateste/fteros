@@ -206,7 +206,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                       <Price
                         ref={register({
                           required: true,
-                          validate: (value) => value > values.price,
+                          validate: (value) => Number(value) > Number(values.price),
                         })}
                         name="originalPrice"
                         placeholder="150"
