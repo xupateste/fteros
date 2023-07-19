@@ -91,12 +91,30 @@ const ProductProvider: React.FC<Props> = ({initialValues, initialOrders, childre
         });
       })
       .catch(() => {
-        toast({
-          title: "Error",
-          description:
-            "Hubo un error actualizando el producto, refresca la página e intenta nuevamente",
-          status: "error",
-        });
+        api
+          .update(tenant.id, casted)
+          .then(() => {
+            setProducts((products) =>
+              products.map((_product) =>
+                _product.id === casted.id ? {..._product, ...casted} : _product,
+              ),
+            );
+            console.log("second chance done")
+            toast({
+              title: "Producto actualizado",
+              description: "Tu producto fue actualizado correctamente",
+              status: "success",
+            });
+          })
+          .catch(() => {
+            console.log("second chance error")
+            toast({
+              title: "Error",
+              description:
+                "Hubo un error actualizando el producto, refresca la página e intenta nuevamente",
+              status: "error",
+            });
+          });
       });
   }
 
