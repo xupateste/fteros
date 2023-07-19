@@ -277,15 +277,15 @@ const Overview: React.FC<Props> = ({
                     borderWidth="1px"
                     borderColor="gray.100"
                     rounded="md">
-                    <Flex justifyContent="space-between" color="gray.700">
+                    <Flex justifyContent="space-between" color="gray.700" lineHeight={1}>
                       <Text fontSize="md" alignSelf="center">Subtotal</Text>
                       <Text fontSize="lg" alignSelf="center">{p(Number(total)+Number(totalSaving))}</Text>
                     </Flex>
-                    <Flex justifyContent="space-between" color="gray.700">
+                    <Flex justifyContent="space-between" color="gray.700" lineHeight={1}>
                       <Text fontSize="md" alignSelf="center">Descuentos</Text>
                       <Text fontSize="lg" alignSelf="center">{totalSaving ? "-"+p(totalSaving) : '—'}</Text>
                     </Flex>
-                    <Flex justifyContent="space-between">
+                    <Flex justifyContent="space-between" lineHeight={1}>
                       <Text as="b" fontSize="lg" alignSelf="center">{t("cart.estimatedTotal")}</Text>
                       <Text as="b" fontSize="xl" alignSelf="center">{p(total)}</Text>
                     </Flex>
