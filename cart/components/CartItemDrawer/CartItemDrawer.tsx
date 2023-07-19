@@ -304,7 +304,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                               {product.originalPrice ? `${p(product.originalPrice)}` : ''}
                             </Text>
                             <Box d="inline-flex" ml={2} fontSize="xs" borderWidth={2} borderRadius='lg' borderColor='black' px={1} py={0} fontWeight={600}>
-                              {`USTED GANA.. ${p(product.originalPrice - min)}`}
+                              {`GANAS HASTA.. ${p(product.originalPrice - min)}`}
                             </Box>
                           </Box>
                         )}
