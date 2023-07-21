@@ -234,7 +234,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                           </Flex>
                         )}
                         <Text fontSize="sm" textAlign="left">
-                          Pedido mín.: {product.mqo} {product.mqo > 1 ? 'Unidades' : 'Unidad'}
+                          Pedido mín.: {product.mqo} {product.mqo > 1 ? 'Piezas' : 'Pieza'}
                         </Text>
                       </Stack>
                     )}
@@ -251,7 +251,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                             >
                               {`${p(product.price)}`}
                               <Box fontWeight={500} color="gray.700" fontSize="xs" mt="-6px">
-                                {`${product.mqo} - ${product.xoptions[0].quantity - 1} unidades`}
+                                {`${product.mqo} - ${product.xoptions[0].quantity - 1} piezas`}
                               </Box>
                             </Box>
                           )}
@@ -269,19 +269,19 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                                 {`${p(xoption.price)}`}
                                 {next && (
                                   <Box fontWeight={500} color="gray.700" fontSize="xs" mt="-6px">
-                                    {`${xoption.quantity} - ${next.quantity - 1} unidades`}
+                                    {`${xoption.quantity} - ${next.quantity - 1} piezas`}
                                   </Box>
                                 )}
                                 {!next && (
                                   <Box fontWeight={500} color="gray.700" fontSize="xs" mt="-6px">
-                                    {`≥ ${xoption.quantity} unidades`}
+                                    {`≥ ${xoption.quantity} piezas`}
                                   </Box>
                                 )}
                               </Box>
                           )})}
                         </SimpleGrid>
                         <Text fontSize="sm" textAlign="center">
-                          Pedido mín.: {product.mqo} {product.mqo > 1 ? 'Unidades' : 'Unidad'}
+                          Pedido mín.: {product.mqo} {product.mqo > 1 ? 'Piezas' : 'Pieza'}
                         </Text>
                         {product.type === "promotional" && (
                           <Box textAlign="center" mb={2}>
