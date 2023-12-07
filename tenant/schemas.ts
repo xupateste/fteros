@@ -118,6 +118,7 @@ export default {
       facebook: yup.string().nullable(),
       twitter: yup.string().nullable(),
       keywords: yup.string().nullable(),
+      promoText: yup.string().nullable(),
       banner: yup.string().nullable(),
       description: yup.string().nullable(),
       country: yup.string().nullable(),
@@ -132,6 +133,7 @@ export default {
       hook: yup.string().nullable(),
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
+      showMqo: yup.boolean().nullable(),
       mercadopago: mercadopago.lazy,
     }),
     update: yup.object<Partial<ServerTenant>>({
@@ -149,6 +151,7 @@ export default {
       facebook: yup.string().nullable(),
       twitter: yup.string().nullable(),
       keywords: yup.string().nullable(),
+      promoText: yup.string().nullable(),
       banner: yup.string().nullable(),
       description: yup.string().nullable(),
       country: yup.string().nullable(),
@@ -163,6 +166,7 @@ export default {
       hook: yup.string().nullable(),
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
+      showMqo: yup.boolean().nullable(),
       mercadopago: mercadopago.schema.nullable().strip(true),
     }),
     create: yup.object<ServerTenant>({
@@ -180,6 +184,7 @@ export default {
       facebook: yup.string(),
       twitter: yup.string(),
       keywords: yup.string().default(DEFAULT_CLIENT_TENANT.keywords),
+      promoText: yup.string().default(DEFAULT_CLIENT_TENANT.promoText),
       banner: yup.string(),
       description: yup.string().default(DEFAULT_CLIENT_TENANT.description),
       country: yup.string().default(DEFAULT_CLIENT_TENANT.country),
@@ -194,6 +199,7 @@ export default {
       hook: yup.string(),
       pixel: yup.string(),
       ga: yup.string(),
+      showMqo: yup.boolean().default(DEFAULT_CLIENT_TENANT.showMqo),
       mercadopago: mercadopago.schema.default(DEFAULT_CLIENT_TENANT.mercadopago),
     }),
     mercadopago: yup.object<Pick<ServerTenant, "mercadopago">>({
@@ -216,6 +222,7 @@ export default {
       facebook: yup.string().default("").nullable(),
       twitter: yup.string().default("").nullable(),
       keywords: yup.string().default("").nullable(),
+      promoText: yup.string().default("").nullable(),
       banner: yup.string().default("").nullable(),
       description: yup.string().default("").nullable(),
       country: yup.string().default(DEFAULT_CLIENT_TENANT.country).nullable(),
@@ -230,6 +237,7 @@ export default {
       hook: yup.string().default("").nullable(),
       pixel: yup.string().default("").nullable(),
       ga: yup.string().default("").nullable(),
+      showMqo: yup.boolean().default(DEFAULT_CLIENT_TENANT.showMqo),
       mercadopago: yup
         .boolean()
         .transform((mercadopago) => Boolean(mercadopago?.token))
@@ -250,6 +258,7 @@ export default {
       facebook: yup.string().nullable(),
       twitter: yup.string().nullable(),
       keywords: yup.string().nullable(),
+      promoText: yup.string().nullable(),
       banner: yup.string().nullable(),
       description: yup.string().nullable(),
       country: yup.string().nullable(),
@@ -264,6 +273,7 @@ export default {
       hook: yup.string().nullable(),
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
+      showMqo: yup.boolean().nullable(),
       mercadopago: yup.boolean().strip(true),
     }),
     create: yup.object<ClientTenant>({
@@ -281,6 +291,7 @@ export default {
       facebook: yup.string(),
       twitter: yup.string(),
       keywords: yup.string().default(DEFAULT_CLIENT_TENANT.keywords),
+      promoText: yup.string().default(DEFAULT_CLIENT_TENANT.promoText),
       banner: yup.string(),
       description: yup.string().default(DEFAULT_CLIENT_TENANT.description),
       country: yup.string().default(DEFAULT_CLIENT_TENANT.country),
@@ -295,6 +306,7 @@ export default {
       hook: yup.string(),
       pixel: yup.string(),
       ga: yup.string(),
+      showMqo: yup.boolean().default(DEFAULT_CLIENT_TENANT.showMqo),
       mercadopago: yup.boolean().default(DEFAULT_CLIENT_TENANT.mercadopago),
     }),
   },

@@ -4,6 +4,7 @@ import {Box, Text, Flex, Stack, FlexProps} from "@chakra-ui/core";
 import Image from "~/ui/feedback/Image";
 import {Product} from "~/product/types";
 import {usePrice} from "~/i18n/hooks";
+import {useTenant} from "~/tenant/hooks";
 //import {getVariantsPriceRange} from "~/product/selectors";
 import {getxOptionsPriceRange} from "~/product/selectors";
 
@@ -19,6 +20,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
   const {image, title, price, originalPrice, type, badgeText, badgeColor, wholesale, mqo} = product;
   // const [min, max] = getVariantsPriceRange(product.options);
   const [min, max] = getxOptionsPriceRange(price, product.xoptions, mqo);
+  const {promoText, showMqo} = useTenant();
 
   function formattedImg(image) {
     const position = image.indexOf('/upload/') + 8;
@@ -103,9 +105,11 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
               {p(price)}
             </Text>
-            <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
-              {`Pedido mín.: ${mqo} unid.`}
-            </Text>
+            {showMqo && (
+              <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                {`Pedido mín.: ${mqo} unid.`}
+              </Text>
+            )}
           </Stack>
         )}
         {(type === "promotional" && !wholesale) && (
@@ -118,11 +122,13 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
                 {p(originalPrice)}
               </Text>
             </Stack>
-            <Flex>
-              <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
-                {`USTED GANA.. ${p(originalPrice - price)}`}
-              </Box>
-            </Flex>
+            {promoText && (
+              <Flex>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
+                  {`${promoText} ${p(originalPrice - price)}`}
+                </Box>
+              </Flex>
+            )}
           </>
         )}
         {(wholesale && !["unavailable", "ask"].includes(type)) && (
@@ -130,9 +136,11 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
               {p(min) + " - " + p(max)}
             </Text>
-            <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
-              {`Pedido mín.: ${mqo} unid.`}
-            </Text>
+            {showMqo && (
+              <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                {`Pedido mín.: ${mqo} unid.`}
+              </Text>
+            )}
           </Stack>
         )}
         {type === "unavailable" && (
@@ -150,7 +158,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             </Stack>
             <Flex>
               <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
-                {`USTED GANA.. ${p(originalPrice - price)}`}
+                {`${promoText} ${p(originalPrice - price)}`}
               </Box>
             </Flex>
           </>

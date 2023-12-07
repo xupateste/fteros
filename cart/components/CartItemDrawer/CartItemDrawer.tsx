@@ -38,7 +38,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
   const t = useTranslation();
   const log = useAnalytics();
   // const toast = useToast();
-  const {flags} = useTenant();
+  const {flags, promoText, showMqo} = useTenant();
   // {{ base: product.xoptions.length+1 === 1 ? 1 : product.xoptions.length+1 === 2 ? 2 : product.xoptions.length+1 === 3 ? 3 : 2}}
   const [min, ] = getxOptionsPriceRange(product.price, product.xoptions, product.mqo);
   const numPriceColums = () => {
@@ -229,13 +229,15 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                         {product.type === "promotional" && (
                           <Flex>
                             <Box borderWidth={2} borderRadius='lg' borderColor='black' px={3} py={1} fontWeight={600}>
-                              {`USTED GANA.. ${p(product.originalPrice - product.price)}`}
+                              {`${promoText} ${p(product.originalPrice - product.price)}`}
                             </Box>
                           </Flex>
                         )}
-                        <Text fontSize="sm" textAlign="left">
-                          Pedido mín.: {product.mqo} {product.mqo > 1 ? 'Piezas' : 'Pieza'}
-                        </Text>
+                        {showMqo && (
+                          <Text fontSize="sm" textAlign="left">
+                            Pedido mín.: {product.mqo} {product.mqo > 1 ? 'Piezas' : 'Pieza'}
+                          </Text>
+                        )}
                       </Stack>
                     )}
                     {(["promotional", "available"].includes(product.type) && product.wholesale) && (
@@ -304,7 +306,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                               {product.originalPrice ? `${p(product.originalPrice)}` : ''}
                             </Text>
                             <Box d="inline-flex" ml={2} fontSize="xs" borderWidth={2} borderRadius='lg' borderColor='black' px={1} py={0} fontWeight={600}>
-                              {`USTED GANA.. ${p(product.originalPrice - min)}`}
+                              {`${promoText} ${p(product.originalPrice - min)}`}
                             </Box>
                           </Box>
                         )}

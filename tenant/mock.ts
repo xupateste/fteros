@@ -24,9 +24,11 @@ const mock = {
         phonePersonal: faker.phone.phoneNumber("##########"),
         category: CATEGORIES[faker.random.number(CATEGORIES.length - 1)],
         highlight: faker.lorem.words(10),
+        promoText: faker.lorem.words(10),
         hook: "http://some.url",
         pixel: "1000",
         ga: "ASD123",
+        showMqo: false,
         country: "AR",
         flags: ["mercadopago", "bulk", "advanced", "note"],
         location: {

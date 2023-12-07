@@ -6,6 +6,7 @@ import {Product} from "~/product/types";
 import {usePrice} from "~/i18n/hooks";
 import TruncatedText from "~/ui/feedback/TruncatedText";
 //import {getVariantsPriceRange} from "~/product/selectors";
+import {useTenant} from "~/tenant/hooks";
 import {getxOptionsPriceRange} from "~/product/selectors";
 
 interface Props extends Omit<FlexProps, "onClick"> {
@@ -21,6 +22,7 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
   //const [min, max] = getVariantsPriceRange(product.options);
   const [min, max] = getxOptionsPriceRange(price, product.xoptions, mqo);
 
+  const {promoText} = useTenant()
 
   function handleClick() {
     onClick && onClick(product);
@@ -95,7 +97,7 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
             </Stack>
             <Flex>
               <Box borderWidth={2} fontSize={{base:"xs", md:"sm"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
-                {`USTED GANA.. ${p(originalPrice - price)}`}
+                {`${promoText} ${p(originalPrice - price)}`}
               </Box>
             </Flex>
           </>

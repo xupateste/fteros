@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import {Icon, Text, Flex, InputGroup, InputLeftElement, Divider, Box} from "@chakra-ui/core";
 
 import ProductContext from "./context";
@@ -159,6 +159,8 @@ export function useFilteredProducts(selector?: (product: Product) => boolean) {
 }
 
 export function useFilteredProductsScroll(selector?: (product: Product) => boolean) {
+  const searchInputRef = useRef<HTMLInputElement>(null);;
+
   const products = useProducts();
   const t = useTranslation();
   const [query, setQuery] = React.useState("");
@@ -200,6 +202,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
 
   React.useEffect(() => {
     // setQuery(catquery);
+    searchInputRef.current.value = ""
     handleCategoryChange(catquery)
   }, [catquery]);
 
@@ -218,7 +221,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
   const isMobile = width <= 768;
 
   function handleCategoryChange(category: Product["category"]) {
-    setQuery("");
+    // setQuery("");
     if (category === "TODOS") {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else if (category) {
@@ -235,10 +238,21 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
 
 
   function onChangeSearchInput(value) {
-    window.scrollTo({ top: 0, behavior: 'smooth' })
-    setQuery(value)
+    if(query != value) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setQuery(value)
+    }
   }
 
+  function handleEnterKey(value) {
+    if(query != value) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setQuery(value)
+    }
+  }
+
+
+  
   return {
     products: (query || catquery==="TODOS") ? productsBySearch.slice(0,getQtyProdsTypeOf(typeTenant)) : productsByCategory.slice(0,getQtyProdsTypeOf(typeTenant)),
     filters: (
@@ -252,12 +266,14 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
               top="inherit"
             />
             <Input
+              ref={searchInputRef}
               fontSize="md"
               paddingLeft={10}
               placeholder={t("filters.search")}
-              value={query}
+              // value={query}
               variant="unstyled"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
+              onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
+              onKeyUp={(e) => e.key === 'Enter' && handleEnterKey(e.target.value)}
             />
           </InputGroup>
         </Flex>
@@ -283,7 +299,7 @@ export function useFilteredProductsWithCode(selector?: (product: Product) => boo
   const t = useTranslation();
   const [query, setQuery] = React.useState("");
   const filtered = selector ? products.filter(selector) : products;
-  const productsBySearch = React.useMemo(() => filterBy(filtered, {code: query, title:query, description:query}), [
+  const productsBySearch = React.useMemo(() => filterBy(filtered, {code:query, title:query, keywords:query, badgeText:query, brand:query}), [
     query,
     filtered,
   ]);
@@ -307,6 +323,20 @@ export function useFilteredProductsWithCode(selector?: (product: Product) => boo
     }
   }
 
+  function onChangeSearchInput(value) {
+    if(query != value) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setQuery(value)
+    }
+  }
+  
+  function handleEnterKey(value) {
+    if(query != value) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+      setQuery(value)
+    }
+  }
+
   return {
     products: productsBySearch,
     filters: (
@@ -321,9 +351,7 @@ export function useFilteredProductsWithCode(selector?: (product: Product) => boo
           value=""
           variant="unstyled"
           width="auto"
-          onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
-            handleCategoryChange(e.target.value)
-          }
+          onChange={(e: React.ChangeEvent<HTMLSelectElement>) => handleCategoryChange(e.target.value)}
         >
           {categories.map(([category, count]) => (
             <option key={category} value={category}>
@@ -343,9 +371,11 @@ export function useFilteredProductsWithCode(selector?: (product: Product) => boo
             fontSize="md"
             paddingLeft={10}
             placeholder={t("filters.search")}
-            value={query}
+            // value={query}
             variant="unstyled"
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+            // onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
+            onKeyUp={(e) => e.key === 'Enter' && handleEnterKey(e.target.value)}
           />
         </InputGroup>
       </Flex>

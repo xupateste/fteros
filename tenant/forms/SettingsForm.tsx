@@ -14,6 +14,8 @@ import ColorRadio from "~/ui/inputs/ColorRadio";
 import ImageInput from "~/ui/inputs/Image";
 import FormControl from "~/ui/form/FormControl";
 import MPConnect from "~/payment/inputs/MPConnect";
+import SwitchInput from "~/ui/inputs/Switch";
+
 //import PlaceInput from "~/ui/inputs/Place";
 import {COUNTRIES} from "~/i18n/constants";
 import {useTranslation} from "~/i18n/hooks";
@@ -259,6 +261,37 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 control={control}
                 defaultValue="portrait"
                 name="layout"
+              />
+            </FormControl>
+            <FormControl
+              error={errors.promoText && "No debe ser mayor a 20 caracteres"}
+              label="Etiqueta en Precio"
+              help="Una palabra o frase para destacar el precio promocional"
+              name="promoText"
+            >
+              <Input
+                ref={register({maxLength: 20})}
+                defaultValue=""
+                maxLength={20}
+                name="promoText"
+                placeholder="AHORRAS"
+              />
+            </FormControl>
+            <FormControl 
+              error=""
+              name="showMqo"
+              help="Al activar esta opcion tus clientes verán la cantidad mínima de compra"
+              mt={4}
+              mb={2}
+            >
+              <Controller
+                as={SwitchInput}
+                color="primary"
+                control={control}
+                defaultValue={false}
+                display="block"
+                name="showMqo"
+                label="Mostrar cantidad mínima de pedido"
               />
             </FormControl>
           </Stack>
