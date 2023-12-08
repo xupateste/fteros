@@ -294,6 +294,23 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 label="Mostrar cantidad mínima de pedido"
               />
             </FormControl>
+            <FormControl 
+              error=""
+              name="fakeVisitors"
+              help="Tus clientes verán visitas aleatorias en tus productos"
+              mt={4}
+              mb={2}
+            >
+              <Controller
+                as={SwitchInput}
+                color="primary"
+                control={control}
+                defaultValue={false}
+                display="block"
+                name="fakeVisitors"
+                label="Activar visitantes aleatorios"
+              />
+            </FormControl>
           </Stack>
           <Divider />
           <Stack spacing={4}>

@@ -29,6 +29,7 @@ const mock = {
         pixel: "1000",
         ga: "ASD123",
         showMqo: false,
+        fakeVisitors: false,
         country: "AR",
         flags: ["mercadopago", "bulk", "advanced", "note"],
         location: {

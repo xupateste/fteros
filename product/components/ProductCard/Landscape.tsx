@@ -95,11 +95,13 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
                 {p(originalPrice)}
               </Text>
             </Stack>
-            <Flex>
-              <Box borderWidth={2} fontSize={{base:"xs", md:"sm"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
-                {`${promoText} ${p(originalPrice - price)}`}
-              </Box>
-            </Flex>
+            {promoText && (
+              <Flex>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"sm"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
+                  {`${promoText} ${p(originalPrice - price)}`}
+                </Box>
+              </Flex>
+            )}
           </>
         )}
         {(wholesale && !["unavailable", "ask"].includes(type)) && (

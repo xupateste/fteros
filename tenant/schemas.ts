@@ -134,6 +134,7 @@ export default {
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
       showMqo: yup.boolean().nullable(),
+      fakeVisitors: yup.boolean().nullable(),
       mercadopago: mercadopago.lazy,
     }),
     update: yup.object<Partial<ServerTenant>>({
@@ -167,6 +168,7 @@ export default {
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
       showMqo: yup.boolean().nullable(),
+      fakeVisitors: yup.boolean().nullable(),
       mercadopago: mercadopago.schema.nullable().strip(true),
     }),
     create: yup.object<ServerTenant>({
@@ -200,6 +202,7 @@ export default {
       pixel: yup.string(),
       ga: yup.string(),
       showMqo: yup.boolean().default(DEFAULT_CLIENT_TENANT.showMqo),
+      fakeVisitors: yup.boolean().default(DEFAULT_CLIENT_TENANT.fakeVisitors),
       mercadopago: mercadopago.schema.default(DEFAULT_CLIENT_TENANT.mercadopago),
     }),
     mercadopago: yup.object<Pick<ServerTenant, "mercadopago">>({
@@ -238,6 +241,7 @@ export default {
       pixel: yup.string().default("").nullable(),
       ga: yup.string().default("").nullable(),
       showMqo: yup.boolean().default(DEFAULT_CLIENT_TENANT.showMqo),
+      fakeVisitors: yup.boolean().default(DEFAULT_CLIENT_TENANT.fakeVisitors),
       mercadopago: yup
         .boolean()
         .transform((mercadopago) => Boolean(mercadopago?.token))
@@ -274,6 +278,7 @@ export default {
       pixel: yup.string().nullable(),
       ga: yup.string().nullable(),
       showMqo: yup.boolean().nullable(),
+      fakeVisitors: yup.boolean().nullable(),
       mercadopago: yup.boolean().strip(true),
     }),
     create: yup.object<ClientTenant>({
@@ -307,6 +312,7 @@ export default {
       pixel: yup.string(),
       ga: yup.string(),
       showMqo: yup.boolean().default(DEFAULT_CLIENT_TENANT.showMqo),
+      fakeVisitors: yup.boolean().default(DEFAULT_CLIENT_TENANT.fakeVisitors),
       mercadopago: yup.boolean().default(DEFAULT_CLIENT_TENANT.mercadopago),
     }),
   },

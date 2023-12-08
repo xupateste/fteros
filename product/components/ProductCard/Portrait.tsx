@@ -107,7 +107,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             </Text>
             {showMqo && (
               <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
-                {`Pedido mín.: ${mqo} unid.`}
+                {`Pedido mín.: ${mqo} pza.`}
               </Text>
             )}
           </Stack>
@@ -138,7 +138,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             </Text>
             {showMqo && (
               <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
-                {`Pedido mín.: ${mqo} unid.`}
+                {`Pedido mín.: ${mqo} pza.`}
               </Text>
             )}
           </Stack>
@@ -156,11 +156,12 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
                 {p(originalPrice)}
               </Text>
             </Stack>
-            <Flex>
-              <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
-                {`${promoText} ${p(originalPrice - price)}`}
-              </Box>
-            </Flex>
+            {promoText && (
+              <Flex>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
+                  {`${promoText} ${p(originalPrice - price)}`}
+                </Box>
+              </Flex>)}
           </>
         )}
         {/*type === "variant" && (

@@ -14,6 +14,7 @@ export const DEFAULT_CLIENT_TENANT: Partial<ClientTenant> = {
   promoText: "AHORRAS",
   typeTenant: "test",
   showMqo: false,
+  fakeVisitors: false,
   flags: [],
   fields: [],
   mercadopago: false,

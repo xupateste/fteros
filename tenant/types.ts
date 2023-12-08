@@ -31,6 +31,7 @@ export interface ServerTenant {
   pixel?: string;
   ga?: string;
   showMqo?: boolean;
+  fakeVisitors?: boolean;
   createdAt: number;
   updatedAt: number; 
   layout?: "landscape" | "portrait";

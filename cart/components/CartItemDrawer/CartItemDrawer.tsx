@@ -1,5 +1,5 @@
 import React from "react";
-import {IDrawer, Text, Stack, Flex, Box, SimpleGrid} from "@chakra-ui/core";
+import {IDrawer, Text, Stack, Flex, Box, SimpleGrid, Divider} from "@chakra-ui/core";
 
 import SummaryButton from "../SummaryButton";
 
@@ -23,6 +23,8 @@ import {useTenant} from "~/tenant/hooks";
 import {usePrice} from "~/i18n/hooks";
 import {getProductSaving} from "../../selectors"
 
+import EyeIcon from "~/ui/icons/Eye";
+
 import {getxOptionsPriceRange} from "~/product/selectors";
 
 interface Props extends Omit<IDrawer, "children"> {
@@ -32,13 +34,14 @@ interface Props extends Omit<IDrawer, "children"> {
 
 const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props}) => {
   const [count, setCount] = React.useState(product.mqo ? product.mqo : 1);
+  const [number, setNumber] = React.useState(Math.floor(Math.random() * 5));
   const [note, setNote] = React.useState("");
   let mqo = (product.mqo ? product.mqo : 1)
   const p = usePrice();
   const t = useTranslation();
   const log = useAnalytics();
   // const toast = useToast();
-  const {flags, promoText, showMqo} = useTenant();
+  const {flags, promoText, showMqo, fakeVisitors} = useTenant();
   // {{ base: product.xoptions.length+1 === 1 ? 1 : product.xoptions.length+1 === 2 ? 2 : product.xoptions.length+1 === 3 ? 3 : 2}}
   const [min, ] = getxOptionsPriceRange(product.price, product.xoptions, product.mqo);
   const numPriceColums = () => {
@@ -116,6 +119,21 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
       log.viewProduct(product);
     }
   }, [product, log]);
+
+  React.useEffect(() => {
+    // create interval
+    const interval = setInterval(
+      // set number every 5s
+      () => setNumber(Math.floor(Math.random() * 17)),
+      5500
+    );
+    // clean up interval on unmount
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+
 
   // If we get here by any point, return null
   if (product.type === "hidden") return null;
@@ -226,7 +244,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                             </Text>
                           )}
                         </Box>
-                        {product.type === "promotional" && (
+                        {(product.type === "promotional" && promoText) && (
                           <Flex>
                             <Box borderWidth={2} borderRadius='lg' borderColor='black' px={3} py={1} fontWeight={600}>
                               {`${promoText} ${p(product.originalPrice - product.price)}`}
@@ -305,9 +323,11 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                             >
                               {product.originalPrice ? `${p(product.originalPrice)}` : ''}
                             </Text>
-                            <Box d="inline-flex" ml={2} fontSize="xs" borderWidth={2} borderRadius='lg' borderColor='black' px={1} py={0} fontWeight={600}>
-                              {`${promoText} ${p(product.originalPrice - min)}`}
-                            </Box>
+                            {promoText && (
+                              <Box d="inline-flex" ml={2} fontSize="xs" borderWidth={2} borderRadius='lg' borderColor='black' px={1} py={0} fontWeight={600}>
+                                {`${promoText} ${p(product.originalPrice - min)}`}
+                              </Box>
+                            )}
                           </Box>
                         )}
                       </>
@@ -400,6 +420,20 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                       >
                         {product.description}
                       </TruncatedText>
+                    )}
+                    <Divider/>
+                    {fakeVisitors && (
+                      <Stack
+                        color="black"
+                        isInline
+                        fontSize="sm"
+                        alignItems="center"
+                        fontWeight={300}
+                        marginBottom={6}
+                      >
+                        <EyeIcon size={14}/>
+                        <Text>{number} Personas están mirando este producto ahora!</Text>
+                      </Stack>
                     )}
                   </Stack>
                   {product.options?.length ? form : null}
