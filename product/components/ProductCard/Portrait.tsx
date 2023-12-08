@@ -124,7 +124,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             </Stack>
             {promoText && (
               <Flex>
-                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
                   {`${promoText} ${p(originalPrice - price)}`}
                 </Box>
               </Flex>
@@ -158,7 +158,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
             </Stack>
             {promoText && (
               <Flex>
-                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={1} py={0} fontWeight={600}>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
                   {`${promoText} ${p(originalPrice - price)}`}
                 </Box>
               </Flex>)}
