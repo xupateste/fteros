@@ -8,6 +8,8 @@ import TrashIcon from "~/ui/icons/Trash";
 import DuplicateIcon from "~/ui/icons/Duplicate";
 import Image from "~/ui/feedback/Image";
 import {usePrice} from "~/i18n/hooks";
+import RemoveAskModal from "./RemoveAskModal";
+
 //import {getVariantsPriceRange} from "~/product/selectors";
 
 interface Props extends Product {
@@ -20,15 +22,25 @@ const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
   const toast = useToast();
   const p = usePrice();
   //const [min, max] = getVariantsPriceRange(product.options);
+  const [isShown, setShown] = React.useState(false);
 
   async function handleRemove(product: Product["id"]) {
     setStatus("pending");
-
     onRemove(product).catch(() => {
       setStatus("init");
 
       toast({status: "error", title: "Error", description: "No se pudo borrar el producto"});
-    });
+    }); 
+  }
+
+  function handleSubmitFromRemoveAskModal(event: React.FormEvent<HTMLFormElement>, product: Product["id"]) {
+    event.stopPropagation();
+    handleRemove(product);
+    setShown(false);
+  }
+
+  function handleCloseRemoveAskModal() {
+    setShown(false)
   }
 
   function formattedImg(image) {
@@ -106,12 +118,17 @@ const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
             variant="ghost"
             onClick={(event) => {
               event.stopPropagation();
-
-              handleRemove(product.id);
+              // handleRemove(product.id);
+              setShown(true);
             }}
           />
         </Stack>
       </Box>
+      <RemoveAskModal
+        isShown={isShown}
+        onClose={handleCloseRemoveAskModal}
+        onSubmit={(event) => {handleSubmitFromRemoveAskModal(event, product.id)}}
+      />
     </Box>
   );
 };
