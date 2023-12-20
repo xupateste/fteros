@@ -43,7 +43,7 @@ const ProductsScreen: React.FC = () => {
   // const {products, filters} = useFilteredProducts((product) => product.type !== "hidden");
   const {products, filters} = useFilteredProductsScroll((product) => product.type !== "hidden");
   const productsAll = useProducts();
-  const {fields, layout, ...tenant} = useTenant();
+  const {fields, layout, featuredText,...tenant} = useTenant();
   const selected = React.useMemo(() => products.find((_product) => _product.slug === product), [
     products,
     product,
@@ -166,7 +166,7 @@ const ProductsScreen: React.FC = () => {
               <Box
                 backgroundColor="gray.50"
                 data-test-id="filters"
-                marginBottom={{base: 5, sm: 10}}
+                marginBottom={{base: 2, sm: 4}}
                 paddingX={4}
                 paddingY={1}
                 position="sticky"
@@ -177,41 +177,66 @@ const ProductsScreen: React.FC = () => {
               >
                 {filters}
               </Box>
-              <Box marginBottom={4} paddingX={{base: 4, sm: 0}}>
+              <Box marginBottom={4} >
                 <Stack margin="auto" spacing={5} width="100%">
                   {Boolean(products.length) ? (
-                    <Stack spacing={{base: 5, sm: 10}} width="100%">
-                      {Boolean(featuredProducts.length) && (
-                        <ProductsCarousel title={t("common.featured")} zIndex={0}>
-                          {featuredProducts.map((product) => (
-                            <ProductCard
-                              key={product.id}
-                              isRaised
-                              layout="portrait"
-                              width={{base:210, sm: 280}}
-                              product={product}
-                              onClick={() => handleSelect(product)}
-                            />
-                          ))}
-                        </ProductsCarousel>
-                      )}
-                      {productsByCategory.map(([category, products]) => {
-                        return (
-                          <PseudoBox key={category} as="section" id={category}>
-                            <ProductsGrid data-test-id="category" layout={layout} title={category} products={products}>
-                              {products.map((product) => (
+                    <>
+                      <Stack spacing={{base: 5, sm: 10}} width="100%">
+                        {Boolean(featuredProducts.length) && (
+                          <>
+                            <Stack
+                              isInline
+                              alignItems="center"
+                              fontSize="lg"
+                              fontWeight={900}
+                              spacing={2}
+                              px={4}
+                            >
+                              <Text
+                                as="h2"
+                                data-test-id="title"
+                                fontSize={{base: "xl", sm: "2xl"}}
+                                fontWeight={500}
+                                textTransform="capitalize"  
+                              >
+                                {featuredText ? featuredText : t("common.featured")}
+                              </Text>
+                              <Text fontSize="xl" color="gray.500">({featuredProducts.length})</Text>
+                            </Stack>
+                            <ProductsCarousel  zIndex={0}>
+                              {featuredProducts.map((product) => (
                                 <ProductCard
                                   key={product.id}
-                                  layout={layout}
+                                  isRaised
+                                  layout="portrait"
+                                  width={{base:210, sm: 280}}
                                   product={product}
                                   onClick={() => handleSelect(product)}
                                 />
                               ))}
-                            </ProductsGrid>
-                          </PseudoBox>
-                        );
-                      })}
-                    </Stack>
+                            </ProductsCarousel>
+                          </>
+                        )}
+                      </Stack>
+                      <Stack spacing={{base: 5, sm: 10}} width="100%" paddingX={{base: 4, sm: 0}}>
+                        {productsByCategory.map(([category, products]) => {
+                          return (
+                            <PseudoBox key={category} as="section" id={category}>
+                              <ProductsGrid data-test-id="category" layout={layout} title={category} products={products}>
+                                {products.map((product) => (
+                                  <ProductCard
+                                    key={product.id}
+                                    layout={layout}
+                                    product={product}
+                                    onClick={() => handleSelect(product)}
+                                  />
+                                ))}
+                              </ProductsGrid>
+                            </PseudoBox>
+                          );
+                        })}
+                      </Stack>
+                    </>
                   ) : (
                     <NoResults data-test-id="empty">{t("products.empty")}</NoResults>
                   )}

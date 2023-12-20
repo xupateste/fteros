@@ -6,6 +6,7 @@ import {Product} from "../../types";
 import {useToast} from "~/hooks/toast";
 import TrashIcon from "~/ui/icons/Trash";
 import DuplicateIcon from "~/ui/icons/Duplicate";
+import StarIcon from "~/ui/icons/Star";
 import Image from "~/ui/feedback/Image";
 import {usePrice} from "~/i18n/hooks";
 import RemoveAskModal from "./RemoveAskModal";
@@ -14,10 +15,11 @@ import RemoveAskModal from "./RemoveAskModal";
 
 interface Props extends Product {
   onEdit: (product: Product) => void;
+  onPromotion: (product: Product) => void;
   onRemove: (product: Product["id"]) => Promise<void>;
 }
 
-const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
+const ProductRow: React.FC<Props> = ({onEdit, onPromotion, onRemove, ...product}) => {
   const [status, setStatus] = React.useState("init");
   const toast = useToast();
   const p = usePrice();
@@ -91,6 +93,22 @@ const ProductRow: React.FC<Props> = ({onEdit, onRemove, ...product}) => {
       </Box>
       <Box as="td">
         <Stack isInline justifyContent="flex-end" spacing={1}>
+          <Tooltip aria-label="Promocionar producto" label="Promocionar producto" placement="left">
+            <IconButton
+              color={product.featured ? "yellow.300" : ""}
+              _hover={{color: "yellow.300", opacity: 1}}
+              alignSelf="flex-end"
+              aria-label="Promocionar producto"
+              icon={StarIcon}
+              opacity={product.featured ? 1 : 0.3}
+              size="md"
+              variant="ghost"
+              onClick={(event) => {
+                event.stopPropagation();
+                onPromotion({...product, promotionPrice: product.promotionPrice ? product.promotionPrice : product.price});
+              }}
+            />
+          </Tooltip>
           <Tooltip aria-label="Duplicar producto" label="Duplicar producto" placement="left">
             <IconButton
               _hover={{color: "primary.500", opacity: 1}}

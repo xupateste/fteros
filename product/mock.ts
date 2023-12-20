@@ -27,6 +27,12 @@ export default {
       isPreOrder: true,
       options: [],
       xoptions: [],
+      promotionText: "offer",
+      promotionDays: 1,
+      promotionExpireDate: faker.random.number(999999999),
+      promotionUnits: 0,
+      promotionPrice: 0,
+      promotionExpireText: "",
     };
   },
   get withoutImage(): Product {

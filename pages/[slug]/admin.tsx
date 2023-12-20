@@ -25,14 +25,14 @@ interface Props {
   products: Product[];
   contacts: Contact[];
   orders: any[];
+  timestamp: number;
 }
 
 interface Params extends ParsedUrlQuery {
   slug: ClientTenant["slug"];
 }
 
-const AdminRoute: React.FC<Props> = ({tenant, products, orders, contacts}) => {
-
+const AdminRoute: React.FC<Props> = ({tenant, products, orders, contacts, timestamp}) => {
   return (
     <TenantProvider initialValue={tenant}>
       {(tenant) => (
@@ -41,7 +41,7 @@ const AdminRoute: React.FC<Props> = ({tenant, products, orders, contacts}) => {
             <AdminLayout>
               <I18nProvider country={tenant.country}>
                 <SessionProvider>
-                  <AdminScreen />
+                  <AdminScreen timestamp={timestamp}/>
                 </SessionProvider>
               </I18nProvider>
             </AdminLayout>
@@ -81,8 +81,11 @@ export const getServerSideProps: GetServerSideProps<any, Params> = async functio
         contacts.map((contact) => contactSchemas.client.fetch.cast(contact, {stripUnknown: true})),
       );
 
+    // Get server timestamp
+    const timestamp = Number(tenantApi.timestamp);
+
     // Return props
-    return {props: {tenant, products, orders, contacts}};
+    return {props: {tenant, products, orders, contacts, timestamp}};
   } catch (err) {
     // If something failed report it to _app.tsx
     return {props: {statusCode: err?.status || context.res?.statusCode || 404}};

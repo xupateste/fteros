@@ -10,7 +10,7 @@ interface Props extends StackProps {
 }
 
 const ProductsGrid: React.FC<Props> = ({children, title, layout, products, ...props}) => (
-  <Stack pb={5} spacing={{base: 4, sm: 5}} {...props}>
+  <Stack pb={0} spacing={{base: 4, sm: 5}} {...props}>
     {title && (
       <Stack
           isInline

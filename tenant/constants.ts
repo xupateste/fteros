@@ -12,6 +12,7 @@ export const DEFAULT_CLIENT_TENANT: Partial<ClientTenant> = {
   updatedAt: 1670897400000,
   layout: "portrait",
   promoText: "AHORRAS",
+  featuredText: "Destacados",
   typeTenant: "test",
   showMqo: false,
   fakeVisitors: false,

@@ -13,6 +13,7 @@ export const full = () => (
     width="100%"
     onEdit={action("edit")}
     onRemove={() => Promise.resolve(action("remove")())}
+    onPromotion={() => Promise.resolve(action("promotion")())}
   />
 );
 
@@ -23,6 +24,7 @@ export const noCategory = () => (
     width="100%"
     onEdit={action("edit")}
     onRemove={() => Promise.resolve(action("remove")())}
+    onPromotion={() => Promise.resolve(action("promotion")())}
   />
 );
 
@@ -35,6 +37,7 @@ export const withPreviewLandscape = () => (
     width="100%"
     onEdit={action("edit")}
     onRemove={() => Promise.resolve(action("remove")())}
+    onPromotion={() => Promise.resolve(action("promotion")())}
   />
 );
 
@@ -47,6 +50,7 @@ export const withPreviewPortrait = () => (
     width="100%"
     onEdit={action("edit")}
     onRemove={() => Promise.resolve(action("remove")())}
+    onPromotion={() => Promise.resolve(action("promotion")())}
   />
 );
 

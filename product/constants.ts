@@ -27,6 +27,12 @@ export const DEFAULT_PRODUCT: Omit<Product, "id"> = {
   xoptions: [],
   createdAt: 1594090800000,
   updatedAt: 1594090800000,
+  promotionText: "",
+  promotionDays: 0,
+  promotionExpireDate: 1594090800000,
+  promotionUnits: 0,
+  promotionPrice: 0,
+  promotionExpireText: "",
   slug: "",
 };
 

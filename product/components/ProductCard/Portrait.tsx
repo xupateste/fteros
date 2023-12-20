@@ -47,7 +47,8 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
       rounded="md"
       transition="transform 0.2s"
       onClick={handleClick}
-      marginBottom={2}
+      marginBottom={4}
+      bg="white"
       {...props}
     >
       <Image
@@ -95,12 +96,59 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
           textTransform="uppercase"
           fontWeight={500}
           lineHeight="normal"
-          marginBottom={2}
-          overflowWrap="break-word"
+          marginBottom={1}
+          // isTruncated
         >
           {title}
         </Text>
-        {(type === "available" && !wholesale) &&(
+        {(["promotional", "available"].includes(type) && !wholesale) && (
+          <Box>
+             <Box>
+              <Text d="inline" color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600}>
+                {p(price)}
+              </Text>
+              {(type === "promotional") && (
+                <Text d="inline" ml={2} color="gray.500" fontSize={{base:"sm", md:"md"}} textDecoration="line-through">
+                  {originalPrice ? `${p(originalPrice)}` : ''}
+                </Text>
+              )}
+            </Box>
+            {(type === "promotional" && promoText) && (
+              <Flex>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' px={2} fontWeight={600}>
+                  {`${promoText} ${p(originalPrice - price)}`}
+                </Box>
+              </Flex>
+            )}
+            {showMqo && (
+              <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                {`Pedido mín.: ${mqo} pza.`}
+              </Text>
+            )}
+          </Box>
+        )}
+        {(["promotional", "available"].includes(type) && wholesale) && (
+          <>
+            <Stack alignItems="flex-start" direction="column">
+              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
+                {p(min) + " - " + p(max)}
+              </Text>
+              {showMqo && (
+                <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                  {`Pedido mín.: ${mqo} pza.`}
+                </Text>
+              )}
+            </Stack>
+            {(["promotional"].includes(type) && promoText) && (
+              <Flex>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
+                  {`${promoText} ${p(originalPrice - min)}`}
+                </Box>
+              </Flex>
+            )}
+          </>
+        )}
+       {/* {(type === "available" && !wholesale) &&(
           <Stack alignItems="flex-start" direction="column">
             <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
               {p(price)}
@@ -111,8 +159,8 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
               </Text>
             )}
           </Stack>
-        )}
-        {(type === "promotional" && !wholesale) && (
+        )}*/}
+        {/*{(type === "promotional" && !wholesale) && (
           <>
             <Stack isInline alignItems="center" >
               <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
@@ -130,23 +178,8 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
               </Flex>
             )}
           </>
-        )}
-        {(wholesale && !["unavailable", "ask"].includes(type)) && (
-          <Stack alignItems="flex-start" direction="column">
-            <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
-              {p(min) + " - " + p(max)}
-            </Text>
-            {showMqo && (
-              <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
-                {`Pedido mín.: ${mqo} pza.`}
-              </Text>
-            )}
-          </Stack>
-        )}
-        {type === "unavailable" && (
-          // <Text color="yellow.500" fontSize={{base:"sm", md:"md"}} fontWeight={900} lineHeight={1}>
-          //   *Agotado
-          // </Text>
+        )}*/}
+        {/*{(type === "promotional" && wholesale) && (
           <>
             <Stack isInline alignItems="center" >
               <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
@@ -157,6 +190,51 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
               </Text>
             </Stack>
             {promoText && (
+              <Flex>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
+                  {`${promoText} ${p(originalPrice - min)}`}
+                </Box>
+              </Flex>
+            )}
+          </>
+        )}*/}
+        {/*{(wholesale && !["unavailable", "ask"].includes(type)) && (
+          <>
+            <Stack alignItems="flex-start" direction="column">
+              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
+                {p(min) + " - " + p(max)}
+              </Text>
+              {showMqo && (
+                <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                  {`Pedido mín.: ${mqo} pza.`}
+                </Text>
+              )}
+            </Stack>
+            {promoText && (
+              <Flex>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
+                  {`${promoText} ${p(originalPrice - min)}`}
+                </Box>
+              </Flex>
+            )}
+          </>
+        )}*/}
+        {type === "unavailable" && (
+          // <Text color="yellow.500" fontSize={{base:"sm", md:"md"}} fontWeight={900} lineHeight={1}>
+          //   *Agotado
+          // </Text>
+          <>
+            <Stack isInline alignItems="center" >
+              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
+                {p(price)}
+              </Text>
+              {(originalPrice) && (
+                <Text color="gray.500" fontSize={{base:"sm", md:"md"}} lineHeight={1} textDecoration="line-through">
+                  {p(originalPrice)}
+                </Text>
+              )}
+            </Stack>
+            {(["promotional"].includes(type) && promoText) && (
               <Flex>
                 <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
                   {`${promoText} ${p(originalPrice - price)}`}

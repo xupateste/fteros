@@ -25,6 +25,12 @@ export interface Product {
   isnew?: boolean;
   isPreOrder?: boolean;
   slug?: string;
+  promotionText?: string;
+  promotionDays?: number;
+  promotionExpireDate: number;
+  promotionUnits?: number;
+  promotionPrice?: number;
+  promotionExpireText?: string;
 }
 
 export interface Variant {

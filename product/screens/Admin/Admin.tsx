@@ -2,6 +2,7 @@ import React from "react";
 import {Stack, Box, Flex} from "@chakra-ui/core";
 
 import ProductDrawer from "../../components/ProductDrawer";
+import PromotionDrawer from "../../components/PromotionDrawer";
 import {useFilteredProductsWithCode, useProductActions, useProductCategories, useProductBrands} from "../../hooks";
 import {Product} from "../../types";
 import ProductsList from "../../components/ProductsList";
@@ -18,10 +19,12 @@ import {getIsItExceeds} from "~/app/screens/Home/SelectorsTypeTenant"
 
 interface Props {
   setItExceeds: React.Dispatch<React.SetStateAction<boolean>>;
+  timestamp: number;
 }
 
-const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
+const AdminScreen: React.FC<Props> = ({setItExceeds, timestamp}) => {
   const [selected, setSelected] = React.useState< Partial<Product> | undefined >(undefined);
+  const [promotion, setPromotion] = React.useState< Partial<Product> | undefined >(undefined);
   const {flags, layout, typeTenant} = useTenant();
   const {products, filters} = useFilteredProductsWithCode();
   const {update, remove, create, upsert} = useProductActions();
@@ -40,6 +43,22 @@ const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
     closeProductDrawer();
   }
 
+  async function handlePromotionSubmit(product: Product) {
+    product["featured"] = true;
+    product["type"] = "promotional";
+    await update(product);
+    closePromotionDrawer();
+  }
+
+  async function handlePromotionRemove(product: Product) {
+    product["promotionDays"] = 0;
+    product["promotionUnits"] = 0;
+    product["promotionPrice"] = 0;
+    product["featured"] = false;
+    await update(product);
+    closePromotionDrawer();
+  }
+
   function onCreate() {
     setSelected({
       type: "available",
@@ -52,10 +71,18 @@ const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
     setSelected(product);
   }
 
+  function onPromotion(product: Product) {
+    setPromotion(product);
+  }
+
   function closeProductDrawer() {
     setSelected(undefined);
   }
-
+  
+  function closePromotionDrawer() {
+    setPromotion(undefined);
+  }
+  
   React.useEffect(() => {
     setItExceeds(getIsItExceeds(typeTenant, products.length))
   }, [getIsItExceeds(typeTenant, products.length)])
@@ -103,6 +130,7 @@ const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
                         title={category}
                         width="100%"
                         onEdit={onProductEdit}
+                        onPromotion={onPromotion}
                         onRemove={remove}
                       />
                     </Box>
@@ -115,6 +143,17 @@ const AdminScreen: React.FC<Props> = ({setItExceeds}) => {
           </Content>
         </Box>
       </Flex>
+      {Boolean(promotion) && (
+        <PromotionDrawer
+          // categories={categories}
+          // brands={brands}
+          timestamp={timestamp}
+          defaultValues={promotion}
+          onClose={closePromotionDrawer}
+          onSubmit={handlePromotionSubmit}
+          onRemove={handlePromotionRemove}
+        />
+      )}
       {Boolean(selected) && (
         <ProductDrawer
           categories={categories}

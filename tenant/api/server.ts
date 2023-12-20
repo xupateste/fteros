@@ -45,4 +45,5 @@ export default {
       .doc(id)
       .update(tenant)
       .then(() => tenant),
+  timestamp: firestore.Timestamp.now().toMillis(),
 };

@@ -197,12 +197,15 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
   
   ///////////end add scroll menu test
   function handleCatChange(category) {
+    setQuery("");
+    searchInputRef.current.value = ""
     setCatquery(category)
   }
 
   React.useEffect(() => {
     // setQuery(catquery);
-    searchInputRef.current.value = ""
+    // setQuery("");
+    // searchInputRef.current.value = ""
     handleCategoryChange(catquery)
   }, [catquery]);
 
@@ -221,7 +224,8 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
   const isMobile = width <= 768;
 
   function handleCategoryChange(category: Product["category"]) {
-    // setQuery("");
+    setQuery("");
+    searchInputRef.current.value = ""
     if (category === "TODOS") {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     } else if (category) {

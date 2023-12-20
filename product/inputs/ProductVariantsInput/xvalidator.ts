@@ -30,9 +30,9 @@ export default function xvalidator(xoptions: xOption[] = []) {
     }
 
     if (
-      Number(xoptions[index]?.quantity) <= 0
+      Number(xoptions[index]?.quantity) <= 1
     ) {
-      return `${index}|optionsQuantity|La cantidad debe ser mayor a 0`;
+      return `${index}|optionsQuantity|La cantidad debe ser mayor ó igual a 2`;
     }
   }
 }

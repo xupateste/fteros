@@ -39,6 +39,7 @@ interface Props {
 }
 
 const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit}) => {
+  defaultValues["featuredText"] = defaultValues.featuredText ? defaultValues.featuredText : "Destacados"
   const {handleSubmit: submit, errors, register, control, formState} = useForm<ClientTenant>({
     defaultValues,
   });
@@ -264,8 +265,23 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
               />
             </FormControl>
             <FormControl
+              isRequired
+              error={errors.featuredText && "No debe ser mayor a 30 caracteres"}
+              label="Categoría Promoción"
+              help="Una palabra o frase para titular el grupo de productos en promoción"
+              name="featuredText"
+            >
+              <Input
+                ref={register({maxLength: 30, required: true})}
+                defaultValue="Destacados"
+                maxLength={30}
+                name="featuredText"
+                placeholder="Destacados"
+              />
+            </FormControl>
+            <FormControl
               error={errors.promoText && "No debe ser mayor a 20 caracteres"}
-              label="Etiqueta en Precio"
+              label="Etiqueta en productos"
               help="Una palabra o frase para destacar el precio promocional"
               name="promoText"
             >
@@ -291,7 +307,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 defaultValue={false}
                 display="block"
                 name="showMqo"
-                label="Mostrar cantidad mínima de pedido"
+                label="Activar cantidad mínima de pedido"
               />
             </FormControl>
             <FormControl 

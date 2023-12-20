@@ -200,7 +200,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                       error={errors.originalPrice && "Debe ser mayor a Precio final"}
                       flex={1}
                       help="Precio sin promoción"
-                      label="Precio regular"
+                      label="Precio anterior"
                       name="originalPrice"
                     >
                       <Price
@@ -331,7 +331,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 placeholder="Palabras separadas por espacios"
               />
             </FormControl>
-            <FormControl error={errors.featured?.message} name="featured">
+            {/*<FormControl error={errors.featured?.message} name="featured">
               <Controller
                 as={SwitchInput}
                 color="primary"
@@ -342,7 +342,7 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                 name="featured"
               />
             </FormControl>
-            <Divider />
+            <Divider />*/}
             {/*<FormControl info={<ProductVariantsInputInfo />} label="Variantes" name="options">
               <Controller
                 as={ProductVariantsInput}

@@ -1,5 +1,5 @@
 import React from "react";
-import {IDrawer, Text, Stack, Flex, Box, SimpleGrid, Divider} from "@chakra-ui/core";
+import {Button, IDrawer, Text, Stack, Flex, Box, SimpleGrid, Divider, Progress} from "@chakra-ui/core";
 
 import SummaryButton from "../SummaryButton";
 
@@ -41,7 +41,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
   const t = useTranslation();
   const log = useAnalytics();
   // const toast = useToast();
-  const {flags, promoText, showMqo, fakeVisitors} = useTenant();
+  const {flags, promoText, showMqo, fakeVisitors, phone} = useTenant();
   // {{ base: product.xoptions.length+1 === 1 ? 1 : product.xoptions.length+1 === 2 ? 2 : product.xoptions.length+1 === 3 ? 3 : 2}}
   const [min, ] = getxOptionsPriceRange(product.price, product.xoptions, product.mqo);
   const numPriceColums = () => {
@@ -51,7 +51,6 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
     } else {
       return product.xoptions.length
     }
-    console.log('oh my')
     return 0
   }
   // const canShare = {
@@ -109,6 +108,12 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
   //       });
   //   }
   // }
+  const onPromoLink = () => {
+    window.open(
+      `https://wa.me/${phone}?text=${encodeURIComponent(`Hola - quiero este producto: ${product.code} ${product.title} (${p(product.price)})`)}`,
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  };
 
   function handleNoteChange(event: React.ChangeEvent<HTMLInputElement>) {
     setNote(event.target.value);
@@ -203,7 +208,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     onClick={handleShare}
                   />
                 )*/}
-                {product.image ? <ToggleableImage maxHeight={{base:"35vh", md:"45vh"}} src={formattedImg(product.image)} /> : <ToggleableImage maxHeight={{base:"35vh", md:"45vh"}} src="/assets/fallback.jpg" />}
+                {product.image ? <ToggleableImage maxHeight="35vh" src={formattedImg(product.image)} /> : <ToggleableImage maxHeight={{base:"35vh", md:"45vh"}} src="/assets/fallback.jpg" />}
 
                 <Stack
                   shouldWrapChildren
@@ -224,7 +229,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                       {(product.title).toUpperCase()}
                     </Text>
                     
-                    {(["promotional", "available"].includes(product.type) && (!product.wholesale)) && (
+                    {(["promotional", "available"].includes(product.type) && !product.wholesale) && (
                       <Stack>
                         <Box
                           color="green.500"
@@ -401,8 +406,50 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                       </Stack>
                     )}
 
+                    {(product.featured && product.promotionUnits) && (
+                      <Stack mt={2} w="100%">
+                        <Flex
+                          fontSize="sm"
+                        >
+                          ¡Solo Quedan <Text color="red.500" px={1} fontWeight={800}>{product.promotionUnits}</Text> Unidades!
+                        </Flex>
+                        <Progress color="red" value={product.promotionUnits < 4 ? 15 : 32} />
+                         <Button
+                          boxShadow="lg"
+                          paddingX={4}
+                          onClick={onPromoLink}
+                          color="white"
+                          variant="unstyled"
+                          backgroundColor="#1b9127"
+                          // variantColor="green"
+                          textAlign="center"
+                          width="100%"
+                        >
+                         👉 ¡Pide ahora este producto!
+                        </Button>
+                        <Text fontSize="xs">🔥¡DATE PRISA! LA OFERTA TERMINA PRONTO ⏰</Text>
+                      </Stack>
+                    )}
+                    {fakeVisitors && (
+                       <>
+                        <Divider/>
+                          <Stack
+                            color="black"
+                            isInline
+                            fontSize="sm"
+                            alignItems="center"
+                            fontWeight={300}
+                            marginTop={0}
+                          >
+                            <EyeIcon size={14}/>
+                            <Text>{number} Personas están mirando este producto ahora!</Text>
+                          </Stack>
+                        <Divider/>
+                      </>
+                    )}
                     {product.code && (
                       <Text
+                        marginTop={1}
                         color="gray.500"
                         fontSize="md"
                         whiteSpace="pre-line"
@@ -422,19 +469,6 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                       </TruncatedText>
                     )}
                     <Divider/>
-                    {fakeVisitors && (
-                      <Stack
-                        color="black"
-                        isInline
-                        fontSize="sm"
-                        alignItems="center"
-                        fontWeight={300}
-                        marginBottom={6}
-                      >
-                        <EyeIcon size={14}/>
-                        <Text>{number} Personas están mirando este producto ahora!</Text>
-                      </Stack>
-                    )}
                   </Stack>
                   {product.options?.length ? form : null}
                   {/*product.type != "unavailable" && (

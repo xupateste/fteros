@@ -1,10 +1,10 @@
 import React from "react";
-import {Button, Stack, IDrawer} from "@chakra-ui/core";
+import {Button, Stack, IDrawer, SimpleGrid} from "@chakra-ui/core";
 
 import {Product} from "../types";
 import ProductForm from "../forms/ProductForm";
 
-import Drawer, {DrawerHeader, DrawerBody, DrawerTitle} from "~/ui/controls/Drawer";
+import Drawer, {DrawerHeader, DrawerBody, DrawerTitle, DrawerFooter} from "~/ui/controls/Drawer";
 
 interface Props extends Omit<IDrawer, "children"> {
   onClose: () => void;
@@ -22,28 +22,34 @@ const ProductDrawer: React.FC<Props> = ({categories, brands, defaultValues, onCl
       <DrawerHeader onClose={onClose} />
       <ProductForm categories={categories} brands={brands} defaultValues={defaultValues} onSubmit={onSubmit}>
         {({form, submit, isLoading}) => (
-          <DrawerBody marginBottom={4}>
-            <Stack shouldWrapChildren spacing={4}>
-              <DrawerTitle>{isNew ? "Agregar" : "Editar"} producto</DrawerTitle>
-              {form}
-              <Button
-                backgroundColor="primary.500"
-                color="white"
-                data-test-id={isNew ? `submit-new-product` : `submit-edit-product`}
-                isLoading={isLoading}
-                type="submit"
-                variantColor="primary"
-                width="100%"
-                onClick={(event) => {
-                  event.stopPropagation();
+          <>
+            <DrawerBody marginBottom={4}>
+              <Stack shouldWrapChildren spacing={4}>
+                <DrawerTitle>{isNew ? "Agregar" : "Editar"} producto</DrawerTitle>
+                {form}
+              </Stack>
+            </DrawerBody>
+            <DrawerFooter>
+              <SimpleGrid columns={1} w="100%" spacing={2}>
+                <Button
+                  backgroundColor="primary.500"
+                  color="white"
+                  data-test-id={isNew ? `submit-new-product` : `submit-edit-product`}
+                  isLoading={isLoading}
+                  type="submit"
+                  variantColor="primary"
+                  width="100%"
+                  onClick={(event) => {
+                    event.stopPropagation();
 
-                  submit();
-                }}
-              >
-                {isNew ? "Agregar producto" : "Editar producto"}
-              </Button>
-            </Stack>
-          </DrawerBody>
+                    submit();
+                  }}
+                >
+                  {isNew ? "Agregar producto" : "Editar producto"}
+                </Button>
+              </SimpleGrid>
+            </DrawerFooter>
+          </>
         )}
       </ProductForm>
     </Drawer>

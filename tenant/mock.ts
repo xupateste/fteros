@@ -24,7 +24,7 @@ const mock = {
         phonePersonal: faker.phone.phoneNumber("##########"),
         category: CATEGORIES[faker.random.number(CATEGORIES.length - 1)],
         highlight: faker.lorem.words(10),
-        promoText: faker.lorem.words(10),
+        promoText: "PROMOCIÓN",
         hook: "http://some.url",
         pixel: "1000",
         ga: "ASD123",

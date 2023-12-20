@@ -37,7 +37,11 @@ import HomeIcon from "~/ui/icons/Home";
 import Users from "~/ui/icons/Users";
 import BannerTenant from "./Home/BannerTenant";
 
-const AdminScreen: React.FC = () => {
+interface Props {
+  timestamp: number;
+}
+
+const AdminScreen: React.FC<Props> = (timestamp) => {
   const {signOut} = useSession();
   const t = useTranslation();
   const {createdAt, slug, typeTenant} = useTenant();
@@ -175,7 +179,7 @@ const AdminScreen: React.FC = () => {
               <TenantAdminScreen />
             </TabPanel>
             <TabPanel>
-              <ProductsAdminScreen setItExceeds={setItExceeds} />
+              <ProductsAdminScreen setItExceeds={setItExceeds} timestamp={timestamp.timestamp}/>
             </TabPanel>
             <TabPanel>
               <OrdersAdminScreen />

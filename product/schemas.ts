@@ -89,6 +89,21 @@ export default {
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
       slug: yup.string().default(DEFAULT_PRODUCT.slug),
+      promotionText: yup.string().default(DEFAULT_PRODUCT.promotionText),
+      promotionDays: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.promotionDays),
+      promotionExpireDate: yup.number().default(DEFAULT_PRODUCT.promotionExpireDate),
+      promotionUnits: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.promotionUnits),
+      promotionPrice: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.promotionPrice),
+      promotionExpireText: yup.string().default(DEFAULT_PRODUCT.promotionExpireText),
     }),
     update: yup.object<Partial<Product>>({
       id: yup.string().required(),
@@ -157,6 +172,12 @@ export default {
               .nullable(), //.nullable() ?
       image: yup.string().nullable(),
       slug: yup.string().nullable(),
+      promotionText: yup.string().nullable(),
+      promotionDays: yup.number().nullable(),
+      promotionExpireDate: yup.number().nullable().strip(true),
+      promotionUnits: yup.number().nullable(),
+      promotionPrice: yup.number().nullable(),
+      promotionExpireText: yup.string().nullable(),
     }),
   },
   client: {
@@ -250,6 +271,24 @@ export default {
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
       slug: yup.string().default(DEFAULT_PRODUCT.slug),
+      promotionText: yup.string().default(DEFAULT_PRODUCT.promotionText),
+      promotionDays: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .required()
+        .default(DEFAULT_PRODUCT.promotionDays),
+      promotionExpireDate: yup.number().default(DEFAULT_PRODUCT.promotionExpireDate),
+      promotionUnits: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .required()
+        .default(DEFAULT_PRODUCT.promotionUnits),
+      promotionPrice: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .required()
+        .default(DEFAULT_PRODUCT.promotionPrice),
+      promotionExpireText: yup.string().default(DEFAULT_PRODUCT.promotionExpireText),
     }),
     update: yup.object<Product>({
       type: yup
@@ -318,6 +357,12 @@ export default {
       numPiezas: yup.number().nullable(),
       title: yup.string().nullable(),
       slug: yup.string().nullable(),
+      promotionText: yup.string().nullable(),
+      promotionDays: yup.number().nullable(),
+      promotionExpireDate: yup.number().nullable().strip(true),
+      promotionUnits: yup.number().nullable(),
+      promotionPrice: yup.number().nullable(),
+      promotionExpireText: yup.string().nullable(),
     }),
     create: yup.object<Product>({
       id: yup.string().strip(true),
@@ -406,6 +451,21 @@ export default {
       isPreOrder: yup.boolean().default(DEFAULT_PRODUCT.isPreOrder),
       image: yup.string().default(DEFAULT_PRODUCT.image),
       slug: yup.string().default(DEFAULT_PRODUCT.slug),
+      promotionText: yup.string().default(DEFAULT_PRODUCT.promotionText),
+      promotionDays: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.promotionDays),
+      promotionExpireDate: yup.number().default(DEFAULT_PRODUCT.createdAt),
+      promotionUnits: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.promotionUnits),
+      promotionPrice: yup
+        .number()
+        .transform((value) => (isNaN(value) ? undefined : value))
+        .default(DEFAULT_PRODUCT.promotionPrice),
+      promotionExpireText: yup.string().default(DEFAULT_PRODUCT.promotionExpireText),
     }),
   },
 };

@@ -5,6 +5,7 @@ import {Product} from "../../types";
 
 import LandscapeProductCard from "./Landscape";
 import PortraitProductCard from "./Portrait";
+// import PromotionProductCard from "./Promotion";
 
 interface Props extends Omit<FlexProps, "onClick"> {
   product: Product;

@@ -70,8 +70,8 @@ export default {
       .then(() => order),
   update: (tenant: ClientTenant["id"], {id, ...product}: Product) => {
     product["slug"] = slugify(product.title) + "-" + id;
-
     const casted = schemas.server.update.cast(product);
+
 
     return database
       .collection("tenants")

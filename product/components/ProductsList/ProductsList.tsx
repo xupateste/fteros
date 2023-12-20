@@ -19,6 +19,7 @@ interface Props extends StackProps {
   isPreviewEnabled?: boolean;
   title?: string;
   onEdit: (product: Product) => void;
+  onPromotion: (product: Product) => void;
   onRemove: (id: Product["id"]) => Promise<void>;
 }
 
@@ -27,6 +28,7 @@ const ProductsList: React.FC<Props> = ({
   isPreviewEnabled = false,
   products,
   onEdit,
+  onPromotion,
   onRemove,
   layout,
   ...props
@@ -81,7 +83,7 @@ const ProductsList: React.FC<Props> = ({
         <Box as="table" borderTopWidth={1} width="100%">
           <Box as="tbody">
             {products.map((product) => (
-              <ProductRow key={product.id} onEdit={onEdit} onRemove={onRemove} {...product} />
+              <ProductRow key={product.id} onEdit={onEdit} onPromotion={onPromotion} onRemove={onRemove} {...product} />
             ))}
           </Box>
         </Box>
