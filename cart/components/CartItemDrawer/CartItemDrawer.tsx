@@ -208,7 +208,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     onClick={handleShare}
                   />
                 )*/}
-                {product.image ? <ToggleableImage maxHeight="35vh" src={formattedImg(product.image)} /> : <ToggleableImage maxHeight={{base:"35vh", md:"45vh"}} src="/assets/fallback.jpg" />}
+                {product.image ? <ToggleableImage maxHeight={{base:"35vh", md:"30vh"}} src={formattedImg(product.image)} /> : <ToggleableImage maxHeight={{base:"35vh", md:"45vh"}} src="/assets/fallback.jpg" />}
 
                 <Stack
                   shouldWrapChildren

@@ -17,7 +17,7 @@ interface Props extends Omit<FlexProps, "onClick"> {
 
 const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClick, ...props}) => {
   const p = usePrice();
-  const {image, title, price, originalPrice, type, badgeText, badgeColor, wholesale, mqo} = product;
+  const {image, title, price, originalPrice, type, badgeText, badgeColor, wholesale, mqo, featured} = product;
   // const [min, max] = getVariantsPriceRange(product.options);
   const [min, max] = getxOptionsPriceRange(price, product.xoptions, mqo);
   const {promoText, showMqo} = useTenant();
@@ -49,6 +49,8 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
       onClick={handleClick}
       marginBottom={4}
       bg="white"
+      borderWidth={featured ? 2 : 0}
+      borderColor="yellow.300"
       {...props}
     >
       <Image
@@ -85,7 +87,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
         flexDirection="column"
         height="100%"
         justifyContent="normal"
-        padding={isRaised ? {base: 2, sm: 4} : 0}
+        padding={isRaised ? {base: 2, sm: 4} : 1}
         paddingTop={1}
         width="100%"
         mx="auto"
@@ -97,6 +99,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
           fontWeight={500}
           lineHeight="normal"
           marginBottom={1}
+          // noOfLines={2}
           // isTruncated
         >
           {title}
