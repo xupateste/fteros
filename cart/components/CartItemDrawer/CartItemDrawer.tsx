@@ -425,7 +425,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                           textAlign="center"
                           width="100%"
                         >
-                         👉 ¡Pide ahora este producto!
+                         👉 Pide ahora este producto!
                         </Button>
                         <Text fontSize="xs">🔥¡DATE PRISA! LA OFERTA TERMINA PRONTO ⏰</Text>
                       </Stack>

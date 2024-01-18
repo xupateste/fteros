@@ -107,11 +107,11 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
         {(["promotional", "available"].includes(type) && !wholesale) && (
           <Box>
              <Box>
-              <Text d="inline" color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600}>
+              <Text d="inline" color="green.500" fontSize={{base:"md", md:"lg"}} fontWeight={600}>
                 {p(price)}
               </Text>
               {(type === "promotional") && (
-                <Text d="inline" ml={2} color="gray.500" fontSize={{base:"sm", md:"md"}} textDecoration="line-through">
+                <Text d="inline" ml={1} color="gray.500" fontSize={{base:"sm", md:"md"}} textDecoration="line-through">
                   {originalPrice ? `${p(originalPrice)}` : ''}
                 </Text>
               )}
@@ -228,7 +228,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
           // </Text>
           <>
             <Stack isInline alignItems="center" >
-              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
+              <Text color="green.500" fontSize={{base:"md", md:"lg"}} fontWeight={600} lineHeight={1}>
                 {p(price)}
               </Text>
               {(originalPrice) && (
