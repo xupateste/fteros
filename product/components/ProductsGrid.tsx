@@ -10,7 +10,7 @@ interface Props extends StackProps {
 }
 
 const ProductsGrid: React.FC<Props> = ({children, title, layout, products, ...props}) => (
-  <Stack pb={0} spacing={{base: 4, sm: 5}} {...props}>
+  <Stack pb={0} spacing={{base: 2, sm: 2}} {...props}>
     {title && (
       <Stack
           isInline
@@ -18,6 +18,7 @@ const ProductsGrid: React.FC<Props> = ({children, title, layout, products, ...pr
           fontSize="lg"
           fontWeight={900}
           spacing={2}
+          paddingX={{base: 4, sm: 0}}
         >
         <Text
           as="h2"
@@ -33,18 +34,26 @@ const ProductsGrid: React.FC<Props> = ({children, title, layout, products, ...pr
     )} 
     {layout === "landscape" && (
       <Grid
-        autoRows="auto"
-        gridGap={{base: 0, sm: 8}}
-        templateColumns={{
-          base: "repeat(auto-fill, minmax(200px,1fr))",
-          sm: "repeat(auto-fill, minmax(400px,1fr))",
-        }}
+        alignItems="flex-start"
+        px={4}
+        // gridAutoColumns="minmax(280px,280px)"
+        gridAutoColumns={{base:150, sm:220}}
+        gridAutoFlow="column"
+        // gridGap={{base: 4, sm: 6}}
+        overflowX="auto"
+        overflowY="hidden"
+        gridGap={{base: 3, sm: 6}}
+        // templateColumns={{
+        //   base: "repeat(auto-fill, minmax(200px,1fr))",
+        //   sm: "repeat(auto-fill, minmax(400px,1fr))",
+        // }}
       >
         {children}
       </Grid>
     )}
     {layout === "portrait" && (
       <Grid
+        paddingX={{base: 4, sm: 0}}
         autoRows="auto"
         gridGap={{base: 4, sm: 8}}
         templateColumns={{

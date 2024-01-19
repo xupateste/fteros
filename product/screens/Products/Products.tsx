@@ -218,7 +218,7 @@ const ProductsScreen: React.FC = () => {
                           </>
                         )}
                       </Stack>
-                      <Stack spacing={{base: 5, sm: 10}} width="100%" paddingX={{base: 4, sm: 0}}>
+                      <Stack spacing={{base: 5, sm: 10}} width="100%" >
                         {productsByCategory.map(([category, products]) => {
                           return (
                             <PseudoBox key={category} as="section" id={category}>

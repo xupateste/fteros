@@ -131,7 +131,6 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
           </Box>
         )}
         {(["promotional", "available"].includes(type) && wholesale) && (
-          <>
             <Stack alignItems="flex-start" direction="column">
               <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
                 {p(min) + " - " + p(max)}
@@ -142,14 +141,13 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
                 </Text>
               )}
             </Stack>
-            {(["promotional"].includes(type) && promoText) && (
-              <Flex>
-                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
-                  {`${promoText} ${p(originalPrice - min)}`}
-                </Box>
-              </Flex>
-            )}
-          </>
+            // {(["promotional"].includes(type) && promoText) && (
+            //   <Flex>
+            //     <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
+            //       {`${promoText} ${p(originalPrice - min)}`}
+            //     </Box>
+            //   </Flex>
+            // )}
         )}
        {/* {(type === "available" && !wholesale) &&(
           <Stack alignItems="flex-start" direction="column">

@@ -188,7 +188,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
 
 
   //added
-  const {typeTenant} = useTenant();
+  const {typeTenant, layout} = useTenant();
 
   ///////////add scroll menu test
   // const [items] = React.useState(getItems);
@@ -281,13 +281,15 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
             />
           </InputGroup>
         </Flex>
-        <Box w="100%">
-          <MenuScroll
-            items={categoryList as []}
-            catChange={handleCatChange}
-            setDefault={query ? true : false}
-          />
-        </Box>
+        {["portrait"].includes(layout) && (
+          <Box w="100%">
+            <MenuScroll
+              items={categoryList as []}
+              catChange={handleCatChange}
+              setDefault={query ? true : false}
+            />
+          </Box>
+        )}
         {query && (
             <Text fontWeight="900" fontStyle="italic" textAlign="center">Resultados para: "{query}"</Text>
           )
