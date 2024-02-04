@@ -59,7 +59,7 @@ const Footer: React.FC<Props> = (props) => {
           </Flex>
         </Flex>
         <Text pt={6} fontSize={'sm'} textAlign={'center'}>
-          © 2023 Ferreteros.app Todos los derechos reservados
+          © 2024 Ferreteros.app Todos los derechos reservados
         </Text>
       </Box>
     </Box>

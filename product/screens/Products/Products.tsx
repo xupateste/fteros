@@ -203,7 +203,7 @@ const ProductsScreen: React.FC = () => {
                               </Text>
                               <Text fontSize="xl" color="gray.500">({featuredProducts.length})</Text>
                             </Stack>
-                            <ProductsCarousel  zIndex={0}>
+                            <ProductsCarousel zIndex={0}>
                               {featuredProducts.map((product) => (
                                 <ProductCard
                                   key={product.id}
@@ -218,7 +218,7 @@ const ProductsScreen: React.FC = () => {
                           </>
                         )}
                       </Stack>
-                      <Stack spacing={{base: 5, sm: 10}} width="100%" >
+                      <Stack spacing={{base: 5, sm: 10}} width="100%">
                         {productsByCategory.map(([category, products]) => {
                           return (
                             <PseudoBox key={category} as="section" id={category}>

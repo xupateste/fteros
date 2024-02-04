@@ -198,6 +198,10 @@ export function getCount(items: CartItem[]): number {
   return items.reduce((total, item) => total + item.count, 0);
 }
 
+export function getCountItem(item: CartItem): number {
+  return item.count;
+}
+
 // function _getFields(fields: Field[]) {
 //   if (!fields) return "";
 

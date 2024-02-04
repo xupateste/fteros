@@ -98,7 +98,7 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
           textTransform="uppercase"
           fontWeight={500}
           lineHeight="normal"
-          marginBottom={1}
+          marginBottom={0}
           // noOfLines={2}
           // isTruncated
         >
