@@ -406,7 +406,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                       </Stack>
                     )}
 
-                    {(product.featured && product.promotionUnits) && (
+                    {(product.featured && product.promotionUnits && !["unavailable"].includes(product.type)) && (
                       <Stack mt={2} w="100%">
                         <Flex
                           fontSize="sm"
