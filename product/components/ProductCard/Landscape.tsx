@@ -124,7 +124,7 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
               </Flex>
             )}
             {showMqo && (
-              <Text color="gray.800" fontSize="10px" lineHeight={1}>
+              <Text color="gray.800" fontSize="10px" lineHeight={2}>
                 {`Pedido mín.: ${mqo} pza.`}
               </Text>
             )}

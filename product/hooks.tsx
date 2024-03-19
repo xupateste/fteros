@@ -241,19 +241,19 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
   }
 
 
-  function onChangeSearchInput(value) {
-    if(query != value) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      setQuery(value)
-    }
-  }
+  // function onChangeSearchInput(value) {
+  //   if(query != value) {
+  //     window.scrollTo({ top: 0, behavior: 'smooth' })
+  //     setQuery(value)
+  //   }
+  // }
 
-  function handleEnterKey(value) {
-    if(query != value) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      setQuery(value)
-    }
-  }
+  // function handleEnterKey(value) {
+  //   if(query != value) {
+  //     window.scrollTo({ top: 0, behavior: 'smooth' })
+  //     setQuery(value)
+  //   }
+  // }
 
 
   
@@ -274,10 +274,11 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
               fontSize="md"
               paddingLeft={10}
               placeholder={t("filters.search")}
-              // value={query}
+              value={query}
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
               variant="unstyled"
-              onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
-              onKeyUp={(e) => e.key === 'Enter' && handleEnterKey(e.target.value)}
+              // onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
+              // onKeyUp={(e) => e.key === 'Enter' && handleEnterKey(e.target.value)}
             />
           </InputGroup>
         </Flex>
