@@ -73,7 +73,7 @@ const ProductsScreen: React.FC = () => {
   // console.log(productsByCategory)
   const [selected, setSelected] = React.useState(null)
   //To select category
-  const [selectedCategory, setSelectedCategory] = React.useState<Product["category"] | null>(productsByCategory[0][0] || null);
+  const [selectedCategory, setSelectedCategory] = React.useState<Product["category"] | null>(productsByCategory[0] ? productsByCategory[0][0] : null);
   function handleSelectCategory(category: Product["category"]) {
     setSelectedCategory((currentSelectedCategory) =>
       currentSelectedCategory === category ? null : category,
@@ -223,7 +223,7 @@ const ProductsScreen: React.FC = () => {
                               <Text fontSize="xl" color="gray.500">({featuredProducts.length})</Text>
                             </Stack>
                             <ProductsCarousel zIndex={0}>
-                              {featuredProducts.map((product) => (
+                              {featuredProducts.length && featuredProducts.map((product) => (
                                 <ProductCard
                                   key={product.id}
                                   isRaised

@@ -1,5 +1,5 @@
 import React, {useRef} from "react";
-import {Icon, Text, Flex, InputGroup, InputLeftElement, Divider, Box} from "@chakra-ui/core";
+import {Icon, Text, Flex, InputGroup, InputLeftElement, InputRightElement, Divider, Box} from "@chakra-ui/core";
 
 import ProductContext from "./context";
 import {Product} from "./types";
@@ -280,6 +280,11 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
               // onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
               // onKeyUp={(e) => e.key === 'Enter' && handleEnterKey(e.target.value)}
             />
+            {Boolean(query) && (
+              <InputRightElement top="inherit">
+                <Icon color="gray.500" name="close" onClick={() => setQuery('')}/>
+              </InputRightElement>
+          )}
           </InputGroup>
         </Flex>
         {["portrait"].includes(layout) && (
