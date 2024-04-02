@@ -1,37 +1,12 @@
 import React from "react";
-import {Grid, Stack, Text, StackProps} from "@chakra-ui/core";
+import {Grid, Stack, StackProps} from "@chakra-ui/core";
 
 interface Props extends StackProps {
-  title?: string;
   layout: "landscape" | "portrait";
-  products?: {
-    length?: number,
-  };
 }
 
-const ProductsGrid: React.FC<Props> = ({children, title, layout, products, ...props}) => (
+const ProductsGrid: React.FC<Props> = ({children, layout, ...props}) => (
   <Stack pb={0} spacing={{base: 2, sm: 2}} {...props}>
-    {title && (
-      <Stack
-          isInline
-          alignItems="center"
-          fontSize="lg"
-          fontWeight={900}
-          spacing={2}
-          paddingX={{base: 4, sm: 0}}
-        >
-        <Text
-          as="h2"
-          data-test-id="title"
-          fontSize={{base: "xl", sm: "2xl"}}
-          fontWeight={500}
-          textTransform="capitalize"  
-        >
-          {title}
-        </Text>
-        <Text fontSize="xl" color="gray.500">({products.length})</Text>
-      </Stack>
-    )} 
     {layout === "landscape" && (
       <Grid
         alignItems="flex-start"

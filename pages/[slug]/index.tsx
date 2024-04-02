@@ -31,9 +31,7 @@ const SlugRoute: React.FC<Props> = ({tenant, products, orders, contacts}) => {
   const router = useRouter();
 
   // Get the real product from the product id url
-  const product = router.query.product
-    ? products.find((product) => product.slug === router.query.product) || null
-    : null;
+  const product = null
 
   // added get category
   const category = router.query.category || null;
