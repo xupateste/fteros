@@ -1,7 +1,7 @@
 import React from "react";
 import {Stack, Box, PseudoBox, Flex, useDisclosure, Text, Image, Button} from "@chakra-ui/core";
 // import BTT from "~/ui/icons/BTT";
-import {useRouter} from "next/router";
+// import {useRouter} from "next/router";
 
 import ProductCard from "../../components/ProductCard";
 // import {useFilteredProducts, useProducts} from "../../hooks";
@@ -30,12 +30,15 @@ import WhatsAppIcon from "~/ui/icons/WhatsApp";
 import {useContactActions} from "~/contact/hooks";
 import {Contact} from "~/contact/types";
 
+import ChevronUpIcon from "~/ui/icons/ChevronUp";
+import ChevronDownIcon from "~/ui/icons/ChevronDown";
+
 
 const ProductsScreen: React.FC = () => {
-  const {
-    query: {product},
-    push,
-  } = useRouter();
+  // const {
+  //   query: {product},
+  //   push,
+  // } = useRouter();
   const {add, increase, decrease, items, checkout, removeAll} = useCart();
   const {hookcontact} = useContactActions();
   const t = useTranslation();
@@ -44,10 +47,10 @@ const ProductsScreen: React.FC = () => {
   const {products, filters} = useFilteredProductsScroll((product) => product.type !== "hidden");
   const productsAll = useProducts();
   const {fields, layout, featuredText,...tenant} = useTenant();
-  const selected = React.useMemo(() => products.find((_product) => _product.slug === product), [
-    products,
-    product,
-  ]);
+  // const selected = React.useMemo(() => products.find((_product) => _product.slug === product), [
+  //   products,
+  //   product,
+  // ]);
   React.useEffect(()=>{
     let defaultPhone = window.localStorage?.getItem("phoneclient:Products")
     if(defaultPhone) {
@@ -58,7 +61,6 @@ const ProductsScreen: React.FC = () => {
     }
   }, []) // <-- empty dependency array - run only once
 
-
   const featuredProducts = filterBy(products, {featured: true});
   const productsByCategory = groupBy(products, (product) => product.category);
   const [isShown, setShown] = React.useState(false);
@@ -67,7 +69,18 @@ const ProductsScreen: React.FC = () => {
   const [tmpOptions, setTmpOptions] = React.useState<Variant[]>([])
   const [tmpCount, setTmpCount] = React.useState(0)
   const [tmpNote, setTmpNote] = React.useState('')
+  
+  // console.log(productsByCategory)
+  const [selected, setSelected] = React.useState(null)
+  //To select category
+  const [selectedCategory, setSelectedCategory] = React.useState<Product["category"] | null>(productsByCategory[0][0] || null);
+  function handleSelectCategory(category: Product["category"]) {
+    setSelectedCategory((currentSelectedCategory) =>
+      currentSelectedCategory === category ? null : category,
+    );
+  }
   //end added
+
 
   function handleAdd(product: Product, options: Variant[], count: number, note: string) {
     // add(product, options, count, note);
@@ -81,30 +94,34 @@ const ProductsScreen: React.FC = () => {
         setTmpNote(note);
       } else {
         add(product, options, count, note);
-        push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+        // push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+        setSelected(null)
       }
       // window.localStorage.setItem("addedtocart:Cart", "completed");
       // console.log('set to storage')
     } else {
       add(product, options, count, note);
-      push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+      // push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+      setSelected(null)
     }
 
    //push(`/`);
-    // push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+  // push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+  setSelected(null)
+
   }
 
   const handleSubmitFromPhoneclientModal = () => {
     add(tmpProduct, tmpOptions, tmpCount, tmpNote); // add product to cart from phone modal
     setShown(false)
-    push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+    // push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
   }
 
   const handleClosePhoneclientModal = () => {
     window.localStorage.setItem("phoneclient:After", "after")
     add(tmpProduct, tmpOptions, tmpCount, tmpNote); // add for testing bypassing
     setShown(false)
-    push(`/[slug]`, `/${tenant.slug}`, {shallow: true}); // add for testing bypassing
+    // push(`/[slug]`, `/${tenant.slug}`, {shallow: true}); // add for testing bypassing
   }
 
   function handleOpenCart() {
@@ -113,7 +130,8 @@ const ProductsScreen: React.FC = () => {
 
   function handleCloseSelected() {
     //push(`/`);
-    push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+    // push(`/[slug]`, `/${tenant.slug}`, {shallow: true});
+    setSelected(null)
   }
 
   const onChatLink = () => {
@@ -124,21 +142,22 @@ const ProductsScreen: React.FC = () => {
   };
 
   function handleSelect(product: Product) {
-    push(
-      {
-        pathname: `/[slug]`,
-        query: {
-          product: product.slug,
-        },
-      },
-      {
-        pathname: `/${tenant.slug}`,
-        query: {
-          product: product.slug,
-        },
-      },
-      {shallow: true},
-    );
+    // push(
+    //   {
+    //     pathname: `/[slug]`,
+    //     query: {
+    //       product: product.slug,
+    //     },
+    //   },
+    //   {
+    //     pathname: `/${tenant.slug}`,
+    //     query: {
+    //       product: product.slug,
+    //     },
+    //   },
+    //   {shallow: true},
+    // );
+    setSelected(product);
   }
 
   return (
@@ -218,22 +237,81 @@ const ProductsScreen: React.FC = () => {
                           </>
                         )}
                       </Stack>
-                      <Stack spacing={{base: 5, sm: 10}} width="100%">
+                      <Stack  width="100%">
                         {productsByCategory.map(([category, products]) => {
                           return (
-                            <PseudoBox key={category} as="section" id={category}>
-                              <ProductsGrid data-test-id="category" layout={layout} title={category} products={products}>
-                                {products.map((product) => (
-                                  <ProductCard
-                                    key={product.id}
-                                    layout={layout}
-                                    product={product}
-                                    onClick={() => handleSelect(product)}
-                                  />
-                                ))}
-                              </ProductsGrid>
-                            </PseudoBox>
-                          );
+                            layout == "portrait" ? (
+                              <PseudoBox key={category} as="section" id={category}>
+                                <Stack
+                                    isInline
+                                    alignItems="center"
+                                    fontSize="lg"
+                                    fontWeight={900}
+                                    spacing={2}
+                                    paddingX={{base: 4, sm: 0}}
+                                  >
+                                  <Text
+                                    as="h2"
+                                    data-test-id="title"
+                                    fontSize={{base: "xl", sm: "2xl"}}
+                                    fontWeight={500}
+                                    textTransform="capitalize"  
+                                  >
+                                    {category}
+                                  </Text>
+                                  <Text fontSize="xl" color="gray.500">({products.length})</Text>
+                                </Stack>
+                                <ProductsGrid data-test-id="category" layout={layout}>
+                                  {products.map((product) => (
+                                    <ProductCard
+                                      key={product.id}
+                                      layout={layout}
+                                      product={product}
+                                      onClick={() => handleSelect(product)}
+                                    />
+                                  ))}
+                                </ProductsGrid>
+                              </PseudoBox>
+                              ) : (
+                              <PseudoBox key={category} as="section" id={category}>
+                                <Stack
+                                    w="full"
+                                    isInline
+                                    alignItems="center"
+                                    cursor="pointer"
+                                    borderTopWidth="2px"
+                                    pt={4}
+                                    fontSize="lg"
+                                    fontWeight={900}
+                                    paddingX={{base: 4, sm: 4}}
+                                    onClick={() => handleSelectCategory(category)}
+                                  >
+                                  <Text
+                                    as="h2"
+                                    data-test-id="title"
+                                    fontSize={{base: "xl", sm: "2xl"}}
+                                    fontWeight={500}
+                                    textTransform="capitalize"
+                                  >
+                                    {category}
+                                  </Text>
+                                  <Text fontSize="xl" color="gray.500">({products.length})</Text>
+                                  {selectedCategory == category && <ChevronUpIcon />}
+                                  {!(selectedCategory == category) && <ChevronDownIcon />}
+                                </Stack>
+                                <ProductsGrid data-test-id="category" layout={layout} mt={2}>
+                                  {selectedCategory == category && products.map((product) => (
+                                    <ProductCard
+                                      key={product.id}
+                                      layout={layout}
+                                      product={product}
+                                      onClick={() => handleSelect(product)}
+                                    />
+                                  ))}
+                                </ProductsGrid>
+                              </PseudoBox>
+                              )
+                            )
                         })}
                       </Stack>
                     </>

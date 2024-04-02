@@ -191,7 +191,7 @@ const Initio: React.FC = () => {
           <ModalHeader fontSize={'2xl'}>Crea tu cuenta gratis</ModalHeader>
           <ModalCloseButton isDisabled={isLoading}/>
           <ModalBody>
-            <form onSubmit={handleSubmit(onRegisterSubmit)}>
+            <form onSubmit={handleSubmit(onRegisterSubmit)} autoComplete="off">
               <Stack spacing={4}>
                 <FormControl
                   isRequired
