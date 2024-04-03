@@ -102,7 +102,7 @@ const BannerTenant: React.FC<Props> = ({typeTenant, createdAt, slug, itExceeds})
     case 'free' : {
       return (
         <Box mb={{base:2, sm:0}}>
-          <Text d="inline-box"><b>Tienes activado el Plan Gratuito.</b> Se limitó la cantidad de productos a 100. <b>¡Puedes elegir un mejor Plan!</b></Text>
+          <Text d="inline-box"><b>Tienes activado el Plan Gratuito.</b> Se limitó la cantidad de productos a 25. <b>¡Puedes elegir un mejor Plan!</b></Text>
           <Button onClick={() => {onUpgradePlan('newPlan')}} bg="white" color="red.400" ml={{base:0, sm:3 }}>Elegir Plan</Button>
         </Box>
       );

@@ -74,7 +74,7 @@ const TypeTenant = () => {
         </Flex>
         {/*<Text color="gray.600">Cantidad máxima de productos: {getQtyProdsTypeOf(typeTenant)}</Text>*/}
         <Text color="gray.600" lineHeight={1}>✅ Catálogo de Productos</Text>
-        <Text color="gray.400" lineHeight={1}>🚫 Acceso a Base de Datos de Clientes</Text>
+        <Text color="gray.600" lineHeight={1}>✅ Base de Datos de Clientes</Text>
       </Stack>
       <Button onClick={onUpgradePlan} variantColor="primary" color="white">Mejorar</Button>
     </Flex>

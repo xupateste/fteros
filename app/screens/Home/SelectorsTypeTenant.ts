@@ -44,7 +44,7 @@ export function getIsItExceeds(typeTenant, numProds): boolean {
 export function getQtyProdsTypeOf(typeTenant): number {
   switch (typeTenant) {
     // todo: for COMERCIAL/PREMIUM/EMPRENDEDOR
-    case "test": {return 500;} // free x 40 días
+    case "test": {return 100;} // free x 40 días
     case "p050": {return 50;} // S/ 3.00 x mes
     case "p100": {return 100;} // S/ 5.00 x mes
     case "p250": {return 250;} // S/ 8.00 x mes // desde aqui +S/5.00 x 200p
@@ -63,7 +63,7 @@ export function getQtyProdsTypeOf(typeTenant): number {
     case "p2k8": {return 2850;} // S/ 73.00 x mes
     case "p3k0": {return 3050;} // S/ 78.00 x mes
     default: {
-      return 100;
+      return 25;
     }
   }
 }

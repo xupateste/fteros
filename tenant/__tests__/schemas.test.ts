@@ -99,10 +99,10 @@ describe("schemas", () => {
           flags: DEFAULT_CLIENT_TENANT.flags,
           mercadopago: {token: "", expiration: null, refresh: ""},
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1593371612/ferreteros/michelejoyas/cyath8rdaspggpi1qu8y.jpg",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1593371612/ferreteros/michelejoyas/cyath8rdaspggpi1qu8y.jpg",
           id: "QRWj1dEzx6g4BFwkupX79fhgYUH3",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1593371400/ferreteros/michelejoyas/a2eoe44p8s3khkbjjb10.jpg",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1593371400/ferreteros/michelejoyas/a2eoe44p8s3khkbjjb10.jpg",
           instagram: "Michele_Joyas",
         };
         const expected = true;
@@ -134,10 +134,10 @@ describe("schemas", () => {
           flags: DEFAULT_CLIENT_TENANT.flags,
           mercadopago: {token: "", expiration: null, refresh: ""},
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1594421698/ferreteros/unalome/nkmyuziflvl4g79tnoha.jpg",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1594421698/ferreteros/unalome/nkmyuziflvl4g79tnoha.jpg",
           id: "f0N6MLYGlXesZqZg8Bnigxty3Q22",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1594420621/ferreteros/unalome/iuorwdw8u5mb17grnop0.jpg",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1594420621/ferreteros/unalome/iuorwdw8u5mb17grnop0.jpg",
           instagram: "unalome_velas",
         };
         const expected = true;
@@ -156,7 +156,7 @@ describe("schemas", () => {
           ga: "",
           keywords: "ferreteros, tienda, online, whatsapp, delivery, pedidos, sex shop",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1591988905/ferreteros/sexshopsentidos/ide4humvpd3dpawxtdux.jpg",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1591988905/ferreteros/sexshopsentidos/ide4humvpd3dpawxtdux.jpg",
           mercadopago: {token: "", expiration: null, refresh: ""},
           id: "ege30MHDe7Xw5qH0Dbmbp5PKsb13",
           category: "toys",
@@ -168,7 +168,7 @@ describe("schemas", () => {
           facebook: "Sex Shop Sentidos",
           address: "",
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1591988962/ferreteros/sexshopsentidos/elnptptcz39ygnh1oupo.jpg",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1591988962/ferreteros/sexshopsentidos/elnptptcz39ygnh1oupo.jpg",
           slug: "sexshopsentidos",
           country: DEFAULT_CLIENT_TENANT.country,
           flags: DEFAULT_CLIENT_TENANT.flags,
@@ -184,7 +184,7 @@ describe("schemas", () => {
         const actual = {
           products: [],
           category: "clothes-accessories",
-          slug: "paroditas",
+          slug: "ferreteros",
           layout: DEFAULT_CLIENT_TENANT.layout,
           description:
             "Somos una tienda de venta de indumentaria pedidos de lunes a viernes de 9 a 18 hr.",
@@ -192,12 +192,12 @@ describe("schemas", () => {
           color: "blue",
           country: DEFAULT_CLIENT_TENANT.country,
           twitter: "",
-          title: "Paroditas indumentaria",
+          title: "ferreteros indumentaria",
           highlight: "Solo se despacharan pedidos hecho por via whatsapp",
           hook: "",
           pixel: "",
           ga: "",
-          facebook: "Paroditas indumentaria",
+          facebook: "ferreteros indumentaria",
           location: {
             coordinates: {
               lng: -58.23555589999999,
@@ -225,15 +225,15 @@ describe("schemas", () => {
               ],
             },
           ],
-          keywords: "Paroditas shop",
+          keywords: "ferreteros shop",
           flags: DEFAULT_CLIENT_TENANT.flags,
           mercadopago: null,
           banner:
-            "https://res.cloudinary.com/goncy/image/upload/v1593959210/ferreteros/paroditas/phtzirdrfva8hsqgqkaj.jpg",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1593959210/ferreteros/ferreteros/phtzirdrfva8hsqgqkaj.jpg",
           id: "3wo9AMAWUNPtGeFuppubZw7dEBr1",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1593959197/ferreteros/paroditas/xww2ij6tw0fjal9trjgs.jpg",
-          instagram: "Paroditas indumentaria ",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1593959197/ferreteros/ferreteros/xww2ij6tw0fjal9trjgs.jpg",
+          instagram: "ferreteros indumentaria ",
         };
         const expected = true;
 
@@ -265,7 +265,7 @@ describe("schemas", () => {
           products: [],
           color: "yellow",
           logo:
-            "https://res.cloudinary.com/goncy/image/upload/v1587397932/ferreteros/ab40esgl6xvdbvfomggr.png",
+            "https://res.cloudinary.com/ferreteros/image/upload/v1587397932/ferreteros/ab40esgl6xvdbvfomggr.png",
           slug: "eguez",
           title: "eguez",
           id: "iZ6m50JdNtRdtc84OUGyTcq4qM22",
@@ -389,10 +389,10 @@ describe("schemas", () => {
     describe("create", () => {
       it("should normalize any to server tenant", () => {
         const actual = {
-          slug: "goncy",
+          slug: "ferreteros",
         };
         const expected = {
-          slug: "goncy",
+          slug: "ferreteros",
           color: DEFAULT_CLIENT_TENANT.color,
           country: DEFAULT_CLIENT_TENANT.country,
           description: DEFAULT_CLIENT_TENANT.description,
@@ -413,12 +413,12 @@ describe("schemas", () => {
 
       it("should allow custom createdAt", () => {
         const actual = {
-          slug: "goncy",
+          slug: "ferreteros",
           createdAt: 1,
           updatedAt: 1,
         };
         const expected = {
-          slug: "goncy",
+          slug: "ferreteros",
           color: DEFAULT_CLIENT_TENANT.color,
           country: DEFAULT_CLIENT_TENANT.country,
           description: DEFAULT_CLIENT_TENANT.description,
@@ -439,7 +439,7 @@ describe("schemas", () => {
 
       it("should normalize location if present", () => {
         const actual = {
-          slug: "goncy",
+          slug: "ferreteros",
           location: {
             address: "some-address",
             coordinates: {
@@ -449,7 +449,7 @@ describe("schemas", () => {
           },
         };
         const expected = {
-          slug: "goncy",
+          slug: "ferreteros",
           color: DEFAULT_CLIENT_TENANT.color,
           country: DEFAULT_CLIENT_TENANT.country,
           description: DEFAULT_CLIENT_TENANT.description,

@@ -183,8 +183,8 @@ const ProductForm: React.FC<Props> = ({defaultValues, children, onSubmit, catego
                     isRequired
                     error={errors.price && "Este campo es requerido"}
                     flex={1}
-                    help="Precio principal"
-                    label="Precio final"
+                    help="Precio desde 1 unidad"
+                    label="Precio principal"
                     name="price"
                   >
                     <Price
