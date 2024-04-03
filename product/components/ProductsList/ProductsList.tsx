@@ -71,7 +71,7 @@ const ProductsList: React.FC<Props> = ({
           {isPreviewEnabled && previewMode === "card" && (
             <MenuIcon cursor="pointer" onClick={handleRowPreviewMode} />
           )}
-          <Stack isInline alignItems="center" cursor="pointer" spacing={2} onClick={handleToggle}>
+          <Stack isInline alignItems="center" cursor="pointer" spacing={2} onClick={handleToggle}  width="100%">
             <Text>{title}</Text>
             <Text color="gray.500">({products.length})</Text>
             {!isToggled && <ChevronDownIcon />}
@@ -83,7 +83,7 @@ const ProductsList: React.FC<Props> = ({
         <Box as="table" borderTopWidth={1} width="100%">
           <Box as="tbody">
             {products.length && products.map((product) => (
-              <ProductRow key={product.id} onEdit={onEdit} onPromotion={onPromotion} onRemove={onRemove} {...product} />
+              <ProductRow key={product.id} onEdit={onEdit} onPromotion={onPromotion} onRemove={onRemove} {...product}/>
             ))}
           </Box>
         </Box>
