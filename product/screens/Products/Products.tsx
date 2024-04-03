@@ -73,7 +73,7 @@ const ProductsScreen: React.FC = () => {
   // console.log(productsByCategory)
   const [selected, setSelected] = React.useState(null)
   //To select category
-  const [selectedCategory, setSelectedCategory] = React.useState<Product["category"] | null>(productsByCategory[0] ? productsByCategory[0][0] : null);
+  const [selectedCategory, setSelectedCategory] = React.useState<Product["category"] | null>(productsByCategory[0] && !featuredProducts.length ? productsByCategory[0][0] : null);
 
   function handleSelectCategory(category: Product["category"]) {
     setSelectedCategory((currentSelectedCategory) =>

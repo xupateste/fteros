@@ -284,7 +284,7 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
               <InputRightElement top="inherit">
                 <Icon color="gray.500" name="close" onClick={() => setQuery('')}/>
               </InputRightElement>
-          )}
+            )}
           </InputGroup>
         </Flex>
         {["portrait"].includes(layout) && (
@@ -307,6 +307,8 @@ export function useFilteredProductsScroll(selector?: (product: Product) => boole
 
 
 export function useFilteredProductsWithCode(selector?: (product: Product) => boolean) {
+  const searchInputRef = useRef<HTMLInputElement>(null);;
+  
   const products = useProducts();
   const t = useTranslation();
   const [query, setQuery] = React.useState("");
@@ -315,45 +317,45 @@ export function useFilteredProductsWithCode(selector?: (product: Product) => boo
     query,
     filtered,
   ]);
-  const categories = groupBy(filtered, (product) => product.category).map(([category, products]): [
-    Product["category"],
-    number,
-  ] => [category, products.length]);
+  // const categories = groupBy(filtered, (product) => product.category).map(([category, products]): [
+  //   Product["category"],
+  //   number,
+  // ] => [category, products.length]);
 
-  function handleCategoryChange(category: Product["category"]) {
-    setQuery("");
+  // function handleCategoryChange(category: Product["category"]) {
+  //   setQuery("");
 
-    if (category) {
-      document
-        .querySelector(`[id="${category}"]`)
-        ?.scrollIntoView(true)
-      var scrolledY = window.scrollY;
-      if(scrolledY){
-        //window.scroll(0, scrolledY - 60);
-        window.scrollTo({ top: scrolledY - 60, behavior: 'smooth' });
-      }
-    }
-  }
+  //   if (category) {
+  //     document
+  //       .querySelector(`[id="${category}"]`)
+  //       ?.scrollIntoView(true)
+  //     var scrolledY = window.scrollY;
+  //     if(scrolledY){
+  //       //window.scroll(0, scrolledY - 60);
+  //       window.scrollTo({ top: scrolledY - 60, behavior: 'smooth' });
+  //     }
+  //   }
+  // }
 
-  function onChangeSearchInput(value) {
-    if(query != value) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      setQuery(value)
-    }
-  }
+  // function onChangeSearchInput(value) {
+  //   if(query != value) {
+  //     window.scrollTo({ top: 0, behavior: 'smooth' })
+  //     setQuery(value)
+  //   }
+  // }
   
-  function handleEnterKey(value) {
-    if(query != value) {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-      setQuery(value)
-    }
-  }
+  // function handleEnterKey(value) {
+  //   if(query != value) {
+  //     window.scrollTo({ top: 0, behavior: 'smooth' })
+  //     setQuery(value)
+  //   }
+  // }
 
   return {
     products: productsBySearch,
     filters: (
-      <Flex alignItems="center">
-        <Select
+      <Flex alignItems="center" w="100%">
+        {/*<Select
           flex={{base: 1, sm: "inherit"}}
           fontWeight="500"
           height="100%"
@@ -370,8 +372,8 @@ export function useFilteredProductsWithCode(selector?: (product: Product) => boo
               {category} ({count})
             </option>
           ))}
-        </Select>
-        <Divider height={4} orientation="vertical" />
+        </Select>*/}
+        {/*<Divider height={4} orientation="vertical" />*/}
         <InputGroup alignItems="center" flex={{base: 1, sm: "inherit"}} height={10} w="100%">
           <InputLeftElement
             children={<Icon color="gray.300" name="search" />}
@@ -380,15 +382,21 @@ export function useFilteredProductsWithCode(selector?: (product: Product) => boo
             top="inherit"
           />
           <Input
+            ref={searchInputRef}
             fontSize="md"
             paddingLeft={10}
             placeholder={t("filters.search")}
-            // value={query}
+            value={query}
             variant="unstyled"
-            // onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
-            onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
-            onKeyUp={(e) => e.key === 'Enter' && handleEnterKey(e.target.value)}
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
+            // onBlur={(e: React.ChangeEvent<HTMLInputElement>) => onChangeSearchInput(e.target.value)}
+            // onKeyUp={(e) => e.key === 'Enter' && handleEnterKey(e.target.value)}
           />
+          {Boolean(query) && (
+            <InputRightElement top="inherit">
+              <Icon color="gray.500" name="close" onClick={() => setQuery('')}/>
+            </InputRightElement>
+          )}
         </InputGroup>
       </Flex>
     ),

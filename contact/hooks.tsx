@@ -1,5 +1,5 @@
 import React from "react";
-import {Icon, Flex, InputGroup, InputLeftElement} from "@chakra-ui/core";
+import {Icon, Flex, InputGroup, InputLeftElement, InputRightElement} from "@chakra-ui/core";
 
 import ContactContext from "./context";
 import {Contact} from "./types";
@@ -29,7 +29,7 @@ export function useFilteredContacts(selector?: (contact: Contact) => boolean) {
   const t = useTranslation();
   const [query, setQuery] = React.useState("");
   const filtered = selector ? contacts.filter(selector) : contacts;
-  const contactsBySearch = React.useMemo(() => filterBy(filtered, {name:query, phone:query}), [
+  const contactsBySearch = React.useMemo(() => filterBy(filtered, {name:query, phone:query, description:query, location:query}), [
     query,
     filtered,
   ]);
@@ -37,7 +37,7 @@ export function useFilteredContacts(selector?: (contact: Contact) => boolean) {
   return {
     contacts: contactsBySearch,
     filters: (
-      <Flex alignItems="center">
+      <Flex alignItems="center" w="100%">
         <InputGroup alignItems="center" flex={{base: 1, sm: "inherit"}} height={10} w="100%">
           <InputLeftElement
             children={<Icon color="gray.300" name="search" />}
@@ -53,6 +53,11 @@ export function useFilteredContacts(selector?: (contact: Contact) => boolean) {
             variant="unstyled"
             onChange={(e: React.ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)}
           />
+          {Boolean(query) && (
+              <InputRightElement top="inherit">
+                <Icon color="gray.500" name="close" onClick={() => setQuery('')}/>
+              </InputRightElement>
+            )}
         </InputGroup>
       </Flex>
     ),

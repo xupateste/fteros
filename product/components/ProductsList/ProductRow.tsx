@@ -61,15 +61,17 @@ const ProductRow: React.FC<Props> = ({onEdit, onPromotion, onRemove, ...product}
     >
       <Box as="td" maxWidth="200px">
         <Flex alignItems="center" marginRight={{base: 4, md: 12}} paddingY={2}>
-          <Image
-            borderColor="gray.100"
-            borderWidth={1}
-            height={12}
-            rounded="lg"
-            src={product.image ? formattedImg(product.image) : "/assets/fallback-sm.jpg"}
-
-            width={12}
-          />
+          {product.image && (
+            <Image
+              borderColor="gray.100"
+              borderWidth={1}
+              height={12}
+              rounded="lg"
+              src={product.image ? formattedImg(product.image) : "/assets/fallback-sm.jpg"}
+  
+              width={12}
+            />)
+          }
           <Box flex={1} isTruncated>
             <Text fontWeight="500" marginLeft={2} color={product.code ? "black" : "gray.300"}>{product.code ? product.code : "[Sin SKU]"}</Text>
             <Text fontWeight="900" marginLeft={2}>{product.title}</Text>

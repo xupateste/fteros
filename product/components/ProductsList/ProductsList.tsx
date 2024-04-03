@@ -34,7 +34,7 @@ const ProductsList: React.FC<Props> = ({
   ...props
 }) => {
   // If it doesn't have a title, show it
-  const [isToggled, toggle] = React.useState(Boolean(title));
+  const [isToggled, toggle] = React.useState(false);
 
   // Store preview mode
   const [previewMode, setPreviewMode] = React.useState("row");
@@ -82,7 +82,7 @@ const ProductsList: React.FC<Props> = ({
       {isToggled && previewMode === "row" && (
         <Box as="table" borderTopWidth={1} width="100%">
           <Box as="tbody">
-            {products.map((product) => (
+            {products.length && products.map((product) => (
               <ProductRow key={product.id} onEdit={onEdit} onPromotion={onPromotion} onRemove={onRemove} {...product} />
             ))}
           </Box>
