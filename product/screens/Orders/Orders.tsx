@@ -18,6 +18,8 @@ import CircleIcon from "~/ui/icons/Circle";
 import TrashIcon from "~/ui/icons/Trash";
 // import {useToast} from "~/hooks/toast";
 
+import {useFilteredContacts} from "~/contact/hooks";
+
 import {useOrders, useProductActions} from "~/product/hooks";
 
 import Content from "~/ui/structure/Content";
@@ -28,7 +30,7 @@ import {useTenant} from "~/tenant/hooks";
 
 const OrdersScreen: React.FC = () => {
   const orders = useOrders();
-  
+  const {contacts} = useFilteredContacts();
 
   // const [, setStatus] = React.useState("init");
   // const toast = useToast();
@@ -49,6 +51,13 @@ const OrdersScreen: React.FC = () => {
     alertDialog.onOpen();
     setOrderkey(order);
   }
+
+  function getContactNameFromNumber(phone) {
+    var contact = contacts.find((contact) => {
+      return contact.phone === phone;
+    })
+    return contact.name || "[Sin Nombre]";
+  } 
 
   function handleRemoveOrder() {
     // setStatus("pending");
@@ -125,17 +134,7 @@ const OrdersScreen: React.FC = () => {
                   </Box>
                 </Box>
                 {orders.map((order) => !order.deleted && (
-                  <PseudoBox as="tr" key={order.id} marginBottom="10px" lineHeight={2} position="relative" color={order.checked ? "#b7b7b7" : ""}
-                  _after={order.checked ? {
-                          content: `""`,
-                          position: "absolute",
-                          left: "0",
-                          width: "100%",
-                          height: "2px",
-                          marginTop: "16px",
-                          bg: "#b7b7b7",
-                          opacity: 0.6,
-                      } : {content: `""`}}>
+                  <PseudoBox as="tr" key={order.id} marginBottom="10px" lineHeight={2} position="relative" borderBottom="1px" borderBottomColor="gray.200" color={order.checked ? "#cccccc" : ""}>
                     <Box as="td" width={10} onClick={() => handleToggleCheck(order)}>
                       {order.checked ? <CheckIcon /> : <CircleIcon />}
                     </Box>
@@ -143,7 +142,7 @@ const OrdersScreen: React.FC = () => {
                       #{order.orderId}
                     </Box>
                     <Box as="td">
-                      {order.phone}
+                      {order.phone} {getContactNameFromNumber(order.phone)}
                     </Box>
                     <Box as="td">
                       {dateOrder(order.createdAt)} {timeOrder(order.createdAt)}

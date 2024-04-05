@@ -4,6 +4,8 @@ import {Stack} from "@chakra-ui/core";
 
 import {Product} from "../types";
 
+import BadgeColorRadio from "~/ui/inputs/BadgeColorRadio";
+
 import Input from "~/ui/inputs/Input";
 import Price from "~/ui/inputs/Price";
 import FormControl from "~/ui/form/FormControl";
@@ -138,6 +140,35 @@ const PromotionForm: React.FC<Props> = ({defaultValues, children, onSubmit}) => 
                   // autoFocus
                   name="originalPrice"
                   // placeholder="Precio"
+                />
+              </FormControl>
+            </Stack>
+            <Stack>
+              <FormControl
+                error={errors.badgeText && "Este valor es requerido"}
+                flex={1}
+                label="Etiqueta en Producto"
+                name="badgeText"
+              >
+                <Input
+                  ref={register({maxLength: 100})}
+                  name="badgeText"
+                  placeholder="Por ejemplo: ¡Nuevo! ó ¡Ultimo Stock!"
+                  rounded="md"
+                />
+              </FormControl>
+              <FormControl
+                error={errors.badgeColor && "Este valor es requerido"}
+                flex={1}
+                help="Texto y color de fondo para etiqueta"
+                name="badgeColor"
+              >
+                <Controller
+                  as={BadgeColorRadio}
+                  control={control}
+                  defaultValue="white"
+                  name="badgeColor"
+                  // rules={{required: true}}
                 />
               </FormControl>
             </Stack>

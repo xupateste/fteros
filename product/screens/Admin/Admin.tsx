@@ -55,6 +55,8 @@ const AdminScreen: React.FC<Props> = ({setItExceeds, timestamp}) => {
     product["promotionUnits"] = 0;
     product["promotionPrice"] = 0;
     product["featured"] = false;
+    product["badgeText"] = "";
+    product["badgeColor"] = "white";
     await update(product);
     closePromotionDrawer();
   }

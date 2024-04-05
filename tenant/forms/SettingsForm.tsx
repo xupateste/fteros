@@ -267,8 +267,8 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
             <FormControl
               isRequired
               error={errors.featuredText && "No debe ser mayor a 30 caracteres"}
-              label="Categoría Promoción"
-              help="Una palabra o frase para titular el grupo de productos en promoción"
+              label="Texto para productos destacados"
+              help="Una palabra o frase para titular el grupo de productos a destacar"
               name="featuredText"
             >
               <Input
@@ -281,7 +281,7 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
             </FormControl>
             <FormControl
               error={errors.promoText && "No debe ser mayor a 20 caracteres"}
-              label="Etiqueta en productos"
+              label="Texto para destacar precio promocional"
               help="Una palabra o frase para destacar el precio promocional"
               name="promoText"
             >

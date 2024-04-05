@@ -110,7 +110,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
   // }
   const onPromoLink = () => {
     window.open(
-      `https://wa.me/${phone}?text=${encodeURIComponent(`Hola - quiero este producto: ${product.code} ${product.title} (${p(product.price)})`)}`,
+      `https://wa.me/${phone}?text=${encodeURIComponent(`Hola - quiero este producto: ${product.code} ${product.title}`)}`,
       '_blank' // <- This is what makes it open in a new window.
     );
   };
@@ -393,6 +393,68 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
                     )}
                     {product.type === "unavailable" && (
                       <Stack>
+                        {!product.wholesale ? (
+                          <Box
+                            color="green.500"
+                            fontWeight={700}
+                            fontSize="2xl"
+                          >
+                            {`${p(product.price)}`}
+                            {product.originalPrice && (
+                              <Text
+                                display="inline"
+                                color="gray.500"
+                                fontSize="xl"
+                                fontWeight={500}
+                                ml={2}
+                                textDecoration="line-through"
+                              >
+                                {product.originalPrice ? `${p(product.originalPrice)}` : ''}
+                              </Text>
+                            )}
+                          </Box>
+                        ) : (
+                          <SimpleGrid columns={{ base: numPriceColums() === 1 ? 1 : numPriceColums() === 2 ? 2 : numPriceColums() === 3 ? 3 : 2}}>
+                            {product.mqo !== product.xoptions[0].quantity && (
+                              <Box
+                                color="green.500"
+                                fontWeight={700}
+                                fontSize={{base: "xl", md:"2xl"}}
+                                textAlign="center"
+                                mb={2}
+                              >
+                                {`${p(product.price)}`}
+                                <Box fontWeight={500} color="gray.700" fontSize="xs" mt="-6px">
+                                  {`${product.mqo} - ${product.xoptions[0].quantity - 1} piezas`}
+                                </Box>
+                              </Box>
+                            )}
+                            {(product.xoptions).map((xoption, index, elements) => {
+                              let next = elements[index+1]
+                              return (
+                                <Box
+                                  color="green.500"
+                                  fontWeight={700}
+                                  fontSize={{base: "xl", md:"2xl"}}
+                                  textAlign="center"
+                                  mb={2}
+                                  key={xoption.id}
+                                >
+                                  {`${p(xoption.price)}`}
+                                  {next && (
+                                    <Box fontWeight={500} color="gray.700" fontSize="xs" mt="-6px">
+                                      {`${xoption.quantity} - ${next.quantity - 1} piezas`}
+                                    </Box>
+                                  )}
+                                  {!next && (
+                                    <Box fontWeight={500} color="gray.700" fontSize="xs" mt="-6px">
+                                      {`≥ ${xoption.quantity} piezas`}
+                                    </Box>
+                                  )}
+                                </Box>
+                            )})}
+                          </SimpleGrid>
+                        )}
                         <Text
                           backgroundColor= "#ebf8ff"
                           borderWidth="1px"
