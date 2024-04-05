@@ -56,7 +56,7 @@ const OrdersScreen: React.FC = () => {
     var contact = contacts.find((contact) => {
       return contact.phone === phone;
     })
-    return contact.name || "[Sin Nombre]";
+    return contact.name ? contact.name "[Sin Nombre]";
   } 
 
   function handleRemoveOrder() {
