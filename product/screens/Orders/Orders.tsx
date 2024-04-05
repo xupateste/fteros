@@ -134,14 +134,14 @@ const OrdersScreen: React.FC = () => {
                   </Box>
                 </Box>
                 {orders.map((order) => !order.deleted && (
-                  <PseudoBox as="tr" key={order.id} marginBottom="10px" lineHeight={2} position="relative" borderBottom="1px" borderBottomColor="gray.200" color={order.checked ? "#cccccc" : ""}>
+                  <PseudoBox as="tr" key={order.id} lineHeight={1.7} position="relative" borderBottom="1px" borderBottomColor="gray.200" color={order.checked ? "#cccccc" : ""}>
                     <Box as="td" width={10} onClick={() => handleToggleCheck(order)}>
                       {order.checked ? <CheckIcon /> : <CircleIcon />}
                     </Box>
                     <Box as="td" onClick={() => {onOpen();setMessage(order.message)}} textDecoration="underline" fontWeight="bold">
                       #{order.orderId}
                     </Box>
-                    <Box as="td">
+                    <Box as="td" lineHeight={1}>
                       {order.phone} {getContactNameFromNumber(order.phone)}
                     </Box>
                     <Box as="td">
