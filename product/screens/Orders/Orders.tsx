@@ -1,5 +1,5 @@
 import React from "react";
-import {Box, Flex, Modal, Button, PseudoBox,
+import {Box, Flex, Modal, Button, PseudoBox, IconButton,
   ModalOverlay,
   ModalContent,
   ModalBody,
@@ -31,7 +31,7 @@ import {useTenant} from "~/tenant/hooks";
 const OrdersScreen: React.FC = () => {
   const orders = useOrders();
   const {contacts} = useFilteredContacts();
-
+  const [isLoading, toggleLoading] = React.useState(false);
   // const [, setStatus] = React.useState("init");
   // const toast = useToast();
   const router = useRouter();
@@ -100,8 +100,11 @@ const OrdersScreen: React.FC = () => {
   }, [orders]);
 
   const handleToggleCheck = (order) => {
+    toggleLoading(true)
     order.checked = !order.checked;
-    updateorder(order);
+    updateorder(order).then(() => {
+      toggleLoading(false)
+    });
   }
 
   return (
@@ -118,7 +121,7 @@ const OrdersScreen: React.FC = () => {
               <Box as="tbody">
                 <Box as="tr" borderBottomWidth={1} textAlign="left">
                   <Box as="th" width={10}>
-                    
+
                   </Box>
                   <Box as="th">
                     #PEDIDO
@@ -134,9 +137,9 @@ const OrdersScreen: React.FC = () => {
                   </Box>
                 </Box>
                 {orders.map((order) => !order.deleted && (
-                  <PseudoBox as="tr" key={order.id} lineHeight={1.7} position="relative" borderBottom="1px" borderBottomColor="gray.200" color={order.checked ? "#cccccc" : ""}>
+                  <PseudoBox as="tr" key={order.id} lineHeight={2} position="relative" borderBottom="1px" borderBottomColor="gray.200" color={order.checked ? "#cccccc" : ""}>
                     <Box as="td" width={10} onClick={() => handleToggleCheck(order)}>
-                      {order.checked ? <CheckIcon /> : <CircleIcon />}
+                      {isLoading ? <IconButton isLoading={isLoading} size="sm" aria-label="Check" /> : order.checked ? <CheckIcon /> : <CircleIcon />}
                     </Box>
                     <Box as="td" onClick={() => {onOpen();setMessage(order.message)}} textDecoration="underline" fontWeight="bold">
                       #{order.orderId}
