@@ -171,7 +171,7 @@ const OrdersScreen: React.FC = () => {
           </ModalBody>
         </ModalContent>
       </Modal>
-       <AlertDialog
+      <AlertDialog
         isOpen={alertDialog.isOpen}
         leastDestructiveRef={cancelRef}
         isCentered

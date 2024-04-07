@@ -3,6 +3,7 @@ import {IconButton, Text, Stack, Flex, Box} from "@chakra-ui/core";
 
 import {Contact} from "../../types";
 
+import RemoveAskModal from "./RemoveAskModal";
 
 import {useToast} from "~/hooks/toast";
 import TrashIcon from "~/ui/icons/Trash";
@@ -15,6 +16,7 @@ interface Props extends Contact {
 const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
 	const [status, setStatus] = React.useState("init");
   const toast = useToast();
+  const [isShown, setShown] = React.useState(false);
 
   async function handleRemove(contact: Contact) {
     setStatus("pending");
@@ -24,6 +26,16 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
 
       toast({status: "error", title: "Error", description: "No se pudo borrar el contacto"});
     });
+  }
+
+  function handleSubmitFromRemoveAskModal(event: React.FormEvent<HTMLFormElement>, contact: Contact) {
+    event.stopPropagation();
+    handleRemove(contact);
+    setShown(false);
+  }
+
+  function handleCloseRemoveAskModal() {
+    setShown(false)
   }
 
   function dateContact(secs) {
@@ -93,12 +105,17 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
             variant="ghost"
             onClick={(event) => {
               event.stopPropagation();
-
-              handleRemove(contact);
+              // handleRemove(contact);
+              setShown(true);
             }}
           />
         </Stack>
       </Box>
+      <RemoveAskModal
+        isShown={isShown}
+        onClose={handleCloseRemoveAskModal}
+        onSubmit={(event) => {handleSubmitFromRemoveAskModal(event, contact)}}
+      />
     </Box>
   )
 }
