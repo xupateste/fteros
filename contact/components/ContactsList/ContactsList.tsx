@@ -8,7 +8,7 @@ import {Contact} from "~/contact/types";
 interface Props extends StackProps {
   contacts: Contact[];
   onEdit: (contact: Contact) => void;
-  onRemove: (id: Contact["id"]) => Promise<void>;
+  onRemove: (contact: Contact) => Promise<void>;
 }
 
 
@@ -44,7 +44,7 @@ const ContactsList: React.FC<Props> = ({
                 </Text>
               </Box>
             </Box>
-            {contacts.map((contact) => (
+            {contacts.map((contact) => !contact.deleted && (
               <ContactRow key={contact.id} onEdit={onEdit} onRemove={onRemove} {...contact} />
             ))}
           </Box>

@@ -220,28 +220,49 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
             )}
           </>
         )}*/}
-        {type === "unavailable" && (
+        {type == "unavailable" && (
           // <Text color="yellow.500" fontSize={{base:"sm", md:"md"}} fontWeight={900} lineHeight={1}>
           //   *Agotado
           // </Text>
           <>
-            <Stack isInline alignItems="center" >
-              <Text color="green.500" fontSize={{base:"md", md:"lg"}} fontWeight={600} lineHeight={1}>
-                {p(price)}
-              </Text>
-              {(originalPrice) && (
-                <Text color="gray.500" fontSize={{base:"sm", md:"md"}} lineHeight={1} textDecoration="line-through">
-                  {p(originalPrice)}
+          {!wholesale && (
+            <>
+              <Stack isInline alignItems="center" >
+                <Text color="green.500" fontSize={{base:"md", md:"lg"}} fontWeight={600} lineHeight={1}>
+                  {p(price)}
                 </Text>
-              )}
-            </Stack>
-            {(["promotional"].includes(type) && promoText) && (
+                {(originalPrice) && (
+                  <Text color="gray.500" fontSize={{base:"sm", md:"md"}} lineHeight={1} textDecoration="line-through">
+                    {p(originalPrice)}
+                  </Text>
+                )}
+              </Stack>
+              {(["promotional"].includes(type) && promoText) && (
               <Flex>
-                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600}>
+                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600} lineHeight={1}>
                   {`${promoText} ${p(originalPrice - price)}`}
                 </Box>
               </Flex>)}
-          </>
+              {showMqo && (
+                <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={2}>
+                  {`Pedido mín.: ${mqo} pza.`}
+                </Text>
+              )}
+            </>
+          )}
+          {wholesale && (
+            <Stack alignItems="flex-start" direction="column">
+              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
+                {p(min) + " - " + p(max)}
+              </Text>
+              {showMqo && (
+                <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                  {`Pedido mín.: ${mqo} pza.`}
+                </Text>
+              )}
+            </Stack>
+          )}
+        </>
         )}
         {/*type === "variant" && (
           <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={500} lineHeight={1}>

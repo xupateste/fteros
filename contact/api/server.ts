@@ -58,11 +58,17 @@ export default {
       const matchedDocs = querySnapshot.size
       if (matchedDocs) {
         querySnapshot.docs.forEach(doc => {
+          var visitsPastValue = doc.data().visitsPast ? doc.data().visitsPast : 0;
+          var createdAtPastValue = doc.data().createdAtPast ? doc.data().createdAtPast : firestore.Timestamp.now().seconds;
+          var pastInfoValue = doc.data().pastInfo ? doc.data().pastInfo : '';
           contact['name'] = doc.data().name;
           contact['description'] = doc.data().description;
           contact['location'] = doc.data().location;
-          contact['createdAt'] = doc.data().createdAt;
+          contact['pastInfo'] = pastInfoValue;
+          contact['createdAt'] = doc.data().createdAt == 1594090800000 ? firestore.Timestamp.now().seconds : doc.data().createdAt;;
+          contact['createdAtPast'] = createdAtPastValue;
           contact['updatedAt'] = firestore.Timestamp.now().seconds;
+          contact['visitsPast'] = visitsPastValue;
           contact['visits'] = doc.data().visits + 1;
           return database
             .collection("tenants")
@@ -74,6 +80,7 @@ export default {
         })
       } else {
         contact['createdAt'] = firestore.Timestamp.now().seconds;
+        contact['createdAtPast'] = firestore.Timestamp.now().seconds;
         contact['updatedAt'] = firestore.Timestamp.now().seconds;
         contact['visits'] = 1;
         return database

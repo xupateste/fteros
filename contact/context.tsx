@@ -17,7 +17,7 @@ export interface Context {
   actions: {
     create: (contact: Contact) => Promise<void>;
     update: (contact: Contact) => Promise<void>;
-    remove: (id: Contact["id"]) => Promise<void>;
+    remove: (contact: Contact) => Promise<void>;
     hookcontact: (contact: Contact) => void;
   };
 }
@@ -101,11 +101,27 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
       });
   };
 
-  function remove(id: Contact["id"]) {
+  function remove(contact: Contact) {
+    const casted = schemas.client.update.cast(contact);
+    var visitsPastValue = contact.visitsPast ? contact.visitsPast : 0;
+    var createdAtValue = contact.createdAt;
+    var createdAtPastValue = (contact.createdAtPast !== 1594090800000) ? contact.createdAtPast : createdAtValue;
+    var actualInfo = contact.name + '|' + contact.location + '|' + contact.description + ',';
+    var pastInfoValue = contact.pastInfo ? contact.pastInfo + actualInfo : actualInfo;
+    casted["deleted"] = true;
+    casted["visitsPast"] = visitsPastValue + casted.visits;
+    casted["visits"] = 0;
+    casted["name"] = '';
+    casted["pastInfo"] = pastInfoValue;
+    casted["location"] = '';
+    casted["description"] = '';
+    casted["createdAtPast"] = createdAtPastValue;
+    casted["createdAt"] = 1594090800000;
+
     return api
-      .remove(tenant.id, id)
+      .update(tenant.id, casted)
       .then(() => {
-        setContacts((contacts) => contacts.filter((contact) => contact.id !== id));
+        setContacts((contacts) => contacts.filter((contact) => contact.id !== casted.id));
 
         toast({
           title: "Contacto eliminado",

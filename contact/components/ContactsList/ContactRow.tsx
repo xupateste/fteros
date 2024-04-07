@@ -9,14 +9,14 @@ import TrashIcon from "~/ui/icons/Trash";
 
 interface Props extends Contact {
   onEdit: (contact: Contact) => void;
-  onRemove: (contact: Contact["id"]) => Promise<void>;
+  onRemove: (contact: Contact) => Promise<void>;
 }
 
 const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
 	const [status, setStatus] = React.useState("init");
   const toast = useToast();
 
-  async function handleRemove(contact: Contact["id"]) {
+  async function handleRemove(contact: Contact) {
     setStatus("pending");
 
     onRemove(contact).catch(() => {
@@ -94,7 +94,7 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
             onClick={(event) => {
               event.stopPropagation();
 
-              handleRemove(contact.id);
+              handleRemove(contact);
             }}
           />
         </Stack>
