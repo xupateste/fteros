@@ -10,6 +10,7 @@ import StarIcon from "~/ui/icons/Star";
 import Image from "~/ui/feedback/Image";
 import {usePrice} from "~/i18n/hooks";
 import RemoveAskModal from "./RemoveAskModal";
+import {getxOptionsPriceRange} from "~/product/selectors";
 
 //import {getVariantsPriceRange} from "~/product/selectors";
 
@@ -25,6 +26,7 @@ const ProductRow: React.FC<Props> = ({onEdit, onPromotion, onRemove, ...product}
   const p = usePrice();
   //const [min, max] = getVariantsPriceRange(product.options);
   const [isShown, setShown] = React.useState(false);
+  const [min, max] = getxOptionsPriceRange(product.price, product.xoptions, product.mqo);
 
   async function handleRemove(product: Product["id"]) {
     setStatus("pending");
@@ -79,13 +81,18 @@ const ProductRow: React.FC<Props> = ({onEdit, onPromotion, onRemove, ...product}
         </Flex>
       </Box>
       <Box as="td" display={{base: "none", md: "table-cell"}} width="220px">
-        <Text fontWeight="500" marginRight={{base: 4, md: 10}} textAlign="left">
+        <Text fontWeight="500" marginRight={{base: 4, md: 10}} textAlign="left" fontSize="sm">
           {product.type === "ask" && `Precio a consultar`}
           {/*product.type === "variant" && (min === max ? p(min) : `${p(min)} ~ ${p(max)}`)*/}
-          {product.type === "available" && p(product.price)}
+          {["promotional", "available"].includes(product.type) && !product.wholesale && (
+              <>{p(product.price)} {product.type == "promotional" && (` (${p(product.originalPrice)})`)}</>
+            )}
+          {["promotional", "available"].includes(product.type) && product.wholesale && (
+              <>{p(min) + " - " + p(max)}</>
+            )}
           {product.type === "unavailable" && "Sin stock"}
           {product.type === "hidden" && "Oculto"}
-          {product.type === "promotional" && `${p(product.price)} (${p(product.originalPrice)})`}
+          {/*{product.type === "promotional" && `${p(product.price)} (${p(product.originalPrice)})`}*/}
         </Text>
       </Box>
       <Box as="td" display={{base: "none", md: "table-cell"}} width="200px">
