@@ -8,8 +8,10 @@ import ProductCard from "../../components/ProductCard";
 import {useFilteredProductsScroll, useProducts} from "../../hooks";
 import ProductsGrid from "../../components/ProductsGrid";
 import ProductsCarousel from "../../components/ProductsCarousel";
+import StepperPackedLanding from "~/ui/inputs/StepperPackedLanding";
 
 import PhoneClientNumber from "./PhoneClientNumber";
+import {CartItem} from "~/cart/types";
 
 //import Logo from "~/ui/static/Logo";
 //import Image from "~/ui/feedback/Image";
@@ -81,6 +83,14 @@ const ProductsScreen: React.FC = () => {
     );
   }
   //end added
+
+  function handleDecrease(id: CartItem["id"]) {
+    decrease(id);
+  }
+
+  function handleIncrease(id: CartItem["id"]) {
+    increase(id);
+  }
 
 
   function handleAdd(product: Product, options: Variant[], count: number, note: string) {
@@ -224,16 +234,31 @@ const ProductsScreen: React.FC = () => {
                               <Text fontSize="xl" color="gray.500">({featuredProducts.length})</Text>
                             </Stack>
                             <ProductsCarousel zIndex={0}>
-                              {featuredProducts.length && featuredProducts.map((product) => (
-                                <ProductCard
-                                  key={product.id}
-                                  isRaised
-                                  layout="portrait"
-                                  width={{base:210, sm: 280}}
-                                  product={product}
-                                  onClick={() => handleSelect(product)}
-                                />
-                              ))}
+                              {featuredProducts.length && featuredProducts.map((product) => {
+                                const item = items.find(item => item.product.id == product.id) || null;
+                                return (
+                                  <Flex direction="column" key={product.id} mb={4}>
+                                    <ProductCard
+                                      layout="portrait"
+                                      width={{base:210, sm: 280}}
+                                      product={product}
+                                      onClick={() => handleSelect(product)}
+                                    />
+                                    {item ? (
+                                      <StepperPackedLanding
+                                        isMqo={((item.count > 1) && (item.count === item.product.mqo))}
+                                        value={item.count}
+                                        mqo={item.product.mqo ? item.product.mqo : 1}
+                                        packed={item.product.numPiezas ? item.product.numPiezas : 1}
+                                        onDecrease={() => handleDecrease(item.id)}
+                                        onIncrease={() => handleIncrease(item.id)}
+                                        />) : (
+                                      <Button isDisabled={product.type === "unavailable"} size="sm" variant="solid" color="gray.600" variantColor="gray" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
+                                      )
+                                  }
+                                  </Flex>
+                                )}
+                              )}
                             </ProductsCarousel>
                           </>
                         )}
@@ -301,14 +326,30 @@ const ProductsScreen: React.FC = () => {
                                   {!(selectedCategory == category) && <ChevronDownIcon />}
                                 </Stack>
                                 <ProductsGrid data-test-id="category" layout={layout} mt={2}>
-                                  {selectedCategory == category && products.map((product) => (
-                                    <ProductCard
-                                      key={product.id}
-                                      layout={layout}
-                                      product={product}
-                                      onClick={() => handleSelect(product)}
-                                    />
-                                  ))}
+                                  {selectedCategory == category && products.map((product) => {
+                                  const item = items.find(item => item.product.id == product.id) || null;
+                                  return (
+                                    <Flex direction="column" key={product.id} mb={4}>
+                                      <ProductCard
+                                        layout={layout}
+                                        product={product}
+                                        onClick={() => handleSelect(product)}
+                                      />
+                                      {item ? (
+                                        <StepperPackedLanding
+                                          isMqo={((item.count > 1) && (item.count === item.product.mqo))}
+                                          value={item.count}
+                                          mqo={item.product.mqo ? item.product.mqo : 1}
+                                          packed={item.product.numPiezas ? item.product.numPiezas : 1}
+                                          onDecrease={() => handleDecrease(item.id)}
+                                          onIncrease={() => handleIncrease(item.id)}
+                                          />) : (
+                                        <Button isDisabled={product.type === "unavailable"} size="sm" variant="solid" color="gray.600" variantColor="gray" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
+                                        )
+                                    }
+                                    </Flex>
+                                    )}
+                                  )}
                                 </ProductsGrid>
                               </PseudoBox>
                               )

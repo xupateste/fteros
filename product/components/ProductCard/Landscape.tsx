@@ -47,7 +47,7 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
       rounded="md"
       transition="transform 0.2s"
       onClick={handleClick}
-      marginBottom={4}
+      marginBottom={1}
       bg="white"
       borderWidth={featured ? 2 : 0}
       borderColor="yellow.300"
@@ -66,7 +66,6 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
       <Box
         position="absolute"
         width="100%"
-        paddingBottom="100%"
         height="0"
       >
         {(type === "unavailable") && (
@@ -87,7 +86,7 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
         flexDirection="column"
         height="100%"
         justifyContent="normal"
-        padding={isRaised ? {base: 2, sm: 4} : 1}
+        paddingX={isRaised ? {base: 2, sm: 4} : 1}
         paddingTop={1}
         width="100%"
         mx="auto"

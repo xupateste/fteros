@@ -47,7 +47,7 @@ const PortraitProductCard: React.FC<Props> = ({isRaised = false, product, onClic
       rounded="md"
       transition="transform 0.2s"
       onClick={handleClick}
-      marginBottom={4}
+      marginBottom={2}
       bg="white"
       borderWidth={featured ? 2 : 0}
       borderColor="yellow.300"
