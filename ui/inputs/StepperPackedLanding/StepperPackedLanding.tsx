@@ -50,7 +50,7 @@ const StepperPackedLanding: React.FC<Props> = ({
   }
 
   return (
-    <Stack isInline alignItems="center" spacing={0} mx={2} {...props}>
+    <Stack rounded="lg" isInline alignItems="center" spacing={0} mx={2} backgroundColor="primary.200" {...props}>
       {value && (
         <IconButton
           size="sm"
