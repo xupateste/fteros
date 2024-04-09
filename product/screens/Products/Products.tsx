@@ -253,7 +253,7 @@ const ProductsScreen: React.FC = () => {
                                         onDecrease={() => handleDecrease(item.id)}
                                         onIncrease={() => handleIncrease(item.id)}
                                         />) : (
-                                      <Button isDisabled={product.type === "unavailable"} size="sm" variant="outline" borderColor="primary.100" fontWeight="sm" color="gray.600" backgroundColor="primary.50" variantColor="primary.500" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
+                                      <Button isDisabled={product.type === "unavailable"} size="sm" variant="outline" borderColor="gray.200" borderWidth={2} fontWeight="sm" color="gray.600" backgroundColor="gray.50" variantColor="primary.500" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
                                       )
                                   }
                                   </Flex>
@@ -306,7 +306,7 @@ const ProductsScreen: React.FC = () => {
                                             onDecrease={() => handleDecrease(item.id)}
                                             onIncrease={() => handleIncrease(item.id)}
                                             />) : (
-                                          <Button isDisabled={product.type === "unavailable"} size="sm" variant="outline" borderColor="primary.100" fontWeight="sm" color="gray.600" backgroundColor="primary.50" variantColor="primary.500" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
+                                          <Button isDisabled={product.type === "unavailable"} size="sm" variant="outline" borderColor="gray.200" borderWidth={2} fontWeight="sm" color="gray.600" backgroundColor="gray.50" variantColor="primary.500" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
                                           )
                                       }
                                       </Flex>
@@ -360,7 +360,7 @@ const ProductsScreen: React.FC = () => {
                                           onDecrease={() => handleDecrease(item.id)}
                                           onIncrease={() => handleIncrease(item.id)}
                                           />) : (
-                                        <Button isDisabled={product.type === "unavailable"} size="sm" variant="outline" borderColor="primary.100" fontWeight="sm" color="gray.600" backgroundColor="primary.50" variantColor="primary.500" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
+                                        <Button isDisabled={product.type === "unavailable"} size="sm" variant="outline" borderColor="gray.200" borderWidth={2} fontWeight="sm" color="gray.600" backgroundColor="gray.50" variantColor="primary.500" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
                                         )
                                     }
                                     </Flex>
