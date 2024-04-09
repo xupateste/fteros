@@ -23,6 +23,7 @@ import {useTenant} from "~/tenant/hooks";
 import {usePrice} from "~/i18n/hooks";
 import {getProductSaving} from "../../selectors"
 
+import {CartItem} from "~/cart/types";
 import EyeIcon from "~/ui/icons/Eye";
 
 import {getxOptionsPriceRange} from "~/product/selectors";
@@ -30,13 +31,15 @@ import {getxOptionsPriceRange} from "~/product/selectors";
 interface Props extends Omit<IDrawer, "children"> {
   onSubmit: (product: Product, options: Variant[], count: number, note: string) => void;
   product: Product;
+  items: CartItem[];
 }
 
-const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props}) => {
-  const [count, setCount] = React.useState(product.mqo ? product.mqo : 1);
+const CartItemDrawer: React.FC<Props> = ({onClose, product, items, onSubmit, ...props}) => {
+  let mqo = (product.mqo ? product.mqo : 1)
+  const item = items.find(item => item.product.id == product.id) || null;
+  const [count, setCount] = React.useState(item ? item.count : mqo);
   const [number, setNumber] = React.useState(Math.floor(Math.random() * 5));
   const [note, setNote] = React.useState("");
-  let mqo = (product.mqo ? product.mqo : 1)
   const p = usePrice();
   const t = useTranslation();
   const log = useAnalytics();
@@ -53,6 +56,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, onSubmit, ...props})
     }
     return 0
   }
+
   // const canShare = {
   //   prompt: Boolean(navigator?.share),
   //   clipboard: Boolean(navigator?.clipboard),

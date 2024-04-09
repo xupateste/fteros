@@ -288,14 +288,30 @@ const ProductsScreen: React.FC = () => {
                                   <Text fontSize="xl" color="gray.500">({products.length})</Text>
                                 </Stack>
                                 <ProductsGrid data-test-id="category" layout={layout}>
-                                  {products.map((product) => (
-                                    <ProductCard
-                                      key={product.id}
-                                      layout={layout}
-                                      product={product}
-                                      onClick={() => handleSelect(product)}
-                                    />
-                                  ))}
+                                  {products.map((product) => {
+                                    const item = items.find(item => item.product.id == product.id) || null;
+                                    return (
+                                      <Flex direction="column" key={product.id} mb={4}>
+                                        <ProductCard
+                                          layout={layout}
+                                          product={product}
+                                          onClick={() => handleSelect(product)}
+                                        />
+                                        {item ? (
+                                          <StepperPackedLanding
+                                            isMqo={((item.count > 1) && (item.count === item.product.mqo))}
+                                            value={item.count}
+                                            mqo={item.product.mqo ? item.product.mqo : 1}
+                                            packed={item.product.numPiezas ? item.product.numPiezas : 1}
+                                            onDecrease={() => handleDecrease(item.id)}
+                                            onIncrease={() => handleIncrease(item.id)}
+                                            />) : (
+                                          <Button isDisabled={product.type === "unavailable"} size="sm" variant="solid" color="gray.600" variantColor="gray" onClick={() => add(product, [] as Variant[], product.mqo ? product.mqo : 1, "")}>{product.type == "unavailable" ? "Agotado" : "Agregar"}</Button>
+                                          )
+                                      }
+                                      </Flex>
+                                    )}
+                                  )}
                                 </ProductsGrid>
                               </PseudoBox>
                               ) : (
@@ -429,7 +445,7 @@ const ProductsScreen: React.FC = () => {
         />
       )}
       {Boolean(selected) && (
-        <CartItemDrawer product={selected} onClose={handleCloseSelected} onSubmit={handleAdd} />
+        <CartItemDrawer items={items} product={selected} onClose={handleCloseSelected} onSubmit={handleAdd} />
       )}
       <PhoneClientNumber
         isShown={isShown}

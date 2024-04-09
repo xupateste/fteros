@@ -79,18 +79,18 @@ const CartProvider = ({children}: Props) => {
         })
 
         if (foundDup) {
-          cart[foundDup.id].count += count
-        } else {
-          cart[id] = {
-            id,
-            variants,
-            count,
-            product,
-            note,
-            mqo,
-            numPiezas,
-          };
+          // cart[foundDup.id].count += count
+          delete cart[foundDup.id];
         }
+        cart[id] = {
+          id,
+          variants,
+          count,
+          product,
+          note,
+          mqo,
+          numPiezas,
+        };
       }),
     );
   }
