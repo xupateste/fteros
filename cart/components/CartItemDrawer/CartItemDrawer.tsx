@@ -398,6 +398,7 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, items, onSubmit, ...
                     {product.type === "unavailable" && (
                       <Stack>
                         {!product.wholesale ? (
+                          <>
                           <Box
                             color="green.500"
                             fontWeight={700}
@@ -417,7 +418,16 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, items, onSubmit, ...
                               </Text>
                             )}
                           </Box>
+                          {(product.originalPrice && promoText) && (
+                            <Flex fontSize="md">
+                              <Box borderWidth={2} borderRadius='lg' borderColor='black' px={3} py={0} fontWeight={600}>
+                                {`${promoText} ${p(product.originalPrice - product.price)}`}
+                              </Box>
+                            </Flex>
+                          )}
+                          </>
                         ) : (
+                          <>
                           <SimpleGrid columns={{ base: numPriceColums() === 1 ? 1 : numPriceColums() === 2 ? 2 : numPriceColums() === 3 ? 3 : 2}}>
                             {product.mqo !== product.xoptions[0].quantity && (
                               <Box
@@ -458,6 +468,34 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, items, onSubmit, ...
                                 </Box>
                             )})}
                           </SimpleGrid>
+                          {(product.originalPrice && promoText) && (
+                            <Box textAlign="center" mb={2}>
+                              <Text
+                                display="inline-flex"
+                                color="gray.500"
+                                fontSize="xs"
+                                fontWeight={800}
+                              >
+                                PRECIO REGULAR:
+                              </Text>
+                              <Text
+                                display="inline-flex"
+                                color="gray.500"
+                                fontSize="sm"
+                                fontWeight={800}
+                                ml={1}
+                                textDecoration="line-through"
+                              >
+                                {product.originalPrice ? `${p(product.originalPrice)}` : ''}
+                              </Text>
+                              {promoText && (
+                                <Box d="inline-flex" ml={2} fontSize="xs" borderWidth={2} borderRadius='lg' borderColor='black' px={1} py={0} fontWeight={600}>
+                                  {`${promoText} ${p(product.originalPrice - min)}`}
+                                </Box>
+                              )}
+                            </Box>
+                          )}
+                          </>
                         )}
                         <Text
                           backgroundColor= "#ebf8ff"
@@ -465,10 +503,10 @@ const CartItemDrawer: React.FC<Props> = ({onClose, product, items, onSubmit, ...
                           fontSize="md"
                           whiteSpace="pre-line"
                           p={3}
+                          mt={3}
                         >
                           Producto sin stock
                         </Text>
-                        
                       </Stack>
                     )}
 

@@ -33,6 +33,26 @@ interface Params extends ParsedUrlQuery {
 }
 
 const AdminRoute: React.FC<Props> = ({tenant, products, orders, contacts, timestamp}) => {
+  
+React.useEffect(() => {
+  var isTabActive = true;
+  var isTimeout = false;
+  window.onfocus = function () { 
+    isTabActive = true; 
+  }; 
+  window.onblur = function () { 
+    isTabActive = false; 
+  }; 
+  setTimeout(() => {
+    isTimeout = true;
+  }, 1800000)
+
+  // test
+  setInterval(function () { 
+    if(isTabActive && isTimeout) window.location.reload();
+  }, 10000);
+}, []);
+
   return (
     <TenantProvider initialValue={tenant}>
       {(tenant) => (

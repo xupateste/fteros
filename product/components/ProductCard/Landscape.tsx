@@ -131,11 +131,11 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
         )}
         {(["promotional", "available"].includes(type) && wholesale) && (
             <Stack alignItems="flex-start" direction="column">
-              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
+              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1} mt={1}>
                 {p(min) + " - " + p(max)}
               </Text>
               {showMqo && (
-                <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                <Text color="gray.800" fontSize="10px" lineHeight={1}>
                   {`Pedido mín.: ${mqo} pza.`}
                 </Text>
               )}
@@ -226,24 +226,19 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
           <>
           {!wholesale && (
             <>
-              <Stack isInline alignItems="center" >
-                <Text color="green.500" fontSize={{base:"md", md:"lg"}} fontWeight={600} lineHeight={1}>
+
+              <Box>
+                <Text d="inline" color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600}>
                   {p(price)}
                 </Text>
-                {(originalPrice) && (
-                  <Text color="gray.500" fontSize={{base:"sm", md:"md"}} lineHeight={1} textDecoration="line-through">
-                    {p(originalPrice)}
+                {originalPrice && (
+                  <Text d="inline" ml={1} color="gray.500" fontSize={{base:"xs", md:"sm"}} textDecoration="line-through">
+                    {originalPrice ? `${p(originalPrice)}` : ''}
                   </Text>
                 )}
-              </Stack>
-              {(["promotional"].includes(type) && promoText) && (
-              <Flex>
-                <Box borderWidth={2} fontSize={{base:"xs", md:"xs"}} borderRadius='md' borderColor='black' mt={1} px={2} py={0} fontWeight={600} lineHeight={1}>
-                  {`${promoText} ${p(originalPrice - price)}`}
-                </Box>
-              </Flex>)}
+              </Box>
               {showMqo && (
-                <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={2}>
+                <Text color="gray.800" fontSize="10px" lineHeight={2}>
                   {`Pedido mín.: ${mqo} pza.`}
                 </Text>
               )}
@@ -251,11 +246,11 @@ const LandscapeProductCard: React.FC<Props> = ({isRaised = false, product, onCli
           )}
           {wholesale && (
             <Stack alignItems="flex-start" direction="column">
-              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1}>
+              <Text color="green.500" fontSize={{base:"sm", md:"md"}} fontWeight={600} lineHeight={1} mt={1}>
                 {p(min) + " - " + p(max)}
               </Text>
               {showMqo && (
-                <Text color="gray.800" fontSize={{base:"xs", md:"xs"}} lineHeight={1}>
+                <Text color="gray.800" fontSize="10px" lineHeight={1}>
                   {`Pedido mín.: ${mqo} pza.`}
                 </Text>
               )}
