@@ -10,7 +10,7 @@ export const META = {
   twitter: "@",
   url: "https://ferreteros.app",
   banner: {
-    url: "/og-image.jpg",
+    url: "https://res.cloudinary.com/dmpnhivah/image/upload/v1673386608/CLOUDINARY_PRESET_HIGH/brup5eig9ntrs4cdpaqy.jpg",
     format: "image/jpeg",
     width: "1200",
     height: "630",
