@@ -8,6 +8,8 @@ import {ClientTenant} from "~/tenant/types";
 import tenantApi from "~/tenant/api/server";
 import tenantSchemas from "~/tenant/schemas";
 import { getCountryTelCode } from "~/landing/components/countries";
+import ClientLayout from "~/app/layouts/ClientLayout";
+
 
 interface Props {
   tenant: ClientTenant;
@@ -24,7 +26,8 @@ const Index: React.FC<Props> = ({tenant}) => {
       window.location.replace(`/${tenant.slug}`);
 	}
 
-	return <Text> </Text>;
+	return <ClientLayout tenant={tenant}><Text></Text></ClientLayout>;
+;
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
