@@ -1,7 +1,7 @@
 import React from "react";
 
 import {GetServerSideProps} from "next";
-import {Flex, Stack, Text, Button} from '@chakra-ui/core';
+import {Flex, Stack, Text, Button, Textarea} from '@chakra-ui/core';
 import ClientLayout from "~/app/layouts/ClientLayout";
 import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
 
@@ -33,10 +33,24 @@ const Index: React.FC<Props> = ({tenant}) => {
     label: name,
     value: iso
   }));
+  const [messageLocal, setMessage] = React.useState("");
+
+  React.useEffect(() => {
+    const data = window.localStorage.getItem('messageLocal');
+    if ( data !== null ) { setMessage(data)}
+      else {setMessage("Hola! te envío nuestro *catálogo actualizado*, cualquier consulta no dude en escribirnos")};
+  }, []);
+
+
+  React.useEffect(() => {
+    window.localStorage.setItem('messageLocal', messageLocal);
+  }, [messageLocal]);
+
 
   const onPhoneclientSubmit = data => {
+    window.localStorage.setItem("messageLocal", `${data.message}`);    
     window.open(
-      `https://wa.me/${storeCode}${data.phoneclient}?text=${encodeURIComponent(`Hola! le envío nuestro *catálogo actualizado*, cualquier consulta no dude en escribirnos\nhttps://ferreteros.app/${tenant.slug}/cliente/${data.phoneclient}`)}`,
+      `https://wa.me/${storeCode}${data.phoneclient}?text=${encodeURIComponent(`${data.message}\nhttps://ferreteros.app/${tenant.slug}/cliente/${data.phoneclient}`)}`,
       '_blank' // <- This is what makes it open in a new window.
     );
   }
@@ -70,6 +84,19 @@ const Index: React.FC<Props> = ({tenant}) => {
           Invitación para clientes
         </Text>
         <form onSubmit={handleSubmit(onPhoneclientSubmit)}>
+          <FormControl
+            id="name"
+            label="Mensaje"
+            mb={2}
+          >
+            <Textarea
+              ref={register({maxLength: 140})}
+              defaultValue={messageLocal}
+              maxLength={140}
+              name="message"
+              placeholder="Hola, revisa nuestro catalogo:"
+            />
+          </FormControl>
           <FormControl
             isRequired
             error={errors.phoneclient && "Ingrese un número válido"}
