@@ -50,24 +50,26 @@ const Index: React.FC<Props> = ({tenant}) => {
   const onPhoneclientSubmit = data => {
     window.localStorage.setItem("messageLocal", `${data.message}`);    
     window.open(
-      `https://wa.me/${storeCode}${data.phoneclient}?text=${encodeURIComponent(`${data.message}\nhttps://ferreteros.app/${tenant.slug}/cliente/${data.phoneclient}`)}`,
+      `https://wa.me/${storeCode}${data.phoneclient}?text=${encodeURIComponent(`${data.message}\n*https://ferreteros.app/${tenant.slug}/cliente/${data.phoneclient}*`)}`,
       '_blank' // <- This is what makes it open in a new window.
     );
   }
 
 	return (
     <ClientLayout tenant={tenant}>
+    <Stack>
     <Flex
       p={4}
       minH={'100vh'}
       align={'center'}
       justify={'center'}
-      bg="gray">
+      bg="gray.100"
+    >
       <Stack
         spacing={4}
         w={'full'}
         maxW={'md'}
-        bg="blue"
+        background={"white"}
         alignItems="center"
         rounded={'xl'}
         boxShadow={'lg'}
@@ -87,13 +89,14 @@ const Index: React.FC<Props> = ({tenant}) => {
           <FormControl
             id="name"
             label="Mensaje"
-            mb={2}
+            mb={4}
           >
             <Textarea
               ref={register({maxLength: 140})}
               defaultValue={messageLocal}
               maxLength={140}
               name="message"
+              color="gray.500"
               placeholder="Hola, revisa nuestro catalogo:"
             />
           </FormControl>
@@ -108,6 +111,7 @@ const Index: React.FC<Props> = ({tenant}) => {
               country={tenant.country}
               onChange={value => setstoreCode(value)}
               options={countryOptions}
+              color="gray.500"
               size="lg"
               name="phoneclient"
               placeholder="111344400"
@@ -122,6 +126,7 @@ const Index: React.FC<Props> = ({tenant}) => {
         </Stack>
       </Stack>
     </Flex>
+    </Stack>
     </ClientLayout>
   );
 }
