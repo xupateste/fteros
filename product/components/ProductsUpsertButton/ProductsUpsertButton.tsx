@@ -6,7 +6,7 @@ import ProductsUpsertModal from "../ProductsUpsertModal";
 
 import UploadIcon from "~/ui/icons/Upload";
 import IconButton from "~/ui/controls/IconButton";
-import EditIcon from "~/ui/icons/Edit";
+// import EditIcon from "~/ui/icons/Edit";
 import {Product} from "~/product/types";
 
 interface Props extends Omit<StackProps, "onSubmit"> {
@@ -37,10 +37,10 @@ const ProductsUpsertButton: React.FC<Props> = ({products: base, onSubmit, isDisa
     toggleImportModal(false);
   }
 
-  function handleBulkEdit() {
-    // Open drawer with prop-passed products
-    setProducts(base);
-  }
+  // function handleBulkEdit() {
+  //   // Open drawer with prop-passed products
+  //   setProducts(base);
+  // }
 
   async function handleSubmit(products: Product[]) {
     // Upsert products
@@ -68,7 +68,7 @@ const ProductsUpsertButton: React.FC<Props> = ({products: base, onSubmit, isDisa
         >
           Importar
         </IconButton>
-        <IconButton
+        {/*<IconButton
           isCollapsable
           data-test-id="bulk-edit-button"
           leftIcon={EditIcon}
@@ -76,7 +76,7 @@ const ProductsUpsertButton: React.FC<Props> = ({products: base, onSubmit, isDisa
           onClick={handleBulkEdit}
         >
           Edicion en lote
-        </IconButton>
+        </IconButton>*/}
       </Stack>
       {isImportModalShown && (
         <ProductsUpsertModal onChange={handleImport} onClose={handleImportClose} />

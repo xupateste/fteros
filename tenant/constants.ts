@@ -10,7 +10,7 @@ export const DEFAULT_CLIENT_TENANT: Partial<ClientTenant> = {
   color: "teal",
   createdAt: 1670897400000,
   updatedAt: 1670897400000,
-  layout: "portrait",
+  layout: "landscape",
   promoText: "AHORRAS",
   featuredText: "Destacados",
   typeTenant: "test",
