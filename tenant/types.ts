@@ -12,6 +12,16 @@ export interface ServerTenant {
   >;
   phone: string;
   phonePersonal: string;
+  sales1: string;
+  sales2: string;
+  sales3: string;
+  sales4: string;
+  sales5: string;
+  sales6: string;
+  sales7: string;
+  sales8: string;
+  sales9: string;
+  sales10: string;
   logo?: string;
   title: string;
   instagram?: string;

@@ -10,6 +10,7 @@ export default {
       phone: yup.string().default(DEFAULT_CONTACT.phone),
       name: yup.string().default(DEFAULT_CONTACT.name),
       pastInfo: yup.string().default(DEFAULT_CONTACT.pastInfo),
+      sales: yup.string().default(DEFAULT_CONTACT.sales),
       location: yup.string().default(DEFAULT_CONTACT.location),
       description: yup.string().default(DEFAULT_CONTACT.description),
       visits: yup
@@ -30,6 +31,7 @@ export default {
       phone: yup.string().nullable(),
       name: yup.string().nullable(),
       pastInfo: yup.string().nullable(),
+      sales: yup.string().nullable(),
       location: yup.string().nullable(),
       description: yup.string().nullable(),
       visits: yup.number().nullable(),
@@ -46,6 +48,7 @@ export default {
       phone: yup.string().required().default(DEFAULT_CONTACT.phone),
       name: yup.string().default(DEFAULT_CONTACT.name),
       pastInfo: yup.string().default(DEFAULT_CONTACT.pastInfo),
+      sales: yup.string().default(DEFAULT_CONTACT.sales),
       location: yup.string().default(DEFAULT_CONTACT.location),
       description: yup.string().default(DEFAULT_CONTACT.description),
       visits: yup
@@ -66,6 +69,7 @@ export default {
       phone: yup.string().nullable(),
       name: yup.string().nullable(),
       pastInfo: yup.string().nullable(),
+      sales: yup.string().nullable(),
       location: yup.string().nullable(),
       description: yup.string().nullable(),
       visits: yup.number().nullable(),
@@ -80,6 +84,7 @@ export default {
       phone: yup.string().default(DEFAULT_CONTACT.phone),
       name: yup.string().default(DEFAULT_CONTACT.name),
       pastInfo: yup.string().default(DEFAULT_CONTACT.pastInfo),
+      sales: yup.string().default(DEFAULT_CONTACT.sales),
       location: yup.string().default(DEFAULT_CONTACT.location),
       description: yup.string().default(DEFAULT_CONTACT.description),
       visits: yup

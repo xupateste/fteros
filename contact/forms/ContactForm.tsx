@@ -20,12 +20,18 @@ interface Props {
 
 
 const ContactForm: React.FC<Props> = ({defaultValues, children, onSubmit, isNew}) => {
+  const salesPerson = {phone:"Tienda", sales1:"Ventas1", sales2:"Ventas2", sales3:"Ventas3", sales4:"Ventas4", sales5:"Ventas5",
+                       sales6:"Ventas6", sales7:"Ventas7", sales8:"Ventas8", sales9:"Ventas9", sales10:"Ventas10",};
+
+  const currentSales = defaultValues.sales ? defaultValues.sales : "phone";
+
   const form = useForm<Partial<Contact>>({defaultValues});
   const {handleSubmit: submit, errors, register, formState} = form;
   // const values = watch();
 
   function handleSubmit(values: Partial<Contact>) {
     const contact = {...defaultValues, ...values};
+    contact["sales"] = currentSales;
 
     return onSubmit(contact);
   }
@@ -37,20 +43,33 @@ const ContactForm: React.FC<Props> = ({defaultValues, children, onSubmit, isNew}
     	<FormContext {...form}>
         <form onSubmit={submit(handleSubmit)}>
           <Stack spacing={4}>
-          	<FormControl
-              isRequired
-              error={errors.phone && "Ingrese un número de Whatsapp válido. Ej: +51999111111"}
-              label="WhatsApp"
-              name="phone"
-              help="Simbolo(+) + Código de país + teléfono. Ej: +51999111111"
-            >
-              <Input
-                ref={register({required: true, minLength: 10, maxLength: 15,  pattern: /^[+][0-9]+$/})}
-                isDisabled={isNew ? false : true}
+            <Stack isInline spacing={2}>
+            	<FormControl
+                isRequired
+                error={errors.phone && "Ingrese un número de Whatsapp válido. Ej: +51999111111"}
+                label="WhatsApp"
                 name="phone"
-                placeholder="Ej. +51999111111"
-              />
-            </FormControl>
+                help="Simbolo(+) + Código de país + teléfono. Ej: +51999111111"
+              >
+                <Input
+                  ref={register({required: true, minLength: 10, maxLength: 15,  pattern: /^[+][0-9]+$/})}
+                  isDisabled={isNew ? false : true}
+                  name="phone"
+                  placeholder="Ej. +51999111111"
+                />
+              </FormControl>
+              <FormControl
+                label="Vendedor"
+                name="sales"
+                help="Agente de Ventas"
+              >
+                <Input
+                  isDisabled={true}
+                  name="sales"
+                  defaultValue={salesPerson[currentSales]}
+                />
+              </FormControl>
+            </Stack>
             <FormControl
               isRequired
               error={errors.name && "El nombre no puede ser mayor a 70 caracteres"}

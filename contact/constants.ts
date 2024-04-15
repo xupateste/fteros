@@ -4,6 +4,7 @@ export const DEFAULT_CONTACT: Omit<Contact, "id"> = {
   phone: "",
   name: "",
   pastInfo: "",
+  sales: "",
   location: "",
   description: "",
   visits: 0,

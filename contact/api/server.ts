@@ -54,10 +54,17 @@ export default {
     // SIN AWAIT
     const firestoreRef = database.collection('tenants').doc(tenant).collection("contacts");
     const queryRef = firestoreRef.where('phone', '==', contact['phone']);
+    // let salesContact = process.browser ? window.localStorage?.getItem(tenant.slug) : '';
+    // let finallySales =  salesContact ? salesContact : 'phone';
+    // console.log(finallySales)
+
+
     return queryRef.get().then((querySnapshot) => {
       const matchedDocs = querySnapshot.size
       if (matchedDocs) {
         querySnapshot.docs.forEach(doc => {
+          // if(typeof window !== "undefined") window.localStorage?.setItem(tenant, doc.data().sales);
+          
           var visitsPastValue = doc.data().visitsPast ? doc.data().visitsPast : 0;
           var createdAtPastValue = doc.data().createdAtPast ? doc.data().createdAtPast : firestore.Timestamp.now().seconds;
           var pastInfoValue = doc.data().pastInfo ? doc.data().pastInfo : '';
@@ -65,6 +72,7 @@ export default {
           contact['description'] = doc.data().description;
           contact['location'] = doc.data().location;
           contact['pastInfo'] = pastInfoValue;
+          // contact['sales'] = doc.data().sales;
           contact['createdAt'] = doc.data().createdAt == 1594090800000 ? firestore.Timestamp.now().seconds : doc.data().createdAt;;
           contact['createdAtPast'] = createdAtPastValue;
           contact['updatedAt'] = firestore.Timestamp.now().seconds;
@@ -82,6 +90,7 @@ export default {
         contact['createdAt'] = firestore.Timestamp.now().seconds;
         contact['createdAtPast'] = firestore.Timestamp.now().seconds;
         contact['updatedAt'] = firestore.Timestamp.now().seconds;
+        // contact['sales'] = finallySales;
         contact['visits'] = 1;
         return database
           .collection("tenants")

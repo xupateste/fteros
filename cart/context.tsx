@@ -184,17 +184,21 @@ const CartProvider = ({children}: Props) => {
       api.hook(hook, {phone, items, orderId, fields});
     }
 
+    let salesContact = process.browser ? window.localStorage?.getItem(tenant.slug) : '';
+    let finallyPhone =  (salesContact && tenant[salesContact]) ? tenant[salesContact] : phone;
+
     let phoneclient = process.browser ? window.localStorage?.getItem('phoneclient:Products') : '';
     
     apiClient
-      .hookorder(tenant.id, {orderId: orderId, items: items, fields: fields, phone: phoneclient, message: encodeURIComponent(getMessage(items, orderId, fields, "", tenant.title, tenant.phone))})
+      .hookorder(tenant.id, {orderId: orderId, items: items, fields: fields, phone: phoneclient, message: encodeURIComponent(getMessage(items, orderId, fields, "", tenant.title, finallyPhone))})
       .then()
       .catch(err => {console.log(err)})
     // added
     
     let tenantSlug = tenant.title;
+
     // If we don't have mercadopago configured and selected, redirect the user to whatsapp
-    return api.checkout({tenantSlug, phone, items, orderId, fields});
+    return api.checkout({tenantSlug, phone: finallyPhone, items, orderId, fields});
   }
 
   const state: State = {items, cart};

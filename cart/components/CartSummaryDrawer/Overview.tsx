@@ -62,7 +62,7 @@ const Overview: React.FC<Props> = ({
   //const {image, title, price, originalPrice, description, type} = product; //added
 
   //const cancelRef = React.useRef();
-  const {phone} = useTenant();
+  const tenant = useTenant();
 
 
   function formattedImg(image) {
@@ -122,8 +122,10 @@ const Overview: React.FC<Props> = ({
   };
 
   const onChatLink = () => {
+    const salesContact = window.localStorage.getItem(tenant.slug);
+
     window.open(
-      `https://wa.me/${phone}?text=${encodeURIComponent('Hola - acabo de ver su catálogo y tengo una pregunta')}`,
+      `https://wa.me/${(salesContact && tenant[salesContact]) ? tenant[salesContact] : tenant.phone}?text=${encodeURIComponent('Hola - acabo de ver su catálogo y tengo una pregunta')}`,
       '_blank' // <- This is what makes it open in a new window.
     );
   };

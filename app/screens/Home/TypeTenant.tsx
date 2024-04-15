@@ -110,6 +110,22 @@ const TypeTenant = () => {
       </Stack>
       <Button onClick={handleCopyLinkAdmin} variantColor="primary" size="sm" color="white" m="auto">Copiar</Button>
     </Flex>
+    <Divider/>
+    <Flex borderWidth={2} borderColor="gray.200" padding={4} rounded="md" justifyContent="space-between" >
+      <Stack width="100%">
+        <Box overflowX="auto" overflowY="hidden">
+          <Grid>
+            <Text fontSize="lg">
+              Asignar Vendedor/Cliente:
+            </Text>
+            <Flex color="gray.600" bg="primary.50" fontSize={16} px={2} mr={5} alignItems="center" rounded="sm" overflowX="auto">
+              {'https://ferreteros.app/'+slug+'/cliente'}
+            </Flex>
+          </Grid>
+        </Box>
+      </Stack>
+      <Button onClick={handleCopyLinkAdmin} variantColor="primary" size="sm" color="white" m="auto">Copiar</Button>
+    </Flex>
   </>
   );
 };

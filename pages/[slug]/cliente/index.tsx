@@ -1,7 +1,7 @@
 import React from "react";
 
 import {GetServerSideProps} from "next";
-import {Flex, Stack, Text, Button, Textarea} from '@chakra-ui/core';
+import {Flex, Stack, Text, Button, Textarea, Select} from '@chakra-ui/core';
 import ClientLayout from "~/app/layouts/ClientLayout";
 import PhoneNumberInput from "~/landing/components/PhoneNumberInput";
 
@@ -21,6 +21,8 @@ interface Props {
 }
 
 const Index: React.FC<Props> = ({tenant}) => {
+  const salesPerson = {phone:"cliente", sales1:"ventas1", sales2:"ventas2", sales3:"ventas3", sales4:"ventas4", sales5:"ventas5",
+                       sales6:"ventas6", sales7:"ventas7", sales8:"ventas8", sales9:"ventas9", sales10:"ventas10",};
 	// const storeCode = getCountryTelCode(tenant.country).replaceAll("+", "").replaceAll(" ", "");
   if (typeof document === 'undefined') {
     React.useLayoutEffect = React.useEffect;
@@ -34,25 +36,37 @@ const Index: React.FC<Props> = ({tenant}) => {
     value: iso
   }));
   const [messageLocal, setMessage] = React.useState("");
+  const [salesLocal, setSales] = React.useState("");
 
   React.useEffect(() => {
     const data = window.localStorage.getItem('messageLocal');
-    if ( data !== null ) { setMessage(data)}
-      else {setMessage("Hola! te envío nuestro *catálogo actualizado*, cualquier consulta no dude en escribirnos")};
+    const sales = window.localStorage.getItem(tenant.slug);
+    if ( data !== null ) { setMessage(data) }
+      else {
+        setMessage("Hola! te envío nuestro *catálogo actualizado*, cualquier consulta no dude en escribirnos")
+      };
+    if ( sales !== null ) { setSales(sales); }
+      else {
+        setSales("phone")
+      };
   }, []);
 
 
   React.useEffect(() => {
     window.localStorage.setItem('messageLocal', messageLocal);
-  }, [messageLocal]);
+    window.localStorage.setItem(tenant.slug, salesLocal);
+  }, [messageLocal, salesLocal]);
 
 
   const onPhoneclientSubmit = data => {
-    window.localStorage.setItem("messageLocal", `${data.message}`);    
-    window.open(
-      `https://wa.me/${storeCode}${data.phoneclient}?text=${encodeURIComponent(`${data.message}\n*https://ferreteros.app/${tenant.slug}/cliente/${data.phoneclient}*`)}`,
-      '_blank' // <- This is what makes it open in a new window.
-    );
+    if(data.phoneclient) {
+      window.localStorage.setItem(tenant.slug, salesLocal);
+      window.localStorage.setItem("messageLocal", `${data.message}`);    
+      window.open(
+        `https://wa.me/${storeCode}${data.phoneclient}?text=${encodeURIComponent(`${data.message}\n*https://ferreteros.app/${tenant.slug}/${salesPerson[salesLocal]}/${data.phoneclient}*`)}`,
+        '_blank' // <- This is what makes it open in a new window.
+      );
+    }
   }
 
 	return (
@@ -83,9 +97,35 @@ const Index: React.FC<Props> = ({tenant}) => {
           title={tenant.title}
         />
         <Text lineHeight={1.1} fontSize={{ base: '2xl', md: '3xl' }}>
-          Invitación para clientes
+          Asignar Vendedor/Cliente
         </Text>
         <form onSubmit={handleSubmit(onPhoneclientSubmit)}>
+          <FormControl
+            id="sales"
+            label="Agente de Ventas"
+            mb={4}
+          >
+            <Select
+              data-test-id="brand-select"
+              // defaultValue={salesLocal}
+              value={salesLocal}
+              onChange={(e: React.ChangeEvent<HTMLSelectElement>) =>
+                setSales(e.target.value)
+              }
+            >
+              <option value="phone">Tienda</option>
+              {tenant.sales1 && (<option value="sales1">Ventas 1 ({tenant.sales1})</option>)}
+              {tenant.sales2 && (<option value="sales2">Ventas 2 ({tenant.sales2})</option>)}
+              {tenant.sales3 && (<option value="sales3">Ventas 3 ({tenant.sales3})</option>)}
+              {tenant.sales4 && (<option value="sales4">Ventas 4 ({tenant.sales4})</option>)}
+              {tenant.sales5 && (<option value="sales5">Ventas 5 ({tenant.sales5})</option>)}
+              {tenant.sales6 && (<option value="sales6">Ventas 6 ({tenant.sales6})</option>)}
+              {tenant.sales7 && (<option value="sales7">Ventas 7 ({tenant.sales7})</option>)}
+              {tenant.sales8 && (<option value="sales8">Ventas 8 ({tenant.sales8})</option>)}
+              {tenant.sales9 && (<option value="sales9">Ventas 9 ({tenant.sales9})</option>)}
+              {tenant.sales10 && (<option value="sales10">Ventas 10 ({tenant.sales10})</option>)}
+            </Select>
+          </FormControl>
           <FormControl
             id="name"
             label="Mensaje"
@@ -107,7 +147,7 @@ const Index: React.FC<Props> = ({tenant}) => {
           >
             <Text textDecoration="underline" color="primary.700" fontSize={17} mb={2}>Número de WhatsApp</Text>
             <PhoneNumberInput
-              ref={register({required: true, maxLength: 12, pattern: /^[0-9]+$/})}
+              ref={register({pattern: /^[0-9]+$/})}
               country={tenant.country}
               onChange={value => setstoreCode(value)}
               options={countryOptions}

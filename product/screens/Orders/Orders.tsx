@@ -29,6 +29,9 @@ import {useTenant} from "~/tenant/hooks";
 
 
 const OrdersScreen: React.FC = () => {
+  const salesPerson = {phone:"Tienda", sales1:"Ventas1", sales2:"Ventas2", sales3:"Ventas3", sales4:"Ventas4", sales5:"Ventas5",
+                       sales6:"Ventas6", sales7:"Ventas7", sales8:"Ventas8", sales9:"Ventas9", sales10:"Ventas10",};
+
   const orders = useOrders();
   const {contacts} = useFilteredContacts();
   const [isLoading, toggleLoading] = React.useState(false);
@@ -57,6 +60,12 @@ const OrdersScreen: React.FC = () => {
       return contact.phone === phone;
     })
     return (contact && !contact.deleted && contact.name) ? contact.name : "[Sin Nombre]";
+  } 
+  function getContactSalesFromNumber(phone) {
+    var contact = contacts.find((contact) => {
+      return contact.phone === phone;
+    })
+    return (contact && !contact.deleted && contact.sales) ? contact.sales : "phone";
   } 
 
   function handleRemoveOrder() {
@@ -145,7 +154,7 @@ const OrdersScreen: React.FC = () => {
                       #{order.orderId}
                     </Box>
                     <Box as="td" lineHeight={1}>
-                      {order.phone} {getContactNameFromNumber(order.phone)}
+                      {order.phone} [{salesPerson[getContactSalesFromNumber(order.phone)]}] {getContactNameFromNumber(order.phone)}
                     </Box>
                     <Box as="td">
                       {dateOrder(order.createdAt)} {timeOrder(order.createdAt)}

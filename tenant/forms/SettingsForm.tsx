@@ -1,6 +1,6 @@
 import React from "react";
 import {useForm, Controller, FieldError} from "react-hook-form";
-import {Stack, Text, Divider} from "@chakra-ui/core";
+import {Stack, Text, Divider, InputLeftAddon, InputGroup} from "@chakra-ui/core";
 
 import {ClientTenant} from "../types";
 import FieldsInput, {validator as FieldsInputValidator} from "../inputs/Fields";
@@ -15,6 +15,9 @@ import ImageInput from "~/ui/inputs/Image";
 import FormControl from "~/ui/form/FormControl";
 import MPConnect from "~/payment/inputs/MPConnect";
 import SwitchInput from "~/ui/inputs/Switch";
+import IconButton from "~/ui/controls/IconButton";
+
+import PlusIcon from "~/ui/icons/Plus";
 
 //import PlaceInput from "~/ui/inputs/Place";
 import {COUNTRIES} from "~/i18n/constants";
@@ -45,10 +48,16 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
   });
   const t = useTranslation();
 
+  const [activeSales, setActiveSales] = React.useState(false)
+
   function handleSubmit(values: ClientTenant) {
     const tenant = {...defaultValues, ...values};
 
     return onSubmit(tenant);
+  }
+
+  function showMoreSales() {
+    setActiveSales(true);
   }
 
   return children({
@@ -204,6 +213,199 @@ const SettingsForm: React.FC<Props> = ({defaultValues = {}, children, onSubmit})
                 placeholder={"URL: https://goo.gl/maps/..."}
               />
             </FormControl>
+          </Stack>
+          <Divider />
+          <Stack spacing={4}>
+            <Stack spacing={1}>
+              <Text fontSize="2xl" fontWeight={500} id="customization">
+                {"Agentes de venta"}
+              </Text>
+              <Text color="gray.600">Configura hasta 10 agentes de venta</Text>
+            </Stack>
+            <FormControl
+              isRequired
+              error={errors.sales1 && "Ingrese un numero válido"}
+              name="sales1"
+            >
+              <InputGroup>
+                <InputLeftAddon children="Ventas 1" fontWeight={700}/>
+                <Input
+                  ref={register({maxLength: 15})}
+                  defaultValue=""
+                  maxLength={15}
+                  name="sales1"
+                  placeholder="51911114444"
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl
+              isRequired
+              error={errors.sales2 && "Ingrese un numero válido"}
+              name="sales2"
+            >
+              <InputGroup>
+                <InputLeftAddon children="Ventas 2" fontWeight={700}/>
+                <Input
+                  ref={register({maxLength: 15})}
+                  defaultValue=""
+                  maxLength={15}
+                  name="sales2"
+                  placeholder="51911114444"
+                />
+              </InputGroup>
+            </FormControl>
+            <FormControl
+              isRequired
+              error={errors.sales3 && "Ingrese un numero válido"}
+              name="sales3"
+            >
+              <InputGroup>
+                <InputLeftAddon children="Ventas 3" fontWeight={700}/>
+                <Input
+                  ref={register({maxLength: 15})}
+                  defaultValue=""
+                  maxLength={15}
+                  name="sales3"
+                  placeholder="51911114444"
+                />
+              </InputGroup>
+            </FormControl>
+            {(defaultValues.sales4 || activeSales) && (
+              <FormControl
+                isRequired
+                error={errors.sales4 && "Ingrese un numero válido"}
+                name="sales4"
+              >
+                <InputGroup>
+                  <InputLeftAddon children="Ventas 4" fontWeight={700}/>
+                  <Input
+                    ref={register({maxLength: 15})}
+                    defaultValue=""
+                    maxLength={15}
+                    name="sales4"
+                    placeholder="51911114444"
+                  />
+                </InputGroup>
+              </FormControl>
+            )}
+            {(defaultValues.sales5 || activeSales) && (
+              <FormControl
+                isRequired
+                error={errors.sales5 && "Ingrese un numero válido"}
+                name="sales5"
+              >
+                <InputGroup>
+                  <InputLeftAddon children="Ventas 5" fontWeight={700}/>
+                  <Input
+                    ref={register({maxLength: 15})}
+                    defaultValue=""
+                    maxLength={15}
+                    name="sales5"
+                    placeholder="51911114444"
+                  />
+                </InputGroup>
+              </FormControl>
+            )}
+            {(defaultValues.sales6 || activeSales) && (
+              <FormControl
+                isRequired
+                error={errors.sales6 && "Ingrese un numero válido"}
+                name="sales6"
+              >
+                <InputGroup>
+                  <InputLeftAddon children="Ventas 6" fontWeight={700}/>
+                  <Input
+                    ref={register({maxLength: 15})}
+                    defaultValue=""
+                    maxLength={15}
+                    name="sales6"
+                    placeholder="51911114444"
+                  />
+                </InputGroup>
+              </FormControl>
+            )}
+            {(defaultValues.sales7 || activeSales) && (
+              <FormControl
+                isRequired
+                error={errors.sales7 && "Ingrese un numero válido"}
+                name="sales7"
+              >
+                <InputGroup>
+                  <InputLeftAddon children="Ventas 7" fontWeight={700}/>
+                  <Input
+                    ref={register({maxLength: 15})}
+                    defaultValue=""
+                    maxLength={15}
+                    name="sales7"
+                    placeholder="51911114444"
+                  />
+                </InputGroup>
+              </FormControl>
+            )}
+            {(defaultValues.sales8 || activeSales) && (
+              <FormControl
+                isRequired
+                error={errors.sales8 && "Ingrese un numero válido"}
+                name="sales8"
+              >
+                <InputGroup>
+                  <InputLeftAddon children="Ventas 8" fontWeight={700}/>
+                  <Input
+                    ref={register({maxLength: 15})}
+                    defaultValue=""
+                    maxLength={15}
+                    name="sales8"
+                    placeholder="51911114444"
+                  />
+                </InputGroup>
+              </FormControl>
+            )}
+            {(defaultValues.sales9 || activeSales) && (
+              <FormControl
+                isRequired
+                error={errors.sales9 && "Ingrese un numero válido"}
+                name="sales9"
+              >
+                <InputGroup>
+                  <InputLeftAddon children="Ventas 9" fontWeight={700}/>
+                  <Input
+                    ref={register({maxLength: 15})}
+                    defaultValue=""
+                    maxLength={15}
+                    name="sales9"
+                    placeholder="51911114444"
+                  />
+                </InputGroup>
+              </FormControl>
+            )}
+            {(defaultValues.sales10 || activeSales) && (
+              <FormControl
+                isRequired
+                error={errors.sales10 && "Ingrese un numero válido"}
+                name="sales10"
+              >
+                <InputGroup>
+                  <InputLeftAddon children="Ventas 10" fontWeight={700}/>
+                  <Input
+                    ref={register({maxLength: 15})}
+                    defaultValue=""
+                    maxLength={15}
+                    name="sales10"
+                    placeholder="51911114444"
+                  />
+                </InputGroup>
+              </FormControl>
+            )}
+            {!activeSales && (
+              <IconButton
+                fontWeight="normal"
+                justifyContent="space-between"
+                rightIcon={PlusIcon}
+                onClick={showMoreSales}
+              >
+                Mostrar más
+              </IconButton>
+            )}
           </Stack>
           <Divider />
           <Stack spacing={4}>

@@ -14,6 +14,10 @@ interface Props extends Contact {
 }
 
 const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
+  const salesPerson = {phone:"Tienda", sales1:"Ventas1", sales2:"Ventas2", sales3:"Ventas3", sales4:"Ventas4", sales5:"Ventas5",
+                       sales6:"Ventas6", sales7:"Ventas7", sales8:"Ventas8", sales9:"Ventas9", sales10:"Ventas10",};
+  const currentSales = contact.sales ? contact.sales : "phone";
+  // console.log(currentSales)
 	const [status, setStatus] = React.useState("init");
   const toast = useToast();
   const [isShown, setShown] = React.useState(false);
@@ -73,7 +77,7 @@ const ContactRow: React.FC<Props> = ({onEdit, onRemove, ...contact}) => {
 	    	<Flex alignItems="center" marginRight={{base: 4, md: 12}} paddingY={2}>
 	        <Box flex={1} isTruncated>
 	          <Text fontWeight="900" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} isTruncated>{contact.phone ? contact.phone : ""}</Text>
-	          <Text fontWeight="500" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} color={contact.name ? "black" : "gray.300"} isTruncated>{contact.name ? contact.name : "[Sin Nombre]"}</Text>
+	          <Text fontWeight="500" marginLeft={2} maxWidth={{base: '150px', md: '300px'}} color={contact.name ? "black" : "gray.400"} isTruncated>[{salesPerson[currentSales]}] {contact.name ? contact.name : "[Sin Nombre]"}</Text>
 	        </Box>
 	      </Flex>
       </Box>

@@ -3,6 +3,7 @@ export interface Contact {
   phone: string;
   name?: string;
   pastInfo?: string;
+  sales?: string;
   location?: string;
   description?: string;
   visits?: number;
