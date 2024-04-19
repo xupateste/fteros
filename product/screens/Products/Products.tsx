@@ -59,8 +59,8 @@ const ProductsScreen: React.FC = () => {
       // const [isContact, setIsNewContact] = React.useState<Contact>(undefined)
       let isContact = {} as Contact;
       isContact['phone'] = defaultPhone;
-      setTimeout(() => {hookcontact(isContact)}, 2000)
-      
+      setTimeout(() => {hookcontact(isContact)}, 3000)
+      // console.log("from useffect from products")
     }
   }, []) // <-- empty dependency array - run only once
 

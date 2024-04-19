@@ -59,6 +59,7 @@ const PhoneClientNumber: React.FC<Props> = ({
     // setNewContact({phone: `+${storeCode}${data.phoneclient}`});
     onHookcontact(newContact);
     // handleOnHookContact();
+    console.log("from onPhoneclientSubmit")
     onSubmit();
   }
 

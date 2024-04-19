@@ -139,7 +139,7 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
       });
   };
 
-  async function hookcontact(contact: Contact) {
+  function hookcontact(contact: Contact) {
     const casted = schemas.client.create.cast(contact);
 
     let salesContact = process.browser ? window.localStorage?.getItem(tenant.slug) : '';
@@ -148,16 +148,16 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
     
     casted["sales"] = finallySales;
 
-    await api
+    api
       .hookcontact(tenant.id, casted)
       .then(() => {
         // setContacts((contacts) => contacts.filter((contact) => contact.id !== casted.id));
-        console.log(casted)
-        toast({
-          title: "Contacto ",
-          description: "Tu contacto fue  correctamente",
-          status: "success",
-        });
+        // console.log(casted)
+        // toast({
+        //   title: "Contacto ",
+        //   description: "Tu contacto fue  correctamente",
+        //   status: "success",
+        // });
       })
       .catch(err => {console.log(err)})
       // .then((contact) => {
