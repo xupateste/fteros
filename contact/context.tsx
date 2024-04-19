@@ -8,7 +8,7 @@ import {useToast} from "~/hooks/toast";
 import {useTenant} from "~/tenant/hooks";
 import {sortBy, sortByDesc} from "~/selectors/sort";
 
-import apiContact from "~/contact/api/client"; //added
+// import apiContact from "~/contact/api/client"; //added
 
 export interface Context {
   state: {
@@ -148,7 +148,7 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
     
     casted["sales"] = finallySales;
 
-    apiContact
+    await api
       .hookcontact(tenant.id, casted)
       .then()
       .catch(err => {console.log(err)})
