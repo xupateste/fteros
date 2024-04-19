@@ -33,7 +33,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     //console.log('inside sessionApi')
     const casted = schemas.client.create.cast(contact, {stripUnkown: true});
 
-    return api
+    return await api
       .hookcontact(id, casted)
       .then(() => res.status(200).json(casted))
       .catch(() => res.status(400).end("Hubo un error creando el contacto"));
