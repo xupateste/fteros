@@ -83,8 +83,18 @@ export default {
             .doc(tenant)
             .collection("contacts")
             .doc(doc.id)
-            .update(contact)
-            .then();
+            .update({
+              name: contact.name,
+              description: contact.description,
+              location: contact.location,
+              pastInfo: contact.pastInfo,
+              createdAt: contact.createdAt,
+              updatedAt: contact.updatedAt,
+              visitsPast: contact.visitsPast,
+              visits: contact.visits
+            })
+            // .update(contact)
+            // .then(() => contact);
         })
       } else {
         contact['createdAt'] = firestore.Timestamp.now().seconds;
@@ -97,7 +107,7 @@ export default {
           .doc(tenant)
           .collection("contacts")
           .add(contact)
-          .then();
+          // .then();
       }
     })
     // return 'hookcontact success'

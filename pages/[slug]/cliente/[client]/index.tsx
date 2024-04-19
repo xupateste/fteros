@@ -22,8 +22,8 @@ const Index: React.FC<Props> = ({tenant}) => {
 	
 	if (typeof window !== "undefined") {
 		window.localStorage.setItem("phoneclient:Products", `+${storeCode}${phone}`);
-    	window.localStorage.setItem("phoneclientnocode:Products", `${phone}`);
-      window.location.replace(`/${tenant.slug}`);
+    window.localStorage.setItem("phoneclientnocode:Products", `${phone}`);
+    window.location.replace(`/${tenant.slug}`);
 	}
 
 	return <ClientLayout tenant={tenant}><Text></Text></ClientLayout>;

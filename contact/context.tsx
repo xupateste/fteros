@@ -150,7 +150,15 @@ const ContactProvider: React.FC<Props> = ({initialContacts, children}) => {
 
     await api
       .hookcontact(tenant.id, casted)
-      .then()
+      .then(() => {
+        // setContacts((contacts) => contacts.filter((contact) => contact.id !== casted.id));
+        console.log(casted)
+        toast({
+          title: "Contacto ",
+          description: "Tu contacto fue  correctamente",
+          status: "success",
+        });
+      })
       .catch(err => {console.log(err)})
       // .then((contact) => {
       //   setContacts(contacts.concat(contact));

@@ -59,7 +59,8 @@ const ProductsScreen: React.FC = () => {
       // const [isContact, setIsNewContact] = React.useState<Contact>(undefined)
       let isContact = {} as Contact;
       isContact['phone'] = defaultPhone;
-      hookcontact(isContact)
+      setTimeout(() => {hookcontact(isContact)}, 2000)
+      
     }
   }, []) // <-- empty dependency array - run only once
 
