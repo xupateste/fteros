@@ -78,24 +78,32 @@ export default {
           contact['updatedAt'] = firestore.Timestamp.now().seconds;
           contact['visitsPast'] = visitsPastValue;
           contact['visits'] = doc.data().visits + 1;
-          return database
-            .collection("tenants")
-            .doc(tenant)
-            .collection("contacts")
-            .doc(doc.id)
-            // .update({
-            //   name: contact.name,
-            //   description: contact.description,
-            //   location: contact.location,
-            //   pastInfo: contact.pastInfo,
-            //   createdAt: contact.createdAt,
-            //   updatedAt: contact.updatedAt,
-            //   visitsPast: contact.visitsPast,
-            //   visits: contact.visits
-            // })
-            // .update(contact)
-            .set(contact, {merge: true})
-            // .then(() => contact);
+          // return database
+          //   .collection("tenants")
+          //   .doc(tenant)
+          //   .collection("contacts")
+          //   .doc(doc.id)
+          //   // .update({
+          //   //   name: contact.name,
+          //   //   description: contact.description,
+          //   //   location: contact.location,
+          //   //   pastInfo: contact.pastInfo,
+          //   //   createdAt: contact.createdAt,
+          //   //   updatedAt: contact.updatedAt,
+          //   //   visitsPast: contact.visitsPast,
+          //   //   visits: contact.visits
+          //   // })
+          //   // .update(contact)
+          //   .set(contact, {merge: true})
+          //   // .then(() => contact);
+          const ref = database.collection("tenants").doc(tenant).collection("contacts").doc(doc.id);
+          database.runTransaction(async transaction => {
+            const contactSnapshot = await transaction.get(ref);
+            if (!contactSnapshot.exists) {
+                return;
+            }
+            return transaction.update(ref, contact);
+          });
         })
       } else {
         contact['createdAt'] = firestore.Timestamp.now().seconds;
