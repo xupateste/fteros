@@ -52,14 +52,14 @@ export default {
     //const casted = schemas.server.create.cast(product);
     
     // SIN AWAIT
-    const firestoreRef = database.collection('tenants').doc(tenant).collection("contacts");
-    const queryRef = firestoreRef.where('phone', '==', contact['phone']);
+    const firestoreRef = database.collection('tenants').doc(tenant).collection("contacts").where('phone', '==', contact['phone']);
+    // const queryRef = firestoreRef.where('phone', '==', contact['phone']);
     // let salesContact = process.browser ? window.localStorage?.getItem(tenant.slug) : '';
     // let finallySales =  salesContact ? salesContact : 'phone';
     // console.log(finallySales)
 
 
-    return queryRef.get().then((querySnapshot) => {
+    return firestoreRef.get().then((querySnapshot) => {
       const matchedDocs = querySnapshot.size
       if (matchedDocs) {
         querySnapshot.docs.forEach(doc => {
@@ -102,7 +102,7 @@ export default {
             if (!contactSnapshot.exists) {
                 return;
             }
-            return transaction.update(ref, contact);
+            transaction.update(ref, contact);
           });
         })
       } else {
