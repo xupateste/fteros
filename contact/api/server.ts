@@ -77,7 +77,7 @@ export default {
           contact['createdAtPast'] = createdAtPastValue;
           contact['updatedAt'] = firestore.Timestamp.now().seconds;
           contact['visitsPast'] = visitsPastValue;
-          contact['visits'] = doc.data().visits + 1;
+          contact['visits'] = parseInt(doc.data().visits) + 1;
           // return database
           //   .collection("tenants")
           //   .doc(tenant)
@@ -106,6 +106,7 @@ export default {
           });
         })
       } else {
+        console.log("else hookcontact")
         contact['createdAt'] = firestore.Timestamp.now().seconds;
         contact['createdAtPast'] = firestore.Timestamp.now().seconds;
         contact['updatedAt'] = firestore.Timestamp.now().seconds;
