@@ -83,17 +83,18 @@ export default {
             .doc(tenant)
             .collection("contacts")
             .doc(doc.id)
-            .update({
-              name: contact.name,
-              description: contact.description,
-              location: contact.location,
-              pastInfo: contact.pastInfo,
-              createdAt: contact.createdAt,
-              updatedAt: contact.updatedAt,
-              visitsPast: contact.visitsPast,
-              visits: contact.visits
-            })
+            // .update({
+            //   name: contact.name,
+            //   description: contact.description,
+            //   location: contact.location,
+            //   pastInfo: contact.pastInfo,
+            //   createdAt: contact.createdAt,
+            //   updatedAt: contact.updatedAt,
+            //   visitsPast: contact.visitsPast,
+            //   visits: contact.visits
+            // })
             // .update(contact)
+            .set(contact, {merge: true})
             // .then(() => contact);
         })
       } else {
