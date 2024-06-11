@@ -2,7 +2,7 @@ export const META = {
   favicon: "/favicon.ico",
   theme: "#FFFFFF",
   fbapp: "0011",
-  title: "Ferreteros.app - Crea hoy tu catálogo ferretero",
+  title: "Ferreteros.app - Crea hoy tu catálogo ferretero gratis!",
   description: "Crea tu catálogo ferretero para tu Ferretería, Distribuidora ó Importadora y recibe pedidos online",
   appleicon: "/logo192.jpg",
   keywords: "tienda, negocio, online, facil, delivery, compras, ventas, ferreteria, distribuidora, importadora, ferreteros",

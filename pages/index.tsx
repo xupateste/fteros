@@ -161,7 +161,7 @@ const Initio: React.FC = () => {
           <Brands/>
           <Box textAlign="center" maxWidth="6xl" m="auto" mt={8} mb={8} py={16} px={6} bg={'cyan.100'} >
             <Heading as="h1" size="2xl" mb={2} fontWeight={900} color="black">
-              Crea tu tienda hoy mismo y digitaliza los pedidos de tu negocio
+              Crea tu catálogo hoy mismo y digitaliza los pedidos de tu negocio
             </Heading>
             <Text color={'cyan.600'} fontSize="xl" fontWeight={900}>
               ¡Es GRATIS! Y no requiere tarjetas de crédito.
