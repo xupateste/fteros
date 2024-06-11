@@ -55,7 +55,8 @@ const Initio: React.FC = () => {
     toggleLoading(true);
     //setTimeout(() => {
     window.open(
-      window.location.origin+'/'+data.name+'/admin',
+      // window.location.origin+'/'+data.name+'/admin',
+      process.env.APP_URL +'/'+data.name+'/admin',
       '_blank' // <- This is what makes it open in a new window.
     );
     toggleLoading(false);
@@ -97,7 +98,8 @@ const Initio: React.FC = () => {
               //   `${window.location.origin}/${data.storeName}/admin`,
               //   '_blank' // <- This is what makes it open in a new window.
               // );
-              window.location.href = window.location.origin+'/'+data.storeName+'/admin'; 
+              // window.location.href = window.location.origin+'/'+data.storeName+'/admin'; 
+              window.location.href = process.env.APP_URL +'/'+data.storeName+'/admin'; 
               setTimeout(() => {
                 toggleLoading(false)
                 handleRegisterVisibility()

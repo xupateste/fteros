@@ -126,7 +126,7 @@ export default {
     return batch.commit().then(() => products);
   },
 
-  hookorder: (tenant: ClientTenant["id"], order) => {
+  hookorder: async (tenant: ClientTenant["id"], order) => {
     //const casted = schemas.server.create.cast(product);
     // let now = ;
     // let dateMinusHours = firestore.Timestamp.fromMillis(now.toMillis() - (3600000*5));

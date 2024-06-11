@@ -61,6 +61,21 @@ const TypeTenant = () => {
         .catch(() => {});
     }
   }
+   //handleCopyLinkSeller
+  function handleCopyLinkSeller() {
+    if (canShare.clipboard) {
+      navigator.clipboard
+        .writeText('https://ferreteros.app/'+slug+'/cliente')
+        .then(() => {
+          toast({
+            status: 'success',
+            title: '¡Copiado!',
+            description: 'Panel de Administración',
+          });
+        })
+        .catch(() => {});
+    }
+  }
 
   return (
   <>
@@ -124,7 +139,7 @@ const TypeTenant = () => {
           </Grid>
         </Box>
       </Stack>
-      <Button onClick={handleCopyLinkAdmin} variantColor="primary" size="sm" color="white" m="auto">Copiar</Button>
+      <Button onClick={handleCopyLinkSeller} variantColor="primary" size="sm" color="white" m="auto">Copiar</Button>
     </Flex>
   </>
   );

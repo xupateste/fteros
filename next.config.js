@@ -28,9 +28,9 @@ module.exports = withSourceMaps({
   // async redirects() {
   //   return [
   //     {
-  //       source: '/qr',
-  //       destination: 'https://linkpop.com/ferrisur',
-  //       permanent: false,
+  //       source: '/',
+  //       destination: 'https://web.app',
+  //       permanent: true,
   //       basePath: false
   //     },
   //   ]
