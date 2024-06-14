@@ -177,7 +177,7 @@ const Initio: React.FC = () => {
                 onClick={handleRegisterVisibility}
                 bg={'cyan.500'}
                 _hover={{ bg: 'cyan.600' }}>
-                Crear tienda
+                Crear catálogo
               </Button>
             </Stack>
           </Box>
