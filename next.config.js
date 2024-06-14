@@ -25,14 +25,14 @@ module.exports = withSourceMaps({
       MANTAINER_EMAIL: process.env.MANTAINER_EMAIL,
       MANTAINER_PHONE: process.env.MANTAINER_PHONE,
   },
-  // async redirects() {
-  //   return [
-  //     {
-  //       source: '/',
-  //       destination: 'https://web.app',
-  //       permanent: true,
-  //       basePath: false
-  //     },
-  //   ]
-  // },
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: 'https://web.ferreteros.app',
+        permanent: true,
+        basePath: false
+      },
+    ]
+  },
 })
